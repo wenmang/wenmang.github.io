@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>wenmang</title>
+  <title>枚举 | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wenmang">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="枚举 基于逐个尝试答案的一种问题求解策略  枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。">
+<meta name="keywords" content="博客 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="枚举">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/枚举/index.html">
 <meta property="og:site_name" content="wenmang">
+<meta property="og:description" content="枚举 基于逐个尝试答案的一种问题求解策略  枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-31T01:30:36.484Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wenmang">
+<meta name="twitter:title" content="枚举">
+<meta name="twitter:description" content="枚举 基于逐个尝试答案的一种问题求解策略  枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
   
@@ -162,16 +167,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-枚举" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-枚举" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/26/枚举/">枚举</a>
+    <h1 class="article-title" itemprop="name">
+      枚举
     </h1>
   
 
@@ -187,12 +190,272 @@
         <blockquote>
 <p>枚举 基于逐个尝试答案的一种问题求解策略</p>
 </blockquote>
-<p>枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。<br>
-        
-          <a class="article-more-a" href="/2018/03/26/枚举/#more">more >></a>
-        
+<p>枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。<br><a id="more"></a></p>
+<p>———————————————Mooc 北大 计算机程序程序设计与算法（二）算法基础 笔记</p>
+<p>##完美立方问题</p>
+<blockquote>
+<p>####题目<br>形如a3= b3 + c3 + d3的等式被称为完美立方等式。例如 123= 63 + 83 + 103 。编写一个程序，对任给的正整数N (N≤100)，寻找所有的四元组(a, b, c, d)，使得a3 = b3 + c3 + d3，其中a,b,c,d 大于 1, 小于等于N，且b&lt;=c&lt;=d。</p>
+</blockquote>
+<blockquote>
+<p>####输入<br> 一个正整数N (N≤100)。</p>
+<p>####输出<br> 每行输出一个完美立方。输出格式为： Cube = a, Triple = (b,c,d) 其中a,b,c,d所在位置分别用实   际求出四元组值代入。</p>
+</blockquote>
+<p>####示例代码</p>
+<pre><code>#include&lt;stdio.h&gt;
+int main()
+{
+    int N;
+    scanf(&quot;%d&quot;,&amp;N);
+    for(int a = 2; a &lt;= N; a++)
+        for(int b = 2; b &lt; a; b++)
+            for(int c = b; c &lt; a; c++)
+                for(int d = c; d &lt; a; d++)
+                    if( a*a*a == b*b*b + c*c*c +d*d*d)
+                        printf(&quot;Cube = %d, Triple = (%d,%d,%d)\n&quot;, a, b, c,d);
+    return 0;
+}
+</code></pre><p>算法采用了枚举的方法解决，为使之尽可能简单，做了如上优化：<br> 次外层循环从b开始，由于题目要求b&lt;=c&lt;=d 因此为了排除不必要的一些判断，采用了如</p>
+<blockquote>
+<p>a枚举范围[2,N]<br> b范围 [2,a-1]<br> c范围 [b,a-1]<br> d范围 [c,a-1]</p>
+</blockquote>
+<p> 的循环排列。</p>
+<p>####总结<br>采用枚举需要用到多重循环之时，可通过一定的次序或者筛选，利用循环条件将循环尽可能的优化，从而减少运算次数，提高程序效率。</p>
+<p>##生理周期问题</p>
+<blockquote>
+<p>####题目<br>人有体力、情商、智商的高峰日子，它们分别每隔 23天、28天和33天出现一次。对于每个人，我们想 知道何时三个高峰落在同一天。给定三个高峰出现 的日子p,e和i（不一定是第一次高峰出现的日子）, 再给定另一个指定的日子d，你的任务是输出日子d 之后，下一次三个高峰落在同一天的日子（用距离d 的天数表示）。例如：给定日子为10，下次出现三 个高峰同一天的日子是12，则输出2。</p>
+</blockquote>
+<blockquote>
+<p>####输入<br>四个整数：p, e, i和d。 p, e, i分别表示体力、情感和智力高峰出现的日子。d是给定的日子，可能小于p, e或 i。所有给 定日子是非负的并且小于或等于365，所求的日子小于或等于 21252。</p>
+<p>####输出<br>从给定日子起，下一次三个高峰同一天的日子（距离给定日子 的天数）。</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#define N 21252
+int main()
+{
+    int k,p,e,i,d,caseNo = 0;
+    while ( scanf(&quot;%d%d%d%d&quot;,&amp;p,&amp;e,&amp;i,&amp;d) &amp;&amp; p!= -1)
+    {
+        caseNo++;
+        for(k = d+1; (k-p)%23; ++k)
+            ;
+        for(; (k-e)%28; k+= 23)
+            ;
+        for(; (k-i)%33; k+= 23*28)
+            ;
+        printf(&quot;case:%d the next triple peak occurs in %d days.&quot;,caseNo,k-d);
+    }
+    return 0;
+}
+</code></pre><p>算法为了减少不必要的试探，首先寻找体力高峰首次出现的天数，之后再每隔 23 天寻找情感高峰首次出现的天数（而体力高峰不出现的日子不予判断）。同理，找到两个高峰首次同时出现的天数之后，再每隔 23乘28 天寻找智力高峰首次出现的天数。找到的即为三个高峰首次出现的天数。</p>
+<p>####注意：<br>    while ( scanf(“%d%d%d%d”,&amp;p,&amp;e,&amp;i,&amp;d) &amp;&amp; p!= -1）<br>程序用该while函数来达到反复输入的目的，当输入的值 p == -1之时结束输入。</p>
+<p>####总结<br>适当利用数学思想优化解决方法。</p>
+<p>##称硬币</p>
+<blockquote>
+<p>####题目<br>有12枚硬币。其中有11枚真币和1枚假币。假币和真 币重量不同，但不知道假币比真币轻还是重。现在， 用一架天平称了这些币三次，告诉你称的结果，请你 找出假币并且确定假币是轻是重（数据保证一定能找 出来）。</p>
+</blockquote>
+<blockquote>
+<p>####输入<br>第一行是测试数据组数。<br>每组数据有三行，每行表示一次称量的结果。银币标号为 A-L。每次称量的结果用三个以空格隔开的字符串表示： 天平左边放置的硬币  天平右边放置的硬币  平衡状态。up, down, 和 even分别为右端高、右端低和平衡。天平左右的硬币数总是相等的。</p>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>输出哪一个标号的银币是假币，并说明它比真币轻还是重。</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+char Left[3][7];               //天平左边硬币
+char Right[3][7];               //天平右边硬币
+char result[3][7];              //结果
+bool IsFake(char c,bool light) ; //light 为真表示假设假币为轻，否则表示假设假币为重
+
+int main()
+{
+    int t;
+    scanf(&quot;%d&quot;,&amp;t);
+    while(t--)
+    {
+        for(int i = 0; i &lt; 3; i++)
+        {
+            scanf(&quot;%s&quot;,&amp;Left[i]);
+            scanf(&quot;%s&quot;,&amp;Right[i]);
+            scanf(&quot;%s&quot;,&amp;result[i]);
+        }
+        for(char c=&apos;A&apos;; c&lt;=&apos;L&apos;; c++)
+        {
+            if( IsFake(c,1) )
+            {
+                printf(&quot;%c is the counterfeit coin and it is light.\n&quot;,c);
+                break;
+            }
+            else if( IsFake(c,0) )
+            {
+                printf(&quot;%c is the counterfeit coin and it is heavy.\n&quot;,c);
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+bool IsFake(char c,bool light) //light 为真表示假设假币为轻，否则表示假设假币为重
+{
+    for(int i = 0; i &lt; 3; i++)
+    {
+        char *pLeft,*pRight; //指向天平两边的字符串
+        if(light)
+        {
+            pLeft = Left[i];
+            pRight = Right[i];
+        }
+        else   //如果假设假币是重的，则把称量结果左右对换
+        {
+            pLeft = Right[i];
+            pRight = Left[i];
+        }
+
+        switch(result[i][0])   //天平右边的情况 case &apos;u&apos;:
+        {
+        case &apos;u&apos;:
+            if ( strchr(pRight,c) == NULL)    //右边翘起，判断右边是否出现该假币
+                return 0;    //如未出现，返回假
+            break;
+        case &apos;e&apos;:
+            if( strchr(pLeft,c) || strchr(pRight,c))//二者平衡，判断左右两边是否出现该假币
+                return 0;    //如出现，返回假
+            break;
+        case &apos;d&apos;:
+            if ( strchr(pLeft,c) == NULL)    //右边压下，判断左边是否出现该假币
+                return 0;    //如未出现，返回假
+            break;
+        }
+    }
+    return 1;
+}
+</code></pre><p>此题为逻辑推理题。<br>因为</p>
+<blockquote>
+<p>数据保证一定能找出来</p>
+</blockquote>
+<p>所以，只需一个个试就行，基本思想就是：由A到L依次先假定为假币，且轻于真币，成立则输出，否则设其比真币重，终能尝试出答案。<br>而本程序的重点则在于IsFake函数，也就是如何判断这个是不是的问题。由上程序可知</p>
+<p>####注意<br><strong>1.#include &lt;stdbool.h&gt; 为c语言声明布尔类型必需要加的头文件</strong><br><strong>2.调换之后的判断均基于假币为轻币的情况</strong><br><strong>3. strchr(pRight,c)函数 查找第一个参数首次出现c字母的位置，返回位置的指针，没有出现则返回NULL</strong></p>
+<p>####总结<br>一个基于枚举推导逻辑关系的优秀算法</p>
+<p>##熄灯问题</p>
+<blockquote>
+<p>####题目<br>有一个由按钮组成的矩阵, 其中每行有6个按钮, 共5行<br>每个按钮的位置上有一盏灯<br>当按下一个按钮后, 该按钮以及周围位置(上边, 下边, 左 边, 右边)的灯都会改变状态<br>如果灯原来是点亮的, 就会被熄灭<br>如果灯原来是熄灭的, 则会被点亮<br>（在矩阵角上的按钮改变3盏灯的状态   在矩阵边上的按钮改变4盏灯的状态   其他的按钮改变5盏灯的状态    与一盏灯毗邻的多个按钮被按下时,一个操作会抵消另一次操作的结果）<br>给定矩阵中每盏灯的初始状态，求一种按按钮方案，使得所有 的灯都熄灭</p>
+</blockquote>
+<blockquote>
+<p>####输入:<br>第一行是一个正整数N, 表示需要解决的案例数<br>每个案例由5行组成, 每一行包括6个数字<br>这些数字以空格隔开, 可以是0或1<br>–0 表示灯的初始状态是熄灭的  1 表示灯的初始状态是点亮的</p>
+<p>####输出:<br>对每个案例, 首先输出一行, 输出字符串 “PUZZLE #m”, 其中m是该案例的序号<br>接着按照该案例的输入格式输出5行<br>–1 表示需要把对应的按钮按下  0 表示不需要按对应的按钮<br>每个数字以一个空格隔开</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int GetBit(char c,int i)   //取c的第i位
+{
+    return ( c &gt;&gt; i ) &amp; 1;
+}
+void SetBit(char *c,int i, int v)   //设置c的第i位为v
+{
+    if( v )
+        *c |= ( 1 &lt;&lt; i);
+    else
+        *c &amp;= ~( 1 &lt;&lt; i);
+}
+void Flip(char *c, int i)   //将c的第i位为取反
+{
+    *c ^= ( 1 &lt;&lt; i);
+}
+void OutputResult(int t,char result[]) //输出结果
+{
+    printf(&quot;PUZZLE #%d\n&quot;,t);
+for( int i = 0; i &lt; 5; ++i )
+{
+    for( int j = 0; j &lt; 6; ++j )
+    {
+        int z;
+        z = GetBit(result[i],j);
+        printf(&quot;%d&quot;,z);
+        if( j &lt; 5 )
+            printf(&quot; &quot;);
+    }
+    printf(&quot;\n&quot;);
+}
+} int main()
+{
+    char oriLights[5]; //最初灯矩阵，一个比特表示一盏灯
+    char lights[5];    //不停变化的灯矩阵
+    char result[5];    //结果开关矩阵
+    char switchs;    //某一行的开关状态
+    int T;
+    scanf(&quot;%d&quot;,&amp;T);
+    for( int t = 1; t &lt;= T; ++ t)
+    {
+        memset(oriLights,0,sizeof(oriLights));
+        for( int i = 0; i &lt; 5; i ++ )  //读入最初灯状态
+        {
+            for( int j = 0; j &lt; 6; j ++ )
+            {
+                int s;
+                scanf(&quot;%d&quot;,&amp;s);
+                SetBit(&amp;oriLights[i],j,s);
+            }
+        }
+        for( int n = 0; n &lt; 64; ++n )   //遍历首行开关的64种状态
+        {
+            memcpy(lights,oriLights,sizeof(oriLights));
+            switchs = n; //第i行的开关状态
+            for( int i = 0; i &lt; 5; ++i )
+            {
+                result[i] = switchs; //第i行的开关方案
+                for( int j = 0; j &lt; 6; ++j )
+                {
+                    if( GetBit(switchs,j))
+                    {
+                        if( j &gt; 0)
+                            Flip(&amp;lights[i],j-1);//改左灯
+                        Flip(&amp;lights[i],j);//改开关位置的灯
+                        if( j &lt; 5 )
+                            Flip(&amp;lights[i],j+1);//改右灯
+                    }
+                }
+                if( i &lt; 4 )
+                    lights[i+1] ^= switchs;//改下一行的灯
+                switchs = lights[i]; //第i+1行开关方案和第i行灯情况相同
+            }
+            if( lights[4] == 0 )
+            {
+                OutputResult(t,result);
+                break;
+            }
+        } // for( int n = 0; n &lt; 64; n ++ )
+    }
+    return 0;
+}
+</code></pre><p>此题可以说是颇有难度了，我零零散散搞了两天，才初步弄懂程序的原理。</p>
+<p>####基本思想<br>题目如果直接进行枚举，那么将会有2^30次尝试，可以说是非常庞大的一个数字了，而老师采用的方法是只对第一行进行枚举，而为了将所有开着灯关掉，当第一行的开关的开关状态通过假设确定之后，如第一行还有开着的灯，那么只能通过第二行的灯的开关进行控制将第一行的灯关闭（也就是说，第一行的开关确定之后，之后没一行开关的任务就是关掉上一行未关闭的灯），所以第二行的灯的开关状态是唯一确定的，以此类推，后面行的状态也是唯一确定的。而最后判断灯是否全部关掉只需判断第五行的灯是否关闭（也就是当第五行的开关将第四行的灯完全关掉之后，判断它自身是否完全关闭）。而这种枚举只需要2^6,也就是64次（枚举第一列更少，仅有32次，而题目要求一行一行输入，故没有选择），而为了再次提升速度，采用通过一维字符数组进行位运算的方式解决，因为一个char类型占8个比特，而灯每行六个，可以直接用来储存一行的数据。</p>
+<p>####难点讨论<br>1.<a href="https://baike.baidu.com/item/memset" target="_blank" rel="noopener">memset函数</a>：其功能是将s所指向的某一块内存中的后n个 字节的内容全部设置为ch指定的ASCII值， 第一个值为指定的内存地址，块的大小由第三个参数指定，这个函数通常为新申请的内存做初始化工作，其返回值为s。memset(oriLights,0,sizeof(oriLights))这个语句即将oriLights初始化，各位为0。<br>2.读入灯最初的状态，采用了将1左移的方式，但通过这种方式输入的原始灯的情况，灯的状态是左右倒置的。<br>3.<a href="https://baike.baidu.com/item/memcpy" target="_blank" rel="noopener">memcpy函数</a>：其功能是从源src所指的内存地址的起始位置开始拷贝n个字节到目标dest所指的内存地址的起始位置中。而 memcpy(lights,oriLights,sizeof(oriLights)) 是将oriLights函数中的数据拷贝到lights之中。<br>4.switchs = n;  0:63（此条为个人理解）该语句即对第一行开关的枚举值,每一个n对应的一个二进制即为第一行开关的状态。<br>5.输出函数 OutputResult 输出处理的组数以及最后的结果（输出之前调用GetBit函数，将反着的顺序调换过来）。</p>
+<p>###课程总结<br>1.由于本课程所教学代码由C++所写，在自己记录博客之时改写成C，但改写过程中不能快速写出，可见对c的掌握很不熟练。<br>2.C语言指针以及位运算理解还需加强。<br>3.以后用枚举法求解之时可借鉴此些思想，通过逻辑推理或是数学运算竭力优化算法，减少无意义查找。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -212,16 +475,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/26/枚举/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/26/枚举/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/22/初入博客世界/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初入博客世界</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -241,84 +563,14 @@
 
 
 
-
   
-    <article id="post-初入博客世界" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/初入博客世界/">初入博客世界</a>
-    </h1>
   
 
-        
-        <a href="/2018/03/22/初入博客世界/" class="archive-article-date">
-  	<time datetime="2018-03-22T12:52:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在大佬分享的链接以及自己胡乱操作之后，我的博客终于是搭建完成了，这里附上两个起了主要作用的链接吧！<br>
-        
-          <a class="article-more-a" href="/2018/03/22/初入博客世界/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/22/初入博客世界/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -341,8 +593,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
