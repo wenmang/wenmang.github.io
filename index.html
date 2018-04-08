@@ -164,6 +164,226 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-递归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/07/递归/">递归</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/07/递归/" class="archive-article-date">
+  	<time datetime="2018-04-07T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>一个函数调用其自身，就是递归</p>
+</blockquote>
+<p>了解递归，必先了解<a href="http://www.baidu.com/link?url=OEcmNPPHMvzhCG8PWuRLTTse5OlugCZIVPWsDqilzf9JXmvw5825cwZVlRIF-IXw46QRxLYjqlhiMxoetcFWJyT4asIKFxqrdXEgqQGbwPm&amp;wd=&amp;eqid=f9b6087900079974000000035aca0fbb" target="_blank" rel="noopener">栈stack</a>的概念<br>递归是常见的一种解决问题所用的基本算法，主要在以下三种情况下用到递归</p>
+<blockquote>
+<p>1.替代多重循环<br>2.解决本来就是用递归形式定义的问题<br>3.（最多）将问题分解为规模更小的子问题进行求解……</p>
+</blockquote>
+<p>———————————————Mooc 北大 计算机程序程序设计与算法（二）算法基础 笔记<br>——引子</p>
+<h2 id="汉诺塔问题"><a href="#汉诺塔问题" class="headerlink" title="汉诺塔问题"></a>汉诺塔问题</h2><blockquote>
+<p>古代有一个梵塔，塔内有三个座A、B、C，A座上有64个盘子，盘子大小不等，大的在下，小的在上（如图）。有一个和尚想把这64个盘子从A座移 到C座，但每次只能允许移动一个盘子，并且在移动过程中，3个座上的盘子 始终保持大盘在下，小盘在上。在移动过程中可以利用B座，要求输出移动 的步骤。</p>
+</blockquote>
+<p>本例为典型递归问题，属于第三种类型</p>
+<blockquote>
+<p>将问题分解为规模更小的子问题进行求解……</p>
+</blockquote>
+<p>首先理解只有</p>
+<h4 id="一个盘子："><a href="#一个盘子：" class="headerlink" title="一个盘子："></a>一个盘子：</h4><p>直接从A移动到C即可</p>
+<h4 id="两个盘子："><a href="#两个盘子：" class="headerlink" title="两个盘子："></a>两个盘子：</h4><p>第一步：首先将除了最大盘子之外的盘子由A移动到B<br>第二步：将最大的盘子由A移动到C<br>第三步：将除了最大盘子之外的盘子从B移动到C</p>
+<h4 id="三个盘子："><a href="#三个盘子：" class="headerlink" title="三个盘子："></a>三个盘子：</h4><p>第一步：首先将除了最大盘子之外的盘子由A移动到B（对于这个步骤来说此时A为开始柱，C为中转柱，B为目标柱）<br>第二步：将最大的盘子由A移动到C（对于这个步骤来说此时A为开始柱，B为中转柱，C为目标柱）<br>第三步：将除了最大盘子之外的盘子从B移动到C（对于这个步骤来说此时B为开始柱，A为中转柱，C为目标柱）</p>
+<h4 id="四个盘子："><a href="#四个盘子：" class="headerlink" title="四个盘子："></a>四个盘子：</h4><p>略……</p>
+<p><strong>综上可见：这个问题无论几个盘子都始终是分为三大步的（这也是能够产生递归的条件），而每一步中三个柱子的种类（也就是目标柱，中转柱）都是变化的。</strong><br>C源码如下：</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+void Hanoi(int n, char src,char mid,char dest,int src_n) //将src座上的n个盘子，以mid座为中转，移动到dest座
+//src座上最上方盘子编号是src_n
+{
+    if( n == 1)   //只需移动一个盘子
+    {
+        printf(&quot;%c -&gt; %c\n&quot;,src,dest);    //直接将盘子从src移动到dest即可
+        return ;
+    }
+    Hanoi(n-1,src,dest,mid,src_n); //先将n-1个盘子从src移动到mid
+    printf(&quot;%d : %c -&gt; %c\n&quot;,src_n+n-1,src,dest); //再将一个盘子从src移动到dest
+    Hanoi(n-1,mid,src,dest,src_n); //最后将n-1个盘子从mid移动到dest
+    return ;
+}
+int main()
+{
+    char a = &apos;A&apos;,b = &apos;C&apos;,c = &apos;C&apos;;
+    int n;
+    scanf(&quot;%d&quot;,&amp;n); //输入盘子数目
+    Hanoi(n,a,b,c,1);
+    return 0;
+}
+</code></pre><blockquote>
+<p><strong> 用递归替代多重循环 </strong></p>
+</blockquote>
+<h2 id="N皇后问题"><a href="#N皇后问题" class="headerlink" title="N皇后问题"></a>N皇后问题</h2><blockquote>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>输入一个正整数N，则程序输出N皇后问题的全部摆法。 输出结果里的每一行都代表一种摆法。行里的第i个数字如 果是n，就代表第i行的皇后应该放在第n列。 皇后的行、列编号都是从1开始算。</p>
+</blockquote>
+<blockquote>
+<h4 id="样例输入："><a href="#样例输入：" class="headerlink" title="样例输入："></a>样例输入：</h4><p>4</p>
+<h4 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出:"></a>样例输出:</h4><p>2 4 1 3<br>3 1 4 2</p>
+</blockquote>
+<p>经典的8皇后问题可由8重循环解决，但N皇后问题由于皇后数目未知，不便用循环解决，因此我们采用递归方式实现此问题。</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int N;
+int queenPos[100]; //用来存放算好的皇后位置。最左上角是(0,0)
+void NQueen( int k);
+int main()
+{
+    scanf(&quot;%d&quot;,&amp;N);
+    NQueen(0); //从第0行开始摆皇后
+    return 0;
+}
+void NQueen( int k)   //在0~k-1行皇后已经摆好的情况下，摆第k行及其后的皇后
+{
+    int i;
+    if( k == N )   // N 个皇后已经摆好
+    {
+        for( i = 0; i &lt; N; i ++ )
+            printf(&quot;%d &quot;,(queenPos[i] + 1));
+        printf(&quot;\n&quot;);
+        return ;
+    }
+    for( i = 0; i &lt; N; i ++ ) //逐尝试第k个皇后的位置
+    {
+        int j;
+        for( j = 0; j &lt; k; j ++ )   //和已经摆好的 k 个皇后的位置比较，看是否冲突
+        {
+            if( queenPos[j] == i || abs(queenPos[j] - i) == abs(k-j))
+                break; //冲突，则试下一个位置
+        }
+        if( j == k )   //当前选的位置 i 不冲突
+        {
+            queenPos[k] = i; //将第k个皇后摆放在位置i
+            NQueen(k+1);
+        }
+    } //for( i = 0;i &lt; N;i ++ )
+}
+</code></pre><p>解决问题的主体为函数NQueen，其由第0行开始通过递归逐一尝试皇后摆放的位置，K行在k-1行已经完全摆放无误的基础上进行递归操作。函数中通过循环来判断皇后的摆放位置是否正确（不被吃掉，也就是前一行的皇后的上方及两个对角不能有皇后）</p>
+<h4 id="语句分析"><a href="#语句分析" class="headerlink" title="语句分析"></a>语句分析</h4><pre><code>if( queenPos[j] == i || abs(queenPos[j] - i) == abs(k-j))
+</code></pre><p>此语句于循环之中判断k行的皇后是否基于K-1行成立，条件内容（摆在i的正上方 或者 摆在i的斜对角线）</p>
+<blockquote>
+<p>用递归解决递归形式的问题</p>
+</blockquote>
+<h2 id="波兰表达式"><a href="#波兰表达式" class="headerlink" title="波兰表达式"></a>波兰表达式</h2><blockquote>
+<h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>波兰表达式是一种把运算符前置的算术表达式，例如普通的表达式2 + 3的波兰表示法为+ 2 3逆波兰表达式的优点是运算符之间不必有优先级关系，也不必用括号改变运算次序，例如 (2 + 3) <em> 4的波兰表示法为</em> + 2 3 4。本题求解波兰表达式的值，其中运算符 包括+ - * /四个。</p>
+</blockquote>
+<blockquote>
+<p>####输入<br>输入为一行，其中运算符和运算数之间都用空格分隔，运算数是浮点 数</p>
+<p>####输出<br>输出为一行，表达式的值。</p>
+</blockquote>
+<blockquote>
+<p>本题中“波兰表达式”的定义：</p>
+<ol>
+<li>一个数是一个逆波兰表达式，值为该数 </li>
+<li>“运算符 逆波兰表达式 逆波兰表达式” 是逆波兰表达 式，值为两个逆波兰表达式的值运算的结果</li>
+</ol>
+</blockquote>
+<p>可见，其定义本身就为一个递归定义：1 为递归结束的条件 2 为递归的定义<br>因此，我们采用递归的方法来解决这个问题</p>
+<pre><code>#include&lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+double exp()   //读入一个逆波兰表达式，并计算其值
+{
+    char s[20];
+    scanf(&quot;%s&quot;,&amp;s);
+    switch(s[0])
+    {
+    case &apos;+&apos;:
+        return exp()+exp();
+    case &apos;-&apos;:
+        return exp()-exp();
+    case &apos;*&apos;:
+        return exp()*exp();
+    case &apos;/&apos;:
+        return exp()/exp();
+    default:
+        return atof(s);
+        break;
+    }
+}
+
+int main()
+{
+    printf(&quot;%lf&quot;,exp());
+    return 0;
+}
+</code></pre><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<p>C语言利用 scanf 输入字符串，如果输入了空格则认为此字符串结束<br>故每输入一个符号或者数字应该按一下空格。则函数首先读入一个字符数组，也就是一个字符串。判断S[0]的情况（因为S[0]可以直接判断出输入的是一个运算符还是一个数字），假如其为‘+’（其余运算符同理），则就触发return语句，继续调用exp函数，随即输入下一个字符串接着判断。<br>exp函数执行完之后，就会将波兰表达式转化为正常的顺序表达式，从而在main函数中输出结果</p>
+</blockquote>
+<pre><code>#include &lt;stdlib.h&gt; 头文件中所包含的     atof 函数，可以将一个字符串转化为正常的double类型的数
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/07/递归/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<span id="busuanzi_container_page_pv">
+   阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  
     <article id="post-枚举" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
