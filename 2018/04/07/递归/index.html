@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal4o4co1bhl8s21ffkk6rdjqa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal5289ecbfher7tlnjh1dkoa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal57l2c70ekm31p4dou8te6a.png-w.jpg">
-<meta property="og:updated_time" content="2018-04-09T14:33:32.324Z">
+<meta property="og:updated_time" content="2018-04-09T14:41:19.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="递归">
 <meta name="twitter:description" content="一个函数调用其自身，就是递归">
@@ -373,7 +373,7 @@ int main()
 <blockquote>
 <h4 id="输入-2"><a href="#输入-2" class="headerlink" title="输入"></a>输入</h4><p>第一行是测试数据的数目t（0 &lt;= t &lt;= 20）。以下每行均包含二个整 数M和N，以空格分开。1&lt;=M，N&lt;=10。<br>输出<br>对输入的每组数据M和N，用一行输出相应的K。</p>
 </blockquote>
-<p>####分析：<br>1.盘子比苹果多：因为盘子都是一样的，所以将多出来的盘子直接扔掉后再进行摆放。<br>2.苹果多于或等于盘子：又可分为两种摆法<br>   1).所有盘子都摆上苹果，也就是先向所有盘子中放一个苹果，然后随机摆放<br>   2).有盘子不摆苹果，则就会变成盘子多于苹果问题，将不摆苹果的盘子直接扔掉<br>由此可见，衍生出一种递归的方法。<br>那么，代码如下：</p>
+<h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>1.盘子比苹果多：因为盘子都是一样的，所以将多出来的盘子直接扔掉后再进行摆放。<br>2.苹果多于或等于盘子：又可分为两种摆法<br>   1).所有盘子都摆上苹果，也就是先向所有盘子中放一个苹果，然后随机摆放<br>   2).有盘子不摆苹果，则就会变成盘子多于苹果问题，将不摆苹果的盘子直接扔掉<br>由此可见，衍生出一种递归的方法。<br>那么，代码如下：</p>
 <pre><code>#include &lt;stdio.h&gt;
 
 int f(int m,int n)
@@ -405,7 +405,7 @@ int main()
 <blockquote>
 <h4 id="输入-3"><a href="#输入-3" class="headerlink" title="输入"></a>输入</h4><p>输入数据包括多行，每行给出一组测试数据，包括4个小于10个正整 数。最后一组测试数据中包括4个0，表示输入的结束，这组数据不用处理。 </p>
 </blockquote>
-<p>####输出<br>对于每一组测试数据，输出一行，如果可以得到24，输出“YES”； 否则，输出“NO”。</p>
+<h4 id="输出-2"><a href="#输出-2" class="headerlink" title="输出"></a>输出</h4><p>对于每一组测试数据，输出一行，如果可以得到24，输出“YES”； 否则，输出“NO”。</p>
 <h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>n个数计算24，首先应该提出两个数先算。这两个数计算的结果，和剩余的n-2个数又构成n-1个数求24的问题。<br>而挑选两个数先算，则必须用二重循环一一枚举挑选所有可能。<br>代码如下：</p>
 <pre><code>#include &lt;stdio.h&gt;
 #include&lt;stdbool.h&gt;
