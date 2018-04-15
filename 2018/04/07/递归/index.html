@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal4o4co1bhl8s21ffkk6rdjqa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal5289ecbfher7tlnjh1dkoa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal57l2c70ekm31p4dou8te6a.png-w.jpg">
-<meta property="og:updated_time" content="2018-04-09T14:41:19.231Z">
+<meta property="og:updated_time" content="2018-04-15T14:25:40.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="递归">
 <meta name="twitter:description" content="一个函数调用其自身，就是递归">
@@ -210,30 +210,8 @@
 <h4 id="三个盘子："><a href="#三个盘子：" class="headerlink" title="三个盘子："></a>三个盘子：</h4><p>第一步：首先将除了最大盘子之外的盘子由A移动到B（对于这个步骤来说此时A为开始柱，C为中转柱，B为目标柱）<br>第二步：将最大的盘子由A移动到C（对于这个步骤来说此时A为开始柱，B为中转柱，C为目标柱）<br>第三步：将除了最大盘子之外的盘子从B移动到C（对于这个步骤来说此时B为开始柱，A为中转柱，C为目标柱）</p>
 <h4 id="四个盘子："><a href="#四个盘子：" class="headerlink" title="四个盘子："></a>四个盘子：</h4><p>略……</p>
 <p><strong>综上可见：这个问题无论几个盘子都始终是分为三大步的（这也是能够产生递归的条件），而每一步中三个柱子的种类（也就是目标柱，中转柱）都是变化的。</strong><br>C源码如下：</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-void Hanoi(int n, char src,char mid,char dest,int src_n) //将src座上的n个盘子，以mid座为中转，移动到dest座
-//src座上最上方盘子编号是src_n
-{
-    if( n == 1)   //只需移动一个盘子
-    {
-        printf(&quot;%c -&gt; %c\n&quot;,src,dest);    //直接将盘子从src移动到dest即可
-        return ;
-    }
-    Hanoi(n-1,src,dest,mid,src_n); //先将n-1个盘子从src移动到mid
-    printf(&quot;%d : %c -&gt; %c\n&quot;,src_n+n-1,src,dest); //再将一个盘子从src移动到dest
-    Hanoi(n-1,mid,src,dest,src_n); //最后将n-1个盘子从mid移动到dest
-    return ;
-}
-int main()
-{
-    char a = &apos;A&apos;,b = &apos;C&apos;,c = &apos;C&apos;;
-    int n;
-    scanf(&quot;%d&quot;,&amp;n); //输入盘子数目
-    Hanoi(n,a,b,c,1);
-    return 0;
-}
-</code></pre><h2 id="N皇后问题"><a href="#N皇后问题" class="headerlink" title="N皇后问题"></a>N皇后问题</h2><p><strong>用递归替代多重循环</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Hanoi</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">char</span> src,<span class="keyword">char</span> mid,<span class="keyword">char</span> dest,<span class="keyword">int</span> src_n)</span> <span class="comment">//将src座上的n个盘子，以mid座为中转，移动到dest座</span></span></span><br><span class="line"><span class="function"><span class="comment">//src座上最上方盘子编号是src_n</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( n == <span class="number">1</span>)   <span class="comment">//只需移动一个盘子</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c -&gt; %c\n"</span>,src,dest);    <span class="comment">//直接将盘子从src移动到dest即可</span></span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    Hanoi(n<span class="number">-1</span>,src,dest,mid,src_n); <span class="comment">//先将n-1个盘子从src移动到mid</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d : %c -&gt; %c\n"</span>,src_n+n<span class="number">-1</span>,src,dest); <span class="comment">//再将一个盘子从src移动到dest</span></span><br><span class="line">    Hanoi(n<span class="number">-1</span>,mid,src,dest,src_n); <span class="comment">//最后将n-1个盘子从mid移动到dest</span></span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a = <span class="string">'A'</span>,b = <span class="string">'C'</span>,c = <span class="string">'C'</span>;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n); <span class="comment">//输入盘子数目</span></span><br><span class="line">    Hanoi(n,a,b,c,<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="N皇后问题"><a href="#N皇后问题" class="headerlink" title="N皇后问题"></a>N皇后问题</h2><p><strong>用递归替代多重循环</strong></p>
 <blockquote>
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>输入一个正整数N，则程序输出N皇后问题的全部摆法。 输出结果里的每一行都代表一种摆法。行里的第i个数字如 果是n，就代表第i行的皇后应该放在第n列。 皇后的行、列编号都是从1开始算。</p>
 </blockquote>
@@ -242,45 +220,10 @@ int main()
 <h4 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出:"></a>样例输出:</h4><p>2 4 1 3<br>3 1 4 2</p>
 </blockquote>
 <p>经典的8皇后问题可由8重循环解决，但N皇后问题由于皇后数目未知，不便用循环解决，因此我们采用递归方式实现此问题。</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-int N;
-int queenPos[100]; //用来存放算好的皇后位置。最左上角是(0,0)
-void NQueen( int k);
-int main()
-{
-    scanf(&quot;%d&quot;,&amp;N);
-    NQueen(0); //从第0行开始摆皇后
-    return 0;
-}
-void NQueen( int k)   //在0~k-1行皇后已经摆好的情况下，摆第k行及其后的皇后
-{
-    int i;
-    if( k == N )   // N 个皇后已经摆好
-    {
-        for( i = 0; i &lt; N; i ++ )
-            printf(&quot;%d &quot;,(queenPos[i] + 1));
-        printf(&quot;\n&quot;);
-        return ;
-    }
-    for( i = 0; i &lt; N; i ++ ) //逐尝试第k个皇后的位置
-    {
-        int j;
-        for( j = 0; j &lt; k; j ++ )   //和已经摆好的 k 个皇后的位置比较，看是否冲突
-        {
-            if( queenPos[j] == i || abs(queenPos[j] - i) == abs(k-j))
-                break; //冲突，则试下一个位置
-        }
-        if( j == k )   //当前选的位置 i 不冲突
-        {
-            queenPos[k] = i; //将第k个皇后摆放在位置i
-            NQueen(k+1);
-        }
-    } //for( i = 0;i &lt; N;i ++ )
-}
-</code></pre><p>解决问题的主体为函数NQueen，其由第0行开始通过递归逐一尝试皇后摆放的位置，K行在k-1行已经完全摆放无误的基础上进行递归操作。函数中通过循环来判断皇后的摆放位置是否正确（不被吃掉，也就是前一行的皇后的上方及两个对角不能有皇后）</p>
-<h4 id="语句分析"><a href="#语句分析" class="headerlink" title="语句分析"></a>语句分析</h4><pre><code>if( queenPos[j] == i || abs(queenPos[j] - i) == abs(k-j))
-</code></pre><p>此语句于循环之中判断k行的皇后是否基于K-1行成立，条件内容（摆在i的正上方 或者 摆在i的斜对角线）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> queenPos[<span class="number">100</span>]; <span class="comment">//用来存放算好的皇后位置。最左上角是(0,0)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NQueen</span><span class="params">( <span class="keyword">int</span> k)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N);</span><br><span class="line">    NQueen(<span class="number">0</span>); <span class="comment">//从第0行开始摆皇后</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NQueen</span><span class="params">( <span class="keyword">int</span> k)</span>   <span class="comment">//在0~k-1行皇后已经摆好的情况下，摆第k行及其后的皇后</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>( k == N )   <span class="comment">// N 个皇后已经摆好</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i ++ )</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,(queenPos[i] + <span class="number">1</span>));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; N; i ++ ) <span class="comment">//逐尝试第k个皇后的位置</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> j;</span><br><span class="line">        <span class="keyword">for</span>( j = <span class="number">0</span>; j &lt; k; j ++ )   <span class="comment">//和已经摆好的 k 个皇后的位置比较，看是否冲突</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( queenPos[j] == i || <span class="built_in">abs</span>(queenPos[j] - i) == <span class="built_in">abs</span>(k-j))</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">//冲突，则试下一个位置</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( j == k )   <span class="comment">//当前选的位置 i 不冲突</span></span><br><span class="line">        &#123;</span><br><span class="line">            queenPos[k] = i; <span class="comment">//将第k个皇后摆放在位置i</span></span><br><span class="line">            NQueen(k+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="comment">//for( i = 0;i &lt; N;i ++ )</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决问题的主体为函数NQueen，其由第0行开始通过递归逐一尝试皇后摆放的位置，K行在k-1行已经完全摆放无误的基础上进行递归操作。函数中通过循环来判断皇后的摆放位置是否正确（不被吃掉，也就是前一行的皇后的上方及两个对角不能有皇后）</p>
+<h4 id="语句分析"><a href="#语句分析" class="headerlink" title="语句分析"></a>语句分析</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( queenPos[j] == i || <span class="built_in">abs</span>(queenPos[j] - i) == <span class="built_in">abs</span>(k-j))</span><br></pre></td></tr></table></figure>
+<p>此语句于循环之中判断k行的皇后是否基于K-1行成立，条件内容（摆在i的正上方 或者 摆在i的斜对角线）</p>
 <blockquote>
 <p><strong>用递归解决递归形式的问题</strong></p>
 </blockquote>
@@ -299,39 +242,12 @@ void NQueen( int k)   //在0~k-1行皇后已经摆好的情况下，摆第k行�
 </ol>
 </blockquote>
 <p>可见，其定义本身就为一个递归定义：1 为递归结束的条件 2 为递归的定义<br>因此，我们采用递归的方法来解决这个问题</p>
-<pre><code>#include&lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-double exp()   //读入一个逆波兰表达式，并计算其值
-{
-    char s[20];
-    scanf(&quot;%s&quot;,&amp;s);
-    switch(s[0])
-    {
-    case &apos;+&apos;:
-        return exp()+exp();
-    case &apos;-&apos;:
-        return exp()-exp();
-    case &apos;*&apos;:
-        return exp()*exp();
-    case &apos;/&apos;:
-        return exp()/exp();
-    default:
-        return atof(s);
-        break;
-    }
-}
-
-int main()
-{
-    printf(&quot;%lf&quot;,exp());
-    return 0;
-}
-</code></pre><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">exp</span><span class="params">()</span>   <span class="comment">//读入一个逆波兰表达式，并计算其值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;s);</span><br><span class="line">    <span class="keyword">switch</span>(s[<span class="number">0</span>])</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">exp</span>()+<span class="built_in">exp</span>();</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">exp</span>()-<span class="built_in">exp</span>();</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">exp</span>()*<span class="built_in">exp</span>();</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">exp</span>()/<span class="built_in">exp</span>();</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> atof(s);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lf"</span>,<span class="built_in">exp</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><blockquote>
 <p>C语言利用 scanf 输入字符串，如果输入了空格则认为此字符串结束<br>故每输入一个符号或者数字应该按一下空格。则函数首先读入一个字符数组，也就是一个字符串。判断S[0]的情况（因为S[0]可以直接判断出输入的是一个运算符还是一个数字），假如其为‘+’（其余运算符同理），则就触发return语句，继续调用exp函数，随即输入下一个字符串接着判断。<br>exp函数执行完之后，就会将波兰表达式转化为正常的顺序表达式，从而在main函数中输出结果</p>
 </blockquote>
-<pre><code>#include &lt;stdlib.h&gt; 头文件中所包含的 atof 函数，可以将一个字符串转化为正常的double类型的数
-</code></pre><h2 id="四则运算表达式求值"><a href="#四则运算表达式求值" class="headerlink" title="四则运算表达式求值"></a>四则运算表达式求值</h2><p> <strong>用递归解决递归形式的问题</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt; 头文件中所包含的 atof 函数，可以将一个字符串转化为正常的double类型的数</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="四则运算表达式求值"><a href="#四则运算表达式求值" class="headerlink" title="四则运算表达式求值"></a>四则运算表达式求值</h2><p> <strong>用递归解决递归形式的问题</strong> </p>
 <blockquote>
 <h4 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h4><p>输入为四则运算表达式，仅由整数、+、－、*、/ 、(、) 组成，没有空格，要求求其值。假设运算符结果都是整数 。”/“结果也是整数</p>
 </blockquote>
@@ -345,26 +261,8 @@ int main()
 <h4 id="输出-1"><a href="#输出-1" class="headerlink" title="输出"></a>输出</h4><p>不同的走法数，每一行输入对应一行输出</p>
 </blockquote>
 <p>分析可得：n级台阶的走法 =先走一级后，n-1级台阶的走法 + 先走两级后，n-2级台阶的走法；<br>也就是每一级台阶都有两种选择，走一级台阶或是两阶。<br>由上述文字说明可得递推公式 f(n) = f(n-1)+f(n-2)<br>代码如下</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-int N;
-int stairs(int n)
-{
-    if( n &lt; 0)
-        return 0;
-    if( n == 0 )
-        return 1;
-    return stairs(n-1) + stairs(n-2);
-}
-int main()
-{
-    while(scanf(&quot;%d&quot;,&amp;N))
-    {
-        printf(&quot;%d\n&quot;,stairs(N));
-    }
-    return 0;
-}
-</code></pre><h4 id="关于其终止条件"><a href="#关于其终止条件" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>因为递归式子中以n-1和n-2为递归，而条件是这两个式子必须大于0进行限制，否则就会无穷递归下去。判断条件，n &lt; 0时，对于负数台阶，无法走，因此返回0；而n == 0时，已无台阶可走，因此直接返回1，结束递归。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">stairs</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( n &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( n == <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> stairs(n<span class="number">-1</span>) + stairs(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,stairs(N));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关于其终止条件"><a href="#关于其终止条件" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>因为递归式子中以n-1和n-2为递归，而条件是这两个式子必须大于0进行限制，否则就会无穷递归下去。判断条件，n &lt; 0时，对于负数台阶，无法走，因此返回0；而n == 0时，已无台阶可走，因此直接返回1，结束递归。</p>
 <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>此程序为输出之后马上输出结果，与题目要求有些许差异，如需一组一组输入输出数据，加一个数组即可解决。</p>
 <p><strong>用递归将问题分解为规模更小的子问题进行求解</strong></p>
 <h2 id="放苹果"><a href="#放苹果" class="headerlink" title="放苹果"></a>放苹果</h2><blockquote>
@@ -374,30 +272,8 @@ int main()
 <h4 id="输入-2"><a href="#输入-2" class="headerlink" title="输入"></a>输入</h4><p>第一行是测试数据的数目t（0 &lt;= t &lt;= 20）。以下每行均包含二个整 数M和N，以空格分开。1&lt;=M，N&lt;=10。<br>输出<br>对输入的每组数据M和N，用一行输出相应的K。</p>
 </blockquote>
 <h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>1.盘子比苹果多：因为盘子都是一样的，所以将多出来的盘子直接扔掉后再进行摆放。<br>2.苹果多于或等于盘子：又可分为两种摆法<br>   1).所有盘子都摆上苹果，也就是先向所有盘子中放一个苹果，然后随机摆放<br>   2).有盘子不摆苹果，则就会变成盘子多于苹果问题，将不摆苹果的盘子直接扔掉<br>由此可见，衍生出一种递归的方法。<br>那么，代码如下：</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-int f(int m,int n)
-{
-    if( n &gt; m )
-        return f(m,m);
-    if( m == 0)
-        return 1;
-    if( n &lt;= 0 )
-        return 0;
-    return f(m,n-1) + f(m-n,n);
-}
-int main()
-{
-    int t,m,n;
-    scanf(&quot;%d&quot;,&amp;t);
-    while( t--)
-    {
-        scanf(&quot;%d%d&quot;,&amp;m,&amp;n);
-        printf(&quot;%d\n&quot;,f(m,n));
-    }
-    return 0;
-}
-</code></pre><h4 id="关于其终止条件-1"><a href="#关于其终止条件-1" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>同上例题，其递归结束之时，也就是没有盘子或者没有苹果之时。f(m,n-1) 此项递归，n变小，则让盘子不能小于0，如果其刚好小于0.没有盘子，则苹果就没地方放，故返回0；而f(m-n,n)项则是m减小，当没有苹果时，只能所有盘子都不放，故返回1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( n &gt; m )</span><br><span class="line">        <span class="keyword">return</span> f(m,m);</span><br><span class="line">    <span class="keyword">if</span>( m == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>( n &lt;= <span class="number">0</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> f(m,n<span class="number">-1</span>) + f(m-n,n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t,m,n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>( t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;m,&amp;n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f(m,n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关于其终止条件-1"><a href="#关于其终止条件-1" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>同上例题，其递归结束之时，也就是没有盘子或者没有苹果之时。f(m,n-1) 此项递归，n变小，则让盘子不能小于0，如果其刚好小于0.没有盘子，则苹果就没地方放，故返回0；而f(m-n,n)项则是m减小，当没有苹果时，只能所有盘子都不放，故返回1。</p>
 <p><strong>用递归将问题分解为规模更小的子问题进行求解</strong></p>
 <h2 id="算24"><a href="#算24" class="headerlink" title="算24"></a>算24</h2><blockquote>
 <h4 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a>题目</h4><p>给出4个小于10个正整数，你可以使用加减乘除4种运算以及括 号把这4个数连接起来得到一个表达式。现在的问题是，是否存 在一种方式使得得到的表达式的结果等于24。</p>
@@ -407,77 +283,8 @@ int main()
 </blockquote>
 <h4 id="输出-2"><a href="#输出-2" class="headerlink" title="输出"></a>输出</h4><p>对于每一组测试数据，输出一行，如果可以得到24，输出“YES”； 否则，输出“NO”。</p>
 <h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><p>n个数计算24，首先应该提出两个数先算。这两个数计算的结果，和剩余的n-2个数又构成n-1个数求24的问题。<br>而挑选两个数先算，则必须用二重循环一一枚举挑选所有可能。<br>代码如下：</p>
-<pre><code>#include &lt;stdio.h&gt;
-#include&lt;stdbool.h&gt;
-#include&lt;math.h&gt;
-#define EPS 1e-6
-
-double a[5];
-
-bool isZero(double x)
-{
-    return fabs(x) &lt;= EPS;
-}
-bool count24(double a[],int n)  //用数组a里的 n个数，计算24
-{
-    if( n == 1 )
-    {
-        if(isZero( a[0] - 24) )
-            return true;
-        else
-            return false;
-    }
-    double b[5];
-    for(int i = 0; i &lt; n-1; ++i)
-        for(int j = i+1; j &lt; n; ++j)  //枚举两个数的组合
-        {
-            int m = 0; //还剩下m个数,m = n - 2 ;
-            for(int k = 0; k &lt; n; ++k)
-                if( k != i &amp;&amp; k!= j)
-                    b[m++] = a[k];//把其余数放入b
-            b[m] = a[i]+a[j];
-            if(count24(b,m+1))
-                return true;
-            b[m] = a[i]-a[j];
-            if(count24(b,m+1))
-                return true;
-            b[m] = a[j]-a[i];
-            if(count24(b,m+1))
-                return true;
-            b[m] = a[i]*a[j];
-            if(count24(b,m+1))
-                return true;
-            if( !isZero(a[j]))
-            {
-                b[m] = a[i]/a[j];
-                if(count24(b,m+1))
-                    return true;
-            }
-            if( !isZero(a[i]))
-            {
-                b[m] = a[j]/a[i];
-                if(count24(b,m+1))
-                    return true;
-            }
-        }
-    return false;
-}
-int main()
-{
-    while(true)
-    {
-        for(int i = 0; i &lt; 4; ++i)
-            scanf(&quot;%lf&quot;,&amp;a[i]);
-        if( isZero(a[0]))
-            break;
-        if( count24(a,4))
-            printf(&quot;YES\n&quot;);
-        else
-            printf(&quot;NO\n&quot;);
-    }
-    return 0;
-}
-</code></pre><h4 id="关于其终止条件-2"><a href="#关于其终止条件-2" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>四个数测试完即结束</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EPS 1e-6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> a[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isZero</span><span class="params">(<span class="keyword">double</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">fabs</span>(x) &lt;= EPS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">count24</span><span class="params">(<span class="keyword">double</span> a[],<span class="keyword">int</span> n)</span>  <span class="comment">//用数组a里的 n个数，计算24</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( n == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isZero( a[<span class="number">0</span>] - <span class="number">24</span>) )</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> b[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; ++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; ++j)  <span class="comment">//枚举两个数的组合</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> m = <span class="number">0</span>; <span class="comment">//还剩下m个数,m = n - 2 ;</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">                <span class="keyword">if</span>( k != i &amp;&amp; k!= j)</span><br><span class="line">                    b[m++] = a[k];<span class="comment">//把其余数放入b</span></span><br><span class="line">            b[m] = a[i]+a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[i]-a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[j]-a[i];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[i]*a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>( !isZero(a[j]))</span><br><span class="line">            &#123;</span><br><span class="line">                b[m] = a[i]/a[j];</span><br><span class="line">                <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( !isZero(a[i]))</span><br><span class="line">            &#123;</span><br><span class="line">                b[m] = a[j]/a[i];</span><br><span class="line">                <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span>( isZero(a[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>( count24(a,<span class="number">4</span>))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="关于其终止条件-2"><a href="#关于其终止条件-2" class="headerlink" title="关于其终止条件"></a>关于其终止条件</h4><p>四个数测试完即结束</p>
 <h4 id="代码说明"><a href="#代码说明" class="headerlink" title="代码说明"></a>代码说明</h4><p>由于计算机关于浮点数特殊的储存方式，所以不能直接用’==’判断，而采用判断与24的差的绝对值是否小于一个极小值来判断该值是否等于24，也就是isZero函数的作用。</p>
 <pre><code>#include&lt;stdbool.h&gt; C语言用布尔类型需加的头文件。
 </code></pre><p>临时数组b的作用，是将取了两个数后的a数组的剩余的数进行存放。</p>
@@ -594,6 +401,15 @@ int main()
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/04/15/二分查找/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          二分查找
+        
+      </div>
+    </a>
   
   
     <a href="/2018/03/26/枚举/" id="article-nav-older" class="article-nav-link-wrap">
@@ -754,11 +570,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
