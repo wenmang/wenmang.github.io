@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/4 | wenmang</title>
+  <title>算法复杂度初探 | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wenmang">
-<meta property="og:url" content="http://yoursite.com/archives/2018/04/index.html">
+  <meta name="description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta name="keywords" content="博客,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法复杂度初探">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/算法复杂度初探/index.html">
 <meta property="og:site_name" content="wenmang">
+<meta property="og:description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg">
+<meta property="og:updated_time" content="2018-07-29T05:25:35.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wenmang">
+<meta name="twitter:title" content="算法复杂度初探">
+<meta name="twitter:description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta name="twitter:image" content="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
   
@@ -162,36 +169,129 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-算法复杂度初探" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      算法复杂度初探
+    </h1>
+  
+
+        
+        <a href="/2018/07/20/算法复杂度初探/" class="archive-article-date">
+  	<time datetime="2018-07-20T13:00:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
+</blockquote>
+<a id="more"></a>
+<p>Q： 既然算法与计算机程序性能有关，那么性能就必须放在第一位吗？</p>
+<p>A： 对于有些问题的处理方案（即算法），以现在的技术，在计算机上进行运算或者处理，但时间是无限久远的，或者无法在短时间内解决，这时候就应该将算法置于首位，提升算法解决问题的速度。 对于有些问题，已有的算法已经能够在短时间解决问题，那么算法就不应该被摆在第一位，那么这时就会考虑其他因素：<strong>成本，简洁度，安全性，稳定度</strong>等等。</p>
+<p>我们向往速度，所以我们总是在追求速度——更快的交通，更快的网络。或许这也是为什么算法会吸引这么多人学习的原因吧！</p>
+<h2 id="从排序入手">从排序入手</h2>
+<blockquote>
+<p>输入一组数(<span class="math inline">\(a_{1}\)</span> <span class="math inline">\(a_{2}\)</span> , …… , <span class="math inline">\(a_{n}\)</span>) 按需求重新排列后进行输出(<span class="math inline">\(a_{1}^{&#39;}\)</span> <span class="math inline">\(a_{2}^{&#39;}\)</span> , …… , <span class="math inline">\(a_{n}^{&#39;}\)</span>) 使得<span class="math inline">\(a_{1}^{&#39;}\)</span> $$ <span class="math inline">\(a_{2}^{&#39;}\)</span> $$ …… $$ <span class="math inline">\(a_{n}^{&#39;}\)</span> （使得大小单调递增）</p>
+</blockquote>
+<h3 id="插入排序">插入排序</h3>
+<p><strong>伪代码为：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Insertion <span class="title">Sort</span><span class="params">(A,n)</span>	<span class="comment">// Sorts A[1 , 2 , ...... , n]</span></span></span><br><span class="line"> for j &lt;-- 2 to n</span><br><span class="line"> 	<span class="keyword">do</span> key &lt;-- A[j]</span><br><span class="line">    	i &lt;-- j<span class="number">-1</span></span><br><span class="line">    	<span class="keyword">while</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> A[i] &gt; key</span><br><span class="line">    		<span class="keyword">do</span> A[i+<span class="number">1</span>] &lt;-- A[i]</span><br><span class="line">    			i &lt;-- i<span class="number">-1</span></span><br><span class="line">    		A[i+<span class="number">1</span>]&lt;-- key</span><br></pre></td></tr></table></figure>
+<p>顾名思义，该算法核心在于插入，从第二个数起开始插入，也就是上述伪码中的 j ，根据程序的运行可知，a[j] 之前的数均已经排序完成，所以只需不断插入即可！</p>
+<p><strong>运行时间</strong></p>
+<ol type="1">
+<li>输入的数据本身（如输入已经有序，那么进行的步骤将会非常少）</li>
+<li>输入数据的规模（六百万数据和六亿数据运行的时间肯定不一样） —- 我们将输入数据的规模进行参数化，之后将运行时间看作是待排列数据规模的函数</li>
+<li>硬件设备的种类（同样的算法在PC 和 超级计算机运行情况不同）</li>
+</ol>
+<p><strong>一般研究种类</strong></p>
+<ol type="1">
+<li><p>最坏情况（最常研究的）</p>
+<p>—- T(n) = 输入规模为n时的最长运行时间</p></li>
+<li><p>平均情况（有时研究）</p>
+<p>—- T(n) = 输入规模之下的所有可能<strong>期望时间</strong> （也就是一种加权平均，即每种输入的运行时间乘以那种输入出现的概率） 但是输入出现的概率是不知道的，所以需要进行假设，如 每种输入出现的概率相等。</p></li>
+<li><p>最好情况（假象 bogus：因为最好的情况往往不会出现，但可以骗人，有些算法对于特定的数据可能会有超级优秀的速率，但是这不具有普遍性，是无效的）</p></li>
+</ol>
+<p><strong>插入排序的最坏运行时间</strong></p>
+<p>由于不同设备因其性能不同，运行时间也会不同，那我们如何比较算法的运行时间呢？ —- 通常，我们比较算法时，比较的是其相对速度，即两个算法在同一机器上的时间。</p>
+<p>但是一个算法一定会在所有计算机上都是优秀的吗？ —- <strong>算法的BIG IDEA ! —— Asymptotic analysis</strong></p>
+<p><strong>Asymptotic analysis</strong></p>
+<ol type="1">
+<li><p>忽略掉依赖于机器的常量，也就是不同机器对于算法的影响一般仅仅相当于时间的n倍</p></li>
+<li><p>不是去检查实际的运行时间，而是去关注运行时间的增长 —- <strong>look at growth of T(n) as n –&gt; $$</strong></p></li>
+</ol>
+<p><strong>Asymptotic notation</strong></p>
+<ul>
+<li><p><span class="math inline">\(\theta\)</span> ：弃去公式的低阶项，并忽略前面的常数因子 Ex：公式为 ： <span class="math inline">\(3{n}^{3}+90{n}^{2}-5n+6046\)</span> = <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)</p></li>
+<li><p>当 n –&gt; $$ 时 , <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{2}\)</span>) 的算法迟早会战胜一个<span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)的算法</p></li>
+</ul>
+<p><strong>Insertion Sort analysis</strong></p>
+<p>最坏情况：即输入的数已经按照从大到小排列好 —- T(n) = <span class="math inline">\(\sum\limits_{j=2}^{n}{\theta (j)=\theta ({n}^{2})}\)</span> 也就是一个常数级数</p>
+<p>由上可见：当数据量小的时候，插入排序的速度是毋庸置疑的，但数据量大的时候，就不是那么快了</p>
+<h3 id="归并排序">归并排序</h3>
+<p><strong>伪码</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Merge Sort A[<span class="number">1</span> , <span class="number">2</span> , ... , n]</span><br><span class="line"><span class="number">1.</span> <span class="keyword">if</span> n = <span class="number">1</span> , done</span><br><span class="line"><span class="number">2.</span> Recursively sort </span><br><span class="line">   A[<span class="number">1</span> , <span class="number">2</span> , ..., [n/<span class="number">2</span>]]</span><br><span class="line">   A[[n/<span class="number">2</span>]+<span class="number">1</span> , ... , n]</span><br><span class="line"><span class="number">3.</span> Merge <span class="number">2</span> sort lists</span><br></pre></td></tr></table></figure>
+<p><span class="math inline">\(T_{1}\)</span> = <span class="math inline">\(\theta\)</span> (1) // 滥用 <span class="math inline">\(\theta\)</span></p>
+<p><span class="math inline">\(T_{2}\)</span> = 2T(n/2) // 拆成两个数列（故乘2），每个是(n/2)个数</p>
+<p><span class="math inline">\(T_{3}\)</span> = <span class="math inline">\(\theta\)</span> (n) // 将两个排好的数列进行归并，复杂度与输入规模成线性关系</p>
+<p><span class="math display">\[
+T(n) = \left\{ \begin{array}{ll}
+\theta (1) &amp; \textrm{if $ n=1 $}\\
+2T(\frac{n}{2})+\theta(n) &amp; \textrm{if $n &gt; 1$}\\
+\end{array} \right.
+\]</span> 采用递归树方法进行分析 T(n) = $2T() $ + cn (用cn替换了<span class="math inline">\(\theta\)</span>(n) )，如图：</p>
+<figure>
+<img src="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg" alt="递归树分析"><figcaption>递归树分析</figcaption>
+</figure>
+<p>可知树（这个树是倒放的）高n为<span class="math inline">\(\lg (n)\)</span>，实际为以二为底，n的对数。而将所有叶节点加起来为<span class="math inline">\(\theta\)</span>(n)</p>
+<p>那么可知，<span class="math inline">\({T_2}(n) = (cn)\lg (n) + \theta \left( n \right) = \theta (n\lg n)\)</span></p>
+<p>综上可知，归并排序优于插入排序！</p>
+<p><strong>注：重点在于掌握分析算法复杂度的数学方法，<span class="math inline">\(\theta\)</span> 符号的意义，以及学会使用递归树进行分析递归算法</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/30/分治/" class="archive-article-date">
-  	<time datetime="2018-04-30T11:51:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/30/分治/">分治</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,105 +307,140 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/20/算法复杂度初探/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/15/二分查找/" class="archive-article-date">
-  	<time datetime="2018-04-15T12:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/07/29/Android-初步/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android 初步
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/08/队列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/15/二分查找/">二分查找</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="算法复杂度初探" data-title="算法复杂度初探" data-url="http://yoursite.com/2018/07/20/算法复杂度初探/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/07/递归/" class="archive-article-date">
-  	<time datetime="2018-04-07T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/07/递归/">递归</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
+<span id="busuanzi_container_page_pv">
+   阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
           </div>
         </div>
       </div>
@@ -334,8 +469,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
