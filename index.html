@@ -164,6 +164,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-二叉树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/29/二叉树/">二叉树</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/29/二叉树/" class="archive-article-date">
+  	<time datetime="2018-07-29T06:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="树">树</h2>
+<p><strong>树（Tree）:</strong> n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
+<ul>
+<li>树中有一个称为“根（Root）”的特殊结点，用 r 表示；</li>
+<li>其余结点可分为m(m&gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”</li>
+</ul>
+        
+          <a class="article-more-a" href="/2018/07/29/二叉树/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/29/二叉树/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+<span id="busuanzi_container_page_pv">
+   阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  
     <article id="post-Android-初步" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -184,28 +272,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><h3 id="活动的生命周期">活动的生命周期</h3>
+        <h3 id="活动的生命周期">活动的生命周期</h3>
 <p>每个活动在其生命周期中最多可能会有四种状态。</p>
-<p><strong>运行状态：</strong>位于栈顶的活动（不会被系统回收）</p>
-<p><strong>暂停状态：</strong>不再处于栈顶，但仍然可见，这时活动就处于暂停状态（一般不会被回收，当内存占用极低之时才会被回收）</p>
-<p><strong>停止状态：</strong>当一个活动不处于栈顶，且完全不可见，就进入了停止状态（此时系统保留相应状态和成员变量，完全不可靠，极易被回收）</p>
-<p><strong>销毁状态：</strong>活动从返回战中移除，就变成了销毁状态（大概率被回收）</p>
-<h3 id="活动的生存期">活动的生存期 </h3>
-<h4 id="七个方法">七个方法 </h4>
-<p><strong>onCreate()</strong>   活动第一次被创建时候调用，应在此方法中完成初始化操作，如：加载布局，绑定事件等</p>
-<p><strong>onStart()</strong>  这个方法在由活动由不可见变为可见时调用</p>
-<p><strong>onResume()</strong>   这个方法在活动准备好和用户进行交互时调用。此时的活动一定位于返回栈的的栈顶，并处于运行状态。</p>
-<p><strong>onPause()</strong>   这个方法在系统准备启动或恢复另一个活动时调用。通常在此方法中将一些消耗CPU的资源释放掉，以及保存关键数据，这个方法执行速度一定要快，不然会影响到新的栈顶活动的使用</p>
-<p><strong>onStop()</strong>    这个方法在活动不可见时候调用。他和 onPause() 方法的区别在于，如果启动的是一个对话框活动，那么 onPause() 方法会执行，而 onStop() 方法不会执行</p>
-<p><strong>onDestroy()</strong>   这个方法在销毁前调用，之后变为销毁状态</p>
-<p><strong>onRestart()</strong>   由停止变为运行状态时使用，重启活动。</p>
-<h3 id="活动的启动模式">活动的启动模式</h3>
-<p>启动模式共有四种，实际项目中可以根据特定的需求为每个活动指定恰当的启动模式。可通过在AndroidManifest.xml 中通过给<code>&lt;activity&gt;</code> 标签指定 <code>android：launchMode</code> 属性来选择启动模式</p>
-<p><strong>standard：</strong>活动默认启动模式，不进行显示指定的情况下，所有活动都会自动使用这种启动模式。用此种模式时。每当启动一个活动，就会在返回栈中入栈，并处于栈顶，而系统不会在乎这个活动是否已经在返回栈中存在。</p>
-<p><strong>singleTop：</strong>与standard不同，运用此模式时，如果已经是该活动（也就是该活动位于栈顶），则不会再创建新的活动实例，而是直接使用该活动，如果活动没有位于栈顶，仍然会创建新的活动实例。</p>
-<p><strong>singleTask：</strong>应用此模式之时，首先会在返回栈中检测是否存在该活动的实例，如果存在，就会将此活动之上的活动统统出栈，如果没有，就会创建一个新的实例</p>
-<p><strong>singleInstance：</strong>指定为此模式的活动会启用一个新的返回栈来管理这个活动（如果singleTask模式指定了不同的taskAffinity，同样会启动一个新返回栈），比如我们想实现其他程序和我们的程序可以共享这个活动的实例，则可以采用这种方法实现。            </p>
-
+        
+          <a class="article-more-a" href="/2018/07/29/Android-初步/#more">more >></a>
+        
       
 
       
@@ -935,91 +1006,6 @@
    阅读<span id="busuanzi_value_page_pv"></span>次
 </span>
   
-    <article id="post-递归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/07/递归/">递归</a>
-    </h1>
-  
-
-        
-        <a href="/2018/04/07/递归/" class="archive-article-date">
-  	<time datetime="2018-04-07T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>一个函数调用其自身，就是递归</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/04/07/递归/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/07/递归/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-<span id="busuanzi_container_page_pv">
-   阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1150,11 +1136,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Android</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1163,10 +1153,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
