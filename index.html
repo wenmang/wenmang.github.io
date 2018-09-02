@@ -252,19 +252,19 @@
    阅读<span id="busuanzi_value_page_pv"></span>次
 </span>
   
-    <article id="post-特殊线性表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-特殊链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/特殊线性表/">特殊链表</a>
+      <a class="article-title" href="/2018/08/09/特殊链表/">特殊链表</a>
     </h1>
   
 
         
-        <a href="/2018/08/09/特殊线性表/" class="archive-article-date">
+        <a href="/2018/08/09/特殊链表/" class="archive-article-date">
   	<time datetime="2018-08-09T02:50:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
 </a>
         
@@ -272,74 +272,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><p>就链表而言，其不仅仅有单链表，相反其拥有更多种类。</p>
-<h2 id="静态链表">静态链表</h2>
-<p>链表一定要用指针的方式来实现吗？脱离了指针之后，链表就没法实现吗？答案当然是否定的，链表还可以用数组代替指针来实现</p>
-<p><strong>定义：</strong> 用数组描述的链表叫做动态链表</p>
-<p>首先要知道的肯定是如何实现，以及怎样实现了，如下：</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 1000</span></span><br><span class="line"><span class="keyword">typedef</span>  <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">      Element data ;</span><br><span class="line">      <span class="keyword">int</span>  cur ;  <span class="comment">// 游标 为0时无指向</span></span><br><span class="line">&#125; Component，StaticLinkList[MAXSIZE] ;</span><br></pre></td></tr></table></figure>
-<p>首先设计一个结构体，分为两个数据 —— <strong>data</strong>（用来存储链表节点的数据） <strong>cur</strong>（用来存储下一个结点在数组中的下标） 之后定义两个结构变量 —— <strong>Component</strong> （单个结点）<strong>StaticLinkList[MAXSIZE]</strong> （静态链表）</p>
-<p>既然已经实现，就可以了解相关操作的实现方法了</p>
-<p><strong><em>此后所有描述均为在线性表中的操作</em></strong></p>
-<p>由于数组的空间是一次性申请的，因此我们可以将其简单地理解为数组包含着两个链表，一个为存有数据的链表，另一个为不存有数据的链表，我们称之为备用链表。</p>
-<p>同时，为了更加方便地使用静态链表，我们将以下几个位置进行特殊处理。</p>
-<p><strong>首位：</strong>也就是下标为0的位置，使其 cur 值来存放<strong>备用链表</strong>第一个结点的下标</p>
-<p><strong>数组末位：</strong>也就是数组的最后一个元素的 cur 值来存放第一个有数值元素的下标，相当于头节点的作用。</p>
-<p><strong>链表末位：</strong>也就是存有数据的链表的末位，将其 cur 值指向数组首位，即将值设为0</p>
-<h3 id="初始化链表">初始化链表</h3>
-<p>初始化的方式，初始化之后的链表，其 cur 变得更加有秩序，每一个结点的 cur 值都是下一个结点的下标。如：1结点的 cur 值是2 2结点的 cur 值是3……</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化静态链表</span></span><br><span class="line"><span class="function">status <span class="title">InitList</span> <span class="params">(StaticLinkList space)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span>  i ;</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span> ; i&lt;MAXSIZE - <span class="number">1</span> ; i++)</span><br><span class="line">            space[i].cur = i+<span class="number">1</span> ;	<span class="comment">// 依次赋值 进行初始化</span></span><br><span class="line">      space[MAXSIZE<span class="number">-1</span>].cur = <span class="number">0</span> ;	<span class="comment">// 初始化之后仍为空表 所以最后一个元素cur为0</span></span><br><span class="line">      <span class="keyword">return</span> OK ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="静态链表的插入">静态链表的插入</h3>
-<p><strong>首先，</strong>找到有空余位置的地址，即所有未使用过的以及被删除的分量用游标链成一个备用的链表。而我们下标为0的结点的 cur 值刚好指向备用链表首结点下标。</p>
-<p><strong>之后，</strong>将元素插入并重新设置 cur 值</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Malloc_SLL</span> <span class="params">(StaticLinkList space)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> i  = space[<span class="number">0</span>].cur;	<span class="comment">// 用变量i临时存储备用链表的首结点下标</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (space[<span class="number">0</span>].cur)</span><br><span class="line">            space[<span class="number">0</span>].cur = space[i].cur ;	</span><br><span class="line">    		<span class="comment">// 链表不为空 使0结点指向下标为i的结点的下一个结点</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> i ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>找到插入数据的位置之后，就可以进行插入了</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status  <span class="title">ListInsert</span> <span class="params">(StaticLinkList L , <span class="keyword">int</span> i , ElemType e)</span></span>&#123;</span><br><span class="line">      <span class="keyword">int</span> j , k , l ;</span><br><span class="line">      k = MAXSIZE - <span class="number">1</span> ;</span><br><span class="line">      <span class="keyword">if</span> ( i &lt; <span class="number">1</span> || i &gt; ListLength(L) + <span class="number">1</span>)	<span class="comment">// 判断插入结点的位置是否合理</span></span><br><span class="line">            <span class="keyword">return</span> ERROR;</span><br><span class="line">      j = Malloc_SSL(L) ;	<span class="comment">// 获得空闲分量的下标</span></span><br><span class="line">      <span class="keyword">if</span> ( j )&#123;	</span><br><span class="line">            L[j].date = e ;	<span class="comment">// 直接将数据放入数组下标为j的位置</span></span><br><span class="line">            <span class="keyword">for</span> (l = <span class="number">1</span> ; l &lt;= i<span class="number">-1</span> ; l++)</span><br><span class="line">                  k = L[k].cur ;	<span class="comment">// 找到要插入结点的前一结点</span></span><br><span class="line">            L[j].cur = L[k].cur ;	 </span><br><span class="line">            L[k].cur = j ;	<span class="comment">// 插入节点</span></span><br><span class="line">            <span class="keyword">return</span> OK ;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> ERROR ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>理解上述代码，首先要清楚一个概念： 静态链表的结点位置与其在数组上的下标无关，是两个独立的概念。在线性表的静态链表表示时，数据的存储是在数组中是一个接一个紧密排列的，而线性表的排列则是通过 cur 值链成一条。</p>
-<p>所以，插入时最主要的两步就是： - 找出空余位置，将数据存储进数组 - 找到结点位置，在线性表中将结点插入</p>
-<h3 id="静态链表的删除">静态链表的删除</h3>
-<p>此条为根据链表位置进行删除。同样，首先应该想到删除之后的处理方法，也就是将删除结点的位置重新放入备用链表之中</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Fre_SSL</span><span class="params">(StaticLinkList space, <span class="keyword">int</span> k )</span></span>&#123;</span><br><span class="line">      space[k].cur = space[<span class="number">0</span>].cur ;	<span class="comment">// 将第一个元素的 cur值赋给要删除的分量</span></span><br><span class="line">      space[<span class="number">0</span>].cur = k ;  <span class="comment">// 将要删除分量的线标赋值给第一个元素的 cur</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如上代码所示，并入备用链表时，首先将删除结点并入备用链表头部，然后将第一个元素的 cur 值为删除结点的下标。</p>
-<p>删除操作如下所示：</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>注：</strong> 删除节点的关键步骤同样可分为两步：</p>
-<ul>
-<li>从链表中删除结点，也就是将删除结点的前后节点连接起来（ListDelete函数中操作）</li>
-<li>将删除后的结点并入备用链表之中（Fre_SSL函数进行操作）</li>
-</ul>
-<h2 id="循环链表">循环链表</h2>
-<p><strong>定义：</strong>将单链表中终端节点的指针端由空指针指向头节点，就使整个单链表形成一个环，这种头尾相接的链表就被称为单循环链表，简称循环链表</p>
-<p>我们一般的单链表为了操作简单，往往给链表增加一个头结点，循环链表也可如此，以使空链表与非空链表处理一致。</p>
-<p>我们如此设立循环链表（加头结点的方式），那么寻访第一个结点的时间复杂度为O(1) ，访问尾节点的时间复杂度为O(n)。为了提高寻访尾结点的效率，我们可以舍弃头结点，在链表尾部添加尾节点，尾指针指向链表尾结点，这也是一般设计循环链表的模式。</p>
-<p>循环链表的相关操作实现与单链表并无不同，所以不再赘述</p>
-<h2 id="双向链表">双向链表</h2>
-<p><strong>定义：</strong> 双向链表是在单链表的每个结点中，再设置一个指向其前驱结点的指针域</p>
-<p>首先需要知道双向链表实现的结构</p>
-<p><strong>代码： </strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>双向链表的一些操作实现与单链表相同，如：获取长度，查找元素数据，获取元素位置等，所以不进行讨论，直接来学习与单链表有差异的操作，也就是插入与删除。</p>
-<p>插入与删除的实现实际本质并无差别，只是多了一个反向指针的连接，注意顺序即可：</p>
-<h4 id="插入顺序">插入顺序：</h4>
-<ol type="1">
-<li>新结点 prior 指针指向插入位置的前一个结点</li>
-<li>新结点的 next 指针指向插入位置的后一个结点</li>
-<li>将后一个结点的 prior 指针指向新结点</li>
-<li>将前一个节点的 next 指针指向新结点</li>
-</ol>
-<p><strong>代码：</strong>依照上述顺序，3 4步的顺序不可改变</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// s为新节点 p为从头节点开始找到的插入位置的之前的一个结点</span></span><br><span class="line">s-&gt;prior = p ; </span><br><span class="line">s-&gt;next = p-&gt;next ;</span><br><span class="line">p-&gt;next-&gt;prior = s ;</span><br><span class="line">p-&gt;next = s ;</span><br></pre></td></tr></table></figure>
-<h4 id="删除顺序">删除顺序</h4>
-<p>不讲究顺序，简单操作即可</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// p为要删除的结点</span></span><br><span class="line">p-&gt;prior-&gt;next = p-&gt;next ;	<span class="comment">// p结点前一个结点的 next 指针指向 p 结点后一个指针的地址</span></span><br><span class="line">p-&gt;next-&gt;prior = p-&gt;prior ; 	<span class="comment">// p结点后一个结点的 prior 指针指向 p 结点的前一个结点地址</span></span><br><span class="line"><span class="built_in">free</span>(p) ;</span><br></pre></td></tr></table></figure>
-
+        <p>就链表而言，其不仅仅有单链表，相反其拥有更多种类，此文讲述一些特殊的链表。</p>
+        
+          <a class="article-more-a" href="/2018/08/09/特殊链表/#more">more >></a>
+        
       
 
       
@@ -362,94 +298,6 @@
 		</ul>
 	</div>
 
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/09/特殊线性表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
- 
-    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'false' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
-            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
-            placeholder: "来造作啊",
-            avatar:""
-        });
-    }
-</script>
-    </section>
-  
-
-
-
-<span id="busuanzi_container_page_pv">
-   阅读<span id="busuanzi_value_page_pv"></span>次
-</span>
-  
-    <article id="post-特殊链表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/09/特殊链表/">特殊链表</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/09/特殊链表/" class="archive-article-date">
-  	<time datetime="2018-08-09T02:50:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <script src="/assets/js/APlayer.min.js"> </script>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
       
 
       
@@ -1203,6 +1051,111 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/05/21/线性表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+ 
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:""
+        });
+    }
+</script>
+    </section>
+  
+
+
+
+<span id="busuanzi_container_page_pv">
+   阅读<span id="busuanzi_value_page_pv"></span>次
+</span>
+  
+    <article id="post-多项式的表示" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/20/多项式的表示/">多项式的表示</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/20/多项式的表示/" class="archive-article-date">
+  	<time datetime="2018-05-20T13:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>由多项式的表示引出链表概念，因此，首先学习多项式的表示。</strong></p>
+        
+          <a class="article-more-a" href="/2018/05/20/多项式的表示/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/20/多项式的表示/">展开全文 >></a>
         </p>
       
 
