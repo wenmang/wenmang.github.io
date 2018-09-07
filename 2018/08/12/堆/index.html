@@ -17,7 +17,7 @@
 <meta property="og:description" content="引例：计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cmouoeo6157o1pj88ie1pb21mj0a.png-w.jpg">
-<meta property="og:updated_time" content="2018-09-07T03:03:59.577Z">
+<meta property="og:updated_time" content="2018-09-07T04:01:38.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆">
 <meta name="twitter:description" content="引例：计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。">
@@ -201,18 +201,20 @@
 <p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。</p>
 <ul>
 <li><p><strong>普通数组</strong></p>
-<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 O(1) <strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 O(n)</p></li>
+<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 O(n)</p></li>
 <li><p><strong>链表</strong></p>
-<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 O(1) <strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度O(1)</p></li>
-<li><p><strong>有序数组：</strong>即在插入时就按照一定顺序插入</p></li>
-</ul>
+<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度O(1)</p></li>
+<li><p><strong>有序数组：</strong>即在插入时就按照一定顺序插入</p>
 <p><strong>插入：</strong>找到合适位置 —— 时间复杂度O(n) 或者 O(log n) [二分查找]        <br>
-移动元素并插入    —— 时间复杂度 O(n) <strong>删除：</strong>删去最后一个元素    —— 时间复杂度 O(n)</p>
-<ul>
-<li><strong>有序链表：</strong>同有序数组插入时按照一定顺序插入</li>
-</ul>
+移动元素并插入    —— 时间复杂度 O(n)</p>
+<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 O(n)</p></li>
+<li><p><strong>有序链表：</strong>同有序数组插入时按照一定顺序插入</p>
 <p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 O(n)  <br>
-插入元素    —— 时间复杂度 O(1) <strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 O(1)</p>
+插入元素    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 O(1)</p></li>
+</ul>
 <p>我们发现，四种表示的时间复杂度基本都是 O(n)，那么可不可以找得到一种表示，降低其时间按复杂度呢？</p>
 <p>树！我们可以用二叉树来表示，平衡二叉树的删除与插入时间复杂度都是与树高有关，为 log(n) 的，所以我们可以考虑用二叉树来表示。</p>
 <h4 id="二叉搜索树">二叉搜索树：</h4>
@@ -281,7 +283,7 @@
 <p>每次将权值最小的两棵二叉树合并，合并之后二者根结点权值为两个结点权值之和，再将根节点作为一个新的结点加入序列中再次选取两个最小值</p>
 <p>程序如何写呢？此构造的重点在于选出两个最小的元素。，而此操作可以直接借助最小堆来实现。</p>
 <p><strong>代码</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HuffmanTree <span class="title">Huffman</span> <span class="params">( MinHeap H )</span></span>&#123;</span><br><span class="line">      <span class="comment">// 假设 H-&gt;Size 个权值已经存在 H-&gt;Elements[]-&gt;Weight 里</span></span><br><span class="line">      <span class="keyword">int</span>  i ;</span><br><span class="line">      HuffmanTree  t ;</span><br><span class="line">      BuildMinHeap(H) ; <span class="comment">// 将H-&gt;Elements[] 按权值调整为最小堆</span></span><br><span class="line">      <span class="keyword">for</span> ( i = <span class="number">1</span> ; i &lt; H-&gt;Size ; i++ )&#123;  <span class="comment">// 进行合并</span></span><br><span class="line">            T = mallo( <span class="keyword">sizeof</span>( struct  TreeNode ) ) ; <span class="comment">// 建立新结点</span></span><br><span class="line">            T-&gt;Left = DeleteMin(H) ;      <span class="comment">// 从最小堆中删除一个结点，作为T的左子结点</span></span><br><span class="line">            T-&gt;Right = DeleteMin(H) ;     <span class="comment">// 从最小堆中删除已一个结点，作为新T的右子结点</span></span><br><span class="line">            T-&gt;Weight = T-&gt;Left-&gt;Weight+T-&gt;Right-&gt;Weight ;  <span class="comment">// 计算新权值</span></span><br><span class="line">            insert( H , T );  <span class="comment">// 将新T插入最小堆</span></span><br><span class="line">      &#125;</span><br><span class="line">      T = DeleteMin(H) ;</span><br><span class="line">      <span class="keyword">return</span>  T ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>先将所有元素存入到最小堆中</p>
 <p>for 循环之中 先从堆中抽出最小值作为左子结点，再抽出最小值作为右子结点，计算新的权值之后将新结点插入进最小堆</p>
 <h4 id="哈夫曼树的特点">哈夫曼树的特点:</h4>
@@ -293,18 +295,11 @@
 </ul>
 <h3 id="哈夫曼编码">哈夫曼编码</h3>
 <p>Q ：给定一段字符串，如何对其进行编码，使得该字符串编码的储存空间最少？</p>
-<p>我们可以有下列想法：</p>
-<ol type="1">
-<li>用等长ASCII编码；</li>
-<li>不等长编码：出现频率高的字符用的编码短些，出现频率低的字符则可以编码</li>
-</ol>
+<p>我们可以有下列想法： 1. 用等长ASCII编码； 2. 不等长编码：出现频率高的字符用的编码短些，出现频率低的字符则可以编码</p>
 <p>显然进行不等长编码的储存空间更小</p>
-<p>但是进行不等长编码时容易产生歧义，也就是二义性：</p>
-<p>a 编码：0</p>
-<p>b 编码：1</p>
-<p>c 编码：10</p>
-<p>d 编码：11</p>
-<p>那么此时给出一段字符串编码：0110，其表达的含义是什么呢？</p>
+<p>但是进行不等长编码时容易产生歧义，也就是二义性： 如将下列四字母如下编码：</p>
+<p>a 编码：0<br>
+b 编码：1 c 编码：10 d 编码：11 那么此时给出一段字符串编码：0110，其表达的含义是什么呢？</p>
 <p>当然会产生歧义：abba abc ada 都是可以解释通的，而为了避免此种结果，我们就可以采用哈夫曼编码的方式来解决。</p>
 
       
