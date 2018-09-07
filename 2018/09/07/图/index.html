@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>练习 | wenmang</title>
+  <title>图 | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="生成五个不重复的随机数 一道蛮有意思的练习">
-<meta name="keywords" content="随笔,Java">
+  <meta name="description" content="什么是图（Graph）？  表示“多对多”的关系 包含：  一组顶点：通常用V（Vertex） 表示顶点集合 一组边：通常用E（Edge）表示边的集合 边是顶点对：（v,w）属于 E ，其中 v,w 属于 V 有向边 &amp;lt;v,w&amp;gt; 表示从v指向w的边（单行线） 不考虑重边和自回路">
+<meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="练习">
-<meta property="og:url" content="http://yoursite.com/2018/06/05/练习/index.html">
+<meta property="og:title" content="图">
+<meta property="og:url" content="http://yoursite.com/2018/09/07/图/index.html">
 <meta property="og:site_name" content="wenmang">
-<meta property="og:description" content="生成五个不重复的随机数 一道蛮有意思的练习">
+<meta property="og:description" content="什么是图（Graph）？  表示“多对多”的关系 包含：  一组顶点：通常用V（Vertex） 表示顶点集合 一组边：通常用E（Edge）表示边的集合 边是顶点对：（v,w）属于 E ，其中 v,w 属于 V 有向边 &amp;lt;v,w&amp;gt; 表示从v指向w的边（单行线） 不考虑重边和自回路">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-09T08:29:23.517Z">
+<meta property="og:updated_time" content="2018-09-07T03:51:15.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="练习">
-<meta name="twitter:description" content="生成五个不重复的随机数 一道蛮有意思的练习">
+<meta name="twitter:title" content="图">
+<meta name="twitter:description" content="什么是图（Graph）？  表示“多对多”的关系 包含：  一组顶点：通常用V（Vertex） 表示顶点集合 一组边：通常用E（Edge）表示边的集合 边是顶点对：（v,w）属于 E ，其中 v,w 属于 V 有向边 &amp;lt;v,w&amp;gt; 表示从v指向w的边（单行线） 不考虑重边和自回路">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
   
@@ -167,20 +167,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-练习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-图" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      练习
+      图
     </h1>
   
 
         
-        <a href="/2018/06/05/练习/" class="archive-article-date">
-  	<time datetime="2018-06-05T09:41:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-05</time>
+        <a href="/2018/09/07/图/" class="archive-article-date">
+  	<time datetime="2018-09-07T03:14:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-07</time>
 </a>
         
         
@@ -192,22 +192,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><h2 id="生成五个不重复的随机数">生成五个不重复的随机数</h2>
-<p>一道蛮有意思的练习</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>什么是图（Graph）？</p>
+<ul>
+<li>表示“多对多”的关系</li>
+<li>包含：
+<ul>
+<li>一组顶点：通常用V（Vertex） 表示顶点集合</li>
+<li>一组边：通常用E（Edge）表示边的集合</li>
+<li>边是顶点对：（v,w）属于 E ，其中 v,w 属于 V 有向边 &lt;v,w&gt; 表示从v指向w的边（单行线） 不考虑重边和自回路</li>
+</ul></li>
+</ul>
 <a id="more"></a>
-<ol type="1">
-<li><p><strong>生成随机数储存在数组中，然后判断数组中元素是否重复，如果重复，则推倒重新生成</strong></p>
-<p>这是我刚开始的想法，后来发现思路用代码实现起来较为困难，而且效率不高，于是摒弃了这种实现方法。</p></li>
-<li><p><strong>每生成一个随机数，进行一次判断，数组中没有此元素，则存入数组，否则重新生成。</strong></p>
-<p>此方法为参照教程思路，效率比较高，而且代码实现也不是很困难，遂采用此种方法实现</p></li>
-</ol>
-<h4 id="代码">代码</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> [] k = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        <span class="keyword">while</span> (index &lt; <span class="number">5</span>)&#123;</span><br><span class="line"></span><br><span class="line">            Random r = <span class="keyword">new</span> Random();</span><br><span class="line">            <span class="keyword">int</span> temp;</span><br><span class="line">            temp = r.nextInt(<span class="number">6</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (temp != <span class="number">0</span> &amp;&amp; !contains(k,temp))&#123;	<span class="comment">// 生成元素不为零且不重复</span></span><br><span class="line">                k[index++] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k.length; i++) &#123;</span><br><span class="line">            System.out.println(k[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断数组中是否包含temp元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(<span class="keyword">int</span> k[],<span class="keyword">int</span> temp)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k.length;i++)&#123;</span><br><span class="line">           <span class="keyword">if</span> (k[i] == temp)</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="实现文件的复制粘贴">实现文件的复制粘贴</h2>
-<p><strong>利用字节输入输出流实现对硬盘文件的复制粘贴</strong></p>
-<h4 id="代码-1">代码</h4>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Copy01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="comment">// 创建输入流</span></span><br><span class="line">        FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"E:\\图片\\壁纸\\0.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建输出流</span></span><br><span class="line">        FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(<span class="string">"王昭君.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] bytes = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];  <span class="comment">// 创建数组 每次读取1KB</span></span><br><span class="line">        <span class="keyword">int</span> temp;</span><br><span class="line">        <span class="comment">// 一边读一边写</span></span><br><span class="line">        <span class="keyword">while</span> ((temp=fis.read(bytes)) != -<span class="number">1</span>)&#123;   <span class="comment">// 读入</span></span><br><span class="line">            fos.write(bytes,<span class="number">0</span>,temp);    <span class="comment">// 写入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码是将图片0.jpg从<code>E:\图片\壁纸</code>目录复制到工程目录下并改名为<code>王昭君.jpg</code></p>
+<h3 id="抽象数据类型定义">抽象数据类型定义</h3>
+<p><strong>类型名称：</strong>图（Graph）</p>
+<p><strong>数据对象集：</strong>G(V,E)由一个非空的有限顶点集合V和一个有限边集合E组成。</p>
+<p><strong>操作集：</strong>对于任意图 G 属于（<span class="math inline">\(/in\)</span>） Graph，以及 v 属于 V, e 属于 E</p>
+<ul>
+<li><strong>Graph Create()：</strong> 建立并返回空图；</li>
+<li><strong>Graph InsertVertex(Graph G, Vertex v)： </strong>将v插入G；</li>
+<li><strong>Graph InsertEdge(Graph G, Edge e)： </strong>将e插入G；</li>
+<li><strong>void DFS(Graph G, Vertex v)： </strong>从顶点v出发深度优先遍历图G；</li>
+<li><strong>void BFS(Graph G, Vertex v)： </strong>从顶点v出发宽度优先遍历图G；</li>
+<li><strong>void ShortestPath(Graph G, Vertex v, int Dist[])：</strong>计算图G中顶点v到任意其他顶点的最短距离；</li>
+<li><strong>void MST(Graph G)： </strong>计算图G的最小生成树；</li>
+<li>……</li>
+</ul>
+<h3 id="图的表示">图的表示</h3>
+<h4 id="邻接矩阵">邻接矩阵：</h4>
+<p><strong>二维数组直接表示：</strong>直接用一个二维数组G[N][N]表示一个图，也就相当于一个方阵，顶点之间是否连接通过1，0 来表示，也就是说G[i][j] 的值为 1 ，说明 i j 两个顶点联通，之间存在边，如果为0，则不连通 <strong>二维数组表示的缺点：</strong>如此表示无向图（边没有方向）有些浪费空间，G[i][j] 与 G[j][i] 表示的内容是相同的，即i 与 j 之间联通 <strong>改进：</strong>用长度为 N(N+1)/2 的一维数组A存储 <strong>一维数组直接表示法：</strong>只取原矩阵的下三角或者上三角矩阵，从左到右从上到下依次存入 <strong>如何判断两顶点之间是否联通：</strong>我们以下三角矩阵为例，发现二维数组之中的 G[i][j] 对应A的下标为 ( i * (i + 1)/2 + j )，所以，判断 i j 之间是否连通，直接查看对应下标的值即可</p>
+<p><strong>建图代码：</strong>代码的思路很简单，首先图包括顶点和边，所以我们将之分离，因为顶点的建立很方便，所以我们可以先初始化一个没有边的图，之后再插入边。 有了这个思路，我们首先将数据类型名称重新设定一番，使之可以见名知意</p>
+<p><strong>代码：一切之前</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_VERTEX_NUM 100 <span class="comment">/* 设定数组最大容量 */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFINITY 65535 <span class="comment">/* 双字节无符号整数最大值 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Vertex; <span class="comment">/* 用顶点下标表示顶点 为整型*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> WeightType; <span class="comment">/* 边的权值为整型 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> DataType; <span class="comment">/* 顶点储存的数据类型为字符串 */</span></span><br></pre></td></tr></table></figure>
+<p>接下来我们需要两个结构，也就是边和图的结构 <strong>代码：结构的设立</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ENode</span> *<span class="title">PtrToENode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ENode</span>&#123;</span> <span class="comment">// 边的定义</span></span><br><span class="line">    Vertex V1,V2; <span class="comment">// 有向边v1, v2</span></span><br><span class="line">    WeightType Weight; <span class="comment">// 权重</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToENode Edge;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span> *<span class="title">PtrToGNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>&#123;</span> <span class="comment">// 图结点的定义</span></span><br><span class="line">    <span class="keyword">int</span> Nv; <span class="comment">// 顶点数</span></span><br><span class="line">    <span class="keyword">int</span> Ne; <span class="comment">// 边数</span></span><br><span class="line">    WeightType G[MAX_VERTEX_NUM][MAX_VERTEX_NUM]; <span class="comment">// 邻接矩阵</span></span><br><span class="line">    DataType Data[MAX_VERTEX_NUM]; <span class="comment">// 存顶点的数据，此项可根据具体情况省去或添加</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToGNode MGraph;</span><br></pre></td></tr></table></figure>
+<p>之后创建一个函数，进行图的初始化，也就是只有顶点没有边的图 <strong>代码：初始化图</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 初始化有VertexNum个顶点但没有边的图 */</span></span><br><span class="line"><span class="function">MGraph <span class="title">CreateGraph</span><span class="params">(<span class="keyword">int</span> VertexNum)</span></span>&#123;</span><br><span class="line">    Vertex V, W;</span><br><span class="line">    MGraph Graph;</span><br><span class="line">    Graph = (MGraph)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct GNode)); <span class="comment">// 建立图</span></span><br><span class="line">    Graph-&gt;Nv = VertexNum; <span class="comment">// 设立顶点数</span></span><br><span class="line">    Graph-&gt;Ne = <span class="number">0</span>; <span class="comment">// 设立边数</span></span><br><span class="line">    <span class="keyword">for</span> (V = <span class="number">0</span>; V &lt; Graph-&gt;Nv; V++)</span><br><span class="line">        <span class="keyword">for</span> (W = <span class="number">0</span>; W &lt; Graph-&gt;Nv; W++)</span><br><span class="line">            Graph-&gt;G[V][W] = INFINITY; <span class="comment">// 初始化数组</span></span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br></pre></td></tr></table></figure>
+<p>既然建图之时需要插入边，所以需要一个插入边的函数 <strong>代码：插入边</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 插入边 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">(MGraph Grape, Edge E)</span></span>&#123;    </span><br><span class="line">    Grape-&gt;G[E-&gt;V1][E-&gt;V2] = E-&gt;Weight;    </span><br><span class="line">    Grape-&gt;G[E-&gt;V2][E-&gt;V1] = E-&gt;Weight; <span class="comment">// 无向图还需反向插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>准备工作做完之后就可以创建完整的图了 <strong>代码：建立完整的图</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 建立完整的图 */</span></span><br><span class="line"><span class="function">MGraph <span class="title">BuildGraph</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MGraph Graph;</span><br><span class="line">    Edge E;</span><br><span class="line">    Vertex V;</span><br><span class="line">    <span class="keyword">int</span> Nv, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Nv); <span class="comment">// 读入顶点数</span></span><br><span class="line">    Graph = CreateGraph(Nv);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;(Graph-&gt;Ne)); <span class="comment">// 输入图的边数</span></span><br><span class="line">    <span class="keyword">if</span> (Graph-&gt;Ne != <span class="number">0</span>)&#123;</span><br><span class="line">        E = (Edge)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct ENode)); <span class="comment">// 新建边结点</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; Graph-&gt;Ne; i++) &#123; <span class="comment">// 读入边</span></span><br><span class="line">            <span class="comment">// 输入格式 “起点 终点 权重”</span></span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;E-&gt;V1, &amp;E-&gt;V2, &amp;E-&gt;Weight);</span><br><span class="line">            InsertEdge(Graph, E); <span class="comment">// 向图中插入边</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (V=<span class="number">0</span>; V &lt; Graph-&gt;Nv; V++) <span class="comment">// 输入顶点值 若没有顶点值可以不写</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;(Graph-&gt;Data[V]));</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>邻接矩阵的缺点：</strong>面对稀疏图，我们的邻接矩阵就会有些浪费空间了，大量的0占据了大量空间</p>
+<p><strong>改进：</strong>用邻接表表示</p>
+<h4 id="邻接表">邻接表</h4>
+<p>G[N] 为指针数组，对应矩阵每行一个链表，只存非0元素，如果是网络，结构之中要增加权重的域</p>
+<p>建图代码： 我们的实现方案和邻接矩阵一样，先建立一个只有顶点没有边的图，之后再插入边以形成一个完整的图，所以一些代码完全和邻接矩阵相同 准备工作和定义边的代码与邻接矩阵相同</p>
+<p>之后，定义邻接点结构 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 邻接点的定义 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">AdjVNode</span> *<span class="title">PtrToAdjVNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">AdjVNode</span>&#123;</span></span><br><span class="line">    Vertex AdjV; <span class="comment">//邻接点下标</span></span><br><span class="line">    WeightType Weight; <span class="comment">// 边权重</span></span><br><span class="line">    PtrToAdjVNode Next; <span class="comment">// 指向下一个邻接点的指针</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>为方便操作，定义表头结点 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 顶点表头结点的定义 */</span><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Vnode</span>&#123;</span>    </span><br><span class="line">    PtrToAdjVNode FirstEdge; <span class="comment">// 边表头指针    </span></span><br><span class="line">    DataType Data; <span class="comment">// 存顶点的数据     </span></span><br><span class="line">    <span class="comment">/* 注意：很多情况下，顶点无数据，此时Data可以不用出现 */</span></span><br><span class="line">&#125; AdjList[MaxVertexNum]; <span class="comment">// AdjList是邻接表类型</span></span><br></pre></td></tr></table></figure>
+<p>重新以邻接表的方式定义图结点 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 图结点的定义 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span> *<span class="title">PtrToGNode</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> Nv; <span class="comment">// 顶点数</span></span><br><span class="line">    <span class="keyword">int</span> Ne; <span class="comment">// 边数</span></span><br><span class="line">    AdjList G; <span class="comment">// 邻接表</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> PtrToGNode LGraph;</span><br></pre></td></tr></table></figure>
+<p>初始化一个只有顶点没有边的初识图 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 初始化一个有VertexNum个顶点但没有边的图 */</span></span><br><span class="line"><span class="function">LGraph <span class="title">CreateGraph</span><span class="params">( <span class="keyword">int</span> VertexNum )</span> </span>&#123; </span><br><span class="line">    Vertex V;</span><br><span class="line">    LGraph Graph;</span><br><span class="line">    Graph = (LGraph)<span class="built_in">malloc</span>( <span class="keyword">sizeof</span>(struct GNode) ); <span class="comment">// 建立图</span></span><br><span class="line">    Graph-&gt;Nv = VertexNum;</span><br><span class="line">    Graph-&gt;Ne = <span class="number">0</span>; <span class="comment">// 初始化邻接表头指针      /* 注意：这里默认顶点编号从0开始，到(Graph-&gt;Nv - 1) */</span></span><br><span class="line">    <span class="keyword">for</span> (V=<span class="number">0</span>; V&lt;Graph-&gt;Nv; V++)</span><br><span class="line">        Graph-&gt;G[V].FirstEdge = <span class="literal">NULL</span>; <span class="comment">// 初始化 VertexNum 个表头结点，指针为空</span></span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设计插入函数 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">( LGraph Graph, Edge E )</span> </span>&#123;    </span><br><span class="line">    PtrToAdjVNode NewNode; <span class="comment">// 插入边 &lt;V1, V2&gt;    </span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 为V2建立新的邻接点 */</span>    </span><br><span class="line">    NewNode = (PtrToAdjVNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct AdjVNode));    </span><br><span class="line">    NewNode-&gt;AdjV = E-&gt;V2;    </span><br><span class="line">    NewNode-&gt;Weight = E-&gt;Weight;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* 将V2插入V1的表头 */</span>    </span><br><span class="line">    NewNode-&gt;Next = Graph-&gt;G[E-&gt;V1].FirstEdge;    </span><br><span class="line">    Graph-&gt;G[E-&gt;V1].FirstEdge = NewNode; <span class="comment">/* 若是无向图，还要插入边 &lt;V2, V1&gt; */</span>    </span><br><span class="line">    <span class="comment">/* 为V1建立新的邻接点 */</span>    </span><br><span class="line">    NewNode = (PtrToAdjVNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct AdjVNode));    </span><br><span class="line">    NewNode-&gt;AdjV = E-&gt;V1;    </span><br><span class="line">    NewNode-&gt;Weight = E-&gt;Weight; <span class="comment">// 将V1插入V2的表头    </span></span><br><span class="line">    NewNode-&gt;Next = Graph-&gt;G[E-&gt;V2].FirstEdge;    </span><br><span class="line">    Graph-&gt;G[E-&gt;V2].FirstEdge = NewNode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写出建立完整图的函数 <strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LGraph <span class="title">BuildGraph</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LGraph Graph;</span><br><span class="line">    Edge E;</span><br><span class="line">    Vertex V;</span><br><span class="line">    <span class="keyword">int</span> Nv, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;Nv); <span class="comment">// 读入顶点个数</span></span><br><span class="line">    Graph = CreateGraph(Nv); <span class="comment">// 初始化有Nv个顶点但没有边的图</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;(Graph-&gt;Ne)); <span class="comment">// 读入边数</span></span><br><span class="line">    <span class="keyword">if</span> ( Graph-&gt;Ne != <span class="number">0</span> ) &#123; <span class="comment">// 如果有边</span></span><br><span class="line">        E = (Edge)<span class="built_in">malloc</span>( <span class="keyword">sizeof</span>(struct ENode) ); <span class="comment">// 建立边结点</span></span><br><span class="line">        <span class="comment">/* 读入边，格式为"起点 终点 权重"，插入邻接矩阵 */</span></span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;Graph-&gt;Ne; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;E-&gt;V1, &amp;E-&gt;V2, &amp;E-&gt;Weight);</span><br><span class="line">            <span class="comment">/* 注意：如果权重不是整型，Weight的读入格式要改 */</span></span><br><span class="line">            InsertEdge( Graph, E );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 如果顶点有数据的话，读入数据 */</span></span><br><span class="line">    <span class="keyword">for</span> (V=<span class="number">0</span>; V&lt;Graph-&gt;Nv; V++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">" %c"</span>, &amp;(Graph-&gt;G[V].Data));</span><br><span class="line">    <span class="keyword">return</span> Graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>缺点：</strong>此种表示方法缺点多多，首先图一定要足够稀疏才行，否则的话是不如矩阵节省空间的，其次这样表示不方便进行检查两顶点之间是否存在边</p>
 
       
 
@@ -255,11 +296,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -315,7 +356,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/05/练习/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/09/07/图/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -329,18 +370,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/08/队列/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          队列
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/29/堆栈/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">堆栈</div>
+    <a href="/2018/08/12/堆/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">堆</div>
       <i class="icon-circle-right"></i>
     </a>
   
