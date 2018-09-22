@@ -164,6 +164,138 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-练习（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/22/练习（二）/">练习（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/22/练习（二）/" class="archive-article-date">
+  	<time datetime="2018-09-22T09:41:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-22</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h2 id="算法竞赛入门经典第二版-第二章习题">算法竞赛入门经典（第二版）—— 第二章习题</h2>
+<h3 id="习题-2-5分数化小数">习题 2-5：分数化小数</h3>
+<p>输入正整数a,b,c，输出a/b的小数形式，精确到小数点后c位。a,b ≤ <span class="math inline">\(10 ^6\)</span> ，c ≤ 100。输入包含多组数据, 结束标记为a=b=c=0。</p>
+<h4 id="样例输入">样例输入：</h4>
+<p>1 6 4</p>
+<p>0 0 0</p>
+<h4 id="样例输出">样例输出：</h4>
+<p>Case 1: 0.1667</p>
+<p>该题以普通想法来说，是直接进行输出，但是存在着两个问题：</p>
+<ol type="1">
+<li>输出的小数位数为c，不好直接进行输出</li>
+<li>c ≤ 100 ，由于C语言小数位数的限定，就算 double 类型，其小数位数也不可能达到100位，具体位数可自己进行试验，所以直接进行输出时会有严重的精度损失</li>
+</ol>
+<p>由以上，我们可以针对C语言整数除法的特点，间接计算小数的值</p>
+<h4 id="代码">代码：</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Decimal</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d."</span>, a/b); <span class="comment">// 输出非小数位</span></span><br><span class="line">    a = a % b;</span><br><span class="line">    <span class="keyword">while</span> (i++ &lt; c)&#123;	<span class="comment">// 小数点后前 c-1 位</span></span><br><span class="line">        a *= <span class="number">10</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, a/b);</span><br><span class="line">        a = a % b;</span><br><span class="line">    &#125;</span><br><span class="line">    a *= <span class="number">10</span>;</span><br><span class="line">    <span class="comment">/* 小数点后第 c 位进行四舍五入 */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ((a%b)*<span class="number">10</span>)/b &gt;= <span class="number">5</span> ? (a/b+<span class="number">1</span>):(a/b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码，直接采用函数方式进行分数转小数原理的实现，将多次输入省略</p>
+<p><strong>注：</strong>上述代码实现原理参考<a href="https://blog.csdn.net/Artprog" target="_blank" rel="noopener">Artprog</a>的CSDN博客<a href="https://blog.csdn.net/artprog/article/details/54755191" target="_blank" rel="noopener">C语言 分数化小数</a></p>
+<h3 id="习题2-6排列">习题2-6：排列</h3>
+<p>用1,2,3，……9组成3个三位数 abc , def 和 ghi，每个数字恰好使用一次，要求 abc:def:ghi=1:2:3。按照 “abc def ghi” 格式输出所有接。</p>
+<h4 id="样例输入-1">样例输入</h4>
+<p>无</p>
+<h4 id="样例输出-1">样例输出</h4>
+<p>abc def ghi</p>
+<p>此题我基本想法确立之后：循环判断 abc 2abc 3abc 三个数各位 1~9 每个数字是否恰好使用一次，在判断是否使用之时，却遇到了一些困难，参考博客之后，有了如下解法：</p>
+<p>采用一个布尔类型数组，下标表示数字，储存的值表示数字是否被用到(false or true)，如果数组下标1~9全部为储存的值全部为 true，就进行输出。</p>
+<h4 id="代码-1">代码：</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Permutation</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, k;</span><br><span class="line">    <span class="keyword">bool</span> isAppear[<span class="number">10</span>];  <span class="comment">// 定义判别数组</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">123</span>; i &lt; <span class="number">330</span>; i++)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(isAppear, <span class="literal">false</span>, <span class="keyword">sizeof</span>(isAppear));</span><br><span class="line">        j = <span class="number">2</span>*i;    k = <span class="number">3</span>*i;</span><br><span class="line">        <span class="comment">// 处理数组</span></span><br><span class="line">        isAppear[i/<span class="number">100</span>] = isAppear[(i/<span class="number">10</span>)%<span class="number">10</span>] = isAppear[i%<span class="number">10</span>] = <span class="literal">true</span>;</span><br><span class="line">        isAppear[j/<span class="number">100</span>] = isAppear[(j/<span class="number">10</span>)%<span class="number">10</span>] = isAppear[j%<span class="number">10</span>] = <span class="literal">true</span>;</span><br><span class="line">        isAppear[k/<span class="number">100</span>] = isAppear[(k/<span class="number">10</span>)%<span class="number">10</span>] = isAppear[k%<span class="number">10</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 判断 1-9 九个数是否都用到</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">1</span>; l &lt; <span class="number">10</span>; l++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (isAppear[l] == <span class="literal">false</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span> (l == <span class="number">9</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%5d%5d%5d\n"</span>, i, j, k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>上述代码参考<a href="https://blog.csdn.net/lecholin" target="_blank" rel="noopener">Lecholin</a>的博客<a href="https://blog.csdn.net/lecholin/article/details/69787589" target="_blank" rel="noopener">《算法竞赛入门经典》习题2-6 三位数排列</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/22/练习（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+ 
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
+  
+
+
+  
     <article id="post-串" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1074,107 +1206,6 @@
 
 
   
-    <article id="post-队列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/08/队列/">队列</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/08/队列/" class="archive-article-date">
-  	<time datetime="2018-06-08T06:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-08</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="队列"><a href="https://baike.baidu.com/link?url=gxFy1cITfuDuFiGw3tXjHVlZlEIwtuYIKvu8ZxsUWWvDKTh_FNljSFWvZCd85B7H5LGQdTeWDLmKi8TqRMnKc1CyV2lxe4Cqvxbv32K-FM_" target="_blank" rel="noopener">队列</a></h4>
-<p><strong>队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/08/队列/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
- 
-    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'false' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
-            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
-            placeholder: "来造作啊",
-            avatar:"retro"
-        });
-    }
-</script>
-    </section>
-  
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1308,10 +1339,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -1320,7 +1347,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
             
             <div class="clearfix"></div>
