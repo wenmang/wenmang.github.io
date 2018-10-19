@@ -164,6 +164,143 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-图的遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/15/图的遍历/">图的遍历</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/15/图的遍历/" class="archive-article-date">
+  	<time datetime="2018-10-15T15:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历</p>
+<h3 id="深度优先遍历dfs-depth-first-search">深度优先遍历（DFS – Depth First Search）</h3>
+<p>深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法</p>
+<p>深度优先遍历实现总的来说就是两句话：</p>
+<ol type="1">
+<li>从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历</li>
+<li>无法 ”深入“ 时，进行 ”回溯“ —— 即若遍历到这条边的终点，则原路返回上一个结点，在此结点进行查询通过此结点所有可以到达的所有结点是否还有未遍历过的结点，再次进行 ”深入“</li>
+</ol>
+<p>可见，此遍历的实现过程描述是一种递归描述，所以首先考虑通过递归的方法进行实现</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(MGraph graph, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%5d"</span>, graph-&gt;data[i]);</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++)</span><br><span class="line">        <span class="keyword">if</span> (graph-&gt;g[i][j] != <span class="number">0</span>  &amp;&amp; !visited[j])</span><br><span class="line">            DFS(graph, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<ul>
+<li>此代码为邻接数组实现的图的DFS遍历</li>
+<li>visited[] 为标记数组，标记某结点是否被遍历到</li>
+</ul>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(LGraph graph, Vertex v)</span></span>&#123;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    visited[v] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%5d"</span>, graph-&gt;g[v].data);</span><br><span class="line">    <span class="keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[w-&gt;adjv])</span><br><span class="line">            DFS(graph, w-&gt;adjv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<ul>
+<li>此代码为邻接表实现的图的DFS遍历</li>
+<li>visited[] 为标记数组，标记某结点是否被遍历到，使用之前应进行初始化为FALSE</li>
+</ul>
+<h3 id="广度优先遍历bfs-breadth-first-search">广度优先遍历（BFS – Breadth First Search）</h3>
+<p>深度优先遍历也称之为深度优先搜索，是最简单的图搜索算法之一</p>
+<p>广度优先搜索的实现过程实质就是树的层序遍历，从某一结点开始，将这一结点压入队列，结点出队时，将此结点所有边连接的结点统统压入队列</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(MGraph graph)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; ++i)</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    Q = CreateQueue(MAXSIZE);   <span class="comment">// 初始化辅助队列</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; i++) <span class="comment">// 循环每一个顶点</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i])&#123;   <span class="comment">// 判断是否访问过</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[i]);</span><br><span class="line">            AddQ(Q, i);</span><br><span class="line">            <span class="keyword">while</span> (!IsEmpty(Q))&#123;    <span class="comment">// 队列不空</span></span><br><span class="line">                i = Delete(Q);  <span class="comment">// 取出元素 赋值给i</span></span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph-&gt;g[i][j] == <span class="number">1</span> &amp;&amp; !visited[j])&#123;    <span class="comment">// 判断其他顶点与当前顶点之间是否存在边且是否被访问</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[j]);</span><br><span class="line">                        AddQ(Q, j); <span class="comment">// 将j结点压入队列</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两步：</p>
+<ol type="1">
+<li>创造辅助队列，并将 i 压入队列</li>
+<li>弹出 i ，并将其联通的结点依次压入队列</li>
+</ol>
+<p>邻接表实现方式，基本代码相同</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(MGraph graph)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; ++i)</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    Q = CreateQueue(MAXSIZE);   <span class="comment">// 初始化辅助队列</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; i++) <span class="comment">// 循环每一个顶点</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i])&#123;   <span class="comment">// 判断是否访问过</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[i]);</span><br><span class="line">            AddQ(Q, i);</span><br><span class="line">            <span class="keyword">while</span> (!IsEmpty(Q))&#123;    <span class="comment">// 队列不空</span></span><br><span class="line">                i = Delete(Q);  <span class="comment">// 取出元素 赋值给i</span></span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph-&gt;g[i][j] == <span class="number">1</span> &amp;&amp; !visited[j])&#123;    <span class="comment">// 判断其他顶点与当前顶点之间是否存在边且是否被访问</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[j]);</span><br><span class="line">                        AddQ(Q, j); <span class="comment">// 将j结点压入队列</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<p>注意指针的指向并深刻理解代码含义即可</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/15/图的遍历/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+ 
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
+  
+
+
+  
     <article id="post-练习（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -186,6 +323,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="算法竞赛入门经典第二版-第二章习题">算法竞赛入门经典（第二版）—— 第二章习题</h2>
+<p>此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！</p>
         
       
 
@@ -1102,111 +1240,9 @@
 
 
   
-    <article id="post-算法复杂度初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/20/算法复杂度初探/">算法复杂度初探</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/20/算法复杂度初探/" class="archive-article-date">
-  	<time datetime="2018-07-20T13:00:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
-</blockquote>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/20/算法复杂度初探/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
- 
-    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'false' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
-            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
-            placeholder: "来造作啊",
-            avatar:"retro"
-        });
-    }
-</script>
-    </section>
-  
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1333,11 +1369,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">

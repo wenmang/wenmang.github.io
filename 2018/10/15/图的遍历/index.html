@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>二分查找 | wenmang</title>
+  <title>图的遍历 | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
-<meta name="keywords" content="博客,算法">
+  <meta name="description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 深度优先遍历（DFS – Depth First Search） 深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法 深度优先遍历实现总的来说就是两句话：  从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历 无法 ”深入“ 时，进行 ”回溯“ —— 即若遍">
+<meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二分查找">
-<meta property="og:url" content="http://yoursite.com/2018/04/15/二分查找/index.html">
+<meta property="og:title" content="图的遍历">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/图的遍历/index.html">
 <meta property="og:site_name" content="wenmang">
-<meta property="og:description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
+<meta property="og:description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 深度优先遍历（DFS – Depth First Search） 深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法 深度优先遍历实现总的来说就是两句话：  从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历 无法 ”深入“ 时，进行 ”回溯“ —— 即若遍">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-21T08:58:17.874Z">
+<meta property="og:updated_time" content="2018-10-19T13:31:30.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二分查找">
-<meta name="twitter:description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
+<meta name="twitter:title" content="图的遍历">
+<meta name="twitter:description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 深度优先遍历（DFS – Depth First Search） 深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法 深度优先遍历实现总的来说就是两句话：  从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历 无法 ”深入“ 时，进行 ”回溯“ —— 即若遍">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
   
@@ -167,20 +167,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-二分查找" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-图的遍历" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      二分查找
+      图的遍历
     </h1>
   
 
         
-        <a href="/2018/04/15/二分查找/" class="archive-article-date">
-  	<time datetime="2018-04-15T12:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
+        <a href="/2018/10/15/图的遍历/" class="archive-article-date">
+  	<time datetime="2018-10-15T15:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
 </a>
         
         
@@ -192,27 +192,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><p>二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。 <a id="more"></a> 首先我们来看一个二分查找的实现函数。 &gt;写一个函数BinarySeach，在包含size个元素的、从小到大排序的int数组a里查找元素 p,如果找到，则返回元素下标，如果找不到，则返回-1。要求复杂度O(log(n))。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BinarySearch</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size,<span class="keyword">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">0</span>; <span class="comment">//查找区间的左端点</span></span><br><span class="line">    <span class="keyword">int</span> R = size - <span class="number">1</span>; <span class="comment">//查找区间的右端点</span></span><br><span class="line">    <span class="keyword">while</span>( L &lt;= R)   <span class="comment">//如果查找区间不为空就继续查找</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = L+(R-L)/<span class="number">2</span>; <span class="comment">//取查找区间正中元素的下标</span></span><br><span class="line">        <span class="keyword">if</span>( p == a[mid] )</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( p &gt; a[mid])</span><br><span class="line">            L = mid + <span class="number">1</span>; <span class="comment">//设置新的查找区间的左端点</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            R = mid - <span class="number">1</span>; <span class="comment">//设置新的查找区间的右端点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125; <span class="comment">//复杂度O(log(n))</span></span><br></pre></td></tr></table></figure>
-<h4 id="说明">说明：</h4>
-<p>int mid = L+(R-L)/2 此种写法为防止L+R的值过大而溢出，所以采用此种写法 &gt;写一个函数LowerBound，在包含size个元素的、从小到大排序的int数组a里查找比给 定整数p小的，下标最大的元素。找到则返回其下标，找不到则返回-1</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LowerBound</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size,<span class="keyword">int</span> p)</span> <span class="comment">//复杂度O(log(n))</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">0</span>; <span class="comment">//查找区间的左端点</span></span><br><span class="line">    <span class="keyword">int</span> R = size - <span class="number">1</span>; <span class="comment">//查找区间的右端点</span></span><br><span class="line">    <span class="keyword">int</span> lastPos = <span class="number">-1</span>; <span class="comment">//到目前为止找到的最优解</span></span><br><span class="line">    <span class="keyword">while</span>( L &lt;= R)   <span class="comment">//如果查找区间不为空就继续查找</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = L+(R-L)/<span class="number">2</span>; <span class="comment">//取查找区间正中元素的下标</span></span><br><span class="line">        <span class="keyword">if</span>(a[mid]&gt;= p)</span><br><span class="line">            R = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            lastPos = mid;</span><br><span class="line">            L = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lastPos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="说明-1">说明：</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lastPos = mid;	L = mid+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<p>如上else中语句，执行时mid处数组的值小于p，所以先将其中的最大值mid的号给lastPos，然后寻找比mid处值大而比p的值小的数，所以将mid+1作为左端点继续操作。</p>
-<h3 id="练手">练手</h3>
-<blockquote>
-<h4 id="题目">题目：</h4>
-<p>求下面方程的一个根：f(x) = x<sup>3-5x</sup>2+10x-80 = 0，若求出的根是a，则要求 |f(a)| &lt;= 10^-6</p>
-</blockquote>
-<blockquote>
-<h4 id="解法">解法：</h4>
-<p>对f(x)求导，得f’(x)=3x^2-10x+10。由一元二次方程求根公式知方程 f’(x)= 0 无解，因此f’(x)恒大于0。故f(x)是单调递增的。易知 f(0) &lt; 0且 f(100)&gt;0,所以区间[0,100]内必然有且只有一个根。由于f(x)在[0,100]内是单 调的，所以可以用二分的办法在区间[0,100]中寻找根。</p>
-</blockquote>
-<h4 id="代码">代码：</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> EPS = <span class="number">1e-6</span>;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">f</span><span class="params">(<span class="keyword">double</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*x*x - <span class="number">5</span>*x*x + <span class="number">10</span>*x - <span class="number">80</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> root, x1 = <span class="number">0</span>, x2 = <span class="number">100</span>,y;</span><br><span class="line">    root = x1+(x2-x1)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> triedTimes = <span class="number">1</span>; <span class="comment">//记录一共尝试多少次，对求根来说不是必须的</span></span><br><span class="line">    y = f(root);</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">fabs</span>(y) &gt; EPS)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( y &gt; <span class="number">0</span> )</span><br><span class="line">            x2 = root;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            x1 = root;</span><br><span class="line">        root = x1+(x2 - x1)/<span class="number">2</span>;</span><br><span class="line">        y = f(root);</span><br><span class="line">        triedTimes ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.8f\n"</span>,root);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,triedTimes);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="说明-2">说明：</h4>
-<p>循环条件：fabs(y) &gt; EPS 也就是在精度值达到之后结束循环。 ### 例题一： &gt;#### 题目： &gt;输入n ( n&lt;= 100,000)个整数，找出其中的两个数，它们之和等于整数m(假定肯 定有解)。题中所有整数都能用 int 表示</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历</p>
+<h3 id="深度优先遍历dfs-depth-first-search">深度优先遍历（DFS – Depth First Search）</h3>
+<p>深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法</p>
+<p>深度优先遍历实现总的来说就是两句话：</p>
+<ol type="1">
+<li>从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历</li>
+<li>无法 ”深入“ 时，进行 ”回溯“ —— 即若遍历到这条边的终点，则原路返回上一个结点，在此结点进行查询通过此结点所有可以到达的所有结点是否还有未遍历过的结点，再次进行 ”深入“</li>
+</ol>
+<p>可见，此遍历的实现过程描述是一种递归描述，所以首先考虑通过递归的方法进行实现</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(MGraph graph, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%5d"</span>, graph-&gt;data[i]);</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++)</span><br><span class="line">        <span class="keyword">if</span> (graph-&gt;g[i][j] != <span class="number">0</span>  &amp;&amp; !visited[j])</span><br><span class="line">            DFS(graph, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<ul>
+<li>此代码为邻接数组实现的图的DFS遍历</li>
+<li>visited[] 为标记数组，标记某结点是否被遍历到</li>
+</ul>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(LGraph graph, Vertex v)</span></span>&#123;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    visited[v] = TRUE;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%5d"</span>, graph-&gt;g[v].data);</span><br><span class="line">    <span class="keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[w-&gt;adjv])</span><br><span class="line">            DFS(graph, w-&gt;adjv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<ul>
+<li>此代码为邻接表实现的图的DFS遍历</li>
+<li>visited[] 为标记数组，标记某结点是否被遍历到，使用之前应进行初始化为FALSE</li>
+</ul>
+<h3 id="广度优先遍历bfs-breadth-first-search">广度优先遍历（BFS – Breadth First Search）</h3>
+<p>深度优先遍历也称之为深度优先搜索，是最简单的图搜索算法之一</p>
+<p>广度优先搜索的实现过程实质就是树的层序遍历，从某一结点开始，将这一结点压入队列，结点出队时，将此结点所有边连接的结点统统压入队列</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(MGraph graph)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; ++i)</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    Q = CreateQueue(MAXSIZE);   <span class="comment">// 初始化辅助队列</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; i++) <span class="comment">// 循环每一个顶点</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i])&#123;   <span class="comment">// 判断是否访问过</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[i]);</span><br><span class="line">            AddQ(Q, i);</span><br><span class="line">            <span class="keyword">while</span> (!IsEmpty(Q))&#123;    <span class="comment">// 队列不空</span></span><br><span class="line">                i = Delete(Q);  <span class="comment">// 取出元素 赋值给i</span></span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph-&gt;g[i][j] == <span class="number">1</span> &amp;&amp; !visited[j])&#123;    <span class="comment">// 判断其他顶点与当前顶点之间是否存在边且是否被访问</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[j]);</span><br><span class="line">                        AddQ(Q, j); <span class="comment">// 将j结点压入队列</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两步：</p>
+<ol type="1">
+<li>创造辅助队列，并将 i 压入队列</li>
+<li>弹出 i ，并将其联通的结点依次压入队列</li>
+</ol>
+<p>邻接表实现方式，基本代码相同</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(MGraph graph)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; ++i)</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    Q = CreateQueue(MAXSIZE);   <span class="comment">// 初始化辅助队列</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; graph-&gt;nv; i++) <span class="comment">// 循环每一个顶点</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[i])&#123;   <span class="comment">// 判断是否访问过</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[i]);</span><br><span class="line">            AddQ(Q, i);</span><br><span class="line">            <span class="keyword">while</span> (!IsEmpty(Q))&#123;    <span class="comment">// 队列不空</span></span><br><span class="line">                i = Delete(Q);  <span class="comment">// 取出元素 赋值给i</span></span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; graph-&gt;nv; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (graph-&gt;g[i][j] == <span class="number">1</span> &amp;&amp; !visited[j])&#123;    <span class="comment">// 判断其他顶点与当前顶点之间是否存在边且是否被访问</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"%d"</span>, graph-&gt;data[j]);</span><br><span class="line">                        AddQ(Q, j); <span class="comment">// 将j结点压入队列</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong></p>
+<p>注意指针的指向并深刻理解代码含义即可</p>
 
       
 
@@ -264,7 +281,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -320,7 +337,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/15/二分查找/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/10/15/图的遍历/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -334,18 +351,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/30/分治/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          分治
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/07/递归/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">递归</div>
+    <a href="/2018/09/22/练习（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">练习（二）</div>
       <i class="icon-circle-right"></i>
     </a>
   
