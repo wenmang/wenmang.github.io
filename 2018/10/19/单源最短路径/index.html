@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 博客 | wenmang</title>
+  <title>单源最短路径 | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wenmang">
-<meta property="og:url" content="http://yoursite.com/tags/博客/page/2/index.html">
+  <meta name="description" content="说明 在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
+<meta name="keywords" content="博客,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单源最短路径">
+<meta property="og:url" content="http://yoursite.com/2018/10/19/单源最短路径/index.html">
 <meta property="og:site_name" content="wenmang">
+<meta property="og:description" content="说明 在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-21T09:26:08.567Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wenmang">
+<meta name="twitter:title" content="单源最短路径">
+<meta name="twitter:description" content="说明 在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
   
@@ -162,78 +167,122 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-单源最短路径" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      单源最短路径
+    </h1>
+  
+
+        
+        <a href="/2018/10/19/单源最短路径/" class="archive-article-date">
+  	<time datetime="2018-10-19T13:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-19</time>
+</a>
+        
+        
+        <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
     
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h4 id="说明">说明</h4>
+<p>在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径</p>
+<p>这条路径就是两点之间的<strong>最短路径</strong>（Shortest Path）</p>
+<p>第一个顶点为<strong>源点</strong>（Source）</p>
+<p>最后一个顶点为<strong>终点</strong>（Destination）</p>
+<a id="more"></a>
+<h4 id="分类">分类：</h4>
+<p><strong>单源最短路径：</strong>从某固定源点出发，求其到其他顶点的最短路径</p>
+<ul>
+<li><strong>无权图</strong></li>
+<li><strong>有权图</strong></li>
+</ul>
+<h3 id="无权图的单源最短路">无权图的单源最短路</h3>
+<p><strong>实现方法：</strong>从源点开始，按照非递减的顺序，找出各个顶点的最短路，此类查找类似于图的BFS遍历，但有细微的不同</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UnWeighted</span> <span class="params">(LGraph graph, <span class="keyword">int</span> dist[], <span class="keyword">int</span> path[], Vertex s)</span></span>&#123;</span><br><span class="line">    <span class="comment">/* dist[] 存距源点的距离   path[] 存通过结点找到此结点的结点 */</span></span><br><span class="line">    Queue Q = CreateQueue();</span><br><span class="line">    Vertex v;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    dist[s] = <span class="number">0</span>;    <span class="comment">// 初始化源节点</span></span><br><span class="line">    AddQ(Q, s);</span><br><span class="line">    <span class="keyword">while</span> (!IsEmpty(Q))&#123;</span><br><span class="line">        v = Delete(Q);</span><br><span class="line">        <span class="keyword">for</span> (w = graph-&gt;g[v]-&gt;firstEdge; w; w = w-&gt;next)</span><br><span class="line">            <span class="keyword">if</span> (dist[w-&gt;adjv] == <span class="number">-1</span>)&#123;</span><br><span class="line">                dist[w-&gt;adjv] = dist[v]+<span class="number">1</span>;  <span class="comment">// 存入此结点到源节点的距离</span></span><br><span class="line">                path[w-&gt;adjv] = v;  <span class="comment">// 存入上个结点的位置</span></span><br><span class="line">                AddQ(Q, w-&gt;adjv);   <span class="comment">// 将结点压入队列</span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>上述代码使用过之前应首先将数组dist[]和path[]各位初始化为-1</p>
+<p><strong>解析：</strong>上述代码实现方式如下：</p>
+<ol type="1">
+<li>将源点对应的 dist[s] 更改为0，并将源点压入队列</li>
+<li>弹出源点，并对源点连接的所有结点均作如下处理：记录其与源点的距离并存入 dist[] 数组对应的位置，记录源点的下标于 path[] 数组，将结点压入队列</li>
+<li>将队头结点弹出，并对其所连结点做与 2 相似处理：记录其与源点的距离并存入 dist[] 数组对应的位置，记录弹出结点的下标于 path[] 数组，将此结点压入队列</li>
+<li>重复 3 ，直至图中所有结点全部 进入并被弹出过队列</li>
+</ol>
+<p>此算法结束后，如需打印某结点到源结点的最短路径，可以采用栈依靠 path 数组 从此结点开始压栈至源节点，然后依次 pop 打印即可</p>
+<h3 id="有权图的单源最短路">有权图的单源最短路</h3>
+<p>有了无权图的单源最短路解决方案，有权图的单源最短路便也显得触手可及了</p>
+<p><strong>区别：</strong>无权图的最短路即经过顶点最少的路径，而有权图的最短路却并非如此，经过的顶点最少的并不一定是最短路</p>
+<p><strong>注意：</strong>负值圈的影响：由于权值可为负数，有权图可能出现某一回路权值和为负数，那么为了求权值和最小，就会一直在此回路绕圈子，所以，我们首先讨论权值均非负的情况</p>
+<p><strong>实现方法：</strong>Dijkstra 算法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Vertex <span class="title">FindMinDist</span><span class="params">(MGraph graph, <span class="keyword">int</span> dist[], <span class="keyword">int</span> collected[])</span></span>&#123;</span><br><span class="line">    Vertex minV, v;</span><br><span class="line">    <span class="keyword">int</span> minDist = INFINITY;</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; graph-&gt;nv; v++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (collected[v] == <span class="literal">false</span> &amp;&amp; dist[v] &lt; minDist)&#123;</span><br><span class="line">            minDist = dist[v];</span><br><span class="line">            minV = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (minDist &lt; INFINITY)</span><br><span class="line">        <span class="keyword">return</span> minV;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Dijkstra</span><span class="params">(MGraph graph, <span class="keyword">int</span> dist[], <span class="keyword">int</span> path[], Vertex s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> collected[MAXSIZE];</span><br><span class="line">    Vertex v, w;</span><br><span class="line">    <span class="comment">/* 初始化：邻接表不存在的边用INFINITY表示 */</span></span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; graph-&gt;nv; v++) &#123;</span><br><span class="line">        dist[v] = graph-&gt;g[s][v];</span><br><span class="line">        <span class="keyword">if</span> (dist[v] &lt; INFINITY)</span><br><span class="line">            path[v] = s;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            path[v] = <span class="number">-1</span>;</span><br><span class="line">        collected[v] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 先将起点收入集合 */</span></span><br><span class="line">    dist[s] = <span class="number">0</span>;</span><br><span class="line">    collected[s] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">/* v = 未被收录顶点中dist最小者 */</span></span><br><span class="line">        v = FindMinDist(graph, dist, collected);</span><br><span class="line">        <span class="keyword">if</span> (v == ERROR) <span class="comment">// 若v不存在</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        collected[v] = <span class="literal">true</span>;    <span class="comment">// 收录v</span></span><br><span class="line">        <span class="keyword">for</span> (w = <span class="number">0</span>; w &lt; graph-&gt;nv; w++) <span class="comment">// 对图中每个顶点w</span></span><br><span class="line">            <span class="keyword">if</span> (collected[w] == <span class="literal">false</span> &amp;&amp; graph-&gt;g[v][w] &lt; INFINITY)&#123;    <span class="comment">// 若w是v的邻接点并且未被收录</span></span><br><span class="line">                <span class="keyword">if</span> (graph-&gt;g[v][w] &lt; <span class="number">0</span>) <span class="comment">// 有负边</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">if</span> (dist[v] + graph-&gt;g[v][w] &lt; dist[w])&#123;    <span class="comment">// 收录v使得dist[w]变小</span></span><br><span class="line">                    dist[w] = dist[v] + graph-&gt;g[v][w]; <span class="comment">// 更新dist[w]</span></span><br><span class="line">                    path[w] = v;    <span class="comment">// 更新s到w的路径</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>void Dijkstra() 函数主要分为两部分：初始化，正式运行</p>
+<p><strong>初始化：</strong></p>
+<ul>
+<li>将 dist[] 数组对应值更新为其到源点的权重，如与源结点不直接相连，则更新为 INFINITY</li>
+<li>将与源点相连通的结点对应的 dath[] 更新为源点下标，不相连的更新为 -1</li>
+<li>将判断结点是否收录的数组 collected[] 全部置为 false</li>
+</ul>
+<p><strong>正式运行：</strong></p>
+<ul>
+<li>将源点收录集合，即 collected[s] 置为true</li>
+<li>通过 FindMinDist() 函数，查找距离源点最近的结点v并将其收录</li>
+<li>遍历v的邻接点，更新其对应的 dist[] 值，存在着两个用处：
+<ul>
+<li>为邻接点为 INFINITY 的结点赋值</li>
+<li>查找是否存在比已有路径更短的路径，如果有，将其更新</li>
+</ul></li>
+<li>循环，直至所有结点均被收录</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+<span id="busuanzi_container_page_pv">
+                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+         </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/20/算法复杂度初探/" class="archive-article-date">
-  	<time datetime="2018-07-20T13:00:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/20/算法复杂度初探/">算法复杂度初探</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/08/队列/" class="archive-article-date">
-  	<time datetime="2018-06-08T06:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/08/队列/">队列</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -249,318 +298,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/10/19/单源最短路径/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/29/堆栈/" class="archive-article-date">
-  	<time datetime="2018-05-29T11:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/15/图的遍历/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">图的遍历</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/29/堆栈/">堆栈</a>
-    </h1>
+        
+        
+    </div>
+</aside>
+
+ 
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/21/线性表/" class="archive-article-date">
-  	<time datetime="2018-05-21T07:41:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/线性表/">线性表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/20/多项式的表示/" class="archive-article-date">
-  	<time datetime="2018-05-20T13:36:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/20/多项式的表示/">多项式的表示</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/30/分治/" class="archive-article-date">
-  	<time datetime="2018-04-30T11:51:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/30/分治/">分治</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/15/二分查找/" class="archive-article-date">
-  	<time datetime="2018-04-15T12:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/15/二分查找/">二分查找</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/07/递归/" class="archive-article-date">
-  	<time datetime="2018-04-07T14:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/07/递归/">递归</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/26/枚举/" class="archive-article-date">
-  	<time datetime="2018-03-26T14:25:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/26/枚举/">枚举</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/博客/">&laquo; Prev</a><a class="page-number" href="/tags/博客/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -589,9 +448,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
