@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>LeetCode练习（一） | wenmang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="No.3 无重复字符的最长子串 给定一个字符串，找出不含有重复字符的最长子串的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 无重复字符的最长子串是 &amp;quot;abc&amp;quot;，其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 无重复字符的最长子串是 &amp;quot;b&amp;quot;，其长度为 1。">
-<meta name="keywords" content="随笔,练习,c">
+  <meta name="description" content="此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文，周更！">
+<meta name="keywords" content="随笔,练习,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode练习（一）">
 <meta property="og:url" content="http://yoursite.com/2018/10/23/LeetCode练习（一）/index.html">
 <meta property="og:site_name" content="wenmang">
-<meta property="og:description" content="No.3 无重复字符的最长子串 给定一个字符串，找出不含有重复字符的最长子串的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 无重复字符的最长子串是 &amp;quot;abc&amp;quot;，其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 无重复字符的最长子串是 &amp;quot;b&amp;quot;，其长度为 1。">
+<meta property="og:description" content="此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文，周更！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cqfu4qqrk19191ej9phk7hma.png-j.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cqfvd9f0magg2j783ovta73a.png-j.jpg">
-<meta property="og:updated_time" content="2018-10-23T08:09:18.699Z">
+<meta property="og:updated_time" content="2018-11-01T13:55:27.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode练习（一）">
-<meta name="twitter:description" content="No.3 无重复字符的最长子串 给定一个字符串，找出不含有重复字符的最长子串的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 无重复字符的最长子串是 &amp;quot;abc&amp;quot;，其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 无重复字符的最长子串是 &amp;quot;b&amp;quot;，其长度为 1。">
+<meta name="twitter:description" content="此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文，周更！">
 <meta name="twitter:image" content="http://t1.aixinxi.net/o_1cqfu4qqrk19191ej9phk7hma.png-j.jpg">
   
     <link rel="alternative" href="/atom.xml" title="wenmang" type="application/atom+xml">
@@ -195,7 +195,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><h3 id="no.3-无重复字符的最长子串">No.3 无重复字符的最长子串</h3>
+        <script src="/assets/js/APlayer.min.js"> </script><p>此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文，周更！</p>
+<a id="more"></a>
+<h3 id="no.3-无重复字符的最长子串">No.3 无重复字符的最长子串</h3>
 <p>给定一个字符串，找出不含有重复字符的<strong>最长子串</strong>的长度。</p>
 <p><strong>示例 1:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。</span><br></pre></td></tr></table></figure>
@@ -204,6 +206,7 @@
 <p><strong>示例 3:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 无重复字符的最长子串是 &quot;wke&quot;，其长度为 3。</span><br><span class="line">     请注意，答案必须是一个子串，&quot;pwke&quot; 是一个子序列 而不是子串。</span><br></pre></td></tr></table></figure>
 <p><strong>说明：</strong>在看到此题之后，菜鸡的我开始思考如何通过设置一临时字符指针对未重复数字进行复制求长，有了大致思路之后开始胡乱操作，写的代码涂涂改改愣是半天没有结果，我随手百度一手，看到了一个简洁与智慧并存的解决方案，让人五体投地，特来膜拜</p>
+<p><strong>算法来源：</strong><a href="https://blog.csdn.net/ysayk/article/details/51505502" target="_blank" rel="noopener">XDmonkey 的CSDN博客</a></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, idx = <span class="number">-1</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p[<span class="number">256</span>];</span><br><span class="line">    <span class="built_in">memset</span>(p, <span class="number">-1</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; s[i] != <span class="string">'\0'</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p[s[i]] &gt; idx)</span><br><span class="line">            idx = p[s[i]];</span><br><span class="line">        <span class="keyword">if</span> (i - idx &gt; max)</span><br><span class="line">            max = i - idx;</span><br><span class="line">        p[s[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>说明：</strong></p>
 <ol type="1">
@@ -289,7 +292,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
         		</li>
       		
 		</ul>
@@ -553,7 +556,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,6 +577,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
             
             <div class="clearfix"></div>
