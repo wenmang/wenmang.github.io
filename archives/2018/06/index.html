@@ -277,8 +277,19 @@
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
+    <div calss="count-span">
+      <span id="busuanzi_container_site_pv">
+        总访问量: <span id="busuanzi_value_site_pv"></span>|
+      </span>
+      <span id="busuanzi_container_site_uv">
+        总访客: <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </div>
   </div>
 </footer>
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     </div>
     <script>
 	var yiliaConfig = {
@@ -323,64 +334,6 @@ MathJax.Hub.Queue(function() {
 </script>
 
 
-
-
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
-<script type="text/javascript"> 
-if(true){
-    var leancloud_app_id  = 'aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz';
-    var leancloud_app_key = 'z44iJIftlyIVIWPh6A9LDHH3';
-    AV.init({
-        appId: leancloud_app_id,
-        appKey: leancloud_app_key
-    });
-    var pageViewsLength = $(".pageViews").length;
-    var isIndex = $("#page-nav").length > 0 ?true:false;
-    function showTime() {
-        var Counter = AV.Object.extend("Counter");
-        if(isIndex){
-            $(".pageViews").each(function(){
-                showPageViewsNum($(this),Counter);
-            });
-        }else{
-            addPageViewsNum($(".pageViews"));
-            showPageViewsNum($(".pageViews"),Counter);
-        }
-    }
-    function showPageViewsNum(ele,Counter){
-        var query = new AV.Query("Counter");
-        var url = ele.attr('id').trim();
-        query.equalTo("words",url);
-        query.find().then(function(results){
-        	if (results.length>0) $(document.getElementById(url)).text(results[0].get("views"));
-        	else $(document.getElementById(url)).text('0');
-        },function(error){$(document.getElementById(url)).text('0');});
-    }
-    function addPageViewsNum(ele){
-        var url = ele.attr('id').trim();var title = $('.article-title').text().trim();
-        var Counter = AV.Object.extend("Counter");
-        var now=new AV.Query(Counter);now.equalTo("words",url);
-        now.find().then(function(results){
-            if (results.length>0){
-                var query=results[0];
-                query.increment("views");
-                query.fetchWhenSave(true);
-                query.save();
-            } else{
-                var query = new Counter;
-                query.set("words",url);
-                query.set("title",title);
-                query.set("views",1);
-                query.save(null,{}).then(function (object) {});
-            }
-        },function(error){});
-    }
-    if(pageViewsLength){
-        showTime();
-    }
-}
-</script>
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
   <div class="tools-nav header-menu">
