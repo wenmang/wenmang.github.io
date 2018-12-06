@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal4o4co1bhl8s21ffkk6rdjqa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal5289ecbfher7tlnjh1dkoa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cal57l2c70ekm31p4dou8te6a.png-w.jpg">
-<meta property="og:updated_time" content="2018-05-21T08:57:36.680Z">
+<meta property="og:updated_time" content="2018-12-04T15:05:07.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="递归">
 <meta name="twitter:description" content="一个函数调用其自身，就是递归">
@@ -296,7 +296,7 @@ var _hmt = _hmt || [];
 <p>n个数计算24，首先应该提出两个数先算。这两个数计算的结果，和剩余的n-2个数又构成n-1个数求24的问题。 而挑选两个数先算，则必须用二重循环一一枚举挑选所有可能。 代码如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EPS 1e-6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> a[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isZero</span><span class="params">(<span class="keyword">double</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">fabs</span>(x) &lt;= EPS;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">count24</span><span class="params">(<span class="keyword">double</span> a[],<span class="keyword">int</span> n)</span>  <span class="comment">//用数组a里的 n个数，计算24</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( n == <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isZero( a[<span class="number">0</span>] - <span class="number">24</span>) )</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">double</span> b[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; ++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; n; ++j)  <span class="comment">//枚举两个数的组合</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> m = <span class="number">0</span>; <span class="comment">//还剩下m个数,m = n - 2 ;</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; ++k)</span><br><span class="line">                <span class="keyword">if</span>( k != i &amp;&amp; k!= j)</span><br><span class="line">                    b[m++] = a[k];<span class="comment">//把其余数放入b</span></span><br><span class="line">            b[m] = a[i]+a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[i]-a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[j]-a[i];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            b[m] = a[i]*a[j];</span><br><span class="line">            <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>( !isZero(a[j]))</span><br><span class="line">            &#123;</span><br><span class="line">                b[m] = a[i]/a[j];</span><br><span class="line">                <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( !isZero(a[i]))</span><br><span class="line">            &#123;</span><br><span class="line">                b[m] = a[j]/a[i];</span><br><span class="line">                <span class="keyword">if</span>(count24(b,m+<span class="number">1</span>))</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;a[i]);</span><br><span class="line">        <span class="keyword">if</span>( isZero(a[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>( count24(a,<span class="number">4</span>))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="关于其终止条件-2">关于其终止条件</h4>
-<p>四个数测试完即结束 #### 代码说明 由于计算机关于浮点数特殊的储存方式，所以不能直接用’==’判断，而采用判断与24的差的绝对值是否小于一个极小值来判断该值是否等于24，也就是isZero函数的作用。 #include&lt;stdbool.h&gt; C语言用布尔类型需加的头文件。 临时数组b的作用，是将取了两个数后的a数组的剩余的数进行存放。</p>
+<p>四个数测试完即结束 #### 代码说明 由于计算机关于浮点数特殊的储存方式，所以不能直接用’==’判断，而采用判断与24的差的绝对值是否小于一个极小值来判断该值是否等于24，也就是isZero函数的作用。 ​ <code>#include&lt;stdbool.h&gt;</code> C语言用布尔类型需加的头文件。 临时数组b的作用，是将取了两个数后的a数组的剩余的数进行存放。</p>
 
       
 
@@ -608,6 +608,18 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -620,7 +632,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,27 +640,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>

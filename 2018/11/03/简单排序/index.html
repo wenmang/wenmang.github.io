@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>简单排序 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理">
+  <meta name="description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前  所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单排序">
 <meta property="og:url" content="http://yoursite.com/2018/11/03/简单排序/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理">
+<meta property="og:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前  所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:49:07.692Z">
+<meta property="og:updated_time" content="2018-12-06T09:00:46.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单排序">
-<meta name="twitter:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理">
+<meta name="twitter:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前  所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -225,13 +225,13 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <script src="/assets/js/APlayer.min.js"> </script><p>排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理</p>
-<a id="more"></a>
 <h3 id="开始之前">开始之前</h3>
 <ul>
 <li>所有的排序算法以函数形式展现，采用C语言编写</li>
 <li>函数风格统一，命名规则同<code>ASort</code>，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为<code>void</code>，即直接将原数组进行排序</li>
 <li>所有排序的终点，也就时排序后的结果，为从大到小排序</li>
 </ul>
+<a id="more"></a>
 <p>为了让排序更好的进行，首先编写交换函数，即<code>Swap()</code>函数</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ELEMENT_TYPE int</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span><span class="params">(ELEMENT_TYPE *x, ELEMENT_TYPE *y)</span> </span>&#123;</span><br><span class="line">    ELEMENT_TYPE temp = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -604,6 +604,18 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -616,7 +628,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,27 +636,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>

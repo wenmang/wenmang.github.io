@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>改进排序 | 文的盲</title>
+  <title>排序进阶 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序 在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
+  <meta name="description" content="开始之前 进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序  当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="改进排序">
-<meta property="og:url" content="http://yoursite.com/2018/11/08/改进排序/index.html">
+<meta property="og:title" content="排序进阶">
+<meta property="og:url" content="http://yoursite.com/2018/11/15/排序进阶/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序 在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
+<meta property="og:description" content="开始之前 进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序  当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T09:00:09.745Z">
+<meta property="og:updated_time" content="2018-12-06T08:59:02.444Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="改进排序">
-<meta name="twitter:description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序 在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
+<meta name="twitter:title" content="排序进阶">
+<meta name="twitter:description" content="开始之前 进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序  当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -199,20 +199,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-改进排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-排序进阶" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      改进排序
+      排序进阶
     </h1>
   
 
         
-        <a href="/2018/11/08/改进排序/" class="archive-article-date">
-  	<time datetime="2018-11-08T06:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
+        <a href="/2018/11/15/排序进阶/" class="archive-article-date">
+  	<time datetime="2018-11-15T14:51:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
 </a>
         
         
@@ -224,98 +224,46 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><p>在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来</p>
-<h3 id="希尔排序">希尔排序</h3>
-<p>在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路</p>
-<a id="more"></a>
-<h4 id="实现思路">实现思路</h4>
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="开始之前">开始之前</h3>
+<p>进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法</p>
+<h3 id="表排序">表排序</h3>
 <ul>
-<li>冒泡和插入排序每次只消除一个逆序对</li>
-<li><p>既然排序是为了消除逆序对，那么能不能通过一次交换消除多个逆序对呢</p></li>
-<li>显然，我们可以采用隔几个数字的方式来进行排序，这样一来，进行一次交换就可消除不止一个逆序对</li>
-<li><p>结和以上思路，便实现了希尔排序的一般实现方式</p></li>
+<li>当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停<code>Swap</code>的操作，就会使时间大大增加</li>
 </ul>
-<h4 id="代码1">代码1</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;   <span class="comment">// 希尔1</span></span><br><span class="line">    <span class="keyword">int</span> i, j, k;</span><br><span class="line">    <span class="keyword">for</span> (i = n/<span class="number">2</span>; i &gt; <span class="number">0</span>; i /= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">            ELEMENT_TYPE temp = a[j];</span><br><span class="line">            <span class="keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                a[k] = a[k - i];</span><br><span class="line">            a[k] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>简单的希尔排序如上，也就是分别隔<code>n/2``n/4</code>…… 直至<code>n = 1</code></p>
-<p>但是采用这种方法可能出现尴尬的情况</p>
+<a id="more"></a>
+<h4 id="间接排序">间接排序</h4>
+<ul>
+<li>那么此时，我们可以采取间接排序的方式，也就是在结构体中添加一个属性，将之进行简单排序，来作为数据的真实顺序</li>
+</ul>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">1</th>
-<th style="text-align: center;">9</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">10</th>
-<th style="text-align: center;">3</th>
-<th style="text-align: center;">11</th>
-<th style="text-align: center;">4</th>
-<th style="text-align: center;">12</th>
-<th style="text-align: center;">5</th>
-<th style="text-align: center;">13</th>
-<th style="text-align: center;">6</th>
-<th style="text-align: center;">14</th>
-<th style="text-align: center;">7</th>
-<th style="text-align: center;">15</th>
-<th style="text-align: center;">8</th>
-<th style="text-align: center;">16</th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">[0]</th>
+<th style="text-align: center;">[1]</th>
+<th style="text-align: center;">[2]</th>
+<th style="text-align: center;">[3]</th>
+<th style="text-align: center;">[4]</th>
+<th style="text-align: center;">[5]</th>
+<th style="text-align: center;">[6]</th>
+<th style="text-align: center;">[7]</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">16</td>
+<td style="text-align: center;">key</td>
+<td style="text-align: center;">f</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">g</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">e</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">16</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">16</td>
-</tr>
-<tr class="even">
+<td style="text-align: center;">table</td>
+<td style="text-align: center;">0</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
 <td style="text-align: center;">3</td>
@@ -323,115 +271,368 @@ var _hmt = _hmt || [];
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">6</td>
 <td style="text-align: center;">7</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">12</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">15</td>
-<td style="text-align: center;">16</td>
 </tr>
 </tbody>
 </table>
-<p>也就是数列刚好每隔<code>n/2``n/4</code>…… 都是排序完成的，那么扫描就成了无用功</p>
-<p>发现上述问题之后，有专家就提出来一个交换间隔的数列</p>
 <ul>
-<li><p>Hibbard 增量序列</p>
-<ul>
-<li><span class="math inline">\(D_K\)</span> = <span class="math inline">\(2^k\)</span> - 1（<span class="math inline">\(D_k\)</span>为间隔数）</li>
-<li>最坏情况：<span class="math inline">\(T = Θ{(N^{\frac{2}{3}})}\)</span></li>
-<li>猜测：<span class="math inline">\(T_{avg} = O(N{\frac{5}{4}})\)</span></li>
-</ul></li>
-<li><p>Sedgewick增量序列</p>
-<ul>
-<li><p>{1, 5, 19, 41, 109, …}</p>
-<p>—— <span class="math inline">\(9\times4^i - 9\times2^i + 1\)</span> 或者 <span class="math inline">\(4^i - 3\times2^i + 1\)</span></p></li>
-<li><p>猜想：<span class="math inline">\(T_{avg} = O(N^\frac{7}{6})\)</span> , <span class="math inline">\(T_{worst} = O(N\frac{4}{3})\)</span></p></li>
-</ul></li>
+<li>对<code>table</code>根据<code>key</code>值进行排序即可</li>
 </ul>
-<p>则改进后的代码为：（只写Sedgewick）</p>
-<h4 id="代码2">代码2</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;   <span class="comment">// 希尔2</span></span><br><span class="line">    <span class="keyword">int</span> si, i, j, k;</span><br><span class="line">    <span class="keyword">int</span> Sedgewick[] = &#123;<span class="number">929</span>, <span class="number">505</span>, <span class="number">20</span>, <span class="number">109</span>, <span class="number">41</span>, <span class="number">19</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (si = <span class="number">0</span>; Sedgrwick[si] &gt;= N; si++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = Sedgrwick[si]; i &gt; <span class="number">0</span>; i = Sedgrwick[++si]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">                ELEMENT_TYPE temp = a[j];</span><br><span class="line">                <span class="keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                    a[k] = a[k - i];</span><br><span class="line">                a[k] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="堆排序">堆排序</h3>
-<p>那么简单排序中的选择排序是否可以优化呢？答案是肯定的</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">[0]</th>
+<th style="text-align: center;">[1]</th>
+<th style="text-align: center;">[2]</th>
+<th style="text-align: center;">[3]</th>
+<th style="text-align: center;">[4]</th>
+<th style="text-align: center;">[5]</th>
+<th style="text-align: center;">[6]</th>
+<th style="text-align: center;">[7]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">key</td>
+<td style="text-align: center;">f</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">g</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">h</td>
+<td style="text-align: center;">e</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">table</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">6</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>排序完成后结果如上，这时如果要求按顺序输出元素，就可按照<code>A[table[i]]</code> `i取值为0~n-1</li>
+</ul>
+<h4 id="物理排序">物理排序</h4>
+<ul>
+<li>如果明确要求需要对数据进行物理排序的话，那么我们就可以在表排序的基础之上对数据进行交换</li>
+<li>首先我们将<code>A[0]</code>取出，赋给临时值<code>temp</code>，之后寻找<code>A[table[0]]</code>，将之移动到空位上，依次寻找并移动</li>
+<li>因有定理：<strong>N个数字的排列由若干个独立的环组成</strong>，所以我们将每个环都一次移动一遍就好</li>
+<li>那么如何判断一个环已经全部排列整齐呢？我们可以将已排列好的环的<code>table</code>值改为<code>A</code>的下标值，所以<code>if(table[i] == i)</code>为<code>true</code>之时，就说明此环已经被排列整齐</li>
+</ul>
+<h4 id="物理排序复杂度分析">物理排序复杂度分析</h4>
+<ul>
+<li>最好情况：有序，不用交换</li>
+<li>最坏情况：每个环都只有两个元素</li>
+</ul>
+<h3 id="桶排序">桶排序</h3>
+<ul>
+<li>采用传统交换的排序，其时间下限为<span class="math inline">\(O(Nlog(N))\)</span> ，就算是最快的排序也总能找到一个特例，使其最坏时间复杂度为<span class="math inline">\(O(Nlog(N))\)</span></li>
+<li>那么就无法让排序变为线性复杂度吗？</li>
+</ul>
+<p>例：有N(N = 50000)个学生，考试成绩为 0 - 100 ，那么此时将学生的考试成绩排序，怎样排序最快呢？</p>
+<p>这时我们可以采用桶排序，将时间复杂度提升到线性时间：</p>
+<ul>
+<li>因为人数极多，而分数只有101种可能，所以我们可以先建立101个桶（指针数组）</li>
+<li>遍历每个学生的成绩，将其放在对应的桶下</li>
+<li>依次输出每个桶内的学生，排序完成</li>
+</ul>
+<h4 id="实现思路">实现思路</h4>
+<p>桶排序的一般实现思路：</p>
+<ul>
+<li>在数据种类小而数据规模大时使用</li>
+<li>为所有可能出现的数据种类建桶，将数据分别放入对应的桶中</li>
+<li>从桶中取出并进行之后的操作</li>
+</ul>
+<p>那么，如果数据规模不大，但是种类比较多，又该如何操作呢？</p>
+<h3 id="基数排序">基数排序</h3>
+<p>假设有10个整数，数字在0到999之间，这时应该怎样使用基数排序呢？</p>
+<ul>
+<li>次位优先法进行排序</li>
+<li>在一个数中，个位被称为该数的次位，最高位称为主位</li>
+</ul>
+<h4 id="实例说明">实例说明</h4>
+<p>例：有数字 64， 8， 216， 512， 27， 729 ，0， 1， 343， 125</p>
+<ul>
+<li>因为是十进制数字，所以我们建立0-9十个桶</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th style="text-align: left;">4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+<td>512</td>
+<td>343</td>
+<td style="text-align: left;">64</td>
+<td>125</td>
+<td>216</td>
+<td>27</td>
+<td>8</td>
+<td>729</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第一次排列，根据个位（次位）数字，将之放入相应的桶中</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>512</td>
+<td>125</td>
+<td></td>
+<td>343</td>
+<td></td>
+<td>64</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>216</td>
+<td>27</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td></td>
+<td>729</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第二次排列，在第一次的基础上按照十位数字将元素放入相应的桶中</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>125</td>
+<td>216</td>
+<td>343</td>
+<td></td>
+<td>512</td>
+<td></td>
+<td>729</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>27</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>第三次排列，按照百位数字放入相应的桶中，排序完毕</li>
+<li>用的时候，直接将元素按次序从桶中依次取出即可</li>
+</ul>
 <h4 id="实现思路-1">实现思路</h4>
 <ul>
-<li>首先选择排序的外层循环是不可变的，优化的只能是内层循环，即寻找数列之中最小的元素的过程</li>
-<li>选择排序中，此过程运用了遍历数组的方式，复杂度为 <span class="math inline">\(O(N)\)</span></li>
-<li>而在之前，我们学习了堆的知识，所以我们可以利用最小堆来进行寻找</li>
+<li>显然，我们首先要知道最高位的位数，以便知晓我们应该进行几趟排序</li>
+<li>之后就是每一趟将元素依次放入桶中即可</li>
 </ul>
-<h4 id="代码1-1">代码1</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;    <span class="comment">// 堆</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    ELEMENT_TYPE tmpA;</span><br><span class="line">    BuildHeap(a);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        tmpA = DeleteMin(a);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">        a[i] = tmpA[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>次位优先</strong></p>
 <ul>
-<li>如上代码，首先将<code>a</code>调整为一个最小堆</li>
-<li>之后取出依次最小的元素置于一个新临时数组中</li>
-<li>最后，将排好序的<code>tmpA</code>数组中的元素复制回原数组</li>
+<li>实现需要创建桶的结构体</li>
 </ul>
-<p>这样，虽然将时间复杂度降到了<span class="math inline">\(O(log(n))\)</span> ，但是空间复杂度提升了一倍，在数据量较大之时应用不是很方便</p>
-<h4 id="代码2-1">代码2</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;    <span class="comment">// 堆</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = N / <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; --i) &#123;</span><br><span class="line">        Swap(&amp;a[<span class="number">0</span>], &amp;a[i]);</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_DIGIT 4</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> REDIX 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 桶元素结点 */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">PtrToNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    PtrToNode next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 桶头结点 */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HeadNode</span>&#123;</span></span><br><span class="line">    PtrToNode head, tail;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">HeadNode</span> <span class="title">Bucket</span>[<span class="title">REDIX</span>];</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>首先通过第一个循环将其建为最大堆</li>
-<li>将最大堆的根与<code>a[0]</code>交换，之后再将<code>a</code>调整为最大堆</li>
-<li>重复2步骤，n次</li>
+<li><code>REDIX</code>表示需要排序数字的进制，<code>MAX_DIGIT</code>表示排序数字的最高位数</li>
+<li>之后，因为要根据每一位的数字来放置，所以需要一个取固定位 数字的函数</li>
 </ul>
-<p>由定理可知，其平均比较次数为 <span class="math inline">\(2NlogN - O(Nlog(logN))\)</span></p>
-<h3 id="归并排序">归并排序</h3>
-<p>归并排序的核心就是有序子列的归并，也就是将两个已经排好序的数列，归并到一个更大的数列中去</p>
-<h4 id="实现思路-2">实现思路</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetDit</span> <span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp, i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= d; ++i) &#123;</span><br><span class="line">        tmp = x % REDIX;</span><br><span class="line">        x /= REDIX;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>分别设立两个指针，从两个数组的开头扫到结尾，比较指针所在处数组的值，将小值复制到大数组中，之后将小值所在数组的指针后移一位</li>
-<li>重复步骤一，直至所有数字都挪入大数组</li>
+<li>准备工作做完之后，就可以进行排序了</li>
 </ul>
-<p>核心理解之后就可以进行排序了，也就是将需排序的数组拆分成若干已排序的小数组直接进行归并</p>
-<h4 id="递归代码">递归代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leftEnd = r<span class="number">-1</span> ;</span><br><span class="line">    <span class="keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123; <span class="comment">// 当左右子序列均不空</span></span><br><span class="line">        <span class="keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; rightEnd + <span class="number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> l, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> temp[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> center;</span><br><span class="line">    <span class="keyword">if</span> (l &lt; rightEnd) &#123;</span><br><span class="line">        center = (l + rightEnd) / <span class="number">2</span>;</span><br><span class="line">        MergeSort(a, l, center, temp);</span><br><span class="line">        MergeSort(a, center + <span class="number">1</span>, rightEnd, temp);</span><br><span class="line">        Merge(a, l, center+<span class="number">1</span>, rightEnd, temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* tmpA;</span><br><span class="line">    tmpA = <span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (tmpA != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        MergeSort(a, <span class="number">0</span>, n<span class="number">-1</span>, tmpA);</span><br><span class="line">        <span class="built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"ERROR"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LSDRadixSort</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> d, di, i;</span><br><span class="line">    Bucket bucket;</span><br><span class="line">    PtrToNode tmp, p, <span class="built_in">list</span> = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; REDIX; ++i) <span class="comment">// 初始化桶</span></span><br><span class="line">        bucket[i].head = bucket[i].tail = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;   <span class="comment">// 将数组逆序存入list链表</span></span><br><span class="line">        tmp = (PtrToNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Node));</span><br><span class="line">        tmp-&gt;key = a[i];</span><br><span class="line">        tmp-&gt;next = <span class="built_in">list</span>;</span><br><span class="line">        <span class="built_in">list</span> = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (d = <span class="number">1</span>; d &lt;= MAX_DIGIT; ++d) &#123;	<span class="comment">// 排序</span></span><br><span class="line">        p = <span class="built_in">list</span>;</span><br><span class="line">        <span class="keyword">while</span> (p) &#123;	<span class="comment">// 将 list 按顺序放入桶中</span></span><br><span class="line">            di = GetDit(p-&gt;key, d);</span><br><span class="line">            tmp = p;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            tmp-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">            <span class="keyword">if</span> (bucket[di].head == <span class="literal">NULL</span>)</span><br><span class="line">                bucket[di].head = bucket[di].tail = tmp;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                bucket[di].tail-&gt;next = tmp;</span><br><span class="line">                bucket[di].tail = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">list</span> = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">for</span> (di = REDIX<span class="number">-1</span>; di &gt;= <span class="number">0</span>; di--) &#123;	<span class="comment">// 将桶中数字按顺序放回 list 中</span></span><br><span class="line">            <span class="keyword">if</span> (bucket[di].head) &#123;</span><br><span class="line">                bucket[di].tail-&gt;next = <span class="built_in">list</span>;</span><br><span class="line">                <span class="built_in">list</span> = bucket[di].head;</span><br><span class="line">                bucket[di].head = bucket[di].tail = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;	<span class="comment">// 将排序完成的list重新赋值给a数组</span></span><br><span class="line">        tmp = <span class="built_in">list</span>;</span><br><span class="line">        <span class="built_in">list</span> = <span class="built_in">list</span>-&gt;next;</span><br><span class="line">        a[i] = tmp-&gt;key;</span><br><span class="line">        <span class="built_in">free</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>主位优先</strong></p>
 <ul>
-<li>三个函数，分别为归并函数，主函数，和接口函数</li>
-<li>归并函数就是将两个有序数组归并为一个大数组</li>
-<li>主函数起到将数组左边右边分别进行归并的作用，也就是当数组分割到只有一个元素之后，直接进行归并</li>
-<li>接口函数为了使其符合排序函数的规律，仅传入数组及其长度</li>
+<li>该算法采用递归的方式实现，初始化部分和之前一致，只是后面有点差异</li>
 </ul>
-<h4 id="循环代码">循环代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> a[],  <span class="keyword">int</span> temp[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rightEnd)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> leftEnd = r<span class="number">-1</span> ;</span><br><span class="line">    <span class="keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123;</span><br><span class="line">        <span class="keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; rightEnd + <span class="number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergePass</span><span class="params">(ELEMENT_TYPE a[], ELEMENT_TYPE tmpA[], <span class="keyword">int</span> n, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt;= n - <span class="number">2</span>*length; i += <span class="number">2</span>*length)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">if</span> (i + length &lt; n)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">for</span> (j = i; j &lt; n; j++)</span><br><span class="line">            tmpA[j] = a[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">    ELEMENT_TYPE* tmpA;</span><br><span class="line">    length = <span class="number">1</span>;</span><br><span class="line">    tmpA = <span class="built_in">malloc</span>(n*<span class="keyword">sizeof</span>(ELEMENT_TYPE));</span><br><span class="line">    <span class="keyword">if</span> (tmpA != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (length &lt; n) &#123;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"空间不足"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>简单的递归可以用循环代替，所以也就有了上面的代码</p>
-<ul>
-<li>即先将数组元素，相邻的两个一对进行归并</li>
-<li>之后相邻的元素便排序完成，再四个一对进行归并，同理，之后就是八个……</li>
-</ul>
-<h3 id="快速排序">快速排序</h3>
-<p>快排是很有名的一个排序算法，在许多语言的库函数中直接调用的排序函数就是快速排序，据说快排是在实际应用中最快的算法，其由归并排序衍生而来，也主要采用递归的方法来实现，其主要原理寻找主元和针对主元对数组进行调整的过程</p>
-<h4 id="选主元">选主元</h4>
-<p>主元的选择是快排中至关重要的一个环节，如果主元失误的话就整个排序就容易废掉，那么如何选取主元呢?</p>
-<ul>
-<li>随机选择主元，<code>rand()</code> 函数也是需要时间的</li>
-<li>取数组头，中，尾三个数字中的中位数</li>
-<li>等等 等等……</li>
-</ul>
-<p>这里采取选取三者中位数的方式来选取主元</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ELEMENT_TYPE <span class="title">Media3</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> center = (left + right) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[left] &gt; a[center])</span><br><span class="line">        Swap(&amp;a[left], &amp;a[center]);</span><br><span class="line">    <span class="keyword">if</span> (a[left] &gt; a[right])</span><br><span class="line">        Swap(&amp;a[left], &amp;a[right]);</span><br><span class="line">    <span class="keyword">if</span> (a[center] &gt; a[right])</span><br><span class="line">        Swap(&amp;a[center], &amp;a[right]);</span><br><span class="line"></span><br><span class="line">    Swap(&amp;a[center], &amp;a[right<span class="number">-1</span>]);</span><br><span class="line">    <span class="keyword">return</span> a[right<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>功能就是将三个数排列，并将中位数置于<code>right-1</code>的位置，并返回主元</li>
-</ul>
-<h4 id="子集划分">子集划分</h4>
-<ul>
-<li>子集划分主要由两个 “指针” 从两端进行查找，将比主元小的元素调整到数组左边，比主元大的元素调整到数组的右边</li>
-<li>之后将主元移动到数组固定的位置</li>
-</ul>
-<p>在子集划分之后，采用递归处理， 将数组左边进行快排，右边进行快排</p>
-<p>了解了子集划分之后，就又有了新的问题，因为快排的实现方式是采用递归的方法，所以对于小规模数据的排序可能还不如插入排序，所以我们应该设置一个阈值，在数据量低于此阈值的情况下直接采用插入排序</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot, cutoff = <span class="number">10000</span>, low, high;</span><br><span class="line">    <span class="keyword">if</span> (cutoff &lt;= right - left) &#123;</span><br><span class="line">        pivot = Media3(a, left, right);</span><br><span class="line">        low = left;</span><br><span class="line">        high = right <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (; ;) &#123;</span><br><span class="line">            <span class="keyword">while</span> (a[++low] &lt; a[right<span class="number">-1</span>]);</span><br><span class="line">            <span class="keyword">while</span> (a[--high] &gt; a[right<span class="number">-1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (low &lt; high)</span><br><span class="line">                Swap(&amp;a[low], a[high]);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;a[low], &amp;a[right<span class="number">-1</span>]);</span><br><span class="line">        QSort(a, left, low<span class="number">-1</span>);</span><br><span class="line">        QSort(a, low+<span class="number">1</span>, right);</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        InsertionSort(a+left, right-left+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>此段代码最精髓之处我觉得是采用两个<code>while</code>循环进行子集划分的操作，很帅</li>
-<li><code>pivot</code>为主元 <code>cutoff</code>为阈值 我将其设为1000</li>
-</ul>
-<p>之后对接口进行统一化处理</p>
-<p><strong>代码：</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QuickSort</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    QSort(a, <span class="number">0</span>, n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSD</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> di, i, j;</span><br><span class="line">    Bucket bucket;</span><br><span class="line">    PtrToNode tmp, p, <span class="built_in">list</span> = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (d == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; REDIX; ++i)</span><br><span class="line">        bucket[i].head = bucket[i].tail = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = l; l &lt;= r; ++l) &#123;</span><br><span class="line">        tmp = (PtrToNode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Node));</span><br><span class="line">        tmp-&gt;key = a[i];</span><br><span class="line">        tmp-&gt;next = <span class="built_in">list</span>;</span><br><span class="line">        <span class="built_in">list</span> = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    p = <span class="built_in">list</span>;</span><br><span class="line">    <span class="keyword">while</span> (p) &#123;</span><br><span class="line">        di = GetDit(p-&gt;key, d);</span><br><span class="line">        tmp = p;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (bucket[di].head == <span class="literal">NULL</span>)</span><br><span class="line">            bucket[di].tail = tmp;</span><br><span class="line">        tmp-&gt;next = bucket[di].head;</span><br><span class="line">        bucket[di].head = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    i = j = l;</span><br><span class="line">    <span class="keyword">for</span> (di = <span class="number">0</span>; di &lt; REDIX; ++di) &#123;</span><br><span class="line">        <span class="keyword">if</span> (bucket[di].head) &#123;</span><br><span class="line">            p = bucket[di].head;</span><br><span class="line">            <span class="keyword">while</span> (p) &#123;</span><br><span class="line">                tmp = p;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">                a[j++] = tmp-&gt;key;</span><br><span class="line">                <span class="built_in">free</span>(tmp);</span><br><span class="line">            &#125;</span><br><span class="line">            MSD(a, i, j<span class="number">-1</span>, d<span class="number">-1</span>);</span><br><span class="line">            i = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MSDRadixSort</span> <span class="params">(ELEMENT_TYPE a[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    MSD(a, <span class="number">0</span>, n<span class="number">-1</span>, MAX_DIGIT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上</p>
+<h4 id="基数排序的应用">基数排序的应用</h4>
+<p>在有多个条件之时，可以先按照一个条件将之进行简单的归类，再逐个类进行排序，最后将其合并</p>
+<hr>
+<h3 id="总结">总结</h3>
+<p>排序算法的探究到这里就告一段落了，我们对所有排序的时间复杂度和空间复杂度，以及其是否稳定进行一次统计总结：</p>
+<table>
+<thead>
+<tr class="header">
+<th>排序方法</th>
+<th>平均时间复杂度</th>
+<th>最坏时间复杂度</th>
+<th>额外空间复杂度</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>简单选择排序</td>
+<td><span class="math inline">\(O(N^2)\)</span></td>
+<td><span class="math inline">\(O(N^2)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td>不稳定</td>
+</tr>
+<tr class="even">
+<td>冒泡排序</td>
+<td>$O(N^ 2 ) $</td>
+<td><span class="math inline">\(O(N^2 )\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td>稳定</td>
+</tr>
+<tr class="odd">
+<td>直接插入排序</td>
+<td><span class="math inline">\(O(N^ 2)\)</span></td>
+<td><span class="math inline">\(O(N^ 2)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td>稳定</td>
+</tr>
+<tr class="even">
+<td>希尔排序</td>
+<td><span class="math inline">\(O(N^ d)\)</span></td>
+<td><span class="math inline">\(O(N^ 2)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td>不稳定</td>
+</tr>
+<tr class="odd">
+<td>堆排序</td>
+<td><span class="math inline">\(O(Nlog N)\)</span></td>
+<td><span class="math inline">\(O(Nlog N)\)</span></td>
+<td><span class="math inline">\(O(1)\)</span></td>
+<td>不稳定</td>
+</tr>
+<tr class="even">
+<td>快速排序</td>
+<td><span class="math inline">\(O(Nlog N)\)</span></td>
+<td><span class="math inline">\(O(N^ 2)\)</span></td>
+<td><span class="math inline">\(O(log N)\)</span></td>
+<td>不稳定</td>
+</tr>
+<tr class="odd">
+<td>归并排序</td>
+<td><span class="math inline">\(O(Nlog N)\)</span></td>
+<td><span class="math inline">\(O(Nlog N)\)</span></td>
+<td><span class="math inline">\(O( N)\)</span></td>
+<td>稳定</td>
+</tr>
+<tr class="even">
+<td>基数排序</td>
+<td><span class="math inline">\(O(P(N+B))\)</span></td>
+<td><span class="math inline">\(O(P(N+B))\)</span></td>
+<td><span class="math inline">\(O(N+B)\)</span></td>
+<td>稳定</td>
+</tr>
+</tbody>
+</table>
 
       
 
@@ -537,7 +738,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/08/改进排序/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/15/排序进阶/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -551,18 +752,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/11/15/排序进阶/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/11/29/pygame初探/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          排序进阶
+          pygame初探
         
       </div>
     </a>
   
   
-    <a href="/2018/11/03/简单排序/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">简单排序</div>
+    <a href="/2018/11/08/改进排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">改进排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -581,19 +782,6 @@ var _hmt = _hmt || [];
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#希尔排序"><span class="toc-number">1.</span> <span class="toc-text">希尔排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现思路"><span class="toc-number">1.1.</span> <span class="toc-text">实现思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码1"><span class="toc-number">1.2.</span> <span class="toc-text">代码1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码2"><span class="toc-number">1.3.</span> <span class="toc-text">代码2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆排序"><span class="toc-number">2.</span> <span class="toc-text">堆排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现思路-1"><span class="toc-number">2.1.</span> <span class="toc-text">实现思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码1-1"><span class="toc-number">2.2.</span> <span class="toc-text">代码1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码2-1"><span class="toc-number">2.3.</span> <span class="toc-text">代码2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#归并排序"><span class="toc-number">3.</span> <span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现思路-2"><span class="toc-number">3.1.</span> <span class="toc-text">实现思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#递归代码"><span class="toc-number">3.2.</span> <span class="toc-text">递归代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环代码"><span class="toc-number">3.3.</span> <span class="toc-text">循环代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序"><span class="toc-number">4.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选主元"><span class="toc-number">4.1.</span> <span class="toc-text">选主元</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#子集划分"><span class="toc-number">4.2.</span> <span class="toc-text">子集划分</span></a></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
