@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>C语言实现简单的泛型 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起 交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写： 12345void Swap (int *p, int *q) &amp;#123;    int">
+  <meta name="description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起">
 <meta name="keywords" content="博客,C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言实现简单的泛型">
 <meta property="og:url" content="http://yoursite.com/2019/03/05/C语言实现简单的泛型/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起 交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写： 12345void Swap (int *p, int *q) &amp;#123;    int">
+<meta property="og:description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-05T07:04:13.852Z">
+<meta property="og:updated_time" content="2019-03-05T07:11:09.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言实现简单的泛型">
-<meta name="twitter:description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起 交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写： 12345void Swap (int *p, int *q) &amp;#123;    int">
+<meta name="twitter:description" content="C语言实现简单的泛型 众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记， 从 Swap 谈起">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -227,6 +227,7 @@ var _hmt = _hmt || [];
         <script src="/assets/js/APlayer.min.js"> </script><h3 id="c语言实现简单的泛型">C语言实现简单的泛型</h3>
 <p>众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记，</p>
 <h4 id="从-swap-谈起">从 Swap 谈起</h4>
+<a id="more"></a>
 <p>交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span> <span class="params">(<span class="keyword">int</span> *p, <span class="keyword">int</span> *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = *p;</span><br><span class="line">    *p = *q;</span><br><span class="line">    *q = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但是如上代码仅能对 <code>int</code> 类型数据进行交换，如果要交换 <code>double</code> 或者其他类型的数据又需要写一段极其相似的代码（仅将 <code>int</code> 换掉），而这样无疑是不够简练的，代码也不够优美。所以我们考虑写一个能交换所有数据类型的函数，以简练代码，提高效率。</p>
