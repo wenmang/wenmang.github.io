@@ -196,6 +196,444 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C语言实现简单的泛型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/C语言实现简单的泛型/">C语言实现简单的泛型</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/05/C语言实现简单的泛型/" class="archive-article-date">
+  	<time datetime="2019-03-05T07:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="c语言实现简单的泛型">C语言实现简单的泛型</h3>
+<p>众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记，</p>
+<h4 id="从-swap-谈起">从 Swap 谈起</h4>
+<p>交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span> <span class="params">(<span class="keyword">int</span> *p, <span class="keyword">int</span> *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = *p;</span><br><span class="line">    *p = *q;</span><br><span class="line">    *q = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是如上代码仅能对 <code>int</code> 类型数据进行交换，如果要交换 <code>double</code> 或者其他类型的数据又需要写一段极其相似的代码（仅将 <code>int</code> 换掉），而这样无疑是不够简练的，代码也不够优美。所以我们考虑写一个能交换所有数据类型的函数，以简练代码，提高效率。</p>
+<p>既然有这样的想法，那么我们试着去实现它。既然要普适所以数据类型，那么我们就需要向本源出发去寻找。无论什么类型的数据，在计算机底层都是以二进制储存的，这我们就找到了所有不同类型数据的共同点，也就有了设计思路：</p>
+<ol type="1">
+<li>在内存中找到两个数据的地址</li>
+<li>从头至尾，将两个数据的每一个字节进行交换</li>
+</ol>
+<p>所以结合C语言的语法特点，便有了如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span> <span class="params">(<span class="keyword">void</span> *p, <span class="keyword">void</span> *q, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[size];</span><br><span class="line">    <span class="built_in">memcpy</span>(buffer, p, size);</span><br><span class="line">    <span class="built_in">memcpy</span>(p, q, size);</span><br><span class="line">    <span class="built_in">memcpy</span>(q, buffer, size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>就代码而言，此一类函数写就的重中之重就是 <code>void</code> 指针的利用，将 <code>void</code> 指针用于形参，以作限定。由于 <code>void *</code> 变量无法直接引用，因为编译器不知道此指针所指变量到底占了几个字节，且因为要适应所有数据类型，所以多传了个参数—— <code>size</code> ，来对传入数据类型所占字节数进行说明。而整段代码原理如下：</p>
+<ol type="1">
+<li>传入两个数据在内存中的地址以及数据所占字节数</li>
+<li>创建临时变量字符数组 <code>buffer[]</code> 作为中间值（因为一个 <code>char</code> 占1个字节，所以正好采用字符数组来作为中间值）</li>
+<li>与正常交换的方式相同，不过是采用 <code>memcpy()</code> 来进直接对内存进行操作，逐个字节进行复制</li>
+</ol>
+<h4 id="谈谈-issearch">谈谈 IsSearch()</h4>
+<p>既然知道了此种思路与写法，那么我们直接看另一个简单的函数——线性查找，以 <code>int</code> 为例，代码是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsSearch</span> <span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> key, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        <span class="keyword">if</span> (a[i] == key)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么如果使用泛型，代码应该怎样写呢？答案是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">IsSearch</span> <span class="params">(<span class="keyword">void</span>* key, <span class="keyword">void</span>* base, <span class="keyword">int</span> n, <span class="keyword">int</span> elemSize)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">void</span>* elemAddr = (<span class="keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">memcpy</span>(key, elemAddr, elemSize) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>整段代码解释如下：</p>
+<ol type="1">
+<li>传入需要搜索的值，被搜索数组，数组元素数，数组每个元素所占字节数</li>
+<li>进入循环开始查找：
+<ol type="1">
+<li>先确定每一个元素的地址（由于 <code>void*</code> 类型的指针不支持直接操作，所以需要先将其进行强制类型转换为 <code>char*</code> 类型指针）</li>
+<li>调用库函数，将 <code>key</code> 和数组中的元素依次进行必较</li>
+</ol></li>
+<li>成功则返回数组对应元素的首地址，否则返回NULL</li>
+</ol>
+<p>但如果我们不利用库函数来进行比较呢？我们想使用自己写的比较函数来比较，那有应该怎么做呢？（<strong>注：</strong>这个想法显然必较牵强，因为此时的这种写法无疑是更加合理的，而为了说明知识点，就加了这个想法）</p>
+<p>（此处 <code>qsort()</code> 课中并未提及）在这里就不得不提一个C语言库函数了，那就是—— <code>qsort()</code> ，一个在调用之时需要写一个针对问题具体情况的比较函数当作参数传入函数之中，而我们这时的情况显然和 <code>qsort()</code> 函数面临的一样，所以我们采用相同的处理方式：传入一个必较函数，来判断两个元素是否一致。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void* IsSearch (void* key, void* base, int n, int elemSize, int (*cmpfn) (void*, void*))&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">void</span>* elemAddr = (<span class="keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="keyword">if</span> (cmpfn(key, elemAddr) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>因为 <code>cmpfn()</code> 是调用者写的函数，所以其数据类型是确定的，只需直接比较就行，故只传入两个参数。</p>
+<h4 id="调用-issearch">调用 IsSearch()</h4>
+<p>有了普适版（第二版）的代码，其中提供了函数接口，那么调用者应该怎么写这个函数呢？</p>
+<h5 id="int-类型数据"><code>int</code> 类型数据</h5>
+<p>比较 <code>int</code> 类型数据的函数，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">IntCmp</span> <span class="params">(<span class="keyword">void</span>* n1, <span class="keyword">void</span>* n2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip1 = n1;</span><br><span class="line">    <span class="keyword">int</span>* ip2 = n2;</span><br><span class="line">    <span class="keyword">return</span> (*ip1 - *ip2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>此函数所带参数l类型以及返回值类型需与形参中函数一致</p>
+<h5 id="char-字符串类型数据"><code>char*</code> (字符串)类型数据</h5>
+<p>字符串无疑是优雅的，但在C语言中处理字符串，就完全不存在优雅这一说了，因为C语言更加底层，对于字符串的处理不如其他的一些新语言来的形象（当然也是此些语言为字符串处理做了许多预备工作，以至于处理之时只调用已有的函数即可），所以关于字符串的处理可能要更加不易理解，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">StrCmp</span> <span class="params">(<span class="keyword">void</span>* vp1, <span class="keyword">void</span>* vp2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* s1 = * (<span class="keyword">char</span>**)c1;</span><br><span class="line">    <span class="keyword">char</span>* s2 = * (<span class="keyword">char</span>**)c2;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仅看如此代码，会有种毫无头绪的感觉，那么为了更好地理解，我们需要写一下查找字符串时的全过程，代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* key = <span class="string">"Li"</span>;</span><br><span class="line"><span class="keyword">char</span>* faName[] = &#123;<span class="string">"zhang"</span>, <span class="string">"wang"</span>, <span class="string">"li"</span>, <span class="string">"zhao"</span>, <span class="string">"sun"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span>** found = IsSearch(&amp;key, faName, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*), StrCmp);</span><br></pre></td></tr></table></figure>
+<p>好，因为单个的 <code>char</code> 是字符，而字符串是 <code>char*</code> ，那么理所当然字符串数组就是 <code>char**</code> 了，所以需要查找之时，传入 <code>IsSearch()</code> 的参数实际上是指针的指针，所以在调用比较函数之时需要进行一次解耦，将之变成两个字符串，而这也就是比较函数前两行的意义所在。</p>
+<p><strong>注：</strong></p>
+<ol type="1">
+<li>为了比较函数代码美观，所以在传参之时将目标字符串也作为指针的指针传入，如只将其作为指针传入，就无需解耦和了。</li>
+<li>在调用之时，用于接收返回值的变量必须是指针的指针，因为返回是个字符串，也就是一个字符指针</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/05/C语言实现简单的泛型/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-数据在内存中的存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/24/数据在内存中的存储/">数据在内存中的存储</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/24/数据在内存中的存储/" class="archive-article-date">
+  	<time datetime="2019-01-24T10:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案</p>
+<h3 id="整型数据的存储">整型数据的存储</h3>
+<p>整型数据包括 short, int, long 等，其中最为常用的便是 int ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>数据类型</th>
+<th>所占字节</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>short</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>int</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>long</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>而整型数据的存储都是类似的，也就是以二进制方式进行存储，所以很容易理解，但是与日常使用的二进制数不同的是，在计算机储存中，为了方便地计算加减法，我们实际储存的是二进制数的 补码<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
+<p><strong>示例</strong></p>
+<p>下面写几个简单 int 类型数字的在计算机中的二进制储存方式：</p>
+<table>
+<thead>
+<tr class="header">
+<th>十进制</th>
+<th>二进制（int）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>10</td>
+<td>00000000 00000000 00000000 00001010</td>
+</tr>
+<tr class="even">
+<td>-10</td>
+<td>11111111 11111111 11111111 11110110</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+<td>00000000 00000000 00000000 00000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：</strong>字符型（即 char）的存储方式和整数型一致</p>
+<h3 id="浮点型数据的储存">浮点型数据的储存</h3>
+<p>浮点型数据由于有了小数点，小数点后的位数甚至可能是无穷的，那么此时我们就无法再采用和整型数据存储相同的方式了，必须有一种新的存储方法</p>
+<p>浮点型数据最常见的有 float 和 double ，两种数据类型分别占4字节和8字节</p>
+<p>所以，要在固定的位数中表示出各种浮点数，计算机中采取了如下方案：</p>
+<p>下面以 float 为例进行说明：</p>
+<p>从左到右：第一个 bit 为符号位，接下来的8个 bit 为整数位，后 23 个 bit 为小数位，依次为<span class="math inline">\(2^{-1}, 2^{-2}, ...\)</span> ,如下图所示：</p>
+<figure>
+<img src="http://t1.aixinxi.net/o_1d1vscgvl1nbm1k3d1j2o5e01jbpa.png-j.jpg" alt="示意图"><figcaption>示意图</figcaption>
+</figure>
+<p>所表示的数字，由以下方式叠加：<span class="math inline">\((-1)^m * 1.XXXX * 2^{exp-127}\)</span></p>
+<p><strong>说明：</strong></p>
+<ol type="1">
+<li>XXX 为小数位所表示的数字</li>
+<li>exp 为整数位数字的大小</li>
+<li>综上所述，float 可表示从 $2^{-127} $ 到 <span class="math inline">\(2^{128}\)</span>的数字</li>
+</ol>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>二进制的表示方式，具体计算方法为：正数补码不变，负数的补码等于反码加一<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/24/数据在内存中的存储/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-malloc和calloc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/07/malloc和calloc/">malloc和calloc</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/07/malloc和calloc/" class="archive-article-date">
+  	<time datetime="2018-12-07T03:26:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-07</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>昨晚有人在群里提问：</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/07/malloc和calloc/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="“mennew-散列查找" class="article article-type-“mennew  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/30/散列查找/">散列查找</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/30/散列查找/" class="archive-article-date">
+  	<time datetime="2018-11-30T11:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-30</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/30/散列查找/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-pygame初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -252,6 +690,165 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/11/29/pygame初探/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-进阶查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/25/进阶查找/">进阶查找</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/25/进阶查找/" class="archive-article-date">
+  	<time datetime="2018-11-25T12:16:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-25</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/25/进阶查找/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+    <article id="post-普通查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/20/普通查找/">普通查找</a>
+    </h1>
+  
+
+        
+        <a href="/2018/11/20/普通查找/" class="archive-article-date">
+  	<time datetime="2018-11-20T06:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="顺序表查找">顺序表查找</h3>
+<p>顺序表查找是最为简单的一类查找，当需要在顺序表中查找一元素时，需要做的就是从头到尾对表进行一次遍历，直到找到结果为止</p>
+<p><strong>代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Sequen</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/11/20/普通查找/">展开全文 >></a>
         </p>
       
 
@@ -527,498 +1124,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-拓扑排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/28/拓扑排序/">拓扑排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/28/拓扑排序/" class="archive-article-date">
-  	<time datetime="2018-10-27T16:27:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>拓扑序：</strong>如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序</p>
-<p><strong>拓扑排序：</strong>获得一个拓扑序的过程就是拓扑排序</p>
-<p><strong>AOV</strong>如果有合理的拓扑序，则必定是有向无环图</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/28/拓扑排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-最小生成树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/27/最小生成树/">最小生成树</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/27/最小生成树/" class="archive-article-date">
-  	<time datetime="2018-10-27T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-27</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>是一棵树
-<ul>
-<li>无回路</li>
-<li>v 个顶点一定有 v-1 条边</li>
-</ul></li>
-<li>是生成树
-<ul>
-<li>包含全部顶点</li>
-<li>v-1 条边都在图里</li>
-<li>向生成树中加入一条边都一定构成回路</li>
-</ul></li>
-<li>边权重和最小</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/27/最小生成树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-LeetCode练习（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/23/LeetCode练习（一）/">LeetCode练习（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/23/LeetCode练习（一）/" class="archive-article-date">
-  	<time datetime="2018-10-23T04:52:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-23</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">练习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/23/LeetCode练习（一）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-多源最短路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/21/多源最短路径/">多源最短路径</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/21/多源最短路径/" class="archive-article-date">
-  	<time datetime="2018-10-21T09:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>知道了单源最短路的算法之后，我们可以更进一步，学习多源最短路问题，因为我们的需求是多样的，我们在知道某点到某点最短距离之后还想知道其他两点间的最短距离，那么我们需要再求解一次吗？显然，那样过于麻烦，显然，我们需要一种算法来一次性求解所有的两两间距，用的时候只需要取出即可</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/21/多源最短路径/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-单源最短路径" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/19/单源最短路径/">单源最短路径</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/19/单源最短路径/" class="archive-article-date">
-  	<time datetime="2018-10-19T13:53:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-19</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="说明">说明</h4>
-<p>在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径</p>
-<p>这条路径就是两点之间的<strong>最短路径</strong>（Shortest Path）</p>
-<p>第一个顶点为<strong>源点</strong>（Source）</p>
-<p>最后一个顶点为<strong>终点</strong>（Destination）</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/19/单源最短路径/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-图的遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/15/图的遍历/">图的遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/15/图的遍历/" class="archive-article-date">
-  	<time datetime="2018-10-15T15:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-15</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>定义：</strong>从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历</p>
-<p>此文主要介绍两种遍历方法：DFS和BFS</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/15/图的遍历/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1033,7 +1138,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 文盲
+    		&copy; 2019 文盲
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1153,11 +1258,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1165,15 +1266,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">练习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C</a>
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1185,7 +1290,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">练习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">底层</a>
               </li>
              
               <li class="article-tag-list-item">
