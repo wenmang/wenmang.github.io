@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>数据在内存中的存储 | 文的盲</title>
+  <title>队列 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案 整型数据的存储 整型数据包括 short, int, long 等，其中最为常用的便是 int ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：">
-<meta name="keywords" content="博客,底层">
+  <meta name="description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
+<meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据在内存中的存储">
-<meta property="og:url" content="http://yoursite.com/2019/01/24/数据在内存中的存储/index.html">
+<meta property="og:title" content="队列">
+<meta property="og:url" content="http://yoursite.com/2019/08/02/队列/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案 整型数据的存储 整型数据包括 short, int, long 等，其中最为常用的便是 int ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：">
+<meta property="og:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://t1.aixinxi.net/o_1d1vscgvl1nbm1k3d1j2o5e01jbpa.png-j.jpg">
-<meta property="og:updated_time" content="2019-03-05T07:11:30.534Z">
+<meta property="og:updated_time" content="2019-08-02T13:15:20.841Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据在内存中的存储">
-<meta name="twitter:description" content="二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案 整型数据的存储 整型数据包括 short, int, long 等，其中最为常用的便是 int ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：">
-<meta name="twitter:image" content="http://t1.aixinxi.net/o_1d1vscgvl1nbm1k3d1j2o5e01jbpa.png-j.jpg">
+<meta name="twitter:title" content="队列">
+<meta name="twitter:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -201,20 +199,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-数据在内存中的存储" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-队列" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      数据在内存中的存储
+      队列
     </h1>
   
 
         
-        <a href="/2019/01/24/数据在内存中的存储/" class="archive-article-date">
-  	<time datetime="2019-01-24T10:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
+        <a href="/2019/08/02/队列/" class="archive-article-date">
+  	<time datetime="2019-08-02T08:58:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-02</time>
 </a>
         
         
@@ -226,80 +224,61 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><p>二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案</p>
-<h3 id="整型数据的存储">整型数据的存储</h3>
-<p>整型数据包括 short, int, long 等，其中最为常用的便是 int ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p><strong>队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。</strong></p>
+<p>简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。</p>
+<ul>
+<li>数据插入：入队列 （<code>addQueue</code>）</li>
+<li>数据删除：出队列 （<code>deleteQueue</code>）</li>
+</ul>
 <a id="more"></a>
-<table>
-<thead>
-<tr class="header">
-<th>数据类型</th>
-<th>所占字节</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>short</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td>int</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td>long</td>
-<td>8</td>
-</tr>
-</tbody>
-</table>
-<p>而整型数据的存储都是类似的，也就是以二进制方式进行存储，所以很容易理解，但是与日常使用的二进制数不同的是，在计算机储存中，为了方便地计算加减法，我们实际储存的是二进制数的 补码<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
-<p><strong>示例</strong></p>
-<p>下面写几个简单 int 类型数字的在计算机中的二进制储存方式：</p>
-<table>
-<thead>
-<tr class="header">
-<th>十进制</th>
-<th>二进制（int）</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>10</td>
-<td>00000000 00000000 00000000 00001010</td>
-</tr>
-<tr class="even">
-<td>-10</td>
-<td>11111111 11111111 11111111 11110110</td>
-</tr>
-<tr class="odd">
-<td>0</td>
-<td>00000000 00000000 00000000 00000000</td>
-</tr>
-</tbody>
-</table>
-<p><strong>注：</strong>字符型（即 char）的存储方式和整数型一致</p>
-<h3 id="浮点型数据的储存">浮点型数据的储存</h3>
-<p>浮点型数据由于有了小数点，小数点后的位数甚至可能是无穷的，那么此时我们就无法再采用和整型数据存储相同的方式了，必须有一种新的存储方法</p>
-<p>浮点型数据最常见的有 float 和 double ，两种数据类型分别占4字节和8字节</p>
-<p>所以，要在固定的位数中表示出各种浮点数，计算机中采取了如下方案：</p>
-<p>下面以 float 为例进行说明：</p>
-<p>从左到右：第一个 bit 为符号位，接下来的8个 bit 为整数位，后 23 个 bit 为小数位，依次为<span class="math inline">\(2^{-1}, 2^{-2}, ...\)</span> ,如下图所示：</p>
-<figure>
-<img src="http://t1.aixinxi.net/o_1d1vscgvl1nbm1k3d1j2o5e01jbpa.png-j.jpg" alt="示意图"><figcaption>示意图</figcaption>
-</figure>
-<p>所表示的数字，由以下方式叠加：<span class="math inline">\((-1)^m * 1.XXXX * 2^{exp-127}\)</span></p>
-<p><strong>说明：</strong></p>
-<ol type="1">
-<li>XXX 为小数位所表示的数字</li>
-<li>exp 为整数位数字的大小</li>
-<li>综上所述，float 可表示从 $2^{-127} $ 到 <span class="math inline">\(2^{128}\)</span>的数字</li>
-</ol>
-<section class="footnotes">
-<hr>
-<ol>
-<li id="fn1"><p>二进制的表示方式，具体计算方法为：正数补码不变，负数的补码等于反码加一<a href="#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</section>
+<p>而队列主要的<strong>特性</strong>如下：</p>
+<ul>
+<li>先来先服务</li>
+<li>先进先出：FIFO</li>
+</ul>
+<p><strong>类型名称：</strong>队列（Queue）</p>
+<p><strong>数据对象集：</strong>一个有0个或多个元素的有穷线性表</p>
+<p><strong>操作集：</strong>长度为 <code>MaxSize</code> 的队列 <code>Q</code> 属于 <code>Queue</code>， 队列元素 <code>item</code> 属于 <code>ElementType</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Queue CreatQueue()						生成空队列</span><br><span class="line">2. int IsFullQ(Queue PtrQ)		判断队列Q是否已满</span><br><span class="line">3. void AddQ(Queue PtrQ, ElementType item)	将数据元素item插入队列Q中</span><br><span class="line">4. int IsEmptyQ(Queue PtrQ)					判断队列是否为空</span><br><span class="line">5. ElementType DeleteQ(Queue PtrQ)			将对头数据元素从队列中删除并返回</span><br></pre></td></tr></table></figure>
+<h3 id="队列的顺序储存实现">队列的顺序储存实现</h3>
+<p>利用数组来实现相关操作</p>
+<ul>
+<li><h4 id="直接利用数组实现">直接利用数组实现</h4>
+<p>数组的一端作为头，另一端作为尾，这样的方式是比较容易<strong>实现</strong>的：</p>
+<ul>
+<li>首先在空数组上的将队列头和尾均放在数组头的前一个位置，头和尾的标号为-1</li>
+</ul></li>
+<li><p>添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p></li>
+</ul>
+<p><strong>存在的问题：</strong></p>
+<ul>
+<li><p>如果队放满，也就是队尾下标为 <code>MaxSize-1</code> 但此时队头由于删除元素的原因，还空有位置，因此会造成空间浪费。</p></li>
+<li><h4 id="利用环形数组实现">利用环形数组实现</h4>
+<p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 <code>MaxSize-1</code> ），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
+<p><strong>判断队列空和满</strong></p>
+<ul>
+<li><strong>空：</strong>队头下标等于队尾下标</li>
+</ul></li>
+<li><p><strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p></li>
+</ul>
+<p><strong>改进：</strong>最大队尾下标加一除以 <code>MaxSize</code> 的余数等于队尾下标（除数大于被除数，余数为被除数本身）</p>
+<p>正因为上述所说，平常所说的 <strong>顺序存储</strong> 实现均是以 <strong>指环形数组</strong> 的方式实现。</p>
+<p>首先写出 <code>Queue.h</code> ，C语言代码如下：</p>
+<p><strong>C语言代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BASE_SIZE 8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> elementType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">queue</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QNode</span>&#123;</span></span><br><span class="line">    elementType* data;	<span class="comment">// 队列数据存储位置</span></span><br><span class="line">    <span class="keyword">int</span> size;	<span class="comment">// data 数组大小</span></span><br><span class="line">    <span class="keyword">int</span> rear;	<span class="comment">// 队尾</span></span><br><span class="line">    <span class="keyword">int</span> front;	<span class="comment">// 队首</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">queue</span> <span class="title">createQueue</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isFull</span><span class="params">(<span class="built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isEmpty</span><span class="params">(<span class="built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="built_in">queue</span> q, elementType e)</span></span>;</span><br><span class="line"><span class="function">elementType <span class="title">deleteQueue</span><span class="params">(<span class="built_in">queue</span> q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
+<p>紧接着，我们在 <code>Queue.c</code> 文件中实现头文件中所申明的函数：</p>
+<p><strong>C语言代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Queue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">queue</span> <span class="title">createQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">queue</span> q = (<span class="built_in">queue</span>) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct QNode));</span><br><span class="line">    q-&gt;size = <span class="number">8</span>;</span><br><span class="line">    q-&gt;data = (elementType*) <span class="built_in">malloc</span>(q-&gt;size * <span class="keyword">sizeof</span>(elementType));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isFull</span><span class="params">(<span class="built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (q-&gt;rear+<span class="number">1</span>) % q-&gt;size == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isEmpty</span><span class="params">(<span class="built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> q-&gt;rear == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="built_in">queue</span> q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isFull(q)) &#123;</span><br><span class="line">        q-&gt;size *= <span class="number">2</span>;</span><br><span class="line">        q-&gt;data = (elementType*) <span class="built_in">realloc</span>(q-&gt;data, q-&gt;size * <span class="keyword">sizeof</span>(elementType));</span><br><span class="line">    &#125;</span><br><span class="line">    q-&gt;rear = (q-&gt;rear+<span class="number">1</span>) % q-&gt;size;</span><br><span class="line">    q-&gt;data[q-&gt;rear] = e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">elementType <span class="title">deleteQueue</span><span class="params">(<span class="built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    assert(!isEmpty(q));</span><br><span class="line">    q-&gt;front = (q-&gt;front+<span class="number">1</span>) % q-&gt;size;</span><br><span class="line">    <span class="keyword">return</span> q-&gt;data[q-&gt;front];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="队列的链式储存实现">队列的链式储存实现</h3>
+<p>也就是使用链表存储</p>
+<p>首先可以写出头文件 <code>Queue.h</code> 的内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LQNode</span>* <span class="title">lQueue</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    elementType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LQNode</span>&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">rear</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">front</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">lQueue <span class="title">createlQueue</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addlQueue</span><span class="params">(lQueue q, elementType e)</span></span>;</span><br><span class="line"><span class="function">elementType <span class="title">deletelQueue</span><span class="params">(lQueue q)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">islEmpty</span><span class="params">(lQueue q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
+<p>用链表储存，设计了两个结构，</p>
+<p><code>Node</code> 为队列中节点，指针指向下一个节点，<code>data</code> 储存节点数据</p>
+<p><code>QNode</code> 为队列头节点，两个指针分别指向队列头和队列尾</p>
+<p>然后，在 <code>Queue.c</code> 文件中实现声明的函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">lQueue <span class="title">createlQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lQueue q = (lQueue) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct LQNode));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addlQueue</span><span class="params">(lQueue q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">tmp</span> = (<span class="title">struct</span> <span class="title">Node</span>*) <span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">Node</span>));</span></span><br><span class="line">    tmp-&gt;data = e;</span><br><span class="line">    <span class="keyword">if</span> (q-&gt;front == <span class="literal">NULL</span>)</span><br><span class="line">        q-&gt;front = q-&gt;rear = tmp;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        q-&gt;rear = q-&gt;rear-&gt;next = tmp;</span><br><span class="line">    q-&gt;rear-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">elementType <span class="title">deletelQueue</span><span class="params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    assert(!islEmpty(q));</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">tmp</span> = <span class="title">q</span>-&gt;<span class="title">front</span>;</span></span><br><span class="line">    q-&gt;front = q-&gt;front-&gt;next;</span><br><span class="line">    <span class="keyword">return</span> tmp-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">islEmpty</span><span class="params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> q-&gt;front == <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优点：</strong>链表储存无需判断是否队列已满</p>
 
       
 
@@ -349,7 +328,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
@@ -405,7 +384,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/24/数据在内存中的存储/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/02/队列/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -419,18 +398,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/03/05/C语言实现简单的泛型/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C语言实现简单的泛型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/29/pygame初探/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">pygame初探</div>
+    <a href="/2019/07/29/栈的应用及练习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">栈的应用及练习</div>
       <i class="icon-circle-right"></i>
     </a>
   
