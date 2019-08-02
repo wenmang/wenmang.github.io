@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>堆栈 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="堆栈： 堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
+  <meta name="description" content="堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆栈">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/堆栈/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="堆栈： 堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
+<meta property="og:description" content="堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-22T07:09:56.058Z">
+<meta property="og:updated_time" content="2019-08-02T09:03:47.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈">
-<meta name="twitter:description" content="堆栈： 堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
+<meta name="twitter:description" content="堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。 简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：  插入数据：入栈（Push） 删除数据：出栈（Pop）">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -224,8 +224,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><h4 id="堆栈"><a href="https://baike.baidu.com/item/%E5%A0%86%E6%A0%88/1682032" target="_blank" rel="noopener">堆栈：</a></h4>
-<p><strong>堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。</strong></p>
+        <script src="/assets/js/APlayer.min.js"> </script><p><strong>堆栈是一种数据项按序排列的数据结构，只能在一端（称为栈顶(top)）对数据项进行插入和删除。</strong></p>
 <p>简单地说，堆栈可以看作一个箱子，只能在一端放和取，所以其主要操作有：</p>
 <ul>
 <li>插入数据：入栈（Push）</li>
@@ -239,7 +238,7 @@ var _hmt = _hmt || [];
 <p><strong>类型名称：</strong>堆栈（Stack）</p>
 <p><strong>数据对象集：</strong>一个有0个或多个元素的有穷线性表</p>
 <p><strong>操作集：</strong>长度为 <code>MaxSize</code> 的堆栈 <code>S</code> 属于 <code>Stack</code> ， 堆栈元素 <code>item</code> 属于 <code>ElementType</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Stack CreateStack  ()				生成空堆栈，其长度最大为MaxSize</span><br><span class="line">2. int IsFull (Stack S, int MaxSize)			判断堆栈S是否已满</span><br><span class="line">3. void Push (Stack PtrS, ElementType item)		 将元素item压入堆栈</span><br><span class="line">4. int IsEmpty (Stack S)					    判断堆栈S是否为空</span><br><span class="line">5. ElementType Pop (Stack PtrS)					删除堆栈并返回栈顶元素</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Stack CreateStack  ()						生成空堆栈</span><br><span class="line">2. int IsFull (Stack S)							判断堆栈S是否已满</span><br><span class="line">3. void Push (Stack PtrS, ElementType item)		 将元素item压入堆栈</span><br><span class="line">4. int IsEmpty (Stack S)					    判断堆栈S是否为空</span><br><span class="line">5. ElementType Pop (Stack PtrS)					删除堆栈并返回栈顶元素</span><br></pre></td></tr></table></figure>
 <h3 id="栈的顺序储存实现">栈的顺序储存实现</h3>
 <p>所谓顺序存储，也就是利用数组来实现栈的相关操作，那么根据之前的叙述，我们可以写出栈库的头文件 <code>Stack.h</code></p>
 <p><strong>C语言代码：</strong></p>
@@ -600,19 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,11 +615,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">底层</a>
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -636,7 +631,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
+                <a href="javascript:void(0)" class="js-tag color3">底层</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
               </li>
             
             <div class="clearfix"></div>
