@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>队列 | 文的盲</title>
+  <title>由一道题重新审视排序 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="队列 队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除">
-<meta name="keywords" content="博客,数据结构">
+  <meta name="description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
+<meta name="keywords" content="博客,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="队列">
-<meta property="og:url" content="http://yoursite.com/2018/06/08/队列/index.html">
+<meta property="og:title" content="由一道题重新审视排序">
+<meta property="og:url" content="http://yoursite.com/2019/08/14/由一道题重新审视排序/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="队列 队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除">
+<meta property="og:description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-08T09:02:07.924Z">
+<meta property="og:updated_time" content="2019-08-14T15:30:04.207Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="队列">
-<meta name="twitter:description" content="队列 队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除">
+<meta name="twitter:title" content="由一道题重新审视排序">
+<meta name="twitter:description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -120,11 +120,11 @@ var _hmt = _hmt || [];
 				
 					<a class="github" target="_blank" href="https://github.com/wenmang" title="github"><i class="icon-github"></i></a>
 		        
+					<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+		        
 					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xdwenmang/" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
 					<a class="bilibili" target="_blank" href="https://space.bilibili.com/192395573" title="bilibili"><i class="icon-bilibili"></i></a>
-		        
-					<a class="mail" target="_blank" href="/xdwenmang@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 			</div>
 		</nav>
@@ -165,11 +165,11 @@ var _hmt = _hmt || [];
 					
 						<a class="github" target="_blank" href="https://github.com/wenmang" title="github"><i class="icon-github"></i></a>
 			        
+						<a class="rss" target="_blank" href="#" title="rss"><i class="icon-rss"></i></a>
+			        
 						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/xdwenmang/" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
 						<a class="bilibili" target="_blank" href="https://space.bilibili.com/192395573" title="bilibili"><i class="icon-bilibili"></i></a>
-			        
-						<a class="mail" target="_blank" href="/xdwenmang@qq.com" title="mail"><i class="icon-mail"></i></a>
 			        
 				</div>
 			</nav>
@@ -199,20 +199,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-队列" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-由一道题重新审视排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      队列
+      由一道题重新审视排序
     </h1>
   
 
         
-        <a href="/2018/06/08/队列/" class="archive-article-date">
-  	<time datetime="2018-06-08T06:13:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-08</time>
+        <a href="/2019/08/14/由一道题重新审视排序/" class="archive-article-date">
+  	<time datetime="2019-08-14T11:31:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
 </a>
         
         
@@ -224,84 +224,53 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><h4 id="队列"><a href="https://baike.baidu.com/link?url=gxFy1cITfuDuFiGw3tXjHVlZlEIwtuYIKvu8ZxsUWWvDKTh_FNljSFWvZCd85B7H5LGQdTeWDLmKi8TqRMnKc1CyV2lxe4Cqvxbv32K-FM_" target="_blank" rel="noopener">队列</a></h4>
-<p><strong>队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除</strong></p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：</p>
+<ul>
+<li>比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式</li>
+<li>比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。</li>
+</ul>
 <a id="more"></a>
+<h3 id="排序总述">排序总述</h3>
+<p>排序，在我看来，就是<strong>以给定的规则，对一组数（或者字符）进行重新排列</strong>，而规则是可变的，比如我们日常使用的：从大到小的顺序，从小到大的顺序，字典序等等等等。</p>
+<p>那么，<strong>从底向上</strong>看排序，其最核心的部分，就在于两两比较，通过比较，就能确定两两之间的相对顺序——即谁先谁后。</p>
+<p>而排序的效率，则取决于比较次数的多少，比如我们可以通过<strong>不重复比较</strong>，或者一些特殊的比较方式来缩短时间复杂度。</p>
+<h3 id="比较函数">比较函数</h3>
+<h4 id="总述">总述</h4>
+<p>什么是比较函数？抽象来说，就是比较两个数，并确定其先后顺序的函数；具体来说，就是C语言 <code>qsort()</code> 函数中的 <code>cmp</code> 参数，是 <code>java</code> 中 <code>Arrays.sort()</code> 方法中的 <code>Comparator</code> 参数。</p>
+<p>比较函数的一般写法是，对传入的两个参数（<code>a, b</code>）进行比较：</p>
 <ul>
-<li>数据插入：入队列 （AddQ）</li>
-<li>数据删除：出队列 （DeleteQ）</li>
-<li>先来先服务</li>
-<li>先进先出：FIFO</li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>1</code></li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>-1</code></li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>0</code></li>
 </ul>
-<p><strong>类型名称：</strong>队列（Queue）</p>
-<p><strong>数据对象集：</strong>一个有0个或多个元素的有穷线性表</p>
-<p><strong>操作集：</strong>长度为MaxSize的队列 Q 属于 Queue， 队列元素 item 属于 ElementType</p>
-<ol type="1">
-<li>Queue CreatQueue(int MaxSize) 生成长度为MaxSize的空队列</li>
-<li>int IsFullQ(Queue PtrQ,int MaxSize) 判断队列Q是否已满</li>
-<li>void AddQ(Queue PtrQ,ElementType item) 将数据元素item插入队列Q中</li>
-<li>int IsEmptyQ(Queue PtrQ) 判断队列是否为空</li>
-<li>ElementType DeleteQ(Queue PtrQ 将对头数据元素从队列中删除并返回</li>
-</ol>
-<h1 id="队列的顺序储存实现">队列的顺序储存实现</h1>
-<p>利用数组来实现相关操作</p>
+<p>规则进行返回，通过控制两个参数的传入，来控制从大到小排列或者从小到大排列。</p>
+<h4 id="比较">比较</h4>
+<p>比较可以自己写规则，比如最为简单的数字的 从大到小，从小到大 等等，但是一些时候就不仅仅是简单的的从大到小或是从小到大了，比如我今天写的这个题（<a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener"><code>leetcode 179</code></a>）：</p>
+<p><strong>题目如下：</strong></p>
+<p>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: 210</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: 9534330</span><br></pre></td></tr></table></figure>
+<p><strong>说明:</strong> 输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
+<p><strong>题目解答：</strong></p>
+<p>这题本质是一个排序问题，而排序的方式不再是简单的数字排序：</p>
 <ul>
-<li><h4 id="直接利用数组实现">直接利用数组实现</h4>
-<p>数组的一端作为头，另一端作为尾，这样的方式是比较容易实现的：</p>
-<p>​ 首先在空数组上的将队列头和尾均放在数组头的前一个位置，头和尾的标号为-1</p>
-<p>​ 添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p>
-<p>问题：</p>
-<p>​ 如果队放满，也就是队尾下标为 MaxSize-1 但此时队头由于删除元素的原因，还空有位置， 因此会造成空间浪费。</p></li>
-<li><h4 id="利用环形数组实现">利用环形数组实现</h4>
-<p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 MaxSize-1），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
-<p>判断队列空和满</p>
-<p>​ <strong>空：</strong>队头下标等于队尾下标</p>
-<p>​ <strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p>
-<p>​ <strong>改进：</strong>最大队尾下标加一除以MaxSize的余数等于队尾下标（除数大于被除数，余数为被除数本身）</p></li>
+<li>数字从大到小排序：<code>98</code> 肯定在 <code>9</code>前面，但是此题则应该将顺序置反</li>
+<li>数字从小到大排序：<code>2</code> 肯定在 <code>42</code> 前面，但是此题则应该将顺序置反</li>
 </ul>
-<h4 id="代码">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxSize <span class="meta-string">&lt;储存元素的最大个数&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QNode</span>&#123;</span></span><br><span class="line">    ElementType Data[MaxSize];</span><br><span class="line">    <span class="keyword">int</span> rear;   <span class="comment">// 队尾元素</span></span><br><span class="line">    <span class="keyword">int</span> front;  <span class="comment">// 队头元素</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">Queue</span>;</span></span><br></pre></td></tr></table></figure>
-<h3 id="queue-creatqueueint-maxsize">Queue CreatQueue(int MaxSize)</h3>
-<p><strong>生成长度为MaxSize的空队列</strong></p>
-<h4 id="代码-1">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Queue <span class="title">CreatQueue</span><span class="params">(<span class="keyword">int</span> MaxSize)</span></span>&#123;  <span class="comment">// 生成长度为MaxSize的空队列</span></span><br><span class="line">    Queue PtrQ;	<span class="comment">// 创建节点</span></span><br><span class="line">    PtrQ = (Queue)<span class="built_in">malloc</span> (<span class="keyword">sizeof</span>(struct QNode)*MaxSize);	<span class="comment">// 开辟空间</span></span><br><span class="line">    PtrQ-&gt;rear = PtrQ-&gt;front = <span class="number">0</span>;	<span class="comment">// 队头队尾设为零</span></span><br><span class="line">    <span class="keyword">return</span> PtrQ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="int-isfullqqueue-ptrqint-maxsize">int IsFullQ(Queue PtrQ,int MaxSize)</h3>
-<p><strong>判断队列Q是否已满</strong></p>
-<h4 id="代码-2">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsFullQ</span><span class="params">(Queue PtrQ,<span class="keyword">int</span> MaxSize)</span></span>&#123;   <span class="comment">// 判断队列Q是否已满</span></span><br><span class="line">    <span class="keyword">return</span> ((PtrQ-&gt;rear+<span class="number">1</span>) % MaxSize == PtrQ-&gt;front)? <span class="number">1</span>:<span class="number">0</span>;	<span class="comment">// 满则返回1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="void-addqqueue-ptrqelementtype-item">void AddQ(Queue PtrQ,ElementType item)</h3>
-<p><strong>将数据元素item插入队列Q中</strong></p>
-<h4 id="代码-3">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddQ</span><span class="params">(Queue PtrQ,ElementType item)</span></span>&#123;    <span class="comment">// 将数据元素item插入队列Q中</span></span><br><span class="line">    <span class="keyword">if</span> ((PtrQ-&gt;rear+<span class="number">1</span>) % MaxSize == PtrQ-&gt;front)&#123;   </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"队列满"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    PtrQ-&gt;rear = (PtrQ-&gt;rear+<span class="number">1</span>) % MaxSize;</span><br><span class="line">    PtrQ-&gt;Data[PtrQ-&gt;rear] = item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="int-isemptyqqueue-ptrq">int IsEmptyQ(Queue PtrQ)</h3>
-<p><strong>判断队列是否为空</strong></p>
-<h4 id="代码-4">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsEmptyQ</span><span class="params">(Queue PtrQ)</span></span>&#123;  <span class="comment">// 判断队列是否为空</span></span><br><span class="line">    <span class="keyword">return</span> (PtrQ-&gt;front == PtrQ-&gt;rear) ? <span class="number">1</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="elementtype-deleteqqueue-ptrq">ElementType DeleteQ(Queue PtrQ</h3>
-<p><strong>将对头数据元素从队列中删除并返回</strong></p>
-<h4 id="代码-5">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ElementType <span class="title">DeleteQ</span><span class="params">(Queue PtrQ)</span></span>&#123;   <span class="comment">// 将对头数据元素从队列中删除并返回</span></span><br><span class="line">    <span class="keyword">if</span> (PtrQ-&gt;front == PtrQ-&gt;rear)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"队列空"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        PtrQ-&gt;front = (PtrQ-&gt;front+<span class="number">1</span>) % MaxSize;	<span class="comment">// 防止fort在数组末</span></span><br><span class="line">        <span class="keyword">return</span> PtrQ-&gt;Data[PtrQ-&gt;front];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="队列的链式储存实现">队列的链式储存实现</h1>
-<p>使用链表存储</p>
-<h4 id="代码-6">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    ElementType Data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> *<span class="title">Next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">QNode</span>&#123;</span>   <span class="comment">// 链 队列结构</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">rear</span>;</span>  <span class="comment">// 指向队尾结点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">front</span>;</span> <span class="comment">// 指向队头结点</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">Queue</span>;</span></span><br><span class="line">Queue PtrQ;</span><br></pre></td></tr></table></figure>
-<p>用链表储存，设计了两个结构，</p>
-<p><code>Node</code> 为队列中节点，指针指向下一个节点，Data 储存节点数据</p>
-<p><code>QNode</code> 为队列头节点，两个指针分别指向队列头和队列尾</p>
-<p>对于链表的储存实现，只写加入删除操作</p>
-<h3 id="queue-creatqueueint-maxsize-1">Queue CreatQueue(int MaxSize)</h3>
-<p><strong>创建空队列</strong></p>
-<h4 id="代码-7">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Queue <span class="title">CreatQueue</span><span class="params">(<span class="keyword">int</span> MaxSize)</span></span>&#123;      <span class="comment">// 创建空队列</span></span><br><span class="line">      Queue PtrQ;</span><br><span class="line">      PtrQ= (Queue)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct QNode));</span><br><span class="line">      PtrQ-&gt;front = PtrQ-&gt;rear = <span class="literal">NULL</span>;	<span class="comment">// 队列头的指针均为空</span></span><br><span class="line">      <span class="keyword">return</span> PtrQ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="elementtype-deleteqqueue-ptrq-1">ElementType DeleteQ(QUeue PtrQ)</h3>
-<p><strong>将对头数据元素从队列中删除并返回</strong></p>
-<h4 id="代码-8">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ElementType <span class="title">DeleteQ</span><span class="params">(QUeue PtrQ)</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">FrontCell</span>;</span>	<span class="comment">// 创建临时结点</span></span><br><span class="line">    ElementType FrontElem;	<span class="comment">// 临时变量</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (PtrQ-&gt;front == <span class="literal">NULL</span>)&#123;	<span class="comment">// 头指针为空，则队列空</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"队列空"</span>);</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    &#125;</span><br><span class="line">    FrontCell = PtrQ-&gt;front;	<span class="comment">// 将头节点所保存的地址给临时节点</span></span><br><span class="line">    <span class="keyword">if</span> (PtrQ-&gt;front == PtrQ-&gt;rear)	<span class="comment">// 队头节点等于队尾节点 只有一个节点</span></span><br><span class="line">        PtrQ-&gt;front = PtrQ-&gt;rear = <span class="literal">NULL</span>;	<span class="comment">// 删除后队列置为空</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        PtrQ-&gt;front = PtrQ-&gt;front-&gt;Next;	<span class="comment">// 下一个节点的地址给头节点</span></span><br><span class="line">    FrontElem = FrontCell-&gt;Data;	<span class="comment">// 读取值</span></span><br><span class="line">    <span class="built_in">free</span>(FrontCell);</span><br><span class="line">    <span class="keyword">return</span> FrontElem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="void-addqqueue-ptrqelementtype-item-1">void AddQ(Queue PtrQ,ElementType item)</h3>
-<p><strong>将数据元素item插入队列Q中</strong></p>
-<h4 id="代码-9">代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddQ</span><span class="params">(Queue PtrQ,ElementType item)</span></span>&#123;    <span class="comment">// 将数据元素item插入队列Q中</span></span><br><span class="line">      <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">NewQ</span>;</span>      <span class="comment">// 新建节点</span></span><br><span class="line">      <span class="keyword">if</span> (PtrQ-&gt;front == <span class="literal">NULL</span>)&#123;	<span class="comment">// 判断队列是否为空</span></span><br><span class="line">            PtrQ-&gt;front = PtrQ-&gt;rear = NewQ;	<span class="comment">// 队列头指针的首尾节点均指向新建节点</span></span><br><span class="line">            NewQ-&gt;Data = item;</span><br><span class="line">            NewQ-&gt;Next = <span class="literal">NULL</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">            PtrQ-&gt;rear = PtrQ-&gt;rear-&gt;next = NewQ;     <span class="comment">// 指向队尾的指针及队尾的节点的指针指向新节点地址</span></span><br><span class="line">            NewQ-&gt;Data = item;</span><br><span class="line">            NewQ-&gt;Next = <span class="literal">NULL</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>优点：</strong>链表储存无需判断是否队列已满</p>
+<p>所以此题的比较不能够按照常规方式写，而我们可以按照字符串的字典序来看，也就是说，将两个数字拼接，比较两种拼接方式的大小，从而选择排列顺序，比如：<code>98</code> 和 <code>9</code></p>
+<ul>
+<li>两个数只有两种拼接方式：<code>998</code> 明显大于 <code>989</code> ，所以 <code>9</code> 应该在 <code>98</code> 前面</li>
+</ul>
+<p>便是以此种方式，来进行排序，排序后，将之依次拼贴为一字符串即可, <code>java</code>代码（参考了 <code>leetcode</code> 官方题解）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">LargerNumberComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String a, String b)</span> </span>&#123;</span><br><span class="line">            String order1 = a + b;</span><br><span class="line">            String order2 = b + a;</span><br><span class="line">            <span class="keyword">return</span> order2.compareTo(order1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">largestNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        String[] numsString = <span class="keyword">new</span> String[nums.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">            numsString[i] = String.valueOf(nums[i]);</span><br><span class="line">        </span><br><span class="line">        Arrays.sort(numsString, <span class="keyword">new</span> LargerNumberComparator());</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (numsString[<span class="number">0</span>].equals(<span class="string">"0"</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</span><br><span class="line">        </span><br><span class="line">        String ret = <span class="keyword">new</span> String();</span><br><span class="line">        <span class="keyword">for</span> (String numString:numsString)</span><br><span class="line">            ret += numString;   </span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="比较次数">比较次数</h3>
+<p>这部分内容不算是重点，所以，大致说明即可：</p>
+<ul>
+<li>冒泡排序，每次循环都会比较，所以几乎每两个数字间都会进行比较，所以其时间复杂度为 <span class="math inline">\(O(N^2)\)</span></li>
+<li>而比较高级的排序，比如归并，快排甚至桶排，都是降低了比较次数，从而降低了时间复杂度；</li>
+</ul>
 
       
 
@@ -351,7 +320,7 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -407,7 +376,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/08/队列/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/14/由一道题重新审视排序/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -421,18 +390,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/07/20/算法复杂度初探/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          算法复杂度初探
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/06/05/练习/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">练习</div>
+    <a href="/2019/08/02/队列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">队列</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -617,10 +577,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
               </li>
              
@@ -629,19 +585,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,7 +601,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,11 +617,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
             
             <div class="clearfix"></div>
