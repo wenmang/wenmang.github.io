@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | 文的盲</title>
+  <title>二分查找 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文的盲">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
+<meta name="keywords" content="博客,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分查找">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/二分查找/index.html">
 <meta property="og:site_name" content="文的盲">
+<meta property="og:description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-06T14:00:43.626Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文的盲">
+<meta name="twitter:title" content="二分查找">
+<meta name="twitter:description" content="二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -194,36 +199,103 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-二分查找" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二分查找
+    </h1>
+  
+
+        
+        <a href="/2018/04/15/二分查找/" class="archive-article-date">
+  	<time datetime="2018-04-15T12:25:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-15</time>
+</a>
+        
+        
+        <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
     
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>二分查找，显而易见就是每次一分为二的查找方式。其先决条件为必须要在数组中实现，且查找的数据必须已经排序完毕。</p>
+<a id="more"></a>
+<p>首先我们来看一个二分查找库函数的实现：</p>
+<p><strong>C语言 代码：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * @param key 需要查找的元素</span></span><br><span class="line"><span class="comment"> * @param base 查找数组</span></span><br><span class="line"><span class="comment"> * @param n 数组大小</span></span><br><span class="line"><span class="comment"> * @param elemSize 数组元素字节数 </span></span><br><span class="line"><span class="comment"> * @param cmpfn 比较函数</span></span><br><span class="line"><span class="comment"> * @return </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">void* BSearch(void* key, void* base, int n, int elemSize, int (*cmpfn) (void*, void*)) &#123;</span><br><span class="line">	<span class="keyword">int</span> left = <span class="number">0</span>, right = n;</span><br><span class="line">	<span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">		<span class="keyword">int</span> mid = left + (right - left)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">void</span>* elemAddr = (<span class="keyword">char</span>*) base + mid*elemSize;</span><br><span class="line">		<span class="keyword">int</span> tmp = cmpfn(key, elemAddr);</span><br><span class="line">		<span class="keyword">if</span> (tmp == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> elemAddr;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (tmp &lt; <span class="number">0</span>) &#123;</span><br><span class="line">			right = mid - <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			left = mid + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明">说明：</h4>
+<ul>
+<li><p><code>left + (right - left)/2</code></p>
+<p>此种写法为防止 <code>left + right</code> 的值过大而溢出，所以采用此种写法</p></li>
+</ul>
+<blockquote>
+<p>写一个函数 <code>LowerBound</code>，在包含 <code>size</code> 个元素的、从小到大排序的 <code>int</code> 数组 <code>a</code> 里查找比给定整数 <code>p</code> 小的，下标最大的元素。找到则返回其下标，找不到则返回<code>-1</code>。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LowerBound</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size,<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> L = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">int</span> R = size - <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">int</span> lastPos = <span class="number">-1</span>; <span class="comment">//到目前为止找到的最优解</span></span><br><span class="line">    <span class="keyword">while</span>( L &lt;= R) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = L+(R-L)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid] &gt;= p)</span><br><span class="line">            R = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            lastPos = mid;</span><br><span class="line">            L = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lastPos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明-1">说明：</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lastPos = mid;	L = mid+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>如上 <code>else</code> 中语句，执行时 <code>mid</code> 处数组的值小于p，所以先将其中的最大值 <code>mid</code> 的下标给 <code>lastPos</code> ，然后寻找比 <code>mid</code> 处值大而比p的值小的数，所以将 <code>mid+1</code> 作为左端点继续操作。</p>
+<h3 id="练手">练手</h3>
+<blockquote>
+<h4 id="题目">题目：</h4>
+<p>求下面方程的一个根：<span class="math inline">\(f(x) = x^3-5x^2+10x-80 = 0\)</span>，若求出的根是a，则要求 <span class="math inline">\(|f(a)| \le 10^{-6}\)</span></p>
+</blockquote>
+<blockquote>
+<h4 id="解法">解法：</h4>
+<p>对 <span class="math inline">\(f(x)\)</span> 求导，得 <span class="math inline">\(f&#39;(x)=3x^2-10x+10\)</span> 。</p>
+<p>由一元二次方程求根公式知方程 <span class="math inline">\(f&#39;(x)= 0\)</span> 无解，因此 <span class="math inline">\(f&#39;(x)\)</span> 恒大于0。</p>
+<p>故 <span class="math inline">\(f(x)\)</span> 是单调递增的。易知 <span class="math inline">\(f(0) &lt; 0\)</span> 且 <span class="math inline">\(f(100)&gt;0\)</span> ,所以区间 <span class="math inline">\([0,100]\)</span> 内必然有且只有一个根。由于<span class="math inline">\(f(x)\)</span>在 <span class="math inline">\([0,100]\)</span> 内是单 调的，所以可以用二分的办法在区间 <span class="math inline">\([0,100]\)</span> 中寻找根。</p>
+</blockquote>
+<h4 id="代码">代码：</h4>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">double</span> EPS = <span class="number">1e-6</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">f</span><span class="params">(<span class="keyword">double</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*x*x - <span class="number">5</span>*x*x + <span class="number">10</span>*x - <span class="number">80</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> root, x1 = <span class="number">0</span>, x2 = <span class="number">100</span>,y;</span><br><span class="line">    root = x1+(x2-x1)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> triedTimes = <span class="number">1</span>; <span class="comment">//记录一共尝试多少次，对求根来说不是必须的</span></span><br><span class="line">    y = f(root);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">fabs</span>(y) &gt; EPS) &#123;</span><br><span class="line">        <span class="keyword">if</span>(y &gt; <span class="number">0</span>)</span><br><span class="line">            x2 = root;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            x1 = root;</span><br><span class="line">        root = x1+(x2 - x1)/<span class="number">2</span>;</span><br><span class="line">        y = f(root);</span><br><span class="line">        triedTimes ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.8f\n"</span>,root);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,triedTimes);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明-2">说明：</h4>
+<p>循环条件：<code>fabs(y) &gt; EPS</code> 也就是在精度值达到之后结束循环。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欢迎帮助国家扫除文盲<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+         </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/29/pygame初探/" class="archive-article-date">
-  	<time datetime="2018-11-29T07:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/29/pygame初探/">pygame初探</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -233,416 +305,144 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小游戏</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/15/二分查找/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/25/进阶查找/" class="archive-article-date">
-  	<time datetime="2018-11-25T12:16:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-25</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/05/20/多项式的表示/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          多项式的表示
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/22/初入博客世界/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">初入博客世界</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/25/进阶查找/">进阶查找</a>
-    </h1>
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/20/普通查找/" class="archive-article-date">
-  	<time datetime="2018-11-20T06:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/20/普通查找/">普通查找</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/15/排序进阶/" class="archive-article-date">
-  	<time datetime="2018-11-15T14:51:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/15/排序进阶/">排序进阶</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/08/改进排序/" class="archive-article-date">
-  	<time datetime="2018-11-08T06:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/08/改进排序/">改进排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/03/简单排序/" class="archive-article-date">
-  	<time datetime="2018-11-03T07:24:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/03/简单排序/">简单排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/28/拓扑排序/" class="archive-article-date">
-  	<time datetime="2018-10-27T16:27:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/28/拓扑排序/">拓扑排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/27/最小生成树/" class="archive-article-date">
-  	<time datetime="2018-10-27T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/27/最小生成树/">最小生成树</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/23/LeetCode练习（一）/" class="archive-article-date">
-  	<time datetime="2018-10-23T04:52:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/23/LeetCode练习（一）/">LeetCode练习（一）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">练习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/10/21/多源最短路径/" class="archive-article-date">
-  	<time datetime="2018-10-21T09:30:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/21/多源最短路径/">多源最短路径</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="page-number" href="/archives/2018/page/3/">3</a><a class="extend next" rel="next" href="/archives/2018/page/2/">Next &raquo;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -676,8 +476,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
