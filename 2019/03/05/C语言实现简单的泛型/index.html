@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="文的盲">
 <meta property="og:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-29T14:38:59.553Z">
+<meta property="og:updated_time" content="2019-08-31T06:08:15.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言实现简单的泛型">
 <meta name="twitter:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
@@ -266,11 +266,11 @@ var _hmt = _hmt || [];
 <p>有了普适版（第二版）的代码，其中提供了函数接口，那么调用者应该怎么写这个函数呢？</p>
 <h5 id="int-类型数据"><code>int</code> 类型数据</h5>
 <p>比较 <code>int</code> 类型数据的函数，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">IntCmp</span> <span class="params">(<span class="keyword">void</span>* n1, <span class="keyword">void</span>* n2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip1 = n1;</span><br><span class="line">    <span class="keyword">int</span>* ip2 = n2;</span><br><span class="line">    <span class="keyword">return</span> (*ip1 - *ip2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IntCmp</span> <span class="params">(<span class="keyword">void</span>* n1, <span class="keyword">void</span>* n2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip1 = n1;</span><br><span class="line">    <span class="keyword">int</span>* ip2 = n2;</span><br><span class="line">    <span class="keyword">return</span> (*ip1 - *ip2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注：</strong>此函数所带参数l类型以及返回值类型需与形参中函数一致</p>
 <h5 id="char-字符串类型数据"><code>char*</code> (字符串)类型数据</h5>
 <p>字符串无疑是优雅的，但在C语言中处理字符串，就完全不存在优雅这一说了，因为C语言更加底层，对于字符串的处理不如其他的一些新语言来的形象（当然也是此些语言为字符串处理做了许多预备工作，以至于处理之时只调用已有的函数即可），所以关于字符串的处理可能要更加不易理解，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>* <span class="title">StrCmp</span> <span class="params">(<span class="keyword">void</span>* vp1, <span class="keyword">void</span>* vp2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* s1 = * (<span class="keyword">char</span>**)c1;</span><br><span class="line">    <span class="keyword">char</span>* s2 = * (<span class="keyword">char</span>**)c2;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrCmp</span> <span class="params">(<span class="keyword">void</span>* vp1, <span class="keyword">void</span>* vp2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* s1 = * (<span class="keyword">char</span>**)vp1;</span><br><span class="line">    <span class="keyword">char</span>* s2 = * (<span class="keyword">char</span>**)vp2;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>仅看如此代码，会有种毫无头绪的感觉，那么为了更好地理解，我们需要写一下查找字符串时的全过程，代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* key = <span class="string">"Li"</span>;</span><br><span class="line"><span class="keyword">char</span>* faName[] = &#123;<span class="string">"zhang"</span>, <span class="string">"wang"</span>, <span class="string">"li"</span>, <span class="string">"zhao"</span>, <span class="string">"sun"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span>** found = IsSearch(&amp;key, faName, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*), StrCmp);</span><br></pre></td></tr></table></figure>
 <p>好，因为单个的 <code>char</code> 是字符，而字符串是 <code>char*</code> ，那么理所当然字符串数组就是 <code>char**</code> 了，所以需要查找之时，传入 <code>IsSearch()</code> 的参数实际上是指针的指针，所以在调用比较函数之时需要进行一次解耦，将之变成两个字符串，而这也就是比较函数前两行的意义所在。</p>
@@ -594,19 +594,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,15 +618,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,7 +634,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,7 +650,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
               </li>
             
             <div class="clearfix"></div>

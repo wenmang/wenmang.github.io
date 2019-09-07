@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>枚举 | 文的盲</title>
+  <title>链表之快慢指针 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="枚举 基于逐个尝试答案的一种问题求解策略">
-<meta name="keywords" content="博客,算法">
+  <meta name="description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
+<meta name="keywords" content="博客,链表,算法技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="枚举">
-<meta property="og:url" content="http://yoursite.com/2018/03/26/枚举/index.html">
+<meta property="og:title" content="链表之快慢指针">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/链表之快慢指针/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="枚举 基于逐个尝试答案的一种问题求解策略">
+<meta property="og:description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-21T08:57:58.106Z">
+<meta property="og:image" content="https://i.loli.net/2019/09/07/8uzHLWtjrJEVblX.png">
+<meta property="og:updated_time" content="2019-09-07T08:28:08.114Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="枚举">
-<meta name="twitter:description" content="枚举 基于逐个尝试答案的一种问题求解策略">
+<meta name="twitter:title" content="链表之快慢指针">
+<meta name="twitter:description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/07/8uzHLWtjrJEVblX.png">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -199,20 +201,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-枚举" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-链表之快慢指针" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      枚举
+      链表之快慢指针
     </h1>
   
 
         
-        <a href="/2018/03/26/枚举/" class="archive-article-date">
-  	<time datetime="2018-03-26T14:25:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
+        <a href="/2019/09/06/链表之快慢指针/" class="archive-article-date">
+  	<time datetime="2019-09-06T14:15:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-06</time>
 </a>
         
         
@@ -224,67 +226,110 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p>枚举 基于逐个尝试答案的一种问题求解策略</p>
-</blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script><p>链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。</p>
+<p>而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。</p>
 <a id="more"></a>
-<p>枚举是一种最为暴力的解决一个问题的方法，也是最容易想到的一种解决问题的方法。这种方法基于计算机强大的运算能力，但是如果数据过于庞大，那么这个算法的时间复杂度就会极大，甚至永远无法计算出结果。所以，利用枚举的同时尽可能的减小数据量也就显得极为重要。下面通过四个具体例子说明（例子来源于慕课）。</p>
-<p>———————————————Mooc 北大 计算机程序程序设计与算法（二）算法基础 笔记</p>
-<h2 id="完美立方问题">完美立方问题</h2>
-<blockquote>
-<h4 id="题目">题目</h4>
-<p>形如a3= b3 + c3 + d3的等式被称为完美立方等式。例如 123= 63 + 83 + 103 。编写一个程序，对任给的正整数N (N≤100)，寻找所有的四元组(a, b, c, d)，使得a3 = b3 + c3 + d3，其中a,b,c,d 大于 1, 小于等于N，且b&lt;=c&lt;=d。</p>
-</blockquote>
-<blockquote>
-<h4 id="输入">输入</h4>
-<p>一个正整数N (N≤100)。 #### 输出 每行输出一个完美立方。输出格式为： Cube = a, Triple = (b,c,d) 其中a,b,c,d所在位置分别用实 际求出四元组值代入。</p>
-</blockquote>
-<h4 id="示例代码">示例代码</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> N;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> a = <span class="number">2</span>; a &lt;= N; a++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> b = <span class="number">2</span>; b &lt; a; b++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> c = b; c &lt; a; c++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> d = c; d &lt; a; d++)</span><br><span class="line">                    <span class="keyword">if</span>( a*a*a == b*b*b + c*c*c +d*d*d)</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"Cube = %d, Triple = (%d,%d,%d)\n"</span>, a, b, c,d);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>算法采用了枚举的方法解决，为使之尽可能简单，做了如上优化： 次外层循环从b开始，由于题目要求b&lt;=c&lt;=d 因此为了排除不必要的一些判断，采用了如</p>
-<blockquote>
-<p>a枚举范围[2,N] b范围 [2,a-1] c范围 [b,a-1] d范围 [c,a-1]</p>
-</blockquote>
-<p>的循环排列。 #### 总结 采用枚举需要用到多重循环之时，可通过一定的次序或者筛选，利用循环条件将循环尽可能的优化，从而减少运算次数，提高程序效率。</p>
-<h2 id="生理周期问题">生理周期问题</h2>
-<blockquote>
-<h4 id="题目-1">题目</h4>
-<p>人有体力、情商、智商的高峰日子，它们分别每隔 23天、28天和33天出现一次。对于每个人，我们想 知道何时三个高峰落在同一天。给定三个高峰出现 的日子p,e和i（不一定是第一次高峰出现的日子）, 再给定另一个指定的日子d，你的任务是输出日子d 之后，下一次三个高峰落在同一天的日子（用距离d 的天数表示）。例如：给定日子为10，下次出现三 个高峰同一天的日子是12，则输出2。</p>
-</blockquote>
-<blockquote>
-<h4 id="输入-1">输入</h4>
-<p>四个整数：p, e, i和d。 p, e, i分别表示体力、情感和智力高峰出现的日子。d是给定的日子，可能小于p, e或 i。所有给 定日子是非负的并且小于或等于365，所求的日子小于或等于 21252。 #### 输出 从给定日子起，下一次三个高峰同一天的日子（距离给定日子 的天数）。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 21252</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k,p,e,i,d,caseNo = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;p,&amp;e,&amp;i,&amp;d) &amp;&amp; p!= <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        caseNo++;</span><br><span class="line">        <span class="keyword">for</span>(k = d+<span class="number">1</span>; (k-p)%<span class="number">23</span>; ++k)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">for</span>(; (k-e)%<span class="number">28</span>; k+= <span class="number">23</span>)</span><br><span class="line">            ;</span><br><span class="line">        <span class="keyword">for</span>(; (k-i)%<span class="number">33</span>; k+= <span class="number">23</span>*<span class="number">28</span>)</span><br><span class="line">            ;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"case:%d the next triple peak occurs in %d days."</span>,caseNo,k-d);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>算法为了减少不必要的试探，首先寻找体力高峰首次出现的天数，之后再每隔 23 天寻找情感高峰首次出现的天数（而体力高峰不出现的日子不予判断）。同理，找到两个高峰首次同时出现的天数之后，再每隔 23乘28 天寻找智力高峰首次出现的天数。找到的即为三个高峰首次出现的天数。</p>
-<h4 id="注意">注意：</h4>
-<pre><code>while ( scanf(&quot;%d%d%d%d&quot;,&amp;p,&amp;e,&amp;i,&amp;d) &amp;&amp; p!= -1）</code></pre>
-<p>程序用该while函数来达到反复输入的目的，当输入的值 p == -1之时结束输入。 #### 总结 适当利用数学思想优化解决方法。</p>
-<h2 id="称硬币">称硬币</h2>
-<blockquote>
-<h4 id="题目-2">题目</h4>
-<p>有12枚硬币。其中有11枚真币和1枚假币。假币和真 币重量不同，但不知道假币比真币轻还是重。现在， 用一架天平称了这些币三次，告诉你称的结果，请你 找出假币并且确定假币是轻是重（数据保证一定能找 出来）。</p>
-</blockquote>
-<blockquote>
-<h4 id="输入-2">输入</h4>
-<p>第一行是测试数据组数。 每组数据有三行，每行表示一次称量的结果。银币标号为 A-L。每次称量的结果用三个以空格隔开的字符串表示： 天平左边放置的硬币 天平右边放置的硬币 平衡状态。up, down, 和 even分别为右端高、右端低和平衡。天平左右的硬币数总是相等的。 #### 输出 输出哪一个标号的银币是假币，并说明它比真币轻还是重。</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> Left[<span class="number">3</span>][<span class="number">7</span>];               <span class="comment">//天平左边硬币</span></span><br><span class="line"><span class="keyword">char</span> Right[<span class="number">3</span>][<span class="number">7</span>];               <span class="comment">//天平右边硬币</span></span><br><span class="line"><span class="keyword">char</span> result[<span class="number">3</span>][<span class="number">7</span>];              <span class="comment">//结果</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsFake</span><span class="params">(<span class="keyword">char</span> c,<span class="keyword">bool</span> light)</span> </span>; <span class="comment">//light 为真表示假设假币为轻，否则表示假设假币为重</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;Left[i]);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;Right[i]);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s"</span>,&amp;result[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c=<span class="string">'A'</span>; c&lt;=<span class="string">'L'</span>; c++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( IsFake(c,<span class="number">1</span>) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%c is the counterfeit coin and it is light.\n"</span>,c);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( IsFake(c,<span class="number">0</span>) )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%c is the counterfeit coin and it is heavy.\n"</span>,c);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsFake</span><span class="params">(<span class="keyword">char</span> c,<span class="keyword">bool</span> light)</span> <span class="comment">//light 为真表示假设假币为轻，否则表示假设假币为重</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> *pLeft,*pRight; <span class="comment">//指向天平两边的字符串</span></span><br><span class="line">        <span class="keyword">if</span>(light)</span><br><span class="line">        &#123;</span><br><span class="line">            pLeft = Left[i];</span><br><span class="line">            pRight = Right[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>   <span class="comment">//如果假设假币是重的，则把称量结果左右对换</span></span><br><span class="line">        &#123;</span><br><span class="line">            pLeft = Right[i];</span><br><span class="line">            pRight = Left[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(result[i][<span class="number">0</span>])   <span class="comment">//天平右边的情况 case 'u':</span></span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'u'</span>:</span><br><span class="line">            <span class="keyword">if</span> ( <span class="built_in">strchr</span>(pRight,c) == <span class="literal">NULL</span>)	<span class="comment">//右边翘起，判断右边是否出现该假币</span></span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">//如未出现，返回假</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'e'</span>:</span><br><span class="line">            <span class="keyword">if</span>( <span class="built_in">strchr</span>(pLeft,c) || <span class="built_in">strchr</span>(pRight,c))<span class="comment">//二者平衡，判断左右两边是否出现该假币</span></span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">//如出现，返回假</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'d'</span>:</span><br><span class="line">            <span class="keyword">if</span> ( <span class="built_in">strchr</span>(pLeft,c) == <span class="literal">NULL</span>)	<span class="comment">//右边压下，判断左边是否出现该假币</span></span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">//如未出现，返回假</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此题为逻辑推理题。 因为 &gt;数据保证一定能找出来</p>
-<p>所以，只需一个个试就行，基本思想就是：由A到L依次先假定为假币，且轻于真币，成立则输出，否则设其比真币重，终能尝试出答案。 而本程序的重点则在于IsFake函数，也就是如何判断这个是不是的问题。由上程序可知 #### 注意 <strong>1.#include &lt;stdbool.h&gt; 为c语言声明布尔类型必需要加的头文件</strong> <strong>2.调换之后的判断均基于假币为轻币的情况</strong> <strong>3. strchr(pRight,c)函数 查找第一个参数首次出现c字母的位置，返回位置的指针，没有出现则返回NULL</strong> #### 总结 一个基于枚举推导逻辑关系的优秀算法</p>
-<h2 id="熄灯问题">熄灯问题</h2>
-<blockquote>
-<h4 id="题目-3">题目</h4>
-<p>有一个由按钮组成的矩阵, 其中每行有6个按钮, 共5行 每个按钮的位置上有一盏灯 当按下一个按钮后, 该按钮以及周围位置(上边, 下边, 左 边, 右边)的灯都会改变状态 如果灯原来是点亮的, 就会被熄灭 如果灯原来是熄灭的, 则会被点亮 （在矩阵角上的按钮改变3盏灯的状态 在矩阵边上的按钮改变4盏灯的状态 其他的按钮改变5盏灯的状态 与一盏灯毗邻的多个按钮被按下时,一个操作会抵消另一次操作的结果） 给定矩阵中每盏灯的初始状态，求一种按按钮方案，使得所有 的灯都熄灭</p>
-</blockquote>
-<blockquote>
-<h4 id="输入-3">输入:</h4>
-<p>第一行是一个正整数N, 表示需要解决的案例数 每个案例由5行组成, 每一行包括6个数字 这些数字以空格隔开, 可以是0或1 –0 表示灯的初始状态是熄灭的 1 表示灯的初始状态是点亮的 #### 输出: 对每个案例, 首先输出一行, 输出字符串 “PUZZLE #m”, 其中m是该案例的序号 接着按照该案例的输入格式输出5行 –1 表示需要把对应的按钮按下 0 表示不需要按对应的按钮 每个数字以一个空格隔开</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetBit</span><span class="params">(<span class="keyword">char</span> c,<span class="keyword">int</span> i)</span>   <span class="comment">//取c的第i位</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ( c &gt;&gt; i ) &amp; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SetBit</span><span class="params">(<span class="keyword">char</span> *c,<span class="keyword">int</span> i, <span class="keyword">int</span> v)</span>   <span class="comment">//设置c的第i位为v</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( v )</span><br><span class="line">        *c |= ( <span class="number">1</span> &lt;&lt; i);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        *c &amp;= ~( <span class="number">1</span> &lt;&lt; i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Flip</span><span class="params">(<span class="keyword">char</span> *c, <span class="keyword">int</span> i)</span>   <span class="comment">//将c的第i位为取反</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *c ^= ( <span class="number">1</span> &lt;&lt; i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OutputResult</span><span class="params">(<span class="keyword">int</span> t,<span class="keyword">char</span> result[])</span> <span class="comment">//输出结果</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PUZZLE #%d\n"</span>,t);</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; ++j )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> z;</span><br><span class="line">        z = GetBit(result[i],j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,z);</span><br><span class="line">        <span class="keyword">if</span>( j &lt; <span class="number">5</span> )</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125; <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> oriLights[<span class="number">5</span>]; <span class="comment">//最初灯矩阵，一个比特表示一盏灯</span></span><br><span class="line">    <span class="keyword">char</span> lights[<span class="number">5</span>];	<span class="comment">//不停变化的灯矩阵</span></span><br><span class="line">    <span class="keyword">char</span> result[<span class="number">5</span>];	<span class="comment">//结果开关矩阵</span></span><br><span class="line">    <span class="keyword">char</span> switchs;	<span class="comment">//某一行的开关状态</span></span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> t = <span class="number">1</span>; t &lt;= T; ++ t)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(oriLights,<span class="number">0</span>,<span class="keyword">sizeof</span>(oriLights));</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i ++ )  <span class="comment">//读入最初灯状态</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j ++ )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> s;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;s);</span><br><span class="line">                SetBit(&amp;oriLights[i],j,s);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> n = <span class="number">0</span>; n &lt; <span class="number">64</span>; ++n )   <span class="comment">//遍历首行开关的64种状态</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memcpy</span>(lights,oriLights,<span class="keyword">sizeof</span>(oriLights));</span><br><span class="line">            switchs = n; <span class="comment">//第i行的开关状态</span></span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i )</span><br><span class="line">            &#123;</span><br><span class="line">                result[i] = switchs; <span class="comment">//第i行的开关方案</span></span><br><span class="line">                <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; ++j )</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>( GetBit(switchs,j))</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>( j &gt; <span class="number">0</span>)</span><br><span class="line">                            Flip(&amp;lights[i],j<span class="number">-1</span>);<span class="comment">//改左灯</span></span><br><span class="line">                        Flip(&amp;lights[i],j);<span class="comment">//改开关位置的灯</span></span><br><span class="line">                        <span class="keyword">if</span>( j &lt; <span class="number">5</span> )</span><br><span class="line">                            Flip(&amp;lights[i],j+<span class="number">1</span>);<span class="comment">//改右灯</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>( i &lt; <span class="number">4</span> )</span><br><span class="line">                    lights[i+<span class="number">1</span>] ^= switchs;<span class="comment">//改下一行的灯</span></span><br><span class="line">                switchs = lights[i]; <span class="comment">//第i+1行开关方案和第i行灯情况相同</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( lights[<span class="number">4</span>] == <span class="number">0</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                OutputResult(t,result);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="comment">// for( int n = 0; n &lt; 64; n ++ )</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此题可以说是颇有难度了，我零零散散搞了两天，才初步弄懂程序的原理。 #### 基本思想 题目如果直接进行枚举，那么将会有2<sup>30次尝试，可以说是非常庞大的一个数字了，而老师采用的方法是只对第一行进行枚举，而为了将所有开着灯关掉，当第一行的开关的开关状态通过假设确定之后，如第一行还有开着的灯，那么只能通过第二行的灯的开关进行控制将第一行的灯关闭（也就是说，第一行的开关确定之后，之后没一行开关的任务就是关掉上一行未关闭的灯），所以第二行的灯的开关状态是唯一确定的，以此类推，后面行的状态也是唯一确定的。而最后判断灯是否全部关掉只需判断第五行的灯是否关闭（也就是当第五行的开关将第四行的灯完全关掉之后，判断它自身是否完全关闭）。而这种枚举只需要2</sup>6,也就是64次（枚举第一列更少，仅有32次，而题目要求一行一行输入，故没有选择），而为了再次提升速度，采用通过一维字符数组进行位运算的方式解决，因为一个char类型占8个比特，而灯每行六个，可以直接用来储存一行的数据。 #### 难点讨论 1.<a href="https://baike.baidu.com/item/memset" target="_blank" rel="noopener">memset函数</a>：其功能是将s所指向的某一块内存中的后n个 字节的内容全部设置为ch指定的ASCII值， 第一个值为指定的内存地址，块的大小由第三个参数指定，这个函数通常为新申请的内存做初始化工作，其返回值为s。memset(oriLights,0,sizeof(oriLights))这个语句即将oriLights初始化，各位为0。 2.读入灯最初的状态，采用了将1左移的方式，但通过这种方式输入的原始灯的情况，灯的状态是左右倒置的。 3.<a href="https://baike.baidu.com/item/memcpy" target="_blank" rel="noopener">memcpy函数</a>：其功能是从源src所指的内存地址的起始位置开始拷贝n个字节到目标dest所指的内存地址的起始位置中。而 memcpy(lights,oriLights,sizeof(oriLights)) 是将oriLights函数中的数据拷贝到lights之中。 4.switchs = n; 0:63（此条为个人理解）该语句即对第一行开关的枚举值,每一个n对应的一个二进制即为第一行开关的状态。 5.输出函数 OutputResult 输出处理的组数以及最后的结果（输出之前调用GetBit函数，将反着的顺序调换过来）。</p>
-<h3 id="课程总结">课程总结</h3>
-<p>1.由于本课程所教学代码由C++所写，在自己记录博客之时改写成C，但改写过程中不能快速写出，可见对c的掌握很不熟练。 2.C语言指针以及位运算理解还需加强。 3.以后用枚举法求解之时可借鉴此些思想，通过逻辑推理或是数学运算竭力优化算法，减少无意义查找。</p>
+<h3 id="链表的中间结点"><a href="https://leetcode-cn.com/problems/middle-of-the-linked-list/" target="_blank" rel="noopener">链表的中间结点</a></h3>
+<h4 id="题目说明">题目说明</h4>
+<p>给定一个带有头结点 <code>head</code> 的非空单链表，返回链表的中间结点。</p>
+<p>如果有两个中间结点，则返回第二个中间结点。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,3,4,5]</span><br><span class="line">输出：此列表中的结点 3 (序列化形式：[3,4,5])</span><br><span class="line">返回的结点值为 3 。 (测评系统对该结点序列化表述是 [3,4,5])。</span><br><span class="line">注意，我们返回了一个 ListNode 类型的对象 ans，这样：</span><br><span class="line">ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next = NULL.</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,3,4,5,6]</span><br><span class="line">输出：此列表中的结点 4 (序列化形式：[4,5,6])</span><br><span class="line">由于该列表有两个中间结点，值分别为 3 和 4，我们返回第二个结点。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>给定链表的结点数介于 <code>1</code> 和 <code>100</code> 之间。</li>
+</ul>
+<h4 id="题目解答">题目解答</h4>
+<p>链表的中间结点是快慢指针最为基础的一个例子， <code>java</code> 代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">middleNode</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原理分析">原理分析：</h4>
+<p>原理颇为简单，但很精妙：</p>
+<ul>
+<li>声明两个指针，一个将之称为快指针，一个将之称为慢指针【快指针步长（一次经过的结点）相较慢指针更大，固有其名】</li>
+<li>此处的快指针步长为2（一次两个结点），慢指针步长为 1 。当快指针到达链表末尾的时候，慢指针刚好到链表中间，由是一次循环便可以解决问题。</li>
+</ul>
+<h4 id="快慢指针的一般形式">快慢指针的一般形式</h4>
+<p>由上题可见，快慢指针实质上就是两个步长不同的指针，步长大的称之为快指针，小的称之为慢指针。而解决问题的原理，在于利用两个指针步长不同所产生的差异，来进行问题的求解。</p>
+<h3 id="环形链表"><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">环形链表</a></h3>
+<h4 id="题目描述">题目描述</h4>
+<p>给定一个链表，判断链表中是否有环。环，即链表末尾并非指向 <code>null</code> ，而是指向链表中的任意一个结点。详情可点击超链接。</p>
+<h4 id="题目解答-1">题目解答</h4>
+<p>此题依旧可以利用快慢指针的思想来解答，<code>java</code>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode quick = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(quick != <span class="keyword">null</span> &amp;&amp; quick.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            quick = quick.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            <span class="keyword">if</span> (quick == slow)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原理分析-1">原理分析</h4>
+<ul>
+<li>同样是快慢指针，快指针步长为 2 ，慢指针步长为 1 。</li>
+<li>如果两指针相遇，便说明链表中有环。</li>
+</ul>
+<p>那为快慢指针一定会相遇呢？我看了知乎的<a href="https://www.zhihu.com/question/23208893" target="_blank" rel="noopener">同名问题</a>，发现有好多都用了这样一个比喻：两个同学在操场跑步，一个快，一个慢，跑的快的同学总能追的上跑得慢的同学。乍一听，好像颇有道理，但是细思，这个比喻其实是相当不合理的，<strong>跑道可以看是连续的，但是环形链表不是，一个个结点不是，它是离散的。</strong></p>
+<p>所以，这样的比喻并没有任何说服力，而如要真正说明，便需要严谨的<strong>数学证明</strong>，也即此问题目前最高赞回答：</p>
+<ul>
+<li>快指针与慢指针之间差一步：此时继续往后走，慢指针前进一步，快指针前进两步，两者相遇。</li>
+<li>快指针与慢指针之间差两步：此时继续往后走，慢指针前进一步，快指针前进两步，两者之间相差一步，又变为第一种情况。</li>
+<li>快指针与慢指针之间差N步：此时继续往后走，慢指针前进一步，快指针前进两步，两者之间相差N-1步。</li>
+</ul>
+<p>所以，根据上述并不严谨的数学归纳法，便可清晰的说明原因。</p>
+<p>但是若再深究，<strong>步长必须一个为 1 ，一个为 2 吗？</strong> 那么为了说明这点，就需要一个较为普遍的证明：</p>
+<ul>
+<li>一有环链表如下图所示：</li>
+</ul>
+<figure>
+<img src="https://i.loli.net/2019/09/07/8uzHLWtjrJEVblX.png" alt="指针之快慢指针2.png"><figcaption>指针之快慢指针2.png</figcaption>
+</figure>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li><code>A B</code> 分别为链表的头结点，环的入口结点</li>
+<li><p><code>L1</code> 为非环部分的链表长度</p></li>
+<li><code>L2</code> 为慢指针在环入口结点时候与快指针间的距离</li>
+<li>链表环的周长为 <code>C</code></li>
+<li><span class="math inline">\(S_s\)</span> 和 <span class="math inline">\(S_f\)</span> 分别为快指针和慢指针所走的 “路径”（即经过的结点数）</li>
+<li><span class="math inline">\(N_1\)</span> 为正整数</li>
+<li><p><span class="math inline">\(N_2\)</span> 为一任意实数数</p></li>
+</ul>
+<p><strong>证明：</strong></p>
+<ul>
+<li><p>当慢指针到达环的入口结点（即B点）之时，二者所经过的 “路程” 如下：</p>
+<p><span class="math inline">\(S_S = L1\)</span></p>
+<p><span class="math inline">\(S_f = 2\times L1 = L1 + N_1C + L2\)</span></p>
+<p>则：<span class="math inline">\(L1 = N_1C + L2\)</span></p></li>
+<li><p>假设慢指针与快指针在慢指针走了 <code>i</code> 之后相遇（快指针为慢指针的 <span class="math inline">\(N_2\)</span> 倍），可得方程如下：</p>
+<p><span class="math inline">\((S_s + i - L1)\ mod\ C =(S_f + N_2i -L1)\ mod\ C\)</span></p>
+<p><strong>代入可得：</strong> <span class="math inline">\(i\ mod\ C =(N_1C + N_2i + L2)\ mod\ C\)</span></p>
+<p><strong>移向化简：</strong> <span class="math inline">\([(N_2 - 1)i + L1]\ mod\ C = 0\)</span></p>
+<p>又因为 <code>NC</code> 是 <code>C</code> 的整数倍，可约去，所以最终等式为：<span class="math inline">\([(N_2-1)i+L1]\ mod\ C = 0\)</span></p></li>
+</ul>
+<p>则说明，只要 <span class="math inline">\((N_2-1)i+L1\)</span> 是 <span class="math inline">\(C\)</span> 的整数倍，那么快慢指针一定能够相遇</p>
+<p><span class="math inline">\(N_2\)</span> 应该如何取值呢？</p>
+<ul>
+<li>显然，如果 <span class="math inline">\(N_2 = 1\)</span> （即两指针步长相同），那么等式就只有在 <span class="math inline">\(L1\)</span> 是 <span class="math inline">\(C\)</span> 整数倍的时候才能相遇</li>
+<li><span class="math inline">\((N_2-1)i+L1 = KC\)</span> （<span class="math inline">\(K\)</span> 为任意正整数），显然，<span class="math inline">\(N_2\)</span> 取任意大于1的实数，均能够满足此等式</li>
+</ul>
+<p>所以，有环链表中，<strong>理论上只要快指针的步长大于慢指针的步长，两指针就能相遇</strong>。</p>
+<p>但是，快指针步长为2，慢指针步长为1之时，其<strong>时间复杂度是最低</strong>的，故一般如此使用。【关于时间复杂度最低问题，链表中，快指针虽然说是一次走两步，但是其仍旧是一个结点一个结点逐次访问的，所以步长越大，其所遍历的多余结点数就越多，当然时间复杂度也会相应提升】</p>
+<h3 id="环形链表-ii"><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">环形链表 II</a></h3>
+<p>本题与环形链表不同的是，需要求出环形链表的入环结点。此题所采用的算法好像正规名叫 Floyd 判圈算法 ，是图论里的一种算法。</p>
+<h4 id="题目解答-2">题目解答</h4>
+<p>这算法的<strong>详细描述</strong>是：</p>
+<ul>
+<li>利用快慢指针判断是否有环</li>
+<li>如果有，则将相遇的结点标记，同时设新指针指向链表头。</li>
+<li>两个指针分别从相遇的结点和链表头开始移动，直至相遇，相遇后的结点便是入环结点。</li>
+</ul>
+<p><code>java</code> 代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="comment"> *         val = x;</span></span><br><span class="line"><span class="comment"> *         next = null;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">findIntersection</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast) &#123;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">detectCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode intersection = findIntersection(head);</span><br><span class="line">        <span class="keyword">if</span> (intersection == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">        ListNode ptr1 = head;</span><br><span class="line">        ListNode ptr2 = intersection;</span><br><span class="line">        <span class="keyword">while</span> (ptr1 != ptr2) &#123;</span><br><span class="line">            ptr1 = ptr1.next;</span><br><span class="line">            ptr2 = ptr2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ptr1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为了清晰起见，重新定义了一个函数。</p>
+<h4 id="原理分析-2">原理分析</h4>
+<p>由上题之证明：二指针相遇之时，恰好满足 <span class="math inline">\([(N_2 - 1)i + L1]\ mod\ C = 0\)</span> ；</p>
+<p>又因为<code>i</code> 为慢指针走的步数，<code>L1</code> 为前无环部分的长度，二者之和刚好是 <span class="math inline">\(C\)</span> 的整数倍。所以，可得 <span class="math inline">\(C-i = L1\)</span>，故此方法定能找到入环结点。</p>
+<hr>
+<h4 id="参考文章">参考文章：</h4>
+<p><a href="http://windsmoon.com/2017/10/09/判断单向链表是否有环及求环入口的算法数学证明/#more" target="_blank" rel="noopener">windsmoon的博客：判断单向链表是否有环及求环入口的算法数学证明</a></p>
+<p><a href="https://www.zhihu.com/question/23208893" target="_blank" rel="noopener">知乎问题：为什么用快慢指针找链表的环，快指针和慢指针一定会相遇？</a></p>
+<p><a href="https://stackoverflow.com/questions/3952805/proof-of-detecting-the-start-of-cycle-in-linked-list" target="_blank" rel="noopener">StackOverflow 提问：Proof of detecting the start of cycle in linked list</a></p>
+<hr>
+<p>本文题目均来源于<code>LeetCode</code></p>
 
       
 
@@ -334,7 +379,11 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">链表</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法技巧</a>
         		</li>
       		
 		</ul>
@@ -390,7 +439,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/26/枚举/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/06/链表之快慢指针/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -404,18 +453,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2018/04/07/递归/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          递归
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/22/初入博客世界/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">初入博客世界</div>
+    <a href="/2019/08/14/由一道题重新审视排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">由一道题重新审视排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -600,19 +640,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -624,15 +664,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,7 +680,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法技巧</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,7 +696,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+                <a href="javascript:void(0)" class="js-tag color3">刷题</a>
               </li>
             
             <div class="clearfix"></div>
