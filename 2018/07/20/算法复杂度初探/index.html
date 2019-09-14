@@ -20,19 +20,19 @@ var _hmt = _hmt || [];
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>算法复杂度初探 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
-<meta name="keywords" content="博客,算法">
+  <meta name="description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。  算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta name="keywords" content="博客,算法基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法复杂度初探">
 <meta property="og:url" content="http://yoursite.com/2018/07/20/算法复杂度初探/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta property="og:description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。  算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg">
-<meta property="og:updated_time" content="2018-07-29T06:49:04.118Z">
+<meta property="og:updated_time" content="2019-09-12T07:00:32.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法复杂度初探">
-<meta name="twitter:description" content="算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta name="twitter:description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。  算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
 <meta name="twitter:image" content="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
@@ -241,16 +241,31 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script><p>研究算法，研究什么？</p>
+<ul>
+<li>算法的原理：即此算法为何被提出来，其解决问题的原理是什么</li>
+<li>算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。</li>
+</ul>
+<p>而在研究之前，首先应知道相关基础知识。</p>
+<blockquote>
 <p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
 </blockquote>
 <a id="more"></a>
 <p>Q： 既然算法与计算机程序性能有关，那么性能就必须放在第一位吗？</p>
-<p>A： 对于有些问题的处理方案（即算法），以现在的技术，在计算机上进行运算或者处理，但时间是无限久远的，或者无法在短时间内解决，这时候就应该将算法置于首位，提升算法解决问题的速度。 对于有些问题，已有的算法已经能够在短时间解决问题，那么算法就不应该被摆在第一位，那么这时就会考虑其他因素：<strong>成本，简洁度，安全性，稳定度</strong>等等。</p>
+<p>A： 对于有些问题的处理方案（即算法），以现在的技术，在计算机上进行运算或者处理，但时间是无限久远的，或者无法在短时间内解决，这时候就应该将算法置于首位，提升算法解决问题的速度。</p>
+<p>对于有些问题，已有的算法已经能够在短时间解决问题，那么算法就不应该被摆在第一位，那么这时就会考虑其他因素：<strong>成本，简洁度，安全性，稳定度</strong>等等。</p>
 <p>我们向往速度，所以我们总是在追求速度——更快的交通，更快的网络。或许这也是为什么算法会吸引这么多人学习的原因吧！</p>
+<h2 id="符号说明">符号说明</h2>
+<ul>
+<li><span class="math inline">\(O(g(n))\)</span> 大 <span class="math inline">\(O\)</span> 符号，表示复杂度的上限为 <span class="math inline">\(g(n)\)</span> 的 <span class="math inline">\(c\)</span> 倍（ <span class="math inline">\(c\)</span> 为常数）</li>
+<li><span class="math inline">\(\Omega (g(n))\)</span> 大 <span class="math inline">\(\Omega\)</span> 符号，表示复杂度的下限为 <span class="math inline">\(g(n)\)</span> 的 <span class="math inline">\(c\)</span> 倍（ <span class="math inline">\(c\)</span> 为常数）</li>
+<li><span class="math inline">\(\Theta (g(n))\)</span> 大 $ $ 符号，表示复杂度的介于 <span class="math inline">\(c_1 g(n)\)</span> 于 <span class="math inline">\(c_2g(n)\)</span> 之间（ <span class="math inline">\(c_1 c_2\)</span> 为常数）</li>
+</ul>
 <h2 id="从排序入手">从排序入手</h2>
 <blockquote>
-<p>输入一组数(<span class="math inline">\(a_{1}\)</span> <span class="math inline">\(a_{2}\)</span> , …… , <span class="math inline">\(a_{n}\)</span>) 按需求重新排列后进行输出( <span class="math inline">\(a_{1}^{&#39;}\)</span> <span class="math inline">\(a_{2}^{&#39;}\)</span> , …… , <span class="math inline">\(a_{n}^{&#39;}\)</span> ) 使得 <span class="math inline">\(a_{1}^{&#39;}\)</span> $$ <span class="math inline">\(a_{2}^{&#39;}\)</span> $$ …… $$ <span class="math inline">\(a_{n}^{&#39;}\)</span> （使得大小单调递增）</p>
+<p>输入一组数 <span class="math inline">\((a_{1} a_{2} , ...... , a_{n})\)</span></p>
+<p>按需求重新排列后进行输出 <span class="math inline">\(( a_{1}^{&#39;} a_{2}^{&#39;} , ...... , a_{n}^{&#39;} )\)</span></p>
+<p>使得 <span class="math inline">\(a_{1}^{&#39;} \le a_{2}^{&#39;} \le ...... \le a_{n}^{&#39;}\)</span> （使得大小单调递增）</p>
 </blockquote>
 <h3 id="插入排序">插入排序</h3>
 <p><strong>伪代码为：</strong></p>
@@ -281,7 +296,7 @@ var _hmt = _hmt || [];
 <p><strong>Asymptotic notation</strong></p>
 <ul>
 <li><p><span class="math inline">\(\theta\)</span> ：弃去公式的低阶项，并忽略前面的常数因子 Ex：公式为 ： <span class="math inline">\(3{n}^{3}+90{n}^{2}-5n+6046\)</span> = <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)</p></li>
-<li><p>当 n –&gt; $$ 时 , <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{2}\)</span>) 的算法迟早会战胜一个<span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)的算法</p></li>
+<li><p>当 <span class="math inline">\(n\)</span> –&gt; $$ 时 , <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{2}\)</span>) 的算法迟早会战胜一个<span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)的算法</p></li>
 </ul>
 <p><strong>Insertion Sort analysis</strong></p>
 <p>最坏情况：即输入的数已经按照从大到小排列好 —- T(n) = <span class="math inline">\(\sum\limits_{j=2}^{n}{\theta (j)=\theta ({n}^{2})}\)</span> 也就是一个常数级数</p>
@@ -297,11 +312,11 @@ T(n) = \left\{ \begin{array}{ll}
 \theta (1) &amp; \textrm{if $ n=1 $}\\
 2T(\frac{n}{2})+\theta(n) &amp; \textrm{if $n &gt; 1$}\\
 \end{array} \right.
-\]</span> 采用递归树方法进行分析 T(n) = $2T() $ + cn (用cn替换了<span class="math inline">\(\theta\)</span>(n) )，如图：</p>
+\]</span> 采用递归树方法进行分析 T(n) = <span class="math inline">\(2T(\frac{n}{2}) + cn\)</span> (用 <span class="math inline">\(cn\)</span> 替换了<span class="math inline">\(\theta\)</span>(n) )，如图：</p>
 <figure>
 <img src="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg" alt="递归树分析"><figcaption>递归树分析</figcaption>
 </figure>
-<p>可知树（这个树是倒放的）高n为<span class="math inline">\(\lg (n)\)</span>，实际为以二为底，n的对数。而将所有叶节点加起来为<span class="math inline">\(\theta\)</span>(n)</p>
+<p>可知树（这个树是倒放的）高 n 为<span class="math inline">\(\lg (n)\)</span>，实际为以二为底，n的对数。而将所有叶节点加起来为<span class="math inline">\(\theta\)</span>(n)</p>
 <p>那么可知，<span class="math inline">\({T_2}(n) = (cn)\lg (n) + \theta \left( n \right) = \theta (n\lg n)\)</span></p>
 <p>综上可知，归并排序优于插入排序！</p>
 <p><strong>注：重点在于掌握分析算法复杂度的数学方法，<span class="math inline">\(\theta\)</span> 符号的意义，以及学会使用递归树进行分析递归算法</strong></p>
@@ -354,7 +369,7 @@ T(n) = \left\{ \begin{array}{ll}
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法基础</a>
         		</li>
       		
 		</ul>
@@ -616,6 +631,26 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -628,27 +663,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,15 +679,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法技巧</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
