@@ -18,20 +18,26 @@ var _hmt = _hmt || [];
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>pygame初探 | 文的盲</title>
+  <title>Fisher线性判别 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想写小游戏的心早就有了，但是一直觉得额外学习一门语言的GUI编程好像不是很划算，今年趁着看了点 python 的内容，所以想试试用python来写，在过程中了解到python有一个专门的库——pygame ，所以就看了点教程，以下权当做个笔记 初识 pygame pygame最小开发框架主要包含两个方面 —— 引入库和初始化，主循环和刷新">
-<meta name="keywords" content="博客,小游戏,python">
+  <meta name="description" content="分类问题 现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条">
+<meta name="keywords" content="AI,模式识别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pygame初探">
-<meta property="og:url" content="http://yoursite.com/2018/11/29/pygame初探/index.html">
+<meta property="og:title" content="Fisher线性判别">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/Fisher线性判别/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="想写小游戏的心早就有了，但是一直觉得额外学习一门语言的GUI编程好像不是很划算，今年趁着看了点 python 的内容，所以想试试用python来写，在过程中了解到python有一个专门的库——pygame ，所以就看了点教程，以下权当做个笔记 初识 pygame pygame最小开发框架主要包含两个方面 —— 引入库和初始化，主循环和刷新">
+<meta property="og:description" content="分类问题 现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-06T09:01:13.239Z">
+<meta property="og:image" content="https://i.loli.net/2019/09/28/ko2z9ISYOnjx3ma.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/28/uOcRG5ZjfFboWBx.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/28/DHgfhqzY49r2VLt.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/28/YqOwTsc1XZEdfzm.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/28/Co9RzsWtPEgKXrS.png">
+<meta property="og:updated_time" content="2019-09-28T12:25:15.507Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pygame初探">
-<meta name="twitter:description" content="想写小游戏的心早就有了，但是一直觉得额外学习一门语言的GUI编程好像不是很划算，今年趁着看了点 python 的内容，所以想试试用python来写，在过程中了解到python有一个专门的库——pygame ，所以就看了点教程，以下权当做个笔记 初识 pygame pygame最小开发框架主要包含两个方面 —— 引入库和初始化，主循环和刷新">
+<meta name="twitter:title" content="Fisher线性判别">
+<meta name="twitter:description" content="分类问题 现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/28/ko2z9ISYOnjx3ma.png">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -214,20 +220,20 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-pygame初探" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Fisher线性判别" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      pygame初探
+      Fisher线性判别
     </h1>
   
 
         
-        <a href="/2018/11/29/pygame初探/" class="archive-article-date">
-  	<time datetime="2018-11-29T07:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
+        <a href="/2019/09/28/Fisher线性判别/" class="archive-article-date">
+  	<time datetime="2019-09-28T05:53:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
 </a>
         
         
@@ -239,40 +245,156 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><p>想写小游戏的心早就有了，但是一直觉得额外学习一门语言的GUI编程好像不是很划算，今年趁着看了点 python 的内容，所以想试试用python来写，在过程中了解到python有一个专门的库——pygame ，所以就看了点教程，以下权当做个笔记</p>
-<h3 id="初识-pygame">初识 pygame</h3>
-<p>pygame最小开发框架主要包含两个方面 —— 引入库和初始化，主循环和刷新</p>
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="分类问题">分类问题</h3>
+<p>现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。</p>
+<p>我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能得到这样个行向量，将所有行向量拼接起来，构成一个<span class="math inline">\(N\times M\)</span> 的矩阵（<span class="math inline">\(N\)</span> 为鱼的数目，<span class="math inline">\(M\)</span> 为依据的特征数目），这样就构成了一个简单的有标签的数据集。</p>
 <a id="more"></a>
+<p>有了数据集，接下来所要做的便是分类。什么是分类呢？现实生活中此概念很简单，比如我们买鱼时便有许多选择：鲤鱼，草鱼，带鱼等等等等，而用以区分这些鱼类的，大都是凭经验根据某些特征来区分。其实电脑也一样，分类要做的，就是将两类数据通过一个分类面区分开来，如下粗糙的图所示，分类所做的就是根据已有的数据，找出中间那条红线，将二者分开。</p>
+<p><img src="https://i.loli.net/2019/09/28/ko2z9ISYOnjx3ma.png" alt="Fisher1.png" style="zoom:60%;"></p>
+<p>而所谓分类的方法，其归根到底就是利用各种方法，来找到这样一个最佳分类面。而这篇博客所介绍的，仅是所有方法中非常简单的一种——Fisher线性判别。</p>
+<h3 id="fisher线性判别">Fisher线性判别</h3>
+<p><code>Fisher</code> 线性判别 是一种<strong>简单的二分类</strong>方法，其主要思路就是将高维空间的数据进行降维投影至一维空间，从而降低分类的难度。其一般步骤如下：</p>
 <ul>
-<li>引入主要是引入自己要用到的库</li>
-<li>初始化主要是初始化窗体，主要包括窗体的大小，窗体的名称，图标等等</li>
-<li>主循环主要是接收操作，逻辑判断，事件处理和刷新游戏等</li>
+<li>将高维数据投影到一维平面上</li>
+<li>通过运算使得每一类之间更加紧凑（使同一类数据之间的距离变小），两类之间的距离尽可能远，从而方便将两类数据分开。</li>
+<li>一般以两类数据中心点的中点最为分类面。</li>
 </ul>
-<p>根据教程的壁球小游戏，我直接贴上老师的代码：</p>
-<h4 id="初始化部分">初始化部分</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pygame, sys</span><br><span class="line"><span class="keyword">from</span> pygame.locals <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化 pygame</span></span><br><span class="line">pygame.init()</span><br><span class="line"><span class="comment"># 获取系统屏幕尺寸大小</span></span><br><span class="line">sysSize = pygame.display.Info()</span><br><span class="line">size = width, height = <span class="number">400</span>, <span class="number">600</span></span><br><span class="line">speed = [<span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">BLACK = <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建屏幕对象并设定尺寸</span></span><br><span class="line">screen = pygame.display.set_mode(size)</span><br><span class="line"><span class="comment"># 屏幕大小可调节</span></span><br><span class="line"><span class="comment"># screen = pygame.display.set_mode(size, pygame.RESIZABLE)</span></span><br><span class="line"><span class="comment"># 屏幕无边框</span></span><br><span class="line"><span class="comment"># screen = pygame.display.set_mode(size, pygame.NOFRAME)</span></span><br><span class="line"><span class="comment"># 全屏模式</span></span><br><span class="line"><span class="comment"># screen = pygame.display.set_mode(sysSize, pygame.FULLSCREEN)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置窗体显示 一般为游戏名称</span></span><br><span class="line">pygame.display.set_caption(<span class="string">"壁球"</span>)</span><br><span class="line">icon = pygame.image.load(<span class="string">"F:\\PYG02-ball.gif"</span>)</span><br><span class="line"><span class="comment"># 设置窗体图标</span></span><br><span class="line">pygame.display.set_icon(icon)</span><br></pre></td></tr></table></figure>
+<h4 id="数学原理">数学原理</h4>
+<p>显然，Fisher线性判别的重难点在于前两步，即如何找到一个投影面，使得类内距离尽可能小而类间距离尽可能大。</p>
+<h5 id="基础概念">基础概念：</h5>
+<p><strong>在 <code>d</code> 维的 <code>X</code> 空间中（样本空间）：</strong></p>
 <ul>
-<li>首先，<code>pygame.init()</code>代表初始化pygame，也就是所有用pygame写的第一句代码</li>
-<li>之后可以看到初始化部分主要依托于<code>pygame.XXX()</code>的属性设置来完成，具体属性见代码注释
-<ul>
-<li>比如：<code>pygame.display.set_mode()</code> 来设置窗体大小</li>
-<li><code>pygame.display.set_caption()</code> 来设置窗体名称</li>
-<li><code>pygame.display.set_icon(icon)</code> 设置窗体图标 等等……</li>
-<li><code>pygame.display.Info()</code> 来获取系统，也就是自己电脑的屏幕尺寸大小</li>
-</ul></li>
+<li><p><strong>各类样本的均值向量</strong><span class="math inline">\(m_i\)</span> ：<span class="math inline">\(m_i = \frac{1}{n_i}\sum_\limits{X\in D_i}{X},\ i=1,2\)</span></p></li>
+<li><p><strong>样本类内离散矩阵</strong><span class="math inline">\(S_i\)</span>和<strong>总样本类内离散度矩阵</strong><span class="math inline">\(S_w\)</span> （其实可以看出来，所谓类内离散度矩阵便是<strong>每一个样本与样本均值向量之间的欧氏距离</strong>所构成的矩阵） <span class="math display">\[
+\begin{align*}
+  &amp; S_i = \sum_{X\in D_i}(x-m_i)(x-m_i)^T,\ i = 1, 2\\
+  &amp;S_w = S_1+S_2\\
+\end{align*}
+\]</span></p></li>
+<li><p><strong>样本类间离散度矩阵</strong> $ S_b $ （即两类样本均值之间的欧氏距离） <span class="math display">\[
+S_b = (m_1-m_2)(m_1-m_2)^T
+\]</span></p></li>
 </ul>
-<h4 id="主循环和刷新">主循环和刷新</h4>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 载入球图片 保存为一个 Surface 对象</span></span><br><span class="line">ball = pygame.image.load(<span class="string">"F:\\PYG02-ball.gif"</span>)</span><br><span class="line"><span class="comment"># 调用 get_rect() 方法 返回覆盖图像的矩形 Rect 对象</span></span><br><span class="line"><span class="comment"># Rect 对象具有 上下左右宽高 等属性</span></span><br><span class="line">ballRect = ball.get_rect()</span><br><span class="line">fps = <span class="number">500</span></span><br><span class="line">fClock = pygame.time.Clock()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># while True 为游戏主体循环</span></span><br><span class="line">running = <span class="keyword">True</span></span><br><span class="line"><span class="keyword">while</span> running:</span><br><span class="line">    <span class="comment"># 从队列中取出事件</span></span><br><span class="line">    <span class="keyword">for</span> event <span class="keyword">in</span> pygame.event.get():</span><br><span class="line">        <span class="keyword">if</span> event.type == pygame.QUIT:</span><br><span class="line">            sys.exit()</span><br><span class="line">        <span class="comment"># 按键操控</span></span><br><span class="line">        <span class="keyword">elif</span> event.type == KEYDOWN:</span><br><span class="line">            <span class="keyword">if</span> event.key == K_ESCAPE:</span><br><span class="line">                running = <span class="keyword">False</span></span><br><span class="line">            <span class="keyword">elif</span> event.key == K_LEFT:</span><br><span class="line">                speed[<span class="number">0</span>] = speed[<span class="number">0</span>] <span class="keyword">if</span> speed[<span class="number">0</span>] == <span class="number">0</span> <span class="keyword">else</span> (abs(speed[<span class="number">0</span>]) - <span class="number">1</span>) * int(speed[<span class="number">0</span>]/abs(speed[<span class="number">0</span>]))</span><br><span class="line">            <span class="keyword">elif</span> event.key == K_RIGHT:</span><br><span class="line">                speed[<span class="number">0</span>] = speed[<span class="number">0</span>] + <span class="number">1</span> <span class="keyword">if</span> speed[<span class="number">0</span>] &gt; <span class="number">0</span> <span class="keyword">else</span> speed[<span class="number">0</span>] - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> event.key == K_DOWN:</span><br><span class="line">                speed[<span class="number">1</span>] = speed[<span class="number">1</span>] <span class="keyword">if</span> speed[<span class="number">1</span>] == <span class="number">0</span> <span class="keyword">else</span> (abs(speed[<span class="number">1</span>]) - <span class="number">1</span>) * int(speed[<span class="number">1</span>]/abs(speed[<span class="number">1</span>]))</span><br><span class="line">            <span class="keyword">elif</span> event.key == K_UP:</span><br><span class="line">                speed[<span class="number">1</span>] = speed[<span class="number">1</span>] + <span class="number">1</span> <span class="keyword">if</span> speed[<span class="number">1</span>] &gt; <span class="number">0</span> <span class="keyword">else</span> speed[<span class="number">1</span>] - <span class="number">1</span></span><br><span class="line">        <span class="comment"># 如果改变了窗体大小</span></span><br><span class="line">        <span class="keyword">elif</span> event.type == pygame.VIDEORESIZE:</span><br><span class="line">            size = width, height = event.size[<span class="number">0</span>], event.size[<span class="number">1</span>]</span><br><span class="line">            screen = pygame.display.set_mode(size, pygame.RESIZABLE)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 判断窗体是否被最小化</span></span><br><span class="line">    <span class="keyword">if</span> pygame.display.get_active():</span><br><span class="line">        <span class="comment"># 调用move方法移动矩形</span></span><br><span class="line">        ballRect = ballRect.move(speed[<span class="number">0</span>], speed[<span class="number">1</span>])</span><br><span class="line">    <span class="comment"># 判断 反弹</span></span><br><span class="line">    <span class="keyword">if</span> ballRect.left &lt; <span class="number">0</span> <span class="keyword">or</span> ballRect.right &gt; width:</span><br><span class="line">        speed[<span class="number">0</span>] = -speed[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> ballRect.top &lt; <span class="number">0</span> <span class="keyword">or</span> ballRect.bottom &gt; height:</span><br><span class="line">        speed[<span class="number">1</span>] = -speed[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 填充窗口背景</span></span><br><span class="line">    screen.fill(BLACK)</span><br><span class="line">    <span class="comment"># 使小球绘制在矩形框内</span></span><br><span class="line">    screen.blit(ball, ballRect)</span><br><span class="line">    pygame.display.update()</span><br><span class="line">    <span class="comment"># 控制帧速度</span></span><br><span class="line">    fClock.tick(fps)</span><br></pre></td></tr></table></figure>
+<p><strong>在 <code>1</code> 维的 <code>Y</code> 空间中（投影空间）：</strong></p>
 <ul>
-<li>载入图片，之后会保存为<code>surface</code> 对象，因此载入的图片可以运用其方法和属性</li>
-<li><code>for event in pygame.event.get():</code> pygame 中的事件都储存在队列中，需要逐次取出
-<ul>
-<li><code>event.type == KEYDOWN</code> 表示按下某个键，在此判断内，可以进而匹配是按下了什么键</li>
-</ul></li>
-<li><code>screen.fill(BLACK)</code> 窗口的背景色，直接可以传RGB值</li>
-<li><code>pygame.display.update()</code> 刷新画面，适用于变换场景简单的画面</li>
-<li><code>fClock.tick(fps)</code> 控制帧率</li>
+<li><p><strong>各类样本的均值</strong> <span class="math inline">\(\tilde{m_i}\)</span> ：<span class="math inline">\(\tilde{m_i} = \frac{1}{n_i}\sum_\limits{y\in D_i}{y},\ i=1,2\)</span></p></li>
+<li><p><strong>样本类内离散度</strong> <span class="math inline">\(\tilde{S_i}\)</span> 和<strong>总样本类内离散度</strong> <span class="math inline">\(\tilde{S_w}\)</span> <span class="math display">\[
+\begin{align*}
+  \tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})(y- \tilde{m_i})^T,\ i = 1, 2\\
+  &amp;=\sum_{y\in D_i}(y- \tilde{m_i})^2,\ i = 1, 2\\
+  \tilde{S_w} &amp;= \tilde{S_1}+ \tilde{S_2}\\
+\end{align*}
+\]</span></p></li>
+<li><p><strong>样本类间离散度：</strong> <span class="math display">\[
+\begin{align*}
+  \tilde{S_b} &amp;= (\tilde{m_1}-\tilde{m_2})(\tilde{m_1}-\tilde{m_2})^T\\
+  &amp;=(\tilde{m_1} - \tilde{m_2})^2
+\end{align*}
+\]</span></p></li>
 </ul>
+<p>接下来要让投影后的类内距离尽可能小而类间距离尽可能大，也就是要使得 <span class="math inline">\(\tilde{S_w}\)</span> 尽可能小， <span class="math inline">\(\tilde{S_b}\)</span> 尽可能大，换言之也就是令 <span class="math inline">\(\frac{\tilde{S_b}}{\tilde{S_w}}\)</span> 尽可能取得最大值，我们令其比值为 <span class="math inline">\(J(w)\)</span>，如下式子： <span class="math display">\[
+\begin{align*}
+    J(w) &amp;= \frac{\tilde{S_b}}{\tilde{S_w}}= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}
+\end{align*}
+\]</span> 又因为，由各类样本均值可推出： <span class="math display">\[
+\begin{align*}
+    \tilde{m_i} &amp;= \frac{1}{n_i}\sum_\limits{y\in D_i}{y}\\
+    &amp;= \frac{1}{n_i}\sum_\limits{X\in D_i}{w^Tx}\\
+    &amp;= {w^T}(\frac{1}{n_i}\sum_\limits{X\in D_i}{x})\\
+    &amp;= w^Tm_i
+\end{align*}
+\]</span></p>
+<p>则，投影样本均值之差可以展开为： <span class="math display">\[
+\begin{align*}
+    (\tilde{m_1} - \tilde{m_2})^2 &amp;= (w^Tm_1 - w^Tm_2)^2\\
+    &amp;= w^T(m_1-m_2)(m_1-m_2)^Tw\\
+    &amp;= w^TS_bw
+\end{align*}
+\]</span> 同理，可将 <span class="math inline">\(\tilde{S_i}\)</span> 以相同的方式进行变化： <span class="math display">\[
+\begin{align*}
+    \tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})^2\\
+    &amp;= \sum_{X\in D_i}{(w^Tx-w^Tm_i)^2}\\
+    &amp;= \sum_{X\in D_i}{w^T(x-m_2)(x-m_2)^Tw}\\
+    &amp;= w^TS_iw
+\end{align*}
+\]</span> 则 <span class="math inline">\(J(w)\)</span> 可化为： <span class="math display">\[
+\begin{align*}
+    J(w) &amp;= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}\\
+    &amp;= \frac{w^TS_bw}{w^TS_ww}
+\end{align*}
+\]</span> 之后令分母为非零常数，然后采用<strong>拉格朗日乘子法</strong>确定最佳变换向量，定义拉格朗日函数如下： <span class="math display">\[
+\begin{align*}
+    L(w, \lambda) = w^TS_bw-\lambda (w^TS_ww-c)
+\end{align*}
+\]</span> 求解过程如下： <span class="math display">\[
+\begin{align*}
+    &amp;\frac{\partial L(w,\lambda)}{\partial w} = 2S_bw-2\lambda S_ww =0\\
+    \\
+    即：\qquad &amp;S_bw^* = \lambda S_ww^* \qquad S^{-1}_wS_bw^* = \lambda w^*\\
+    \\
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+    w^* &amp;= \frac{1}{\lambda}S^{-1}_wS_bw^*\\
+    &amp;= \frac{1}{\lambda}S^{-1}(m_1-m_2)(m_1-m_2)^Tw^*\\
+    &amp;= \frac{R}{\lambda}S^{-1}(m_1-m_2)
+\end{align*}
+\]</span></p>
+<p>省去常数，则最后可得 <span class="math inline">\(w^* = S^{-1}(m_1-m_2)\)</span></p>
+<p>数据便可通过向量 <span class="math inline">\(w^*\)</span> 投影至一维平面上，变成一个个点，而要将两类分开，便直接可以找出阈值点 <span class="math inline">\(w_0\)</span> ，将之分开。常用确定方法如下： <span class="math display">\[
+\begin{align*}
+    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}\\
+    &amp;w_0 = \frac{n_1\tilde{m_1} + n_2\tilde{m_2}}{n_1+n_2} = \tilde{m}\\
+    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}+\frac{ln[P(w_1)/P(w_2)]}{n_1+n_2-2}
+\end{align*}
+\]</span></p>
+<h4 id="实例验证">实例验证</h4>
+<p><strong>要求：</strong>在 <code>UCI</code> 数据集上的 <code>Iris</code>和 <code>sonar</code> 数据上验证算法的有效性。【<code>Iris</code> 数据3类，4维，150个数据；<code>Sonar</code> 数据2类，60维，208个样本】</p>
+<p><strong>说明：</strong>训练和测试样本有三种方式进行划分：（三选一）</p>
+<ol type="1">
+<li>将数据随机分训练和测试，多次平均求结果</li>
+<li>k折交叉验证</li>
+<li>留1法</li>
+</ol>
+<h5 id="下载数据集">下载数据集</h5>
+<p>到 <a href="https://archive.ics.uci.edu/ml/index.php" target="_blank" rel="noopener"><code>UCI</code></a> 官网上即可直接下载两个数据集</p>
+<h5 id="零碎说明">零碎说明</h5>
+<ul>
+<li>我选择的是第一种划分方式</li>
+<li>为了简便，我使用了 <code>MATLAB</code> 进行编程</li>
+</ul>
+<h5 id="开始验证">开始验证</h5>
+<ul>
+<li><p>首先将<strong>数据读入，并划分矩阵</strong>，此为基础问题，不再赘述</p></li>
+<li><p>然后，<strong>利用 <code>mean()</code> 函数 求每一类样本的均值向量</strong></p></li>
+<li><p>根据公式，求取训练数据的类内散度矩阵 <span class="math inline">\(S_i\)</span> 和 <span class="math inline">\(S_w\)</span> ，代码实现函数如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[s]</span> = <span class="title">getScatter</span><span class="params">(sample, size, m, n1, n2)</span></span></span><br><span class="line">	<span class="comment">% getScatter</span></span><br><span class="line">    <span class="comment">%   计算数据的类内离散度矩阵</span></span><br><span class="line">    s = &#123;zeros(size), zeros(size), zeros(size)&#125;;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n1</span><br><span class="line">        tmp = sample&#123;i:i&#125;;</span><br><span class="line">        mi = m&#123;i:i&#125;;</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:n2</span><br><span class="line">            xj = tmp(<span class="built_in">j</span>:<span class="built_in">j</span>, :);</span><br><span class="line">            A = (xj-mi);</span><br><span class="line">            si = A' * A;</span><br><span class="line">            s&#123;i:i&#125; = s&#123;i:i&#125; + si;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>根据公式，求取最佳变换向量 <span class="math inline">\(w^*\)</span> 和阈值 <span class="math inline">\(w_0\)</span> ，代码实现函数如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[w, w0]</span> = <span class="title">bestVector</span><span class="params">(s1, s2, m1, m2)</span></span></span><br><span class="line">    <span class="comment">% bestVector </span></span><br><span class="line">    <span class="comment">%   求取最佳变换向量</span></span><br><span class="line">    sw = s1 + s2;</span><br><span class="line">    w = sw \ ((m1 - m2)');</span><br><span class="line">    w0 = (w'*m1' + w'*m2') / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将样本矩阵在投影方向上投影，以方便进行检验和画图，代码实现如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[D]</span> = <span class="title">rearProjection</span><span class="params">(sample, size, i1, i2, w1, n)</span></span></span><br><span class="line">    <span class="comment">% rearProjection</span></span><br><span class="line">    <span class="comment">%   计算投影后的点</span></span><br><span class="line">    D = &#123;zeros(size, <span class="number">1</span>), zeros(size, <span class="number">1</span>)&#125;;</span><br><span class="line">    k = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = [i1 i2]</span><br><span class="line">        tmp = sample&#123;i:i&#125;;</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:n(k)</span><br><span class="line">            xj = tmp(<span class="built_in">j</span>:<span class="built_in">j</span>, :);</span><br><span class="line">            Di = w1' * xj';</span><br><span class="line">            D&#123;k:k&#125;(<span class="built_in">j</span>,<span class="number">1</span>) = Di;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        k = k+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>进行检验，我写了两个函数，分别检验两类分的是否正确，代码实现如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[rate]</span> = <span class="title">testLeft</span><span class="params">(class, i, n, w1, w0)</span></span></span><br><span class="line">    <span class="comment">% test</span></span><br><span class="line">    <span class="comment">%   检验剩余测试用例</span></span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="built_in">i</span>:n</span><br><span class="line">        xj = class(<span class="built_in">j</span>:<span class="built_in">j</span>, :);</span><br><span class="line">        Di = w1' * xj';</span><br><span class="line">        <span class="keyword">if</span> Di &lt; w0</span><br><span class="line">            count = count + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    rate = (count*<span class="number">100</span>)/(n+<span class="number">1</span>-<span class="built_in">i</span>);</span><br><span class="line">    fprintf("%d/%d = %.2f%%\n", count, (n-i+1), rate);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[rate]</span> = <span class="title">testRight</span><span class="params">(class, i, n, w1, w0)</span></span></span><br><span class="line">    <span class="comment">% test</span></span><br><span class="line">    <span class="comment">%   检验剩余测试用例</span></span><br><span class="line">    count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="built_in">i</span>:n</span><br><span class="line">        xj = class(<span class="built_in">j</span>:<span class="built_in">j</span>, :);</span><br><span class="line">        Di = w1' * xj';</span><br><span class="line">        <span class="keyword">if</span> Di &gt; w0</span><br><span class="line">            count = count + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    rate = (count*<span class="number">100</span>)/(n+<span class="number">1</span>-<span class="built_in">i</span>);</span><br><span class="line">    fprintf("%d/%d = %.2f%%\n", count, (n-i+1), rate);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将投影后的数据画出散点图，画图函数如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[]</span> = <span class="title">drawPicture</span><span class="params">(x1, x2, n, w0)</span></span></span><br><span class="line">    <span class="comment">% drawPicture</span></span><br><span class="line">    <span class="comment">%   画图函数，分类点为五角星</span></span><br><span class="line">    figure</span><br><span class="line">    scatter(x1, <span class="built_in">zeros</span>(n(<span class="number">1</span>), <span class="number">1</span>), <span class="string">'o'</span>);</span><br><span class="line">    hold on</span><br><span class="line">    scatter(x2, <span class="built_in">zeros</span>(n(<span class="number">2</span>), <span class="number">1</span>), <span class="string">'x'</span>);</span><br><span class="line">    hold on</span><br><span class="line">    scatter(w0, <span class="number">0</span>, <span class="number">400</span>, <span class="string">'p'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="结果展示">结果展示</h5>
+<p>由于 <code>Fisher</code> 仅用于处理二分类问题，但是，<code>Iris</code> 数据集有三类，所以我仅在两两之间进行了分类。执行完毕后画出的三张散点图如下：</p>
+<figure>
+<img src="https://i.loli.net/2019/09/28/uOcRG5ZjfFboWBx.png" alt="Iris1-2.png"><figcaption>Iris1-2.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2019/09/28/DHgfhqzY49r2VLt.png" alt="Iris1-3.png"><figcaption>Iris1-3.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2019/09/28/YqOwTsc1XZEdfzm.png" alt="Iris2-3.png"><figcaption>Iris2-3.png</figcaption>
+</figure>
+<p><code>Sonar</code> 数据集只有两类，分类后的图像如下：</p>
+<figure>
+<img src="https://i.loli.net/2019/09/28/Co9RzsWtPEgKXrS.png" alt="sonar.png"><figcaption>sonar.png</figcaption>
+</figure>
 
       
 
@@ -318,15 +440,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AI</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小游戏</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">模式识别</a>
         		</li>
       		
 		</ul>
@@ -382,7 +500,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/11/29/pygame初探/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/28/Fisher线性判别/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -396,18 +514,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/01/24/数据在内存中的存储/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据在内存中的存储
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/25/进阶查找/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">进阶查找</div>
+    <a href="/2019/09/11/链表及其常用操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">链表及其常用操作</div>
       <i class="icon-circle-right"></i>
     </a>
   
