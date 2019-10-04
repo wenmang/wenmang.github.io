@@ -18,20 +18,15 @@ var _hmt = _hmt || [];
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>C语言实现简单的泛型 | 文的盲</title>
+  <title>Archives: 2019 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
-<meta name="keywords" content="博客,C语言">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C语言实现简单的泛型">
-<meta property="og:url" content="http://yoursite.com/2019/03/05/C语言实现简单的泛型/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="文的盲">
+<meta property="og:url" content="http://yoursite.com/archives/2019/page/2/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-31T06:08:15.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言实现简单的泛型">
-<meta name="twitter:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
+<meta name="twitter:title" content="文的盲">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -214,126 +209,36 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C语言实现简单的泛型" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      C语言实现简单的泛型
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/24/数据在内存中的存储/" class="archive-article-date">
+  	<time datetime="2019-01-24T10:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/24/数据在内存中的存储/">数据在内存中的存储</a>
     </h1>
   
 
-        
-        <a href="/2019/03/05/C语言实现简单的泛型/" class="archive-article-date">
-  	<time datetime="2019-03-05T07:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        
-        
-        <span class="archive-article-date">
-            阅读量 <span id="busuanzi_value_page_pv"></span>
-        </span>
-    
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <script src="/assets/js/APlayer.min.js"> </script><p>众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。</p>
-<h4 id="从-swap-谈起">从 Swap 谈起</h4>
-<a id="more"></a>
-<p>交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span> <span class="params">(<span class="keyword">int</span> *p, <span class="keyword">int</span> *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = *p;</span><br><span class="line">    *p = *q;</span><br><span class="line">    *q = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是如上代码仅能对 <code>int</code> 类型数据进行交换，如果要交换 <code>double</code> 或者其他类型的数据又需要写一段极其相似的代码（仅将 <code>int</code> 换掉），而这样无疑是不够简练的，代码也不够优美。所以我们考虑写一个能交换所有数据类型的函数，以简练代码，提高效率。</p>
-<p>既然有这样的想法，那么我们试着去实现它。既然要普适所以数据类型，那么我们就需要向本源出发去寻找。无论什么类型的数据，在计算机底层都是以二进制储存的，这我们就找到了所有不同类型数据的共同点，也就有了设计思路：</p>
-<ol type="1">
-<li>在内存中找到两个数据的地址</li>
-<li>从头至尾，将两个数据的每一个字节进行交换</li>
-</ol>
-<p>所以结合C语言的语法特点，便有了如下代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Swap</span> <span class="params">(<span class="keyword">void</span> *p, <span class="keyword">void</span> *q, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[size];</span><br><span class="line">    <span class="built_in">memcpy</span>(buffer, p, size);</span><br><span class="line">    <span class="built_in">memcpy</span>(p, q, size);</span><br><span class="line">    <span class="built_in">memcpy</span>(q, buffer, size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就代码而言，此一类函数写就的重中之重就是 <code>void</code> 指针的利用，将 <code>void</code> 指针用于形参，以作限定。由于 <code>void *</code> 变量无法直接引用，因为编译器不知道此指针所指变量到底占了几个字节，且因为要适应所有数据类型，所以多传了个参数—— <code>size</code> ，来对传入数据类型所占字节数进行说明。而整段代码原理如下：</p>
-<ol type="1">
-<li>传入两个数据在内存中的地址以及数据所占字节数</li>
-<li>创建临时变量字符数组 <code>buffer[]</code> 作为中间值（因为一个 <code>char</code> 占1个字节，所以正好采用字符数组来作为中间值）</li>
-<li>与正常交换的方式相同，不过是采用 <code>memcpy()</code> 来进直接对内存进行操作，逐个字节进行复制</li>
-</ol>
-<h4 id="谈谈-issearch">谈谈 IsSearch()</h4>
-<p>既然知道了此种思路与写法，那么我们直接看另一个简单的函数——线性查找，以 <code>int</code> 为例，代码是这样的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IsSearch</span> <span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> key, <span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        <span class="keyword">if</span> (a[i] == key)</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那么如果使用泛型，代码应该怎样写呢？答案是这样的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">IsSearch</span> <span class="params">(<span class="keyword">void</span>* key, <span class="keyword">void</span>* base, <span class="keyword">int</span> n, <span class="keyword">int</span> elemSize)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">void</span>* elemAddr = (<span class="keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">memcpy</span>(key, elemAddr, elemSize) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>整段代码解释如下：</p>
-<ol type="1">
-<li>传入需要搜索的值，被搜索数组，数组元素数，数组每个元素所占字节数</li>
-<li>进入循环开始查找：
-<ol type="1">
-<li>先确定每一个元素的地址（由于 <code>void*</code> 类型的指针不支持直接操作，所以需要先将其进行强制类型转换为 <code>char*</code> 类型指针）</li>
-<li>调用库函数，将 <code>key</code> 和数组中的元素依次进行必较</li>
-</ol></li>
-<li>成功则返回数组对应元素的首地址，否则返回NULL</li>
-</ol>
-<p>但如果我们不利用库函数来进行比较呢？我们想使用自己写的比较函数来比较，那有应该怎么做呢？（<strong>注：</strong>这个想法显然必较牵强，因为此时的这种写法无疑是更加合理的，而为了说明知识点，就加了这个想法）</p>
-<p>（此处 <code>qsort()</code> 课中并未提及）在这里就不得不提一个C语言库函数了，那就是—— <code>qsort()</code> ，一个在调用之时需要写一个针对问题具体情况的比较函数当作参数传入函数之中，而我们这时的情况显然和 <code>qsort()</code> 函数面临的一样，所以我们采用相同的处理方式：传入一个必较函数，来判断两个元素是否一致。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">void* IsSearch (void* key, void* base, int n, int elemSize, int (*cmpfn) (void*, void*))&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">void</span>* elemAddr = (<span class="keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="keyword">if</span> (cmpfn(key, elemAddr) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注：</strong>因为 <code>cmpfn()</code> 是调用者写的函数，所以其数据类型是确定的，只需直接比较就行，故只传入两个参数。</p>
-<h4 id="调用-issearch">调用 IsSearch()</h4>
-<p>有了普适版（第二版）的代码，其中提供了函数接口，那么调用者应该怎么写这个函数呢？</p>
-<h5 id="int-类型数据"><code>int</code> 类型数据</h5>
-<p>比较 <code>int</code> 类型数据的函数，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">IntCmp</span> <span class="params">(<span class="keyword">void</span>* n1, <span class="keyword">void</span>* n2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip1 = n1;</span><br><span class="line">    <span class="keyword">int</span>* ip2 = n2;</span><br><span class="line">    <span class="keyword">return</span> (*ip1 - *ip2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注：</strong>此函数所带参数l类型以及返回值类型需与形参中函数一致</p>
-<h5 id="char-字符串类型数据"><code>char*</code> (字符串)类型数据</h5>
-<p>字符串无疑是优雅的，但在C语言中处理字符串，就完全不存在优雅这一说了，因为C语言更加底层，对于字符串的处理不如其他的一些新语言来的形象（当然也是此些语言为字符串处理做了许多预备工作，以至于处理之时只调用已有的函数即可），所以关于字符串的处理可能要更加不易理解，代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StrCmp</span> <span class="params">(<span class="keyword">void</span>* vp1, <span class="keyword">void</span>* vp2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* s1 = * (<span class="keyword">char</span>**)vp1;</span><br><span class="line">    <span class="keyword">char</span>* s2 = * (<span class="keyword">char</span>**)vp2;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>仅看如此代码，会有种毫无头绪的感觉，那么为了更好地理解，我们需要写一下查找字符串时的全过程，代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* key = <span class="string">"Li"</span>;</span><br><span class="line"><span class="keyword">char</span>* faName[] = &#123;<span class="string">"zhang"</span>, <span class="string">"wang"</span>, <span class="string">"li"</span>, <span class="string">"zhao"</span>, <span class="string">"sun"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span>** found = IsSearch(&amp;key, faName, <span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*), StrCmp);</span><br></pre></td></tr></table></figure>
-<p>好，因为单个的 <code>char</code> 是字符，而字符串是 <code>char*</code> ，那么理所当然字符串数组就是 <code>char**</code> 了，所以需要查找之时，传入 <code>IsSearch()</code> 的参数实际上是指针的指针，所以在调用比较函数之时需要进行一次解耦，将之变成两个字符串，而这也就是比较函数前两行的意义所在。</p>
-<p><strong>注：</strong></p>
-<ol type="1">
-<li>为了比较函数代码美观，所以在传参之时将目标字符串也作为指针的指针传入，如只将其作为指针传入，就无需解耦和了。</li>
-<li>在调用之时，用于接收返回值的变量必须是指针的指针，因为返回是个字符串，也就是一个字符指针</li>
-</ol>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>欢迎帮助国家扫除文盲<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/zhifubao.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-         </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -343,144 +248,30 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/05/C语言实现简单的泛型/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/03/29/以stack来进一步了解C语言的泛型/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          以stack来进一步了解C语言的泛型
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/01/24/数据在内存中的存储/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据在内存中的存储</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-  
-    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
-      <div id="vcomment" class="comment"></div> 
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-   var notify = 'false' == true ? true : false;
-   var verify = 'false' == true ? true : false;
-    window.onload = function() {
-        new Valine({
-            el: '.comment',
-            notify: notify,
-            verify: verify,
-            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
-            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
-            placeholder: "来造作啊",
-            avatar:"retro"
-        });
-    }
-</script>
-    </section>
+    </div></section>
   
 
-
-
-  
-  
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2019/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
-  
-
-  
 
           </div>
         </div>
@@ -514,8 +305,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
