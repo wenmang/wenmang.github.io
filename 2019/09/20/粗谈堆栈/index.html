@@ -18,15 +18,22 @@ var _hmt = _hmt || [];
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: python | 文的盲</title>
+  <title>粗谈堆栈 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文的盲">
-<meta property="og:url" content="http://yoursite.com/tags/python/index.html">
+  <meta name="description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
+<meta name="keywords" content="随笔,底层,C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="粗谈堆栈">
+<meta property="og:url" content="http://yoursite.com/2019/09/20/粗谈堆栈/index.html">
 <meta property="og:site_name" content="文的盲">
+<meta property="og:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png">
+<meta property="og:updated_time" content="2019-10-05T06:11:38.329Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文的盲">
+<meta name="twitter:title" content="粗谈堆栈">
+<meta name="twitter:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -209,69 +216,248 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-粗谈堆栈" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/29/pygame初探/" class="archive-article-date">
-  	<time datetime="2018-11-29T07:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/29/pygame初探/">pygame初探</a>
+    <h1 class="article-title" itemprop="name">
+      粗谈堆栈
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/20/粗谈堆栈/" class="archive-article-date">
+  	<time datetime="2019-09-20T06:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-20</time>
+</a>
+        
+        
+        <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="粗谈堆栈">粗谈堆栈</h3>
+<p>堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。</p>
+<ul>
+<li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li>
+</ul>
+<h4 id="堆heap">堆（Heap）</h4>
+<p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p>
+<p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"><figcaption>粗谈堆栈1.png</figcaption>
+</figure>
+<p>申请的实际空间如最大的红色边界线所示，而理论空间则如阴影部分所示，申请的空间最前面的一到两个字节（视底层的具体代码决定）用来<strong>标识由此开始的xx字节内存已被占用</strong>，以及一些必要的信息，来方便其他操作（例如需要 <code>free()</code> 之时，只需要将此标记移除或者改动即可）。</p>
+<p><strong>谈谈<code>realloc()</code>：</strong> <code>realloc()</code> 进行内存扩展有两种方式：</p>
+<ul>
+<li>可以向后延拓之时，直接在此空间之后连续追加至相应的字节数即可</li>
+<li>无法延拓之时，寻找适合的位置，另辟空间，将原有的数据复制过去，返回新空间的指针</li>
+</ul>
+<p><strong>一个减小 <code>malloc()</code> 时间复杂度的方法：</strong> 将所有空闲的内存首地址之间利用链表连接起来，并注明此处闲余空间是多少，然后再次开辟之时，便可以直接跳转寻找合适的空间</p>
+<h4 id="栈stack">栈（Stack）</h4>
+<p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>int* tmp = malloc(40 * sizeof(int))</code> 在堆中存储</li>
+<li><code>int tmp[40]</code> 在栈中存储</li>
+</ul>
+<p>关于此块内存，也就是遵循着先进后出的原则，就是说：<strong>其是随着程序运行来对内存进行动态分配的</strong> ，非常好理解，在次不多赘述。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欢迎帮助国家扫除文盲<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+         </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小游戏</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/20/粗谈堆栈/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/09/28/Fisher线性判别/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Fisher线性判别
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/09/11/链表及其常用操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">链表及其常用操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
 
-    
 
+
+  
+  
+  
+
+  
+
+  
+
+  
 
           </div>
         </div>
@@ -305,9 +491,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

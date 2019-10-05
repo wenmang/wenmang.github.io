@@ -465,6 +465,113 @@ var _hmt = _hmt || [];
 
 
   
+    <article id="post-粗谈堆栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/20/粗谈堆栈/">粗谈堆栈</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/20/粗谈堆栈/" class="archive-article-date">
+  	<time datetime="2019-09-20T06:10:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-20</time>
+</a>
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><h3 id="粗谈堆栈">粗谈堆栈</h3>
+<p>堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。</p>
+<ul>
+<li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li>
+</ul>
+<h4 id="堆heap">堆（Heap）</h4>
+<p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p>
+<p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"><figcaption>粗谈堆栈1.png</figcaption>
+</figure>
+<p>申请的实际空间如最大的红色边界线所示，而理论空间则如阴影部分所示，申请的空间最前面的一到两个字节（视底层的具体代码决定）用来<strong>标识由此开始的xx字节内存已被占用</strong>，以及一些必要的信息，来方便其他操作（例如需要 <code>free()</code> 之时，只需要将此标记移除或者改动即可）。</p>
+<p><strong>谈谈<code>realloc()</code>：</strong> <code>realloc()</code> 进行内存扩展有两种方式：</p>
+<ul>
+<li>可以向后延拓之时，直接在此空间之后连续追加至相应的字节数即可</li>
+<li>无法延拓之时，寻找适合的位置，另辟空间，将原有的数据复制过去，返回新空间的指针</li>
+</ul>
+<p><strong>一个减小 <code>malloc()</code> 时间复杂度的方法：</strong> 将所有空闲的内存首地址之间利用链表连接起来，并注明此处闲余空间是多少，然后再次开辟之时，便可以直接跳转寻找合适的空间</p>
+<h4 id="栈stack">栈（Stack）</h4>
+<p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>int* tmp = malloc(40 * sizeof(int))</code> 在堆中存储</li>
+<li><code>int tmp[40]</code> 在栈中存储</li>
+</ul>
+<p>关于此块内存，也就是遵循着先进后出的原则，就是说：<strong>其是随着程序运行来对内存进行动态分配的</strong> ，非常好理解，在次不多赘述。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/20/粗谈堆栈/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
     <article id="post-链表及其常用操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -961,89 +1068,9 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-以stack来进一步了解C语言的泛型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/29/以stack来进一步了解C语言的泛型/">以stack来进一步了解C语言的泛型</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/29/以stack来进一步了解C语言的泛型/" class="archive-article-date">
-  	<time datetime="2019-03-29T14:34:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。</p>
-<h4 id="stack栈">Stack（栈）</h4>
-<p>栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/29/以stack来进一步了解C语言的泛型/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1187,19 +1214,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">练习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1211,11 +1230,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">教程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color3">练习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1224,6 +1239,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">教程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,15 +1266,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">链表</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">c</a>
               </li>
             
             <div class="clearfix"></div>
