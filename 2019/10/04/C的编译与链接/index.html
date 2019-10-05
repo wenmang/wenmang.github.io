@@ -18,15 +18,25 @@ var _hmt = _hmt || [];
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>文的盲</title>
+  <title>C的编译与链接 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文的盲">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
+<meta name="keywords" content="随笔,C,底层,有趣">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C的编译与链接">
+<meta property="og:url" content="http://yoursite.com/2019/10/04/C的编译与链接/index.html">
 <meta property="og:site_name" content="文的盲">
+<meta property="og:description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/05/EuZRKoiCy4w7PlB.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/05/C5yD3Hw78dvmMUo.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/05/MUlkeT5Os2fPWQC.png">
+<meta property="og:updated_time" content="2019-10-05T05:58:34.042Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文的盲">
+<meta name="twitter:title" content="C的编译与链接">
+<meta name="twitter:description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -209,114 +219,153 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-C语言实现简单的泛型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-C的编译与链接" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/C语言实现简单的泛型/">C语言实现简单的泛型</a>
+    <h1 class="article-title" itemprop="name">
+      C的编译与链接
     </h1>
   
 
         
-        <a href="/2019/03/05/C语言实现简单的泛型/" class="archive-article-date">
-  	<time datetime="2019-03-05T07:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
+        <a href="/2019/10/04/C的编译与链接/" class="archive-article-date">
+  	<time datetime="2019-10-04T13:43:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-04</time>
 </a>
         
         
+        <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
+    
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。</p>
-<h4 id="从-swap-谈起">从 Swap 谈起</h4>
-        
+        <script src="/assets/js/APlayer.min.js"> </script><p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="%5Bhttps://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md%5D(https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p>
+<ul>
+<li>预处理</li>
+<li>编译</li>
+<li>链接</li>
+</ul>
+<p>今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。</p>
+<a id="more"></a>
+<p>开始之前，我们应该有这样一个概念：在使用 <code>gcc</code> 编译器进行编译之时，以上三步在某种意义上来说是相互分离的。</p>
+<h3 id="预处理阶段">预处理阶段</h3>
+<p>对于此阶段，我之前所理解的全部，便是曾经所做的笔记：</p>
+<blockquote>
+<p>通过预处理器( <code>cpp</code> ) 处理之后，将其变成了 <code>.i</code> 文件，<code>.i</code> 文件实际上对你写的 <code>.c</code> 文件里以井号 <code>#</code> 开头的语句进行了处理，其发现你引入了某个头文件，于是预处理器便将头文件的内容插入到了你的代码之中。</p>
+</blockquote>
+<p>而如今，我想可以进一步扩展（或许不准确），预处理阶段所处理的内容，实质上就是对 C语言中的宏进行处理，而其中需要处理的部分，即通过宏语法限定的，在程序中<strong>有效的宏语言</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。其中主要有两大类：</p>
+<ul>
+<li><code>#define</code> ：对以 <code>#define</code> 打头的宏定义部分进行替换。</li>
+<li><code>#include</code>：对以 <code>#include</code> 格式引入的库文件进行添加。</li>
+</ul>
+<h4 id="define"><code>#define</code></h4>
+<p>最为常见的宏定义，新手常常使用其表示变量，老手便会使用宏来表示一些简单的函数等等：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159	<span class="comment">// 新手</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) ((a)&gt;(b))?(a):(b)	<span class="comment">// 老手</span></span></span><br></pre></td></tr></table></figure>
+<p>一般来说，既然已经有了函数，但是还是有许多人使用宏来替代函数，那么必有原因，一般来说，宏的优点主要有以下几点：</p>
+<ul>
+<li>同函数一般，简单可复用！同时能够使代码含义更加清晰。</li>
+<li>与函数相比，其直接在预处理阶段进行替换，所以其省去了函数调用的时间，所以，我觉得宏适合在下列情境下使用：
+<ul>
+<li>函数功能较为简单，只有一行代码，函数调用所花时间对函数功能影响较大</li>
+<li>函数需要多次重复使用（不适合有递归的情况）</li>
+</ul></li>
+</ul>
+<h4 id="include"><code>#include</code></h4>
+<p>只要学过C语言，想必就不会对此陌生，人生中第一个 <code>hello world</code> 就使用了这个语句，也就是所谓的头文件，头文件的格式有以下两种：</p>
+<ul>
+<li><code>#include&lt;&gt;</code> ：以 <code>&lt;&gt;</code> 引用的一般是系统自带的库文件</li>
+<li><code>#include&quot;&quot;</code> ：以 <code>&quot;&quot;</code> 引用的一般是自己写的头文件</li>
+</ul>
+<p>此部分无需多叙。</p>
+<h3 id="编译阶段">编译阶段</h3>
+<p>所谓编译，就是将C语言文件编译为汇编文件，以方便计算机执行，而此阶段所做工作的<strong>目的是：</strong> 将C语言进行初步编译，并对程序进行语法上的一次检查，对不符合语法规则的，进行报错，也就是 <code>Error</code> ，并会停止程序的编译 ；对有争议，或是不明确的内容提出警告 <code>Warning</code> ，但是并不会停止编译，最终还是会生成可执行文件 。</p>
+<p>既然如此，那么有这样一个有趣的问题：<strong>如果，我们在写代码的时候，不加上头文件，那么该代码是否能通过编译呢？</strong></p>
+<h4 id="示例">示例</h4>
+<p>有这样一段毫无意义的代码，其目的仅是为了说明上述问题：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;	// printf</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;	// malloc, free</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;assert.h&gt;	// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* mom = <span class="built_in">malloc</span>(<span class="number">400</span>);</span><br><span class="line">    assert(mom != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"yeah!\n"</span>);</span><br><span class="line">    <span class="built_in">free</span>(mom);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们首先将 <code>#include&lt;stdio.h&gt;</code> 注释掉，那么此时，编译到 <code>printf</code> 语句的时候，编译器由于找不到 <code>printf</code> 的声明，于是会提出警告，并将 <code>printf</code> 以默认的方式进行编译——将之认为是一个函数（参数为字符串，返回值为 <code>int</code> ）。</p>
+<p>所以在编译阶段，此代码即使去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，也依旧能够编译成功</p>
+<h3 id="链接阶段">链接阶段</h3>
+<p>链接阶段看似是根据编译的结果进行的，但是却不尽然，因为链接阶段是相对独立的，在链接阶段，编译器会根据编译之后的结果，在库中去依次寻找对应的函数。</p>
+<p>所以，上述代码，在编译成功之后，进行链接之时，依旧能够从库中寻找到 <code>printf</code> 函数，并执行成功。也就是说，上述代码，去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，使用 <code>gcc</code> 编译，<strong>能够成功地编译并产生可执行文件</strong>，唯一的影响仅是：在编译过程中会产生一条警告信息。我自己实验的结果也同理论相同，结果如下图：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png" alt="C的编译与链接1.png"><figcaption>C的编译与链接1.png</figcaption>
+</figure>
+<p>可以看到，仅产生了一个 <code>warning</code>，并且能够执行成功。</p>
+<h4 id="普适与特例">普适与特例</h4>
+<p>同样地，在去掉 <code>#include&lt;stdlib.h&gt;</code> 之后，也如是。但是，正如上面所说，链接阶段会重新在库函数中寻找函数原型，那么<strong>对于所有的库函数，都能够如此吗？</strong> 答案当然是<strong>否定的！</strong></p>
+<p><code>#include&lt;assert.h&gt;</code> 头文件之中，<code>assert()</code> 的实现，实质上并不是一个函数，<strong>而是一个宏定义</strong>，所以如果去掉此头文件，在编译阶段便会将 <code>assert()</code> 解释为一个函数。但是显然，<strong>其并非一个函数，那么链接之时便不可能找得到了</strong>，所以如此便会出错！验证结果如下：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/EuZRKoiCy4w7PlB.png" alt="C的编译与链接2.png"><figcaption>C的编译与链接2.png</figcaption>
+</figure>
+<h4 id="意义">意义</h4>
+<p>乍一看，这种写法好像没什么意义，但是，如果需要追求极度的精简，减小文件体积，这样的写法还是有意义的。事实上，我觉得这种写法，其实是远古时期，内存极度短缺时候的小技巧【实际测试中，其最后产生的可执行文件大小是一样的】。</p>
+<p>至于为何会影响文件大小？<strong>因为加上头文件之后，在预处理阶段就会将头文件中的所有内容加到你的程序当中</strong>，而尽管你只使用了该头文件中的几个函数。而以现在大内存当道的现状，估计很少会有人这么写了。</p>
+<p>所以，此技巧更多地还是体现了<strong>C语言的 ”自由“</strong>，并且还是蛮有趣的。</p>
+<h3 id="深入">深入</h3>
+<p>既然不加头文件，编译器会将其理解为一个函数，那么我们就会想到：我直接在自己的代码中以函数的方式进行声明，那么是不是就不会产生警告了？<strong>答案是可行的！</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>验证如下：</p>
+<p>代码改为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;	// malloc, free</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;assert.h&gt;	// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">char</span>* s)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* mom = <span class="built_in">malloc</span>(<span class="number">400</span>);</span><br><span class="line">    assert(mom != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"yeah!\n"</span>);</span><br><span class="line">    <span class="built_in">free</span>(mom);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译结果如下：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/C5yD3Hw78dvmMUo.png" alt="C的编译与链接3.png"><figcaption>C的编译与链接3.png</figcaption>
+</figure>
+<h3 id="拓展">拓展</h3>
+<p>有个很有趣的事情，如果不加库，并且利用一个库函数中已有的函数，但是将其参数进行改变（传参数目变多或变少），那么此时程序又会如何被编译，或是产生何种后果？</p>
+<p>比如下面一段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">65</span>;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="built_in">strlen</span>((<span class="keyword">char</span>*)&amp;num, num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"length = %d\n"</span>, length);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>话不多说，首先来看编译结果：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/MUlkeT5Os2fPWQC.png" alt="C的编译和链接4.png"><figcaption>C的编译和链接4.png</figcaption>
+</figure>
+<p>哈哈哈哈哈，报错了，本来还想着正确之后讲述一番教授的思路呢！看来时代变了啊，编译器是变得安全了不少！那这部分也只能提前结束了。</p>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>为何说是有效，因为宏拥有一套自己简单的语法，可以控制某段宏是否进行处理，处理几次等操作，所以在此使用了有效的宏语言一词<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>可以看到，最终编译结果和公开课教授所讲的还是有出入，可能是编译器进化了的缘故吧！毕竟是<code>10</code> 年的公开课<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/05/C语言实现简单的泛型/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欢迎帮助国家扫除文盲<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+         </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-数据在内存中的存储" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/24/数据在内存中的存储/">数据在内存中的存储</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/24/数据在内存中的存储/" class="archive-article-date">
-  	<time datetime="2019-01-24T10:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>二进制是计算机的基础，数据的存储在底层看来均是由二进制来表示的，那么如何用二进制来表示各种数据呢？此时就需要设计出一套完整的科学的储存方案</p>
-<h3 id="整型数据的存储">整型数据的存储</h3>
-<p>整型数据包括 <code>short</code>, <code>int</code>, <code>long</code> 等，其中最为常用的便是 <code>int</code> ，在目前的系统中（32位和64位编译器，以C语言为主要实例），其所占字节如下：</p>
-        
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -331,8 +380,16 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">有趣</a>
+        		</li>
       		
 		</ul>
 	</div>
@@ -340,16 +397,75 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/24/数据在内存中的存储/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/04/C的编译与链接/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/04/C函数执行/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C函数执行</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -367,677 +483,40 @@ var _hmt = _hmt || [];
     </div>
 </aside>
 
-
-
   
-    <article id="post-pygame初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/29/pygame初探/">pygame初探</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/29/pygame初探/" class="archive-article-date">
-  	<time datetime="2018-11-29T07:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>想写小游戏的心早就有了，但是一直觉得额外学习一门语言的GUI编程好像不是很划算，今年趁着看了点 python 的内容，所以想试试用python来写，在过程中了解到python有一个专门的库——pygame ，所以就看了点教程，以下权当做个笔记</p>
-<h3 id="初识-pygame">初识 pygame</h3>
-<p>pygame最小开发框架主要包含两个方面 —— 引入库和初始化，主循环和刷新</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小游戏</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/29/pygame初探/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-进阶查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/25/进阶查找/">进阶查找</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/25/进阶查找/" class="archive-article-date">
-  	<time datetime="2018-11-25T12:16:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-25</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了</p>
-<h3 id="二分查找">二分查找</h3>
-<p>二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 <span class="math inline">\(log(N)\)</span> 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击<a href="https://wenmang.github.io/2018/04/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" target="_blank" rel="noopener">链接</a>直接跳转</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/25/进阶查找/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-普通查找" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/20/普通查找/">普通查找</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/20/普通查找/" class="archive-article-date">
-  	<time datetime="2018-11-20T06:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>查找是一类重要的算法，尤其是在现今的大数据时代来看更是如此，选择一个好的查找算法往往可以起到事倍功半的效果</p>
-<h3 id="顺序表查找">顺序表查找</h3>
-<p>顺序表查找是最为简单也是最为笨重的一类查找，其遵循的理念就是一个一个找。当需要在顺序表中查找一元素时，需要做的就是从头到尾对表进行一次遍历，直到找到结果为止</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/20/普通查找/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-排序进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/15/排序进阶/">排序进阶</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/15/排序进阶/" class="archive-article-date">
-  	<time datetime="2018-11-15T14:51:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="开始之前">开始之前</h3>
-<p>进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法</p>
-<h3 id="表排序">表排序</h3>
-<ul>
-<li>当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停<code>Swap</code>的操作，就会使时间大大增加</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/15/排序进阶/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-改进排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/08/改进排序/">改进排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/08/改进排序/" class="archive-article-date">
-  	<time datetime="2018-11-08T06:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来</p>
-<h3 id="希尔排序">希尔排序</h3>
-<p>在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/08/改进排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-简单排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/03/简单排序/">简单排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/11/03/简单排序/" class="archive-article-date">
-  	<time datetime="2018-11-03T07:24:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-03</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理</p>
-<h3 id="开始之前">开始之前</h3>
-<ul>
-<li>所有的排序算法以函数形式展现，采用C语言编写</li>
-<li>函数风格统一，命名规则同<code>ASort</code>，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为<code>void</code>，即直接将原数组进行排序</li>
-<li>所有排序的终点，也就时排序后的结果，为从大到小排序</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/11/03/简单排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-拓扑排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/28/拓扑排序/">拓扑排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/28/拓扑排序/" class="archive-article-date">
-  	<time datetime="2018-10-27T16:27:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-28</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>拓扑序：</strong>如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序</p>
-<p><strong>拓扑排序：</strong>获得一个拓扑序的过程就是拓扑排序</p>
-<p><strong>AOV</strong>如果有合理的拓扑序，则必定是有向无环图</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/28/拓扑排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-    <article id="post-最小生成树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/27/最小生成树/">最小生成树</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/27/最小生成树/" class="archive-article-date">
-  	<time datetime="2018-10-27T02:27:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-27</time>
-</a>
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>是一棵树
-<ul>
-<li>无回路</li>
-<li>v 个顶点一定有 v-1 条边</li>
-</ul></li>
-<li>是生成树
-<ul>
-<li>包含全部顶点</li>
-<li>v-1 条边都在图里</li>
-<li>向生成树中加入一条边都一定构成回路</li>
-</ul></li>
-<li>边权重和最小</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/27/最小生成树/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-    </nav>
   
 
+  
+
+  
+
+  
 
           </div>
         </div>
@@ -1070,8 +549,8 @@ var _hmt = _hmt || [];
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-04T13:14:15.100Z</updated>
+  <updated>2019-10-05T05:58:34.042Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C的编译与链接</title>
+    <link href="http://yoursite.com/2019/10/04/C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5/"/>
+    <id>http://yoursite.com/2019/10/04/C的编译与链接/</id>
+    <published>2019-10-04T13:43:29.000Z</published>
+    <updated>2019-10-05T05:58:34.042Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="%5Bhttps://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md%5D(https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p><ul><li>预处理</li><li>编译</li><li>链接</li></ul><p>今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。</p><a id="more"></a><p>开始之前，我们应该有这样一个概念：在使用 <code>gcc</code> 编译器进行编译之时，以上三步在某种意义上来说是相互分离的。</p><h3 id="预处理阶段">预处理阶段</h3><p>对于此阶段，我之前所理解的全部，便是曾经所做的笔记：</p><blockquote><p>通过预处理器( <code>cpp</code> ) 处理之后，将其变成了 <code>.i</code> 文件，<code>.i</code> 文件实际上对你写的 <code>.c</code> 文件里以井号 <code>#</code> 开头的语句进行了处理，其发现你引入了某个头文件，于是预处理器便将头文件的内容插入到了你的代码之中。</p></blockquote><p>而如今，我想可以进一步扩展（或许不准确），预处理阶段所处理的内容，实质上就是对 C语言中的宏进行处理，而其中需要处理的部分，即通过宏语法限定的，在程序中<strong>有效的宏语言</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。其中主要有两大类：</p><ul><li><code>#define</code> ：对以 <code>#define</code> 打头的宏定义部分进行替换。</li><li><code>#include</code>：对以 <code>#include</code> 格式引入的库文件进行添加。</li></ul><h4 id="define"><code>#define</code></h4><p>最为常见的宏定义，新手常常使用其表示变量，老手便会使用宏来表示一些简单的函数等等：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159<span class="comment">// 新手</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(a,b) ((a)&gt;(b))?(a):(b)<span class="comment">// 老手</span></span></span><br></pre></td></tr></table></figure><p>一般来说，既然已经有了函数，但是还是有许多人使用宏来替代函数，那么必有原因，一般来说，宏的优点主要有以下几点：</p><ul><li>同函数一般，简单可复用！同时能够使代码含义更加清晰。</li><li>与函数相比，其直接在预处理阶段进行替换，所以其省去了函数调用的时间，所以，我觉得宏适合在下列情境下使用：<ul><li>函数功能较为简单，只有一行代码，函数调用所花时间对函数功能影响较大</li><li>函数需要多次重复使用（不适合有递归的情况）</li></ul></li></ul><h4 id="include"><code>#include</code></h4><p>只要学过C语言，想必就不会对此陌生，人生中第一个 <code>hello world</code> 就使用了这个语句，也就是所谓的头文件，头文件的格式有以下两种：</p><ul><li><code>#include&lt;&gt;</code> ：以 <code>&lt;&gt;</code> 引用的一般是系统自带的库文件</li><li><code>#include&quot;&quot;</code> ：以 <code>&quot;&quot;</code> 引用的一般是自己写的头文件</li></ul><p>此部分无需多叙。</p><h3 id="编译阶段">编译阶段</h3><p>所谓编译，就是将C语言文件编译为汇编文件，以方便计算机执行，而此阶段所做工作的<strong>目的是：</strong> 将C语言进行初步编译，并对程序进行语法上的一次检查，对不符合语法规则的，进行报错，也就是 <code>Error</code> ，并会停止程序的编译 ；对有争议，或是不明确的内容提出警告 <code>Warning</code> ，但是并不会停止编译，最终还是会生成可执行文件 。</p><p>既然如此，那么有这样一个有趣的问题：<strong>如果，我们在写代码的时候，不加上头文件，那么该代码是否能通过编译呢？</strong></p><h4 id="示例">示例</h4><p>有这样一段毫无意义的代码，其目的仅是为了说明上述问题：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;// printf</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;// malloc, free</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;assert.h&gt;// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* mom = <span class="built_in">malloc</span>(<span class="number">400</span>);</span><br><span class="line">    assert(mom != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"yeah!\n"</span>);</span><br><span class="line">    <span class="built_in">free</span>(mom);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>我们首先将 <code>#include&lt;stdio.h&gt;</code> 注释掉，那么此时，编译到 <code>printf</code> 语句的时候，编译器由于找不到 <code>printf</code> 的声明，于是会提出警告，并将 <code>printf</code> 以默认的方式进行编译——将之认为是一个函数（参数为字符串，返回值为 <code>int</code> ）。</p><p>所以在编译阶段，此代码即使去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，也依旧能够编译成功</p><h3 id="链接阶段">链接阶段</h3><p>链接阶段看似是根据编译的结果进行的，但是却不尽然，因为链接阶段是相对独立的，在链接阶段，编译器会根据编译之后的结果，在库中去依次寻找对应的函数。</p><p>所以，上述代码，在编译成功之后，进行链接之时，依旧能够从库中寻找到 <code>printf</code> 函数，并执行成功。也就是说，上述代码，去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，使用 <code>gcc</code> 编译，<strong>能够成功地编译并产生可执行文件</strong>，唯一的影响仅是：在编译过程中会产生一条警告信息。我自己实验的结果也同理论相同，结果如下图：</p><figure><img src="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png" alt="C的编译与链接1.png"><figcaption>C的编译与链接1.png</figcaption></figure><p>可以看到，仅产生了一个 <code>warning</code>，并且能够执行成功。</p><h4 id="普适与特例">普适与特例</h4><p>同样地，在去掉 <code>#include&lt;stdlib.h&gt;</code> 之后，也如是。但是，正如上面所说，链接阶段会重新在库函数中寻找函数原型，那么<strong>对于所有的库函数，都能够如此吗？</strong> 答案当然是<strong>否定的！</strong></p><p><code>#include&lt;assert.h&gt;</code> 头文件之中，<code>assert()</code> 的实现，实质上并不是一个函数，<strong>而是一个宏定义</strong>，所以如果去掉此头文件，在编译阶段便会将 <code>assert()</code> 解释为一个函数。但是显然，<strong>其并非一个函数，那么链接之时便不可能找得到了</strong>，所以如此便会出错！验证结果如下：</p><figure><img src="https://i.loli.net/2019/10/05/EuZRKoiCy4w7PlB.png" alt="C的编译与链接2.png"><figcaption>C的编译与链接2.png</figcaption></figure><h4 id="意义">意义</h4><p>乍一看，这种写法好像没什么意义，但是，如果需要追求极度的精简，减小文件体积，这样的写法还是有意义的。事实上，我觉得这种写法，其实是远古时期，内存极度短缺时候的小技巧【实际测试中，其最后产生的可执行文件大小是一样的】。</p><p>至于为何会影响文件大小？<strong>因为加上头文件之后，在预处理阶段就会将头文件中的所有内容加到你的程序当中</strong>，而尽管你只使用了该头文件中的几个函数。而以现在大内存当道的现状，估计很少会有人这么写了。</p><p>所以，此技巧更多地还是体现了<strong>C语言的 ”自由“</strong>，并且还是蛮有趣的。</p><h3 id="深入">深入</h3><p>既然不加头文件，编译器会将其理解为一个函数，那么我们就会想到：我直接在自己的代码中以函数的方式进行声明，那么是不是就不会产生警告了？<strong>答案是可行的！</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>验证如下：</p><p>代码改为：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;// malloc, free</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;assert.h&gt;// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">char</span>* s)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">void</span>* mom = <span class="built_in">malloc</span>(<span class="number">400</span>);</span><br><span class="line">    assert(mom != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"yeah!\n"</span>);</span><br><span class="line">    <span class="built_in">free</span>(mom);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>编译结果如下：</p><figure><img src="https://i.loli.net/2019/10/05/C5yD3Hw78dvmMUo.png" alt="C的编译与链接3.png"><figcaption>C的编译与链接3.png</figcaption></figure><h3 id="拓展">拓展</h3><p>有个很有趣的事情，如果不加库，并且利用一个库函数中已有的函数，但是将其参数进行改变（传参数目变多或变少），那么此时程序又会如何被编译，或是产生何种后果？</p><p>比如下面一段代码：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">65</span>;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="built_in">strlen</span>((<span class="keyword">char</span>*)&amp;num, num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"length = %d\n"</span>, length);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>话不多说，首先来看编译结果：</p><figure><img src="https://i.loli.net/2019/10/05/MUlkeT5Os2fPWQC.png" alt="C的编译和链接4.png"><figcaption>C的编译和链接4.png</figcaption></figure><p>哈哈哈哈哈，报错了，本来还想着正确之后讲述一番教授的思路呢！看来时代变了啊，编译器是变得安全了不少！那这部分也只能提前结束了。</p><section class="footnotes"><hr><ol><li id="fn1"><p>为何说是有效，因为宏拥有一套自己简单的语法，可以控制某段宏是否进行处理，处理几次等操作，所以在此使用了有效的宏语言一词<a href="#fnref1" class="footnote-back">↩</a></p></li><li id="fn2"><p>可以看到，最终编译结果和公开课教授所讲的还是有出入，可能是编译器进化了的缘故吧！毕竟是<code>10</code> 年的公开课<a href="#fnref2" class="footnote-back">↩</a></p></li></ol></section>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;曾经在初读 &lt;code&gt;CSAPP&lt;/code&gt; 之时，我初步了解了 C 语言的全部&lt;a href=&quot;%5Bhttps://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md%5D(https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)&quot;&gt;编译&lt;/a&gt;过程，即大概可分为以下三大步：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预处理&lt;/li&gt;
+&lt;li&gt;编译&lt;/li&gt;
+&lt;li&gt;链接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+      <category term="C" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="底层" scheme="http://yoursite.com/tags/%E5%BA%95%E5%B1%82/"/>
+    
+      <category term="有趣" scheme="http://yoursite.com/tags/%E6%9C%89%E8%B6%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>C函数执行</title>
@@ -35,9 +68,9 @@
     
       <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
       <category term="底层" scheme="http://yoursite.com/tags/%E5%BA%95%E5%B1%82/"/>
+    
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
@@ -247,9 +280,9 @@
     
     
     
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
@@ -271,9 +304,9 @@
     
     
     
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
-    
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
@@ -519,31 +552,6 @@
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode练习（一）</title>
-    <link href="http://yoursite.com/2018/10/23/LeetCode%E7%BB%83%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2018/10/23/LeetCode练习（一）/</id>
-    <published>2018-10-23T04:52:36.000Z</published>
-    <updated>2018-11-22T07:23:21.297Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文</p><a id="more"></a><h3 id="no.3-无重复字符的最长子串">No.3 无重复字符的最长子串</h3><p>给定一个字符串，找出不含有重复字符的<strong>最长子串</strong>的长度。</p><p><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 无重复字符的最长子串是 &quot;abc&quot;，其长度为 3。</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 无重复字符的最长子串是 &quot;b&quot;，其长度为 1。</span><br></pre></td></tr></table></figure><p><strong>示例 3:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 无重复字符的最长子串是 &quot;wke&quot;，其长度为 3。</span><br><span class="line">     请注意，答案必须是一个子串，&quot;pwke&quot; 是一个子序列 而不是子串。</span><br></pre></td></tr></table></figure><p><strong>说明：</strong>在看到此题之后，菜鸡的我开始思考如何通过设置一临时字符指针对未重复数字进行复制求长，有了大致思路之后开始胡乱操作，写的代码涂涂改改愣是半天没有结果，我随手百度一手，看到了一个简洁与智慧并存的解决方案，让人五体投地，特来膜拜</p><p><strong>算法来源：</strong><a href="https://blog.csdn.net/ysayk/article/details/51505502" target="_blank" rel="noopener">XDmonkey 的CSDN博客</a></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, idx = <span class="number">-1</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p[<span class="number">256</span>];</span><br><span class="line">    <span class="built_in">memset</span>(p, <span class="number">-1</span>, <span class="keyword">sizeof</span>(p));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; s[i] != <span class="string">'\0'</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p[s[i]] &gt; idx)</span><br><span class="line">            idx = p[s[i]];</span><br><span class="line">        <span class="keyword">if</span> (i - idx &gt; max)</span><br><span class="line">            max = i - idx;</span><br><span class="line">        p[s[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>说明：</strong></p><ol type="1"><li>其首先设置了一个 int 数组p，开辟256空间并初始为-1 ；idx 为辅助变量；max为最小子串的长</li><li>循环读入单个字符，判断字符是否出现重复，如果出现重复，也就是 p[s[i]] &gt; idx ，就刷新 idx 值，也就是 i - idx 开始从0重新记录子串长度。不重复则在p数组对应的位置（字符对应ASCII码）更新为 i 的值，同时更新max的值</li></ol><p>贴上提交后的分析图：</p><figure><img src="http://t1.aixinxi.net/o_1cqfu4qqrk19191ej9phk7hma.png-j.jpg" alt="No.3"><figcaption>No.3</figcaption></figure><h3 id="no.7-反转整数">No.7 反转整数</h3><p>给定一个 32 位有符号整数，将整数中的数字进行反转。</p><p><strong>示例 1:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 123</span><br><span class="line">输出: 321</span><br></pre></td></tr></table></figure><p><strong>示例 2:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -123</span><br><span class="line">输出: -321</span><br></pre></td></tr></table></figure><p><strong>示例 3:</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 120</span><br><span class="line">输出: 21</span><br></pre></td></tr></table></figure><p><strong>注意:</strong></p><p>假设我们的环境只能存储 32 位有符号整数，其数值范围是 [−<span class="math inline">\(2^{31}\)</span>, <span class="math inline">\(2^{31}\)</span> − 1]。根据这个假设，如果反转后的整数溢出，则返回 0。</p><p><strong>说明：</strong>此题作为一个简单题，重点就是后面的注意内容，作为一个菜鸡，我的代码是这样判断滴：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s = <span class="number">0</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (x)&#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">9</span> &amp;&amp; (s &gt; <span class="number">214748364</span> || s &lt; <span class="number">-214748364</span>))</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        s = s * <span class="number">10</span> + x % <span class="number">10</span>;</span><br><span class="line">        x /= <span class="number">10</span>;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>也就是 if 部分，采用判断转换后的前九位与<span class="math inline">\(2^{31}\)</span>的前九位进行比较，来判断是否return 0</p><p>提交后运行时间为20ms，之后我有幸看到了8ms的代码，如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> y=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(x)&#123;</span><br><span class="line">        <span class="keyword">int</span> temp=y;</span><br><span class="line">        y=y*<span class="number">10</span>+x%<span class="number">10</span>;</span><br><span class="line">        <span class="keyword">if</span>((y-x%<span class="number">10</span>)/<span class="number">10</span>!=temp)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        x/=<span class="number">10</span>;    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>嗯，很强，可不是嘛！如果转换后超出，y就会成一个奇怪的数，因此只需在每次y被赋值之后检验其对应位置是否还是x对应位置即可！！！学到了</p><p>贴上提交后的分析图：</p><figure><img src="http://t1.aixinxi.net/o_1cqfvd9f0magg2j783ovta73a.png-j.jpg" alt="No.7"><figcaption>No.7</figcaption></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;此系列博文记录自己的刷题过程，一些有意思或者精妙的解答将会被我整理成一篇博文&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="练习" scheme="http://yoursite.com/tags/%E7%BB%83%E4%B9%A0/"/>
-    
-      <category term="C" scheme="http://yoursite.com/tags/C/"/>
     
   </entry>
   
