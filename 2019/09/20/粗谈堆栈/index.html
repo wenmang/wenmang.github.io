@@ -20,19 +20,19 @@ var _hmt = _hmt || [];
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>粗谈堆栈 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
+  <meta name="description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
 <meta name="keywords" content="随笔,底层,C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="粗谈堆栈">
 <meta property="og:url" content="http://yoursite.com/2019/09/20/粗谈堆栈/index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
+<meta property="og:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png">
-<meta property="og:updated_time" content="2019-10-05T06:11:38.329Z">
+<meta property="og:updated_time" content="2019-10-05T06:13:49.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="粗谈堆栈">
-<meta name="twitter:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称  堆（Heap） 堆区在内存中占了相当大的一部分，这部分主要是为了">
+<meta name="twitter:description" content="粗谈堆栈 堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
 <meta name="twitter:image" content="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
@@ -246,6 +246,7 @@ var _hmt = _hmt || [];
 <ul>
 <li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li>
 </ul>
+<a id="more"></a>
 <h4 id="堆heap">堆（Heap）</h4>
 <p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p>
 <p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p>
@@ -598,11 +599,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">C语言</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -614,15 +615,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">练习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小游戏</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">练习</a>
               </li>
              
               <li class="article-tag-list-item">
