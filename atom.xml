@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-05T05:58:34.042Z</updated>
+  <updated>2019-10-10T13:19:45.766Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分治</title>
+    <link href="http://yoursite.com/2019/10/09/%E5%88%86%E6%B2%BB/"/>
+    <id>http://yoursite.com/2019/10/09/分治/</id>
+    <published>2019-10-09T10:35:45.000Z</published>
+    <updated>2019-10-10T13:19:45.766Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明：</p><p><strong>分治：</strong> 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。</p><a id="more"></a><h3 id="斐波那契数列">斐波那契数列</h3><p>我想了很多，最后发现还是从这个例子开始说起更加便于理解。</p><p>斐波那契数列的定义很简单，其最早的历史来自于那个生兔子的问题。斐波那契数列的解法众多，详细描述可见<a href="https://zh.wikipedia.org/wiki/斐波那契数列" target="_blank" rel="noopener">维基百科</a>，而如果使用数学公式来描述，那么就是这个样子的： <span class="math display">\[\begin{equation}  \left\{      \begin{array}{**lr**}          F_0 = 0 &amp;  \\          F_1 = 1 &amp;  \\          F_n = F_{n-1} + F_{n-2} &amp; \\        \end{array}  \right.  \end{equation}  \]</span> 他这种递归的定义方式，其实以初等数学使用暴力求解的思路来说，刚好是符合我们的分治思想的。因为你若将求解 <span class="math inline">\(F_4\)</span> 看作一个大问题，就必须将其分解为两个小一点的子问题，即求解 <span class="math inline">\(F_3\)</span> 和 <span class="math inline">\(F_2\)</span> ，然后再计算二者之和。</p><p>那么根据这个递归式，我想只要有点语言基础，都能很快写出一段递归的代码进行求解：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> Fibonacci(n<span class="number">-1</span>) + Fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>当然，<code>Fibonacci</code> 真正实现的时候不能这么写。</p><h3 id="分治范式">分治范式</h3><p>大致对分治这种思想有了一个整体认识之后，我们便可以总结出一个求解分治问题的范式：</p><p><strong>何时使用分治思想：</strong>问题规模太大或者其他原因导致难以直接求解，那么这时候便可以考虑将问题划分为子问题，通过求解子问题来实现原问题最终的求解。</p><p><strong>范式的一般步骤：</strong></p><ul><li><strong>划分：</strong>简单来说，此步骤就是将大问题分解为小问题【注：每个小问题的求解必须一致，不然分治就失去了其原本的意义】。</li><li><strong>治理：</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>也就是对每一个子问题进行求解。</li><li><strong>组合：</strong>将所有子问题的结果进行合并，得到原问题的解。</li></ul><h4 id="分治的分析">分治的分析</h4><p>分治的性质决定了其与递归联系紧密，所以如果一个问题可以用分治的思想来解决，那么其必然可以转化为一个递归表达式，就如同最开始直接以递归定义的斐波那契数列的表达式一般。而此类问题时间复杂度的详细分析，也往往依靠求解这样的递归式来得到。</p><h3 id="归并排序">归并排序</h3><p>许多算法都是利用分治思想提出来的，而归并排序无疑是最具代表性的一个，我们可以根据分治范式来一步步分析求解，最终明确这个算法的原理。</p><h4 id="划分">划分</h4><ul><li>两个数之间如何排序【注：此后所说的排序均代表顺序排序】？很显然两两之间比较，小的放左边，大的放右边。</li><li>那三个数如何排序？选两个排好之后，再将第三个数与已经排好的两数比较，进而确定第三个数的位置。</li><li>四个？此时可以两两排好，然后再合并两个已排序的数组即可。</li><li>六十四个？可以分为俩三十二个的，每个三十二个的又可分为俩十六个的……</li></ul><p>如此，我们可以将大问题以对半划分的方式【注：奇数对半，一半比一半多1即可】层层划分，<strong>直至不可划分为止，也就是仅剩一个数的时候。</strong>而划分，也往往就是递归的过程。</p><h4 id="治理">治理</h4><p>治理，即解决划分后的子问题，划分后的子问题是什么呢？答案就是，一个数的排序。一个数显然无需排序，那么此步骤便无需进行处理。</p><h4 id="组合">组合</h4><p>将子问题的结果组合起来，在此问题中便是，<strong>将已排序的两个数组合并为一个已排序的数组。</strong></p><h4 id="具体实现">具体实现</h4><p>分析清楚之后便可自己尝试写出代码了，首先要写的，便是 <strong>组合</strong> 部分，C语言代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">- 将数组a的局部a[l,r-1]和a[r,rightEnd]合并到tmp</span></span><br><span class="line"><span class="comment">    - 然后再拷贝回a[l,rightEnd]</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> leftEnd = r - <span class="number">1</span>; </span><br><span class="line"><span class="keyword">int</span> left = l, count = l;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd) &#123;</span><br><span class="line"><span class="keyword">if</span> (a[l] &lt; a[r])</span><br><span class="line">tmp[count++] = a[l++];</span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">tmp[count++] = a[r++];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">tmp[count++] = a[l++];</span><br><span class="line"><span class="keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">tmp[count++] = a[r++];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; rightEnd+<span class="number">1</span>; i++) </span><br><span class="line">a[i] = tmp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后，就可以完成划分部分，从而进行排序了。C语言代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (left &lt; rightEnd) &#123;</span><br><span class="line"><span class="keyword">int</span> mid = left + (rightEnd-left)/<span class="number">2</span>;</span><br><span class="line">mergeSort(a, left, mid, tmp);<span class="comment">// 划分左半部分</span></span><br><span class="line">mergeSort(a, mid+<span class="number">1</span>, rightEnd, tmp);<span class="comment">// 划分右半部分</span></span><br><span class="line">merge(a, left, mid+<span class="number">1</span>, rightEnd, tmp);<span class="comment">// 组合子问题的解</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="汉诺塔问题">汉诺塔问题</h4><p>作为练习，可尝试自己实现一下汉诺塔问题！【待补】</p><section class="footnotes"><hr><ol><li id="fn1"><p>此处按照教科书上（算法技巧与分析【沙特】）来说，此步骤实质上是一种优化复杂度的步骤，但在此，为了简便起见，直接将其写为了子问题的求解。<a href="#fnref1" class="footnote-back">↩</a></p></li></ol></section>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;分治：&lt;/strong&gt; 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="算法思想" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/"/>
+    
+  </entry>
   
   <entry>
     <title>C的编译与链接</title>
@@ -66,11 +90,11 @@
     
     
     
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
       <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
       <category term="底层" scheme="http://yoursite.com/tags/%E5%BA%95%E5%B1%82/"/>
-    
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
@@ -104,14 +128,13 @@
     <link href="http://yoursite.com/2019/09/20/%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88/"/>
     <id>http://yoursite.com/2019/09/20/粗谈堆栈/</id>
     <published>2019-09-20T06:10:05.000Z</published>
-    <updated>2019-10-05T06:13:49.836Z</updated>
+    <updated>2019-10-05T06:15:49.574Z</updated>
     
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><h3 id="粗谈堆栈">粗谈堆栈</h3><p>堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。</p><ul><li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li></ul><a id="more"></a><h4 id="堆heap">堆（Heap）</h4><p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p><p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p><figure><img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"><figcaption>粗谈堆栈1.png</figcaption></figure><p>申请的实际空间如最大的红色边界线所示，而理论空间则如阴影部分所示，申请的空间最前面的一到两个字节（视底层的具体代码决定）用来<strong>标识由此开始的xx字节内存已被占用</strong>，以及一些必要的信息，来方便其他操作（例如需要 <code>free()</code> 之时，只需要将此标记移除或者改动即可）。</p><p><strong>谈谈<code>realloc()</code>：</strong> <code>realloc()</code> 进行内存扩展有两种方式：</p><ul><li>可以向后延拓之时，直接在此空间之后连续追加至相应的字节数即可</li><li>无法延拓之时，寻找适合的位置，另辟空间，将原有的数据复制过去，返回新空间的指针</li></ul><p><strong>一个减小 <code>malloc()</code> 时间复杂度的方法：</strong> 将所有空闲的内存首地址之间利用链表连接起来，并注明此处闲余空间是多少，然后再次开辟之时，便可以直接跳转寻找合适的空间</p><h4 id="栈stack">栈（Stack）</h4><p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p><p><strong>注意：</strong></p><ul><li><code>int* tmp = malloc(40 * sizeof(int))</code> 在堆中存储</li><li><code>int tmp[40]</code> 在栈中存储</li></ul><p>关于此块内存，也就是遵循着先进后出的原则，就是说：<strong>其是随着程序运行来对内存进行动态分配的</strong> ，非常好理解，在次不多赘述。</p>]]></content>
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。</p><ul><li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li></ul><a id="more"></a><h4 id="堆heap">堆（Heap）</h4><p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p><p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p><figure><img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"><figcaption>粗谈堆栈1.png</figcaption></figure><p>申请的实际空间如最大的红色边界线所示，而理论空间则如阴影部分所示，申请的空间最前面的一到两个字节（视底层的具体代码决定）用来<strong>标识由此开始的xx字节内存已被占用</strong>，以及一些必要的信息，来方便其他操作（例如需要 <code>free()</code> 之时，只需要将此标记移除或者改动即可）。</p><p><strong>谈谈<code>realloc()</code>：</strong> <code>realloc()</code> 进行内存扩展有两种方式：</p><ul><li>可以向后延拓之时，直接在此空间之后连续追加至相应的字节数即可</li><li>无法延拓之时，寻找适合的位置，另辟空间，将原有的数据复制过去，返回新空间的指针</li></ul><p><strong>一个减小 <code>malloc()</code> 时间复杂度的方法：</strong> 将所有空闲的内存首地址之间利用链表连接起来，并注明此处闲余空间是多少，然后再次开辟之时，便可以直接跳转寻找合适的空间</p><h4 id="栈stack">栈（Stack）</h4><p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p><p><strong>注意：</strong></p><ul><li><code>int* tmp = malloc(40 * sizeof(int))</code> 在堆中存储</li><li><code>int tmp[40]</code> 在栈中存储</li></ul><p>关于此块内存，也就是遵循着先进后出的原则，就是说：<strong>其是随着程序运行来对内存进行动态分配的</strong> ，非常好理解，在次不多赘述。</p>]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;粗谈堆栈&quot;&gt;粗谈堆栈&lt;/h3&gt;
-&lt;p&gt;堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。&lt;/p&gt;
+      &lt;p&gt;堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称&lt;/li&gt;
 &lt;/ul&gt;
@@ -120,11 +143,11 @@
     
     
     
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
       <category term="随笔" scheme="http://yoursite.com/tags/%E9%9A%8F%E7%AC%94/"/>
     
       <category term="底层" scheme="http://yoursite.com/tags/%E5%BA%95%E5%B1%82/"/>
-    
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
@@ -512,31 +535,6 @@
 &lt;li&gt;函数风格统一，命名规则同&lt;code&gt;ASort&lt;/code&gt;，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为&lt;code&gt;void&lt;/code&gt;，即直接将原数组进行排序&lt;/li&gt;
 &lt;li&gt;所有排序的终点，也就时排序后的结果，为从大到小排序&lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>拓扑排序</title>
-    <link href="http://yoursite.com/2018/10/28/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
-    <id>http://yoursite.com/2018/10/28/拓扑排序/</id>
-    <published>2018-10-27T16:27:34.000Z</published>
-    <updated>2018-11-01T13:35:41.573Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p><strong>拓扑序：</strong>如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序</p><p><strong>拓扑排序：</strong>获得一个拓扑序的过程就是拓扑排序</p><p><strong>AOV</strong>如果有合理的拓扑序，则必定是有向无环图</p><a id="more"></a><p><strong>算法原理：</strong></p><ul><li>将图中入度为0的顶点输出，或者储存在一数组中</li><li>输出之后，将这些结点以及其所在边一同抹掉，即将其连接的下个结点的入度设为0</li><li>继续输出新的入度为0的顶点</li></ul><p><strong>算法优化：</strong></p><ul><li><strong>问题：</strong>进行寻找入度为0的结点之时，每次都扫描一次，这时很多都是无用功</li><li><strong>优化：</strong>用一个容器将所有入度为0的结点装入，每次输出之时只需取出即可</li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">TopSort</span><span class="params">(LGraph graph, Vertex topOrder[])</span></span>&#123;  <span class="comment">// 拓扑排序</span></span><br><span class="line">    <span class="keyword">int</span> indegree[MAXSIZE], cnt;</span><br><span class="line">    Vertex v;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line"></span><br><span class="line">    Queue Q = CreateQueue(graph-&gt;nv);</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; graph-&gt;nv; ++v) <span class="comment">// 初始化indegree[]</span></span><br><span class="line">        indegree[v] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; graph-&gt;nv; ++v) <span class="comment">// 遍历图 得到indegree[]</span></span><br><span class="line">        <span class="keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next)</span><br><span class="line">            indegree[w-&gt;adjv]++;</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">        <span class="keyword">if</span> (indegree[v] == <span class="number">0</span>)   <span class="comment">// 将入度为0的顶点入队</span></span><br><span class="line">            AddQ(Q, v);</span><br><span class="line"></span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!IsEmpty(Q))&#123;</span><br><span class="line">        v = Delete(Q);  <span class="comment">// 弹出一个入度为0的顶点</span></span><br><span class="line">        topOrder[cnt++] = v;</span><br><span class="line">        <span class="keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next)</span><br><span class="line">            <span class="keyword">if</span> (--indegree[w-&gt;adjv] == <span class="number">0</span>)   <span class="comment">// 将删除v使得w-&gt;adjv入度为0</span></span><br><span class="line">                AddQ(Q, w-&gt;adjv);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (cnt != graph-&gt;nv)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>代码分析：</strong></p><ul><li>定义变量：indegree[MAXSIZE] 值为下标对应结点的入度</li><li>初始化<ul><li>初始化入度数组，使数组所有值均为0</li><li>遍历图，将有前驱结点的结点的入度值+1，变为1</li><li>将入度为0的结点压入队列</li></ul></li><li>排序<ul><li>弹出队列中一个结点，装入排序数组中</li><li>将该结点的边所指向的结点的入度更改为0，并再次将入度为0的结点入队</li></ul></li><li>判断<ul><li>如果所有节点都被访问到，则返回true； 否则返回false</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;拓扑序：&lt;/strong&gt;如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;拓扑排序：&lt;/strong&gt;获得一个拓扑序的过程就是拓扑排序&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;AOV&lt;/strong&gt;如果有合理的拓扑序，则必定是有向无环图&lt;/p&gt;
     
     </summary>
     

@@ -18,15 +18,20 @@ var _hmt = _hmt || [];
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 文的盲</title>
+  <title>分治 | 文的盲</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="文的盲">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
+<meta name="keywords" content="博客,算法思想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分治">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/分治/index.html">
 <meta property="og:site_name" content="文的盲">
+<meta property="og:description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-10T13:19:45.766Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文的盲">
+<meta name="twitter:title" content="分治">
+<meta name="twitter:description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
   
     <link rel="alternative" href="/atom.xml" title="文的盲" type="application/atom+xml">
   
@@ -209,36 +214,128 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-分治" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      分治
+    </h1>
+  
+
+        
+        <a href="/2019/10/09/分治/" class="archive-article-date">
+  	<time datetime="2019-10-09T10:35:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
+</a>
+        
+        
+        <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+        </span>
     
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明：</p>
+<p><strong>分治：</strong> 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。</p>
+<a id="more"></a>
+<h3 id="斐波那契数列">斐波那契数列</h3>
+<p>我想了很多，最后发现还是从这个例子开始说起更加便于理解。</p>
+<p>斐波那契数列的定义很简单，其最早的历史来自于那个生兔子的问题。斐波那契数列的解法众多，详细描述可见<a href="https://zh.wikipedia.org/wiki/斐波那契数列" target="_blank" rel="noopener">维基百科</a>，而如果使用数学公式来描述，那么就是这个样子的： <span class="math display">\[
+\begin{equation}  
+\left\{  
+    \begin{array}{**lr**}  
+        F_0 = 0 &amp;  \\  
+        F_1 = 1 &amp;  \\  
+        F_n = F_{n-1} + F_{n-2} &amp; \\    
+    \end{array}  
+\right.  
+\end{equation}  
+\]</span> 他这种递归的定义方式，其实以初等数学使用暴力求解的思路来说，刚好是符合我们的分治思想的。因为你若将求解 <span class="math inline">\(F_4\)</span> 看作一个大问题，就必须将其分解为两个小一点的子问题，即求解 <span class="math inline">\(F_3\)</span> 和 <span class="math inline">\(F_2\)</span> ，然后再计算二者之和。</p>
+<p>那么根据这个递归式，我想只要有点语言基础，都能很快写出一段递归的代码进行求解：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Fibonacci</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> Fibonacci(n<span class="number">-1</span>) + Fibonacci(n<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，<code>Fibonacci</code> 真正实现的时候不能这么写。</p>
+<h3 id="分治范式">分治范式</h3>
+<p>大致对分治这种思想有了一个整体认识之后，我们便可以总结出一个求解分治问题的范式：</p>
+<p><strong>何时使用分治思想：</strong>问题规模太大或者其他原因导致难以直接求解，那么这时候便可以考虑将问题划分为子问题，通过求解子问题来实现原问题最终的求解。</p>
+<p><strong>范式的一般步骤：</strong></p>
+<ul>
+<li><strong>划分：</strong>简单来说，此步骤就是将大问题分解为小问题【注：每个小问题的求解必须一致，不然分治就失去了其原本的意义】。</li>
+<li><strong>治理：</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>也就是对每一个子问题进行求解。</li>
+<li><strong>组合：</strong>将所有子问题的结果进行合并，得到原问题的解。</li>
+</ul>
+<h4 id="分治的分析">分治的分析</h4>
+<p>分治的性质决定了其与递归联系紧密，所以如果一个问题可以用分治的思想来解决，那么其必然可以转化为一个递归表达式，就如同最开始直接以递归定义的斐波那契数列的表达式一般。而此类问题时间复杂度的详细分析，也往往依靠求解这样的递归式来得到。</p>
+<h3 id="归并排序">归并排序</h3>
+<p>许多算法都是利用分治思想提出来的，而归并排序无疑是最具代表性的一个，我们可以根据分治范式来一步步分析求解，最终明确这个算法的原理。</p>
+<h4 id="划分">划分</h4>
+<ul>
+<li>两个数之间如何排序【注：此后所说的排序均代表顺序排序】？很显然两两之间比较，小的放左边，大的放右边。</li>
+<li>那三个数如何排序？选两个排好之后，再将第三个数与已经排好的两数比较，进而确定第三个数的位置。</li>
+<li>四个？此时可以两两排好，然后再合并两个已排序的数组即可。</li>
+<li>六十四个？可以分为俩三十二个的，每个三十二个的又可分为俩十六个的……</li>
+</ul>
+<p>如此，我们可以将大问题以对半划分的方式【注：奇数对半，一半比一半多1即可】层层划分，<strong>直至不可划分为止，也就是仅剩一个数的时候。</strong>而划分，也往往就是递归的过程。</p>
+<h4 id="治理">治理</h4>
+<p>治理，即解决划分后的子问题，划分后的子问题是什么呢？答案就是，一个数的排序。一个数显然无需排序，那么此步骤便无需进行处理。</p>
+<h4 id="组合">组合</h4>
+<p>将子问题的结果组合起来，在此问题中便是，<strong>将已排序的两个数组合并为一个已排序的数组。</strong></p>
+<h4 id="具体实现">具体实现</h4>
+<p>分析清楚之后便可自己尝试写出代码了，首先要写的，便是 <strong>组合</strong> 部分，C语言代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	- 将数组a的局部a[l,r-1]和a[r,rightEnd]合并到tmp</span></span><br><span class="line"><span class="comment">    - 然后再拷贝回a[l,rightEnd]</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> leftEnd = r - <span class="number">1</span>; </span><br><span class="line">	<span class="keyword">int</span> left = l, count = l;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd) &#123;</span><br><span class="line">		<span class="keyword">if</span> (a[l] &lt; a[r])</span><br><span class="line">			tmp[count++] = a[l++];</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">			tmp[count++] = a[r++];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">		tmp[count++] = a[l++];</span><br><span class="line">	<span class="keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">		tmp[count++] = a[r++];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = left; i &lt; rightEnd+<span class="number">1</span>; i++) </span><br><span class="line">		a[i] = tmp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，就可以完成划分部分，从而进行排序了。C语言代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> rightEnd, <span class="keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left &lt; rightEnd) &#123;</span><br><span class="line">		<span class="keyword">int</span> mid = left + (rightEnd-left)/<span class="number">2</span>;</span><br><span class="line">		mergeSort(a, left, mid, tmp);	<span class="comment">// 划分左半部分</span></span><br><span class="line">		mergeSort(a, mid+<span class="number">1</span>, rightEnd, tmp);	<span class="comment">// 划分右半部分</span></span><br><span class="line">		merge(a, left, mid+<span class="number">1</span>, rightEnd, tmp);	<span class="comment">// 组合子问题的解</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="汉诺塔问题">汉诺塔问题</h4>
+<p>作为练习，可尝试自己实现一下汉诺塔问题！【待补】</p>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>此处按照教科书上（算法技巧与分析【沙特】）来说，此步骤实质上是一种优化复杂度的步骤，但在此，为了简便起见，直接将其写为了子问题的求解。<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欢迎帮助国家扫除文盲<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/zhifubao.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+         </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/22/堆栈/" class="archive-article-date">
-  	<time datetime="2019-07-22T05:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/22/堆栈/">堆栈</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -248,422 +345,135 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法思想</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/29/以stack来进一步了解C语言的泛型/" class="archive-article-date">
-  	<time datetime="2019-03-29T14:34:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/29/以stack来进一步了解C语言的泛型/">以stack来进一步了解C语言的泛型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/03/05/C语言实现简单的泛型/" class="archive-article-date">
-  	<time datetime="2019-03-05T07:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/03/05/C语言实现简单的泛型/">C语言实现简单的泛型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C语言</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/24/数据在内存中的存储/" class="archive-article-date">
-  	<time datetime="2019-01-24T10:21:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/24/数据在内存中的存储/">数据在内存中的存储</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">底层</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/29/pygame初探/" class="archive-article-date">
-  	<time datetime="2018-11-29T07:22:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/29/pygame初探/">pygame初探</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小游戏</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/09/分治/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/25/进阶查找/" class="archive-article-date">
-  	<time datetime="2018-11-25T12:16:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/04/C的编译与链接/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C的编译与链接</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/25/进阶查找/">进阶查找</a>
-    </h1>
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz",
+            app_key: "z44iJIftlyIVIWPh6A9LDHH3",
+            placeholder: "来造作啊",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/20/普通查找/" class="archive-article-date">
-  	<time datetime="2018-11-20T06:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/20/普通查找/">普通查找</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/15/排序进阶/" class="archive-article-date">
-  	<time datetime="2018-11-15T14:51:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/15/排序进阶/">排序进阶</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/08/改进排序/" class="archive-article-date">
-  	<time datetime="2018-11-08T06:39:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/08/改进排序/">改进排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/03/简单排序/" class="archive-article-date">
-  	<time datetime="2018-11-03T07:24:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/03/简单排序/">简单排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/">Next &raquo;</a>
-    </nav>
   
 
+  
+
+  
 
           </div>
         </div>
@@ -697,8 +507,8 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
