@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="/css/progressbar.css">
 <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
     
-    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     
     
@@ -157,6 +157,11 @@
                     2 分钟 读完 (大约 282 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
@@ -262,11 +267,11 @@
 <script>
     new Valine({
         el: '#valine-thread' ,
-        notify: false,
+        notify: true,
         verify: false,
         app_id: 'aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz',
         app_key: 'z44iJIftlyIVIWPh6A9LDHH3',
-        placeholder: 'Say something...'
+        placeholder: '说点什么吧'
     });
 </script>
 
@@ -430,6 +435,11 @@
                 &copy; 2019 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
                 
                 </p>
             </div>

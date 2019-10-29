@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
-<meta name="keywords" content="随笔,C语言,底层">
+<meta name="keywords" content="随笔,底层,C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="粗谈堆栈">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;09&#x2F;20&#x2F;%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88&#x2F;index.html">
@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="/css/progressbar.css">
 <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
     
-    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     
     
     
@@ -157,6 +157,11 @@
                     5 分钟 读完 (大约 819 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
@@ -277,11 +282,11 @@
 <script>
     new Valine({
         el: '#valine-thread' ,
-        notify: false,
+        notify: true,
         verify: false,
         app_id: 'aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz',
         app_key: 'z44iJIftlyIVIWPh6A9LDHH3',
-        placeholder: 'Say something...'
+        placeholder: '说点什么吧'
     });
 </script>
 
@@ -445,6 +450,11 @@
                 &copy; 2019 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                <br>
+                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
+                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
+                
                 
                 </p>
             </div>
