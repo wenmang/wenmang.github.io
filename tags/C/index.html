@@ -174,7 +174,16 @@
         </div>
         
         
-        <div class="level is-mobile">
+        <hr style="height:1px;margin:1rem 0"/>
+        <div class="level is-mobile is-flex">
+            <div class="level-start">
+                
+                <div class="level-item is-size-7 is-uppercase">
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+                    <a class="has-link-grey -link" href="/tags/c/" rel="tag">c</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag">练习</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+                </div>
+                
+            </div>
             <div class="level-start">
                 <div class="level-item">
                 <a class="button is-size-7 is-light" href="/2018/09/22/%E7%BB%83%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/#more">阅读更多</a>
@@ -1470,7 +1479,20 @@ document.addEventListener('DOMContentLoaded', function () {
 <!-- hexo-inject:end -->
     
 </body>
-</html>       });
+</html>d="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
     });
 </script>
 
