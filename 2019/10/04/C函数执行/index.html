@@ -163,25 +163,28 @@
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>此篇博文根据斯坦福公开课 《编程范式》整理，来阐述C语言函数执行时，在内存中的简单过程，也算是一个简单的笔记。</p>
 <a id="more"></a>
-
-<h3 id="函数的活动记录"><a href="#函数的活动记录" class="headerlink" title="函数的活动记录"></a>函数的活动记录</h3><p>所谓活动记录，便是C语言程序在调用过程中的储存分配方案的记录。即：当一个过程被调用时，就把它的活动记录推入运行时存储栈的栈顶，而在控制返回调用程序时，再从栈顶弹出相应的活动记录。如此反复，以执行整个程序。</p>
+<h3 id="函数的活动记录">函数的活动记录</h3>
+<p>所谓活动记录，便是C语言程序在调用过程中的储存分配方案的记录。即：当一个过程被调用时，就把它的活动记录推入运行时存储栈的栈顶，而在控制返回调用程序时，再从栈顶弹出相应的活动记录。如此反复，以执行整个程序。</p>
 <p>我们首先将内存抽象为一个索引从 0 开始的庞大数组，然后为了方便说明函数的具体执行过程，我们以一段简单的代码作为说明：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> c[<span class="hljs-number">4</span>];</span><br><span class="line">    <span class="hljs-keyword">int</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当我们写下这样一个函数的时候，在编译过程中，在内存中会如下图这样分配空间：</p>
-<p><img src="https://i.loli.net/2019/10/04/b5tiMoPpc6n9JG7.png" alt="C函数活动记录1.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/10/04/b5tiMoPpc6n9JG7.png" alt="C函数活动记录1.png"><figcaption>C函数活动记录1.png</figcaption>
+</figure>
 <p>在该函数编译之时，以 <code>Save PC</code> 为分界线，内存上半部分依次为形参空间，下半部分为函数中所申明的变量的空间。</p>
 <p><strong>注：<code>save PC</code> 我其实并没有搞得很懂，但是按照老师的说法，应当可以理解为函数本身的地址（此处存疑）</strong></p>
-<h3 id="函数的执行"><a href="#函数的执行" class="headerlink" title="函数的执行"></a>函数的执行</h3><p>为了较为顺畅地理解，我们依旧以示例代码来说明：</p>
+<h3 id="函数的执行">函数的执行</h3>
+<p>为了较为顺畅地理解，我们依旧以示例代码来说明：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>)	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> foo(a<span class="hljs-number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = <span class="hljs-number">3</span>;</span><br><span class="line">    foo(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>此时，编译之时，会像上边一般，在内存中以相同的方式分配空间，然后，函数开始执行：</p>
 <p>执行过程会在内存的栈区进行，在调用 <code>foo</code> 函数之后，<code>PC</code> 会直接跳转到 <code>foo</code> 函数所在的内存空间之处，也就是 <code>Save PC</code> 所在，如下图所示：</p>
-<p><img src="https://i.loli.net/2019/10/04/Vh3pWATvqNbDyF4.png" alt="C函数活动记录2.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/10/04/Vh3pWATvqNbDyF4.png" alt="C函数活动记录2.png"><figcaption>C函数活动记录2.png</figcaption>
+</figure>
 <p>由于 <code>foo</code> 函数的形参刚好在其上，所以，参数传递就如此完成了。此后，便会执行 <code>foo</code> 函数中的语句。</p>
-<h3 id="有趣的例子"><a href="#有趣的例子" class="headerlink" title="有趣的例子"></a>有趣的例子</h3><p>利用上述原理，有这样一个有趣的例子：</p>
+<h3 id="有趣的例子">有趣的例子</h3>
+<p>利用上述原理，有这样一个有趣的例子：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createArray</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">100</span>];</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) </span><br><span class="line">		<span class="hljs-built_in">array</span>[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printArray</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">100</span>];</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, <span class="hljs-built_in">array</span>[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	createArray();</span><br><span class="line">	<span class="hljs-comment">// printf("Hello");</span></span><br><span class="line">	printArray();</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>看到代码，你会有点懵，这不就是打印 <code>0-99</code> 吗？<strong>这代码有什么特别呢</strong>？然而，你再看看，便会发现两个 <code>array</code> 数组是在两个函数中，这时候你可能会记起当年学的C语言，<strong>不同函数中的声明是相互独立的啊</strong>？这样写不是脱裤子放屁吗？你就会心有疑虑，对这样是否能够实现相关功能而存疑。</p>
 <p>然而，通过上述原理我们知道，函数调用结束之后，只是指针在内存中的跳转，而内容并不会被擦去，所以答案是肯定的，运行代码，会正常输出 <code>0 1 2 3 ...99</code> 。</p>
 <p>那么如果在两次调用中加上一句呢？也就是将上面代码的的注释去掉。然后在运行你便会发现不成了，这是因为<strong>两次调用中间如果加入了其余语句，便会扰乱前一个函数所初始化的内存，从而使得第二个函数不能正常打印</strong>。</p>

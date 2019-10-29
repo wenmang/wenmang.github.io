@@ -163,19 +163,18 @@
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>知道了单源最短路的算法之后，我们可以更进一步，学习多源最短路问题，因为我们的需求是多样的，我们在知道某点到某点最短距离之后还想知道其他两点间的最短距离，那么我们需要再求解一次吗？显然，那样过于麻烦，显然，我们需要一种算法来一次性求解所有的两两间距，用的时候只需要取出即可</p>
 <a id="more"></a>
-
-<h3 id="弗洛伊德（Floyd）算法"><a href="#弗洛伊德（Floyd）算法" class="headerlink" title="弗洛伊德（Floyd）算法"></a>弗洛伊德（Floyd）算法</h3><p>弗洛伊德算法是比较经典的求解多元路径的算法，代码极为简洁</p>
+<h3 id="弗洛伊德floyd算法">弗洛伊德（Floyd）算法</h3>
+<p>弗洛伊德算法是比较经典的求解多元路径的算法，代码极为简洁</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Pathmatirx[MAXSIZE][MAXSIZE];</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ShortPathTable[MAXSIZE][MAXSIZE];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShortestPathFloyd</span><span class="hljs-params">(MGraph graph, Pathmatirx *P, ShortPathTable *D)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> v, w, k;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; ++w) &#123;	<span class="hljs-comment">// 初始化数组</span></span><br><span class="line">            (*D)[v][w] = graph-&gt;g[v][w];</span><br><span class="line">            (*P)[v][w] = w;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>; k &lt; graph-&gt;nv; ++k)</span><br><span class="line">        <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">            <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; ++w)</span><br><span class="line">                <span class="hljs-keyword">if</span> ((*D)[v][w] &gt; (*D)[v][k] + (*D)[k][w])&#123;	<span class="hljs-comment">// 求解</span></span><br><span class="line">                    (*D)[v][w] = (*D)[v][k] + (*D)[k][w];</span><br><span class="line">                    (*P)[v][w] = (*P)[v][k];</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>算法解释：</strong></p>
 <ul>
 <li>首先对传入的两个二维数组进行初始化，将图的存储权重的数组复制给D数组，P数组将每列初始化为列标数</li>
-<li>利用三重循环来查找最短路径<ul>
-<li>k控制中转点，如：k = 0时，所有顶点都经过v0中转；k = 1时，所有顶点都经过v1中转…… </li>
+<li>利用三重循环来查找最短路径
+<ul>
+<li>k控制中转点，如：k = 0时，所有顶点都经过v0中转；k = 1时，所有顶点都经过v1中转……</li>
 <li>依次判断两个点经过中转点时路径是否会缩短，如果是，更新D数组的权重，P数组相应位置更新为中转点的下标</li>
-</ul>
-</li>
+</ul></li>
 <li>所以，最后结果为D数组存着某点到某点的最短距离的值，P数组存着相应的某两点之间最短路径所经过的中转点</li>
 </ul>
 <p><strong>细节说明：</strong></p>
@@ -183,23 +182,22 @@
 <li>上述代码直接适用于邻接矩阵存储的图，如是邻接表存储，则初始化部分的代码需重写</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Pathmatirx[MAXSIZE][MAXSIZE];</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ShortPathTable[MAXSIZE][MAXSIZE];</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>以上述方式定义之后便于直接将二维数组以参数传递进函数</li>
 <li>判断的代码直接带入图中更好理解：v -&gt; w 的距离是否大于v-&gt;k 再由 k-&gt;w的距离之和，以此种方式更容易理解和记忆写出该代码的方树，k是中转点也变得更容易理解</li>
 </ul>
-<h3 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h3><p>运行算法之后，该如何输出某点到某点的最短路径呢？我们直接给出最普遍的方式——打印出所有两两结点间的最短路径</p>
+<h3 id="输出结果">输出结果</h3>
+<p>运行算法之后，该如何输出某点到某点的最短路径呢？我们直接给出最普遍的方式——打印出所有两两结点间的最短路径</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) &#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (w = v+<span class="hljs-number">1</span>; w &lt; graph-&gt;nv; ++w) &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"v%d-v%d weight:%d"</span>, v, w, (*D)[v][w]);</span><br><span class="line">        k = (*P)[v][w];</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">" path: %d"</span>, v);</span><br><span class="line">        <span class="hljs-keyword">while</span> (k != w)&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">" -&gt; %d"</span>, k);</span><br><span class="line">            k = (*P)[k][w];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">" -&gt; %d\n"</span>, w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>算法解释：</strong></p>
 <ul>
 <li>首先输出某点到某点以及之间的距离</li>
-<li>之后输出路径<ul>
+<li>之后输出路径
+<ul>
 <li>在P数组对应位置找到其值k，输出该值之后让其代替初始结点（v）下标</li>
 <li>在新的位置找到新的k并赋值，输出，直至 k==w</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>说明：</strong></p>
 <p>该循环直接嵌入上述函数使用</p>
@@ -417,7 +415,7 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#弗洛伊德（Floyd）算法">
+        <a class="is-flex" href="#弗洛伊德floyd算法">
         <span class="has-mr-6">1</span>
         <span>弗洛伊德（Floyd）算法</span>
         </a></li><li>
