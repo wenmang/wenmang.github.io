@@ -115,6 +115,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
@@ -157,22 +161,24 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p>在大佬分享的链接以及自己胡乱操作之后，我的博客终于是搭建完成了，这里附上两个起了主要作用的链接吧！ <a id="more"></a></p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>在大佬分享的链接以及自己胡乱操作之后，我的博客终于是搭建完成了，这里附上两个起了主要作用的链接吧！</p>
+<a id="more"></a>
+
 <p><a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">知乎 吴润的详细示例</a></p>
 <p>主要的步骤就是依照上述文章进行，但文中仍然有一些小的细节并没有提出</p>
 <p>1.安装过程中路径应该使用英文，这也是很多软件安装的必要条件。</p>
 <blockquote>
-<p>使用npm命令安装Hexo，输入： npm install -g hexo-cli 这个安装时间较长耐心等待，安装完成后，初始化我们的博客，输入： hexo init blog 注意，这里的命令都是作用在刚刚创建的Blog文件夹中。</p>
+<p>使用npm命令安装Hexo，输入：<br>    npm install -g hexo-cli<br>这个安装时间较长耐心等待，安装完成后，初始化我们的博客，输入：<br>    hexo init blog<br>注意，这里的命令都是作用在刚刚创建的Blog文件夹中。</p>
 </blockquote>
 <p>2.进行完这步操作之后，Blog文件夹中应该会生成一个blog文件夹，之后的三条命令就需要切换 到blog文件夹之后再进行操作。</p>
 <blockquote>
-<p>为了检测我们的网站雏形，分别按顺序输入以下三条命令： hexo new test_my_site hexo g hexo s</p>
+<p>为了检测我们的网站雏形，分别按顺序输入以下三条命令：<br>    hexo new test_my_site<br>    hexo g<br>    hexo s</p>
 </blockquote>
 <p><a href="https://www.cnblogs.com/cherishzy/p/5694658.html" target="_blank" rel="noopener">博客园 cherishzy的示例</a></p>
 <p>这一篇，是我在与GitHub关联出错之后搜到的一篇解决方案，而他的一些经验刚好完美解决了我所遇到的问题。</p>
 <blockquote>
-<p>在自己的Github主页右下角,创建一个新的repository。比如我的Github用户名为Gitzhaoyang，那么我创建的repository的名字应该是 gitzhaoyang.github.io 。 添加reponsitories</p>
-<p>这里严重注意: 一定要以你的Github用户名.github.io创建。假如我没有用gitzhaoyang.github.io而是用了mungo.github.io，那么当我浏览器访问博客的时候会出现404错误。如果想直接gitzhaoyang.github.io访问，那么就需要和用户名保持一致。题主在这里吃了不小的苦头，最&gt;后给Github客服发邮件才知道原因。 创建好如下图： 一定要保持一致 将本地的文件部署（上传）到Github账户中 编辑本地Hexo目录下文件_comfig.yml，在最后添加如下代码（在你修改时，把 gitzhaoyang 要替换成你自己的用户名） deploy: type: git repository: http://github.com/Gitzhaoyang/gitzhaoyang.github.io.git branch: master</p>
+<p>在自己的Github主页右下角,创建一个新的repository。比如我的Github用户名为Gitzhaoyang，那么我创建的repository的名字应该是 gitzhaoyang.github.io 。<br>添加reponsitories</p>
+<p>这里严重注意:<br>一定要以你的Github用户名.github.io创建。假如我没有用gitzhaoyang.github.io而是用了mungo.github.io，那么当我浏览器访问博客的时候会出现404错误。如果想直接gitzhaoyang.github.io访问，那么就需要和用户名保持一致。题主在这里吃了不小的苦头，最&gt;后给Github客服发邮件才知道原因。<br>创建好如下图：<br>一定要保持一致<br>将本地的文件部署（上传）到Github账户中<br>编辑本地Hexo目录下文件_comfig.yml，在最后添加如下代码（在你修改时，把 gitzhaoyang 要替换成你自己的用户名）<br>  deploy:<br>      type: git<br>      repository: <a href="http://github.com/Gitzhaoyang/gitzhaoyang.github.io.git" target="_blank" rel="noopener">http://github.com/Gitzhaoyang/gitzhaoyang.github.io.git</a><br>      branch: master</p>
 <p>.yml文件对格式规范要求很严格，type: repository: branch: 前面有两个空格，冒号后面都有一个空格。</p>
 </blockquote>
 <p>通过如上教程与帮助，我搭建完成，并在此写下了我的第一篇博客。</p>
@@ -375,6 +381,7 @@
 </div>
     
         
+
     
     
         <div class="column-right-shadow is-hidden-widescreen ">

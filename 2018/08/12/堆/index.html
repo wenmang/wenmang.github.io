@@ -115,6 +115,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" target="_blank" rel="noopener">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
@@ -157,111 +161,109 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p><strong>引例：</strong>计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p><strong>引例：</strong>计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。 </p>
 <a id="more"></a>
-<p><strong>优先队列（Priority Queue）：</strong>特殊的“队列”，取出元素的顺序是 依照元素的优先权（关键字）大小，而不是元素进入队列的先后顺序。</p>
+
+<p><strong>优先队列（Priority Queue）：</strong>特殊的“队列”，取出元素的顺序是 依照元素的优先权（关键字）大小，而不是元素进入队列的先后顺序。 </p>
 <p>既然已经有了这样一个设想，那我们应该采用何种方式来实现呢？</p>
-<p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。</p>
+<p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。 </p>
 <ul>
 <li><p><strong>普通数组</strong></p>
-<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 O(1)</p>
-<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 O(n)</p></li>
+<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 O(n) </p>
+</li>
 <li><p><strong>链表</strong></p>
-<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 O(1)</p>
-<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度O(1)</p></li>
+<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度O(1) </p>
+</li>
 <li><p><strong>有序数组：</strong>即在插入时就按照一定顺序插入</p>
-<p><strong>插入：</strong>找到合适位置 —— 时间复杂度O(n) 或者 O(log n) [二分查找]        <br>
-移动元素并插入    —— 时间复杂度 O(n)</p>
-<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 O(n)</p></li>
+<p><strong>插入：</strong>找到合适位置 —— 时间复杂度O(n) 或者 O(log n) [二分查找]<br>  移动元素并插入    —— 时间复杂度 O(n)</p>
+<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 O(n) </p>
+</li>
 <li><p><strong>有序链表：</strong>同有序数组插入时按照一定顺序插入</p>
-<p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 O(n)  <br>
-插入元素    —— 时间复杂度 O(1)</p>
-<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 O(1)</p></li>
+<p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 O(n)<br>  插入元素    —— 时间复杂度 O(1)</p>
+<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 O(1) </p>
+</li>
 </ul>
-<p>我们发现，四种表示的时间复杂度基本都是 O(n)，那么可不可以找得到一种表示，降低其时间按复杂度呢？</p>
-<p>树！我们可以用二叉树来表示，平衡二叉树的删除与插入时间复杂度都是与树高有关，为 log(n) 的，所以我们可以考虑用二叉树来表示。</p>
-<h4 id="二叉搜索树">二叉搜索树：</h4>
-<p>二叉搜索树是很好进行插入 删除操作的，删除时只需要将最左或者最右元素删除。但如果删除元素变多之后，可能会出现树”一边倒“ 的情况，这时会使时间复杂度变大，所以二叉搜索树也不合适。</p>
-<h4 id="完全二叉树">完全二叉树：</h4>
-<p>将最大值或者最小值置于根结点处，用完全二叉树来存储，在删除之时就会避免树出现“一边倒”的情况</p>
-<h3 id="堆">堆：</h3>
-<p>堆的两个特性  结构性：用数组表示的完全二叉树；  有序性：任一结点的关键字是其子树所有结点的最大值(或最小值) </p>
+<p>我们发现，四种表示的时间复杂度基本都是 O(n)，那么可不可以找得到一种表示，降低其时间按复杂度呢？ </p>
+<p>树！我们可以用二叉树来表示，平衡二叉树的删除与插入时间复杂度都是与树高有关，为 log(n) 的，所以我们可以考虑用二叉树来表示。 </p>
+<h4 id="二叉搜索树："><a href="#二叉搜索树：" class="headerlink" title="二叉搜索树："></a>二叉搜索树：</h4><p>二叉搜索树是很好进行插入 删除操作的，删除时只需要将最左或者最右元素删除。但如果删除元素变多之后，可能会出现树”一边倒“ 的情况，这时会使时间复杂度变大，所以二叉搜索树也不合适。</p>
+<h4 id="完全二叉树："><a href="#完全二叉树：" class="headerlink" title="完全二叉树："></a>完全二叉树：</h4><p>将最大值或者最小值置于根结点处，用完全二叉树来存储，在删除之时就会避免树出现“一边倒”的情况 </p>
+<h3 id="堆："><a href="#堆：" class="headerlink" title="堆："></a>堆：</h3><p>堆的两个特性<br>结构性：用数组表示的完全二叉树；<br>有序性：任一结点的关键字是其子树所有结点的最大值(或最小值) </p>
 <ul>
-<li>“最大堆(MaxHeap)”,也称“大顶堆”：最大值 </li>
-<li>“最小堆(MinHeap)”,也称“小顶堆” ：最小值</li>
+<li>“最大堆(MaxHeap)”,也称“大顶堆”：最大值 </li>
+<li>“最小堆(MinHeap)”,也称“小顶堆” ：最小值 </li>
 </ul>
-<h4 id="堆的抽象数据类型描述">堆的抽象数据类型描述：</h4>
-<p><strong>类型名称：</strong>最大堆（MaxHeap）  <strong>数据对象集：</strong>完全二叉树，每个结点的元素值不小于其子结点的元素值 <strong>操作集：</strong>最大堆H 属于 MaxHeap，元素item 属于 ElementType <strong>主要操作有： </strong></p>
+<h4 id="堆的抽象数据类型描述："><a href="#堆的抽象数据类型描述：" class="headerlink" title="堆的抽象数据类型描述："></a>堆的抽象数据类型描述：</h4><p><strong>类型名称：</strong>最大堆（MaxHeap）<br><strong>数据对象集：</strong>完全二叉树，每个结点的元素值不小于其子结点的元素值<br><strong>操作集：</strong>最大堆H 属于 MaxHeap，元素item 属于 ElementType<br>*<em>主要操作有： *</em></p>
 <ul>
-<li><strong>MaxHeap Create( int MaxSize )：</strong>创建一个空的最大堆。 </li>
+<li><strong>MaxHeap Create( int MaxSize )：</strong>创建一个空的最大堆。 </li>
 <li><strong>Boolean IsFull( MaxHeap H )：</strong>判断最大堆H是否已满。</li>
-<li><strong>Insert( MaxHeap H, ElementType item )：</strong>将元素item插入最大堆H。 </li>
+<li><strong>Insert( MaxHeap H, ElementType item )：</strong>将元素item插入最大堆H。 </li>
 <li><strong>Boolean IsEmpty( MaxHeap H )：</strong>判断最大堆H是否为空。</li>
-<li><strong>ElementType DeleteMax( MaxHeap H )：</strong>返回H中最大元素(高优先级)。</li>
+<li><strong>ElementType DeleteMax( MaxHeap H )：</strong>返回H中最大元素(高优先级)。 </li>
 </ul>
-<p>首先应该了解怎样创建一个空的最大堆，但在这之前，我们首先应该设计出合适的结构体来表示堆</p>
+<p>首先应该了解怎样创建一个空的最大堆，但在这之前，我们首先应该设计出合适的结构体来表示堆 </p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span>  <span class="hljs-class"><span class="hljs-keyword">struct</span>  <span class="hljs-title">HeapStruct</span>  *<span class="hljs-title">MaxHeap</span> ;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span>  <span class="hljs-title">HeapStruct</span>&#123;</span></span><br><span class="line">      ElementType  *Elements ;       <span class="hljs-comment">// 存储堆元素的数组</span></span><br><span class="line">      <span class="hljs-keyword">int</span>  Size ;       <span class="hljs-comment">// 堆当前的元素个数</span></span><br><span class="line">      <span class="hljs-keyword">int</span>  Capacity ;         <span class="hljs-comment">// 堆的最大容量</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>重点理解：</strong></p>
-<p>两次申请空间：第一次是为整个堆申请一个空间，第二次则是为堆中储存元素的的数组申请空间哨兵的定义：哨兵是为了其他操作方便特意设立的，他是数组的首个元素，存的元素比堆中任何元素值都大</p>
-<h4 id="堆中元素的插入">堆中元素的插入</h4>
-<p><strong>插入分两步：</strong></p>
-<p>将元素插入到数组中元素之后，也就是末位，使之符合完全二叉树的结构 调整元素位置，使之成为堆</p>
+
+<p><strong>重点理解：</strong> </p>
+<p>两次申请空间：第一次是为整个堆申请一个空间，第二次则是为堆中储存元素的的数组申请空间哨兵的定义：哨兵是为了其他操作方便特意设立的，他是数组的首个元素，存的元素比堆中任何元素值都大 </p>
+<h4 id="堆中元素的插入"><a href="#堆中元素的插入" class="headerlink" title="堆中元素的插入"></a>堆中元素的插入</h4><p><strong>插入分两步：</strong></p>
+<p>将元素插入到数组中元素之后，也就是末位，使之符合完全二叉树的结构<br>调整元素位置，使之成为堆 </p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span> <span class="hljs-params">( MaxHeap H, ElementType item )</span></span>&#123;</span><br><span class="line">      <span class="hljs-keyword">int</span>  i ;</span><br><span class="line">      <span class="hljs-keyword">if</span> ( isFull(H) )&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已满"</span>);</span><br><span class="line">            <span class="hljs-keyword">return</span> ;</span><br><span class="line">      &#125;</span><br><span class="line">      i = ++H-&gt;Size ;   <span class="hljs-comment">// i 指向插入后 堆中最后一个元素的位置</span></span><br><span class="line">      <span class="hljs-keyword">for</span>  ( ; H-&gt;Elements[i] &gt; H-&gt;Elements[i/<span class="hljs-number">2</span>] ; i/=<span class="hljs-number">2</span> )</span><br><span class="line">            H-&gt;Elements[i] = H-&gt;Elements[i/<span class="hljs-number">2</span>] ;     <span class="hljs-comment">// 向下过滤节点</span></span><br><span class="line">      H-&gt;Elements[i] = item ; <span class="hljs-comment">// 将item插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>理解：</strong></p>
-<p>代码的主要部分为for循环及之后，for循环在于将新插入至末尾的结点与其父节点进行比较，如新插入节点更大，则将其父节点与其交换位置，即可变为堆。</p>
+<p>代码的主要部分为for循环及之后，for循环在于将新插入至末尾的结点与其父节点进行比较，如新插入节点更大，则将其父节点与其交换位置，即可变为堆。 </p>
 <p><strong>注意：</strong></p>
-<p>交换位置之时，在循环中直接将父节点覆盖子节点，而最后再将新需要插入的结点直接插入到相应位置之中，可以提高效率。 循环之时，如果在堆中不设哨兵，在循环之时还应进行判断，使其循环替换元素之时不能出堆</p>
-<h4 id="最大堆的删除">最大堆的删除</h4>
-<p>最大堆的删除操作也就是删除掉堆中的最大元素（即树根），并将之返回出去</p>
+<p>交换位置之时，在循环中直接将父节点覆盖子节点，而最后再将新需要插入的结点直接插入到相应位置之中，可以提高效率。<br>循环之时，如果在堆中不设哨兵，在循环之时还应进行判断，使其循环替换元素之时不能出堆 </p>
+<h4 id="最大堆的删除"><a href="#最大堆的删除" class="headerlink" title="最大堆的删除"></a>最大堆的删除</h4><p>最大堆的删除操作也就是删除掉堆中的最大元素（即树根），并将之返回出去</p>
 <p>删除之后堆中会少一个元素，因此我们的思路就是在删除操作进行之时首先将树根元素复制并返回，之后直接将数组最后一个元素将树根元素直接覆盖。那么随之而来的问题肯定就是将元素顺序重新调整为一个堆。</p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ElementType  <span class="hljs-title">DeleteMax</span><span class="hljs-params">( MaxHeap H )</span></span>&#123;</span><br><span class="line">      <span class="hljs-keyword">int</span>  parent, child ;</span><br><span class="line">      ElementType  MaxItem, temp ;</span><br><span class="line">      <span class="hljs-keyword">if</span> ( IsEmpty(H) )&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已空"</span>) ；</span><br><span class="line">            <span class="hljs-keyword">return</span> ;</span><br><span class="line">      &#125;</span><br><span class="line">      MaxItem = H-&gt;Elements[<span class="hljs-number">1</span>] ;    <span class="hljs-comment">// 取出根节点的最大值</span></span><br><span class="line">      temp = H-&gt;Elements[H-&gt;Size--] ;     <span class="hljs-comment">// 将最后一个元素赋给temp</span></span><br><span class="line">      <span class="hljs-keyword">for</span> ( parent = <span class="hljs-number">1</span> ; parent*<span class="hljs-number">2</span> &lt;= H-&gt;Size ; parent = child )&#123;</span><br><span class="line">            child = parent * <span class="hljs-number">2</span> ;</span><br><span class="line">            <span class="hljs-keyword">if</span> ( (child != H-&gt;Size) &amp;&amp;</span><br><span class="line">                (H-&gt;Elements[child] &lt; H-&gt;Elements[child+<span class="hljs-number">1</span>]) )</span><br><span class="line">                  child++ ;   <span class="hljs-comment">// 使 child 指向左右结点中较大者</span></span><br><span class="line">            <span class="hljs-keyword">if</span> ( temp &gt;= H-&gt;Elements[child] )   <span class="hljs-keyword">break</span> ;</span><br><span class="line">            <span class="hljs-keyword">else</span>  <span class="hljs-comment">// 将 temp 元素移动到下一层</span></span><br><span class="line">                  H-&gt;Elements[parent] = H-&gt;Elements[child] ;</span><br><span class="line">      &#125;</span><br><span class="line">      H-&gt;Elements[parent] = temp ;</span><br><span class="line">      <span class="hljs-keyword">return</span> MaxItem ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>理解：</strong>代码之中重点就在于重新调整元素，也就是for循环中内容——从根节点开始，依次与最大子结点比较，如果小于就与其交换位置，直至调整好为止。</p>
 <p><strong>注：</strong>for循环的前一个if是用来调整 child 的，使 child 指向子结点中最大结点，之后就是调整结点元素的过程</p>
-<h4 id="最大堆的建立">最大堆的建立</h4>
-<p>建立最大堆：将已经存在的N个元素按最大堆的要求存放在一个一维数组中</p>
+<h4 id="最大堆的建立"><a href="#最大堆的建立" class="headerlink" title="最大堆的建立"></a>最大堆的建立</h4><p>建立最大堆：将已经存在的N个元素按最大堆的要求存放在一个一维数组中</p>
 <ul>
 <li>我们首先直接想到的就是将n个元素依次直接插入，这时其时间复杂度为O(nlogn)</li>
 <li>如果需要压缩时间按复杂度的话，我们可以设计出第二种方法</li>
 </ul>
-<ol type="1">
-<li>将N个元素按输入顺序存入，先满足完全二叉树的结构特性</li>
+<ol>
+<li>将N个元素按输入顺序存入，先满足完全二叉树的结构特性 </li>
 <li>调整各结点位置，以满足最大堆的有序特性。</li>
 </ol>
 <p><strong>而此时的时间复杂度如下：</strong></p>
-<p><img src="http://t1.aixinxi.net/o_1cmouoeo6157o1pj88ie1pb21mj0a.png-w.jpg"></p>
-<h2 id="哈夫曼树与哈夫曼编码">哈夫曼树与哈夫曼编码</h2>
-<p>什么是哈夫曼树？</p>
+<p><img src="http://t1.aixinxi.net/o_1cmouoeo6157o1pj88ie1pb21mj0a.png-w.jpg" alt></p>
+<h2 id="哈夫曼树与哈夫曼编码"><a href="#哈夫曼树与哈夫曼编码" class="headerlink" title="哈夫曼树与哈夫曼编码"></a>哈夫曼树与哈夫曼编码</h2><p>什么是哈夫曼树？</p>
 <p>回答这个问题之前首先应该回答这样一个问题 —— 如何根据结点不同的查找频率构造更有效的搜索树？</p>
 <p>答案是采用哈夫曼树</p>
 <p><strong>定义：</strong></p>
-<p>带权路径长度（WPL）：设二叉树有n个叶子节点，每个叶子节点带有权值 w_k，从根节点到每个叶结点的长度为I_k，则每个叶子结点的带权路径长度之和就是：WPL = $ _{k=1}^{n}w_kl_k $</p>
-<h3 id="哈夫曼树又称最优二叉树">哈夫曼树（又称最优二叉树）</h3>
-<p>WPL最小的二叉树</p>
-<h4 id="哈夫曼树的构造">哈夫曼树的构造</h4>
-<p>每次将权值最小的两棵二叉树合并，合并之后二者根结点权值为两个结点权值之和，再将根节点作为一个新的结点加入序列中再次选取两个最小值</p>
+<p>带权路径长度（WPL）：设二叉树有n个叶子节点，每个叶子节点带有权值 w_k，从根节点到每个叶结点的长度为I_k，则每个叶子结点的带权路径长度之和就是：WPL =   $ \sum_{k=1}^{n}w_kl_k $ </p>
+<h3 id="哈夫曼树（又称最优二叉树）"><a href="#哈夫曼树（又称最优二叉树）" class="headerlink" title="哈夫曼树（又称最优二叉树）"></a>哈夫曼树（又称最优二叉树）</h3><p>WPL最小的二叉树</p>
+<h4 id="哈夫曼树的构造"><a href="#哈夫曼树的构造" class="headerlink" title="哈夫曼树的构造"></a>哈夫曼树的构造</h4><p>每次将权值最小的两棵二叉树合并，合并之后二者根结点权值为两个结点权值之和，再将根节点作为一个新的结点加入序列中再次选取两个最小值</p>
 <p>程序如何写呢？此构造的重点在于选出两个最小的元素。，而此操作可以直接借助最小堆来实现。</p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">HuffmanTree <span class="hljs-title">Huffman</span> <span class="hljs-params">( MinHeap H )</span></span>&#123;</span><br><span class="line">      <span class="hljs-comment">// 假设 H-&gt;Size 个权值已经存在 H-&gt;Elements[]-&gt;Weight 里</span></span><br><span class="line">      <span class="hljs-keyword">int</span>  i ;</span><br><span class="line">      HuffmanTree  t ;</span><br><span class="line">      BuildMinHeap(H) ; <span class="hljs-comment">// 将H-&gt;Elements[] 按权值调整为最小堆</span></span><br><span class="line">      <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">1</span> ; i &lt; H-&gt;Size ; i++ )&#123;  <span class="hljs-comment">// 进行合并</span></span><br><span class="line">            T = mallo( <span class="hljs-keyword">sizeof</span>( struct  TreeNode ) ) ; <span class="hljs-comment">// 建立新结点</span></span><br><span class="line">            T-&gt;Left = DeleteMin(H) ;      <span class="hljs-comment">// 从最小堆中删除一个结点，作为T的左子结点</span></span><br><span class="line">            T-&gt;Right = DeleteMin(H) ;     <span class="hljs-comment">// 从最小堆中删除已一个结点，作为新T的右子结点</span></span><br><span class="line">            T-&gt;Weight = T-&gt;Left-&gt;Weight+T-&gt;Right-&gt;Weight ;  <span class="hljs-comment">// 计算新权值</span></span><br><span class="line">            insert( H , T );  <span class="hljs-comment">// 将新T插入最小堆</span></span><br><span class="line">      &#125;</span><br><span class="line">      T = DeleteMin(H) ;</span><br><span class="line">      <span class="hljs-keyword">return</span>  T ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>先将所有元素存入到最小堆中</p>
 <p>for 循环之中 先从堆中抽出最小值作为左子结点，再抽出最小值作为右子结点，计算新的权值之后将新结点插入进最小堆</p>
-<h4 id="哈夫曼树的特点">哈夫曼树的特点:</h4>
-<ul>
+<h4 id="哈夫曼树的特点"><a href="#哈夫曼树的特点" class="headerlink" title="哈夫曼树的特点:"></a>哈夫曼树的特点:</h4><ul>
 <li>没有度为1的结点；</li>
 <li>哈夫曼树的任意非叶节点的左右子树交换后仍是哈夫曼树；</li>
 <li>n个叶子结点的哈夫曼树共有2n-1个结点；</li>
 <li>对同一组权值{w1 ,w2 , …… , wn}，存在不同构的两棵哈夫曼树</li>
 </ul>
-<h3 id="哈夫曼编码">哈夫曼编码</h3>
-<p>Q ：给定一段字符串，如何对其进行编码，使得该字符串编码的储存空间最少？</p>
-<p>我们可以有下列想法： 1. 用等长ASCII编码； 2. 不等长编码：出现频率高的字符用的编码短些，出现频率低的字符则可以编码</p>
+<h3 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3><p>Q ：给定一段字符串，如何对其进行编码，使得该字符串编码的储存空间最少？</p>
+<p>我们可以有下列想法：</p>
+<ol>
+<li>用等长ASCII编码；</li>
+<li>不等长编码：出现频率高的字符用的编码短些，出现频率低的字符则可以编码</li>
+</ol>
 <p>显然进行不等长编码的储存空间更小</p>
-<p>但是进行不等长编码时容易产生歧义，也就是二义性： 如将下列四字母如下编码：</p>
-<p>a 编码：0<br>
-b 编码：1 c 编码：10 d 编码：11 那么此时给出一段字符串编码：0110，其表达的含义是什么呢？</p>
-<p>当然会产生歧义：abba abc ada 都是可以解释通的，而为了避免此种结果，我们就可以采用哈夫曼编码的方式来解决。</p>
+<p>但是进行不等长编码时容易产生歧义，也就是二义性：<br>如将下列四字母如下编码：</p>
+<p>a 编码：0<br>b 编码：1<br>c 编码：10<br>d 编码：11<br>那么此时给出一段字符串编码：0110，其表达的含义是什么呢？</p>
+<p>当然会产生歧义：abba    abc    ada 都是可以解释通的，而为了避免此种结果，我们就可以采用哈夫曼编码的方式来解决。</p>
 
         </div>
         
@@ -468,6 +470,66 @@ b 编码：1 c 编码：10 d 编码：11 那么此时给出一段字符串编码
 </div>
     
         
+
+    <div class="card widget column-left is-sticky" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    目录
+                </h3>
+                <ul class="menu-list"><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#二叉搜索树：">
+        <span class="has-mr-6">1.1.1</span>
+        <span>二叉搜索树：</span>
+        </a></li><li>
+        <a class="is-flex" href="#完全二叉树：">
+        <span class="has-mr-6">1.1.2</span>
+        <span>完全二叉树：</span>
+        </a></li></ul><li>
+        <a class="is-flex" href="#堆：">
+        <span class="has-mr-6">1.2</span>
+        <span>堆：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#堆的抽象数据类型描述：">
+        <span class="has-mr-6">1.2.1</span>
+        <span>堆的抽象数据类型描述：</span>
+        </a></li><li>
+        <a class="is-flex" href="#堆中元素的插入">
+        <span class="has-mr-6">1.2.2</span>
+        <span>堆中元素的插入</span>
+        </a></li><li>
+        <a class="is-flex" href="#最大堆的删除">
+        <span class="has-mr-6">1.2.3</span>
+        <span>最大堆的删除</span>
+        </a></li><li>
+        <a class="is-flex" href="#最大堆的建立">
+        <span class="has-mr-6">1.2.4</span>
+        <span>最大堆的建立</span>
+        </a></li></ul></li></ul><li>
+        <a class="is-flex" href="#哈夫曼树与哈夫曼编码">
+        <span class="has-mr-6">2</span>
+        <span>哈夫曼树与哈夫曼编码</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#哈夫曼树（又称最优二叉树）">
+        <span class="has-mr-6">2.1</span>
+        <span>哈夫曼树（又称最优二叉树）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#哈夫曼树的构造">
+        <span class="has-mr-6">2.1.1</span>
+        <span>哈夫曼树的构造</span>
+        </a></li><li>
+        <a class="is-flex" href="#哈夫曼树的特点">
+        <span class="has-mr-6">2.1.2</span>
+        <span>哈夫曼树的特点:</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#哈夫曼编码">
+        <span class="has-mr-6">2.2</span>
+        <span>哈夫曼编码</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
     
         <div class="column-right-shadow is-hidden-widescreen ">

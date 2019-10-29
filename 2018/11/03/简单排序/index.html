@@ -10,13 +10,13 @@
 <title>简单排序 - 文的盲</title>
 
 
-    <meta name="description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前  所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
+    <meta name="description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前 所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单排序">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;03&#x2F;%E7%AE%80%E5%8D%95%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前  所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
+<meta property="og:description" content="排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理 开始之前 所有的排序算法以函数形式展现，采用C语言编写 函数风格统一，命名规则同ASort，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为void，即直接将原数组进行排序 所有排序的终点，也就时排序后的结果，为从大到小排序">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-12-06T09:00:46.072Z">
@@ -162,58 +162,53 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>排序可以说是相当常用的一类数据处理方式，而进行排序的方法也是多种多样的，此文主要记录经典的排序算法，并阐明基本原理</p>
-<h3 id="开始之前">开始之前</h3>
-<ul>
+<h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><ul>
 <li>所有的排序算法以函数形式展现，采用C语言编写</li>
 <li>函数风格统一，命名规则同<code>ASort</code>，A为排序方法名称，首字母大写，传参均仅传入数组及其大小，函数类型为<code>void</code>，即直接将原数组进行排序</li>
 <li>所有排序的终点，也就时排序后的结果，为从大到小排序</li>
 </ul>
 <a id="more"></a>
+
 <p>为了让排序更好的进行，首先编写交换函数，即<code>Swap()</code>函数</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ELEMENT_TYPE int</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(ELEMENT_TYPE *x, ELEMENT_TYPE *y)</span> </span>&#123;</span><br><span class="line">    ELEMENT_TYPE temp = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="冒泡排序">冒泡排序</h3>
-<p>冒泡排序可谓是相当经典的一个排序算法，记得自己大一面试学校社团之时，学长让第一个去了解的排序算法就是冒泡算法</p>
-<h4 id="实现思路">实现思路</h4>
-<ul>
+
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒泡排序可谓是相当经典的一个排序算法，记得自己大一面试学校社团之时，学长让第一个去了解的排序算法就是冒泡算法</p>
+<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
 <li>冒泡，顾名思义，就是将需排序的元素，看作大小不同的泡泡进行处理</li>
 <li>首先将数组进行一趟从头至尾的扫描，遇到后者比前者大的元素，就将二者交换，一趟扫描之后，最大的元素实现沉底</li>
 <li>那么只需要扫描n趟，就可让数组排列整齐</li>
 </ul>
 <p>结合上述思路，我们可以写出以下代码：</p>
-<h4 id="代码1">代码1</h4>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BubbleSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123; <span class="hljs-comment">// 冒泡</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; ++j)</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &gt; a[j+<span class="hljs-number">1</span>])</span><br><span class="line">                Swap(&amp;a[j], &amp;a[j+<span class="hljs-number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BubbleSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123; <span class="hljs-comment">// 冒泡</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; ++j)</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &gt; a[j+<span class="hljs-number">1</span>])</span><br><span class="line">                Swap(&amp;a[j], &amp;a[j+<span class="hljs-number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>上述代码相当简单，但是还可进行优化</li>
 <li>因为冒泡排序过程中，有可能只进行小于n趟就已经排序完成，之后的扫描都属于无用功，所以加一标记，使其在扫描一趟的过程中，若无元素交换，则直接结束循环</li>
 </ul>
-<h4 id="代码2">代码2</h4>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BubbleSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123; <span class="hljs-comment">// 冒泡</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &gt; a[j+<span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                Swap(&amp;a[j], &amp;a[j+<span class="hljs-number">1</span>]);</span><br><span class="line">                flag = <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BubbleSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123; <span class="hljs-comment">// 冒泡</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &gt; a[j+<span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                Swap(&amp;a[j], &amp;a[j+<span class="hljs-number">1</span>]);</span><br><span class="line">                flag = <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如此一来，其最好情况为<code>O(N)</code>，而最坏情况为<code>O(N^2)</code></p>
-<h3 id="插入排序">插入排序</h3>
-<p>插入排序也是简单排序的一种，也是比较常见的一种算法</p>
-<h4 id="实现思路-1">实现思路</h4>
-<ul>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序也是简单排序的一种，也是比较常见的一种算法</p>
+<h4 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
 <li>为了更好地理解插入算法，我们引入打牌时的实例</li>
 <li>打牌时，为方便出牌，我们一般将牌有顺序地拿着，当摸一张牌时，我们会与手中已排序完成的牌进行比较，以插入到合适的位置</li>
 <li>插入排序也是模拟了这一过程，首先假设数组中的首个元素已经 “拿在手中” ，之后将数组中的元素依次取出，进行插入</li>
 </ul>
-<h4 id="代码">代码</h4>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InsertionSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 插入</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i, j;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        ELEMENT_TYPE temp = a[i];</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; a[j<span class="hljs-number">-1</span>] &gt; temp; j--)</span><br><span class="line">            a[j] = a[j<span class="hljs-number">-1</span>];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InsertionSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 插入</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i, j;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        ELEMENT_TYPE temp = a[i];</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &gt; <span class="hljs-number">0</span> &amp;&amp; a[j<span class="hljs-number">-1</span>] &gt; temp; j--)</span><br><span class="line">            a[j] = a[j<span class="hljs-number">-1</span>];</span><br><span class="line">        a[j] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>代码在插入的时候是从后往前比较的，也就是从<code>i</code>到<code>0</code></li>
 <li>插入排序无需进行数字的交换，某种程度来说代码量是少于冒泡的</li>
 <li>其最好情况为<code>O(N)</code>，而最坏情况为<code>O(N^2)</code></li>
 </ul>
-<h3 id="选择排序">选择排序</h3>
-<p>提到简单排序，就不得不说选择排序</p>
-<h4 id="实现思路-2">实现思路</h4>
-<ul>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>提到简单排序，就不得不说选择排序</p>
+<h4 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
 <li>选择排序很好理解，就是首先遍历一遍数组，找到，该数组中最小的元素，与数组首位元素进行交换</li>
 <li>这种交换需要进行<code>n</code>次，所以遍历也会进行<code>n</code>次</li>
 </ul>
-<h4 id="代码-1">代码</h4>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SelectionSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;  <span class="hljs-comment">// 选择</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> min = i;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &lt; a[min])</span><br><span class="line">                min = j;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;a[min], &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SelectionSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;  <span class="hljs-comment">// 选择</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> min = i;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt; n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j] &lt; a[min])</span><br><span class="line">                min = j;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;a[min], &amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>选择排序的时间复杂度是恒定的，无所谓最好最坏，均为 <code>O(N^2)</code></li>
 </ul>
