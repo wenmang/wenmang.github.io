@@ -10,13 +10,13 @@
 <title>单源最短路径 - 文的盲</title>
 
 
-    <meta name="description" content="说明在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
+    <meta name="description" content="说明 在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单源最短路径">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;19&#x2F;%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="说明在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
+<meta property="og:description" content="说明 在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径 这条路径就是两点之间的最短路径（Shortest Path） 第一个顶点为源点（Source） 最后一个顶点为终点（Destination）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-10-21T09:26:08.567Z">
@@ -73,7 +73,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -154,36 +154,37 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h4 id="说明">说明</h4>
+<p>在网络中，求两个不同顶点之间的所有路径中，边的权值之和最小的一条路径</p>
 <p>这条路径就是两点之间的<strong>最短路径</strong>（Shortest Path）</p>
 <p>第一个顶点为<strong>源点</strong>（Source）</p>
 <p>最后一个顶点为<strong>终点</strong>（Destination）</p>
 <a id="more"></a>
-
-<h4 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h4><p><strong>单源最短路径：</strong>从某固定源点出发，求其到其他顶点的最短路径</p>
+<h4 id="分类">分类：</h4>
+<p><strong>单源最短路径：</strong>从某固定源点出发，求其到其他顶点的最短路径</p>
 <ul>
 <li><strong>无权图</strong></li>
 <li><strong>有权图</strong></li>
 </ul>
-<h3 id="无权图的单源最短路"><a href="#无权图的单源最短路" class="headerlink" title="无权图的单源最短路"></a>无权图的单源最短路</h3><p><strong>实现方法：</strong>从源点开始，按照非递减的顺序，找出各个顶点的最短路，此类查找类似于图的BFS遍历，但有细微的不同</p>
+<h3 id="无权图的单源最短路">无权图的单源最短路</h3>
+<p><strong>实现方法：</strong>从源点开始，按照非递减的顺序，找出各个顶点的最短路，此类查找类似于图的BFS遍历，但有细微的不同</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">UnWeighted</span> <span class="hljs-params">(LGraph graph, <span class="hljs-keyword">int</span> dist[], <span class="hljs-keyword">int</span> path[], Vertex s)</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/* dist[] 存距源点的距离   path[] 存通过结点找到此结点的结点 */</span></span><br><span class="line">    Queue Q = CreateQueue();</span><br><span class="line">    Vertex v;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    dist[s] = <span class="hljs-number">0</span>;    <span class="hljs-comment">// 初始化源节点</span></span><br><span class="line">    AddQ(Q, s);</span><br><span class="line">    <span class="hljs-keyword">while</span> (!IsEmpty(Q))&#123;</span><br><span class="line">        v = Delete(Q);</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = graph-&gt;g[v]-&gt;firstEdge; w; w = w-&gt;next)</span><br><span class="line">            <span class="hljs-keyword">if</span> (dist[w-&gt;adjv] == <span class="hljs-number">-1</span>)&#123;</span><br><span class="line">                dist[w-&gt;adjv] = dist[v]+<span class="hljs-number">1</span>;  <span class="hljs-comment">// 存入此结点到源节点的距离</span></span><br><span class="line">                path[w-&gt;adjv] = v;  <span class="hljs-comment">// 存入上个结点的位置</span></span><br><span class="line">                AddQ(Q, w-&gt;adjv);   <span class="hljs-comment">// 将结点压入队列</span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注：</strong>上述代码使用过之前应首先将数组dist[]和path[]各位初始化为-1</p>
 <p><strong>解析：</strong>上述代码实现方式如下：</p>
-<ol>
+<ol type="1">
 <li>将源点对应的 dist[s] 更改为0，并将源点压入队列</li>
 <li>弹出源点，并对源点连接的所有结点均作如下处理：记录其与源点的距离并存入 dist[] 数组对应的位置，记录源点的下标于 path[] 数组，将结点压入队列</li>
 <li>将队头结点弹出，并对其所连结点做与 2 相似处理：记录其与源点的距离并存入 dist[] 数组对应的位置，记录弹出结点的下标于 path[] 数组，将此结点压入队列</li>
 <li>重复 3 ，直至图中所有结点全部 进入并被弹出过队列</li>
 </ol>
 <p>此算法结束后，如需打印某结点到源结点的最短路径，可以采用栈依靠 path 数组 从此结点开始压栈至源节点，然后依次 pop 打印即可</p>
-<h3 id="有权图的单源最短路"><a href="#有权图的单源最短路" class="headerlink" title="有权图的单源最短路"></a>有权图的单源最短路</h3><p>有了无权图的单源最短路解决方案，有权图的单源最短路便也显得触手可及了</p>
+<h3 id="有权图的单源最短路">有权图的单源最短路</h3>
+<p>有了无权图的单源最短路解决方案，有权图的单源最短路便也显得触手可及了</p>
 <p><strong>区别：</strong>无权图的最短路即经过顶点最少的路径，而有权图的最短路却并非如此，经过的顶点最少的并不一定是最短路</p>
 <p><strong>注意：</strong>负值圈的影响：由于权值可为负数，有权图可能出现某一回路权值和为负数，那么为了求权值和最小，就会一直在此回路绕圈子，所以，我们首先讨论权值均非负的情况</p>
 <p><strong>实现方法：</strong>Dijkstra 算法</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Vertex <span class="hljs-title">FindMinDist</span><span class="hljs-params">(MGraph graph, <span class="hljs-keyword">int</span> dist[], <span class="hljs-keyword">int</span> collected[])</span></span>&#123;</span><br><span class="line">    Vertex minV, v;</span><br><span class="line">    <span class="hljs-keyword">int</span> minDist = INFINITY;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; v++) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (collected[v] == <span class="hljs-literal">false</span> &amp;&amp; dist[v] &lt; minDist)&#123;</span><br><span class="line">            minDist = dist[v];</span><br><span class="line">            minV = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (minDist &lt; INFINITY)</span><br><span class="line">        <span class="hljs-keyword">return</span> minV;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        <span class="hljs-keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Dijkstra</span><span class="hljs-params">(MGraph graph, <span class="hljs-keyword">int</span> dist[], <span class="hljs-keyword">int</span> path[], Vertex s)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> collected[MAXSIZE];</span><br><span class="line">    Vertex v, w;</span><br><span class="line">    <span class="hljs-comment">/* 初始化：邻接表不存在的边用INFINITY表示 */</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; v++) &#123;</span><br><span class="line">        dist[v] = graph-&gt;g[s][v];</span><br><span class="line">        <span class="hljs-keyword">if</span> (dist[v] &lt; INFINITY)</span><br><span class="line">            path[v] = s;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            path[v] = <span class="hljs-number">-1</span>;</span><br><span class="line">        collected[v] = <span class="hljs-literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">/* 先将起点收入集合 */</span></span><br><span class="line">    dist[s] = <span class="hljs-number">0</span>;</span><br><span class="line">    collected[s] = <span class="hljs-literal">true</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)&#123;</span><br><span class="line">        <span class="hljs-comment">/* v = 未被收录顶点中dist最小者 */</span></span><br><span class="line">        v = FindMinDist(graph, dist, collected);</span><br><span class="line">        <span class="hljs-keyword">if</span> (v == ERROR) <span class="hljs-comment">// 若v不存在</span></span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        collected[v] = <span class="hljs-literal">true</span>;    <span class="hljs-comment">// 收录v</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; w++) <span class="hljs-comment">// 对图中每个顶点w</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (collected[w] == <span class="hljs-literal">false</span> &amp;&amp; graph-&gt;g[v][w] &lt; INFINITY)&#123;    <span class="hljs-comment">// 若w是v的邻接点并且未被收录</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (graph-&gt;g[v][w] &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 有负边</span></span><br><span class="line">                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">                <span class="hljs-keyword">if</span> (dist[v] + graph-&gt;g[v][w] &lt; dist[w])&#123;    <span class="hljs-comment">// 收录v使得dist[w]变小</span></span><br><span class="line">                    dist[w] = dist[v] + graph-&gt;g[v][w]; <span class="hljs-comment">// 更新dist[w]</span></span><br><span class="line">                    path[w] = v;    <span class="hljs-comment">// 更新s到w的路径</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>void Dijkstra() 函数主要分为两部分：初始化，正式运行</p>
 <p><strong>初始化：</strong></p>
 <ul>
@@ -195,11 +196,11 @@
 <ul>
 <li>将源点收录集合，即 collected[s] 置为true</li>
 <li>通过 FindMinDist() 函数，查找距离源点最近的结点v并将其收录</li>
-<li>遍历v的邻接点，更新其对应的 dist[] 值，存在着两个用处：<ul>
+<li>遍历v的邻接点，更新其对应的 dist[] 值，存在着两个用处：
+<ul>
 <li>为邻接点为 INFINITY 的结点赋值</li>
 <li>查找是否存在比已有路径更短的路径，如果有，将其更新</li>
-</ul>
-</li>
+</ul></li>
 <li>循环，直至所有结点均被收录</li>
 </ul>
 
@@ -293,7 +294,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

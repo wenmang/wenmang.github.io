@@ -10,13 +10,13 @@
 <title>由一道题重新审视排序 - 文的盲</title>
 
 
-    <meta name="description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
+    <meta name="description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
 <meta name="keywords" content="随笔,算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由一道题重新审视排序">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;14&#x2F;%E7%94%B1%E4%B8%80%E9%81%93%E9%A2%98%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
+<meta property="og:description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-04T13:10:50.400Z">
@@ -73,7 +73,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -160,27 +160,28 @@
 <li>比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。</li>
 </ul>
 <a id="more"></a>
-
-<h3 id="排序总述"><a href="#排序总述" class="headerlink" title="排序总述"></a>排序总述</h3><p>排序，在我看来，就是<strong>以给定的规则，对一组数（或者字符）进行重新排列</strong>，而规则是可变的，比如我们日常使用的：从大到小的顺序，从小到大的顺序，字典序等等等等。</p>
+<h3 id="排序总述">排序总述</h3>
+<p>排序，在我看来，就是<strong>以给定的规则，对一组数（或者字符）进行重新排列</strong>，而规则是可变的，比如我们日常使用的：从大到小的顺序，从小到大的顺序，字典序等等等等。</p>
 <p>那么，<strong>从底向上</strong>看排序，其最核心的部分，就在于两两比较，通过比较，就能确定两两之间的相对顺序——即谁先谁后。</p>
 <p>而排序的效率，则取决于比较次数的多少，比如我们可以通过<strong>不重复比较</strong>，或者一些特殊的比较方式来缩短时间复杂度。</p>
-<h3 id="比较函数"><a href="#比较函数" class="headerlink" title="比较函数"></a>比较函数</h3><h4 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h4><p>什么是比较函数？抽象来说，就是比较两个数，并确定其先后顺序的函数；具体来说，就是C语言 <code>qsort()</code> 函数中的 <code>cmp</code> 参数，是 <code>java</code> 中 <code>Arrays.sort()</code> 方法中的 <code>Comparator</code> 参数。</p>
+<h3 id="比较函数">比较函数</h3>
+<h4 id="总述">总述</h4>
+<p>什么是比较函数？抽象来说，就是比较两个数，并确定其先后顺序的函数；具体来说，就是C语言 <code>qsort()</code> 函数中的 <code>cmp</code> 参数，是 <code>java</code> 中 <code>Arrays.sort()</code> 方法中的 <code>Comparator</code> 参数。</p>
 <p>比较函数的一般写法是，对传入的两个参数（<code>a, b</code>）进行比较：</p>
 <ul>
-<li><code>a</code> 大于 <code>b</code>  返回 <code>1</code> </li>
-<li><code>a</code> 大于 <code>b</code>  返回 <code>-1</code> </li>
-<li><code>a</code> 大于 <code>b</code>  返回 <code>0</code> </li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>1</code></li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>-1</code></li>
+<li><code>a</code> 大于 <code>b</code> 返回 <code>0</code></li>
 </ul>
 <p>规则进行返回，通过控制两个参数的传入，来控制从大到小排列或者从小到大排列。</p>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>比较可以自己写规则，比如最为简单的数字的 从大到小，从小到大 等等，但是一些时候就不仅仅是简单的的从大到小或是从小到大了，比如我今天写的这个题（<a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener"><code>leetcode 179</code></a>）：</p>
+<h4 id="比较">比较</h4>
+<p>比较可以自己写规则，比如最为简单的数字的 从大到小，从小到大 等等，但是一些时候就不仅仅是简单的的从大到小或是从小到大了，比如我今天写的这个题（<a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener"><code>leetcode 179</code></a>）：</p>
 <p><strong>题目如下：</strong></p>
 <p>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</p>
 <p>示例 1:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: 210</span><br></pre></td></tr></table></figure>
-
 <p>示例 2:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: 9534330</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明:</strong> 输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
 <p><strong>题目解答：</strong></p>
 <p>这题本质是一个排序问题，而排序的方式不再是简单的数字排序：</p>
@@ -188,16 +189,16 @@
 <li>数字从大到小排序：<code>98</code> 肯定在 <code>9</code>前面，但是此题则应该将顺序置反</li>
 <li>数字从小到大排序：<code>2</code> 肯定在 <code>42</code> 前面，但是此题则应该将顺序置反</li>
 </ul>
-<p>所以此题的比较不能够按照常规方式写，而我们可以按照字符串的字典序来看，也就是说，将两个数字拼接，比较两种拼接方式的大小，从而选择排列顺序，比如：<code>98</code> 和 <code>9</code> </p>
+<p>所以此题的比较不能够按照常规方式写，而我们可以按照字符串的字典序来看，也就是说，将两个数字拼接，比较两种拼接方式的大小，从而选择排列顺序，比如：<code>98</code> 和 <code>9</code></p>
 <ul>
-<li>两个数只有两种拼接方式：<code>998</code> 明显大于 <code>989</code> ，所以 <code>9</code> 应该在 <code>98</code> 前面 </li>
+<li>两个数只有两种拼接方式：<code>998</code> 明显大于 <code>989</code> ，所以 <code>9</code> 应该在 <code>98</code> 前面</li>
 </ul>
 <p>便是以此种方式，来进行排序，排序后，将之依次拼贴为一字符串即可, <code>java</code>代码（参考了 <code>leetcode</code> 官方题解）：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LargerNumberComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String a, String b)</span> </span>&#123;</span><br><span class="line">            String order1 = a + b;</span><br><span class="line">            String order2 = b + a;</span><br><span class="line">            <span class="hljs-keyword">return</span> order2.compareTo(order1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">largestNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        String[] numsString = <span class="hljs-keyword">new</span> String[nums.length];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">            numsString[i] = String.valueOf(nums[i]);</span><br><span class="line">        </span><br><span class="line">        Arrays.sort(numsString, <span class="hljs-keyword">new</span> LargerNumberComparator());</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">if</span> (numsString[<span class="hljs-number">0</span>].equals(<span class="hljs-string">"0"</span>))</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-string">"0"</span>;</span><br><span class="line">        </span><br><span class="line">        String ret = <span class="hljs-keyword">new</span> String();</span><br><span class="line">        <span class="hljs-keyword">for</span> (String numString:numsString)</span><br><span class="line">            ret += numString;   </span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="比较次数"><a href="#比较次数" class="headerlink" title="比较次数"></a>比较次数</h3><p>这部分内容不算是重点，所以，大致说明即可：</p>
+<h3 id="比较次数">比较次数</h3>
+<p>这部分内容不算是重点，所以，大致说明即可：</p>
 <ul>
-<li>冒泡排序，每次循环都会比较，所以几乎每两个数字间都会进行比较，所以其时间复杂度为 $O(N^2)$</li>
+<li>冒泡排序，每次循环都会比较，所以几乎每两个数字间都会进行比较，所以其时间复杂度为 <span class="math inline">\(O(N^2)\)</span></li>
 <li>而比较高级的排序，比如归并，快排甚至桶排，都是降低了比较次数，从而降低了时间复杂度；</li>
 </ul>
 
@@ -291,7 +292,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

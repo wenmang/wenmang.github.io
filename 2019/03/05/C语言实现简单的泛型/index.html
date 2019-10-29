@@ -10,13 +10,13 @@
 <title>C语言实现简单的泛型 - 文的盲</title>
 
 
-    <meta name="description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
+    <meta name="description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
 <meta name="keywords" content="C语言,博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言实现简单的泛型">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;03&#x2F;05&#x2F;C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E6%B3%9B%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
+<meta property="og:description" content="众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。 从 Swap 谈起">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-08-31T06:08:15.345Z">
@@ -73,7 +73,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -155,61 +155,57 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>众所周知，C语言是不支持泛型的，但可以利用C语言自身的语法特点来实现此特性。而此篇博文根据斯坦福公开课 《编程范式》整理，以阐述用C语言实现此种特性的大致思路，也算是一个简单的笔记。</p>
-<h4 id="从-Swap-谈起"><a href="#从-Swap-谈起" class="headerlink" title="从 Swap 谈起"></a>从 Swap 谈起</h4><a id="more"></a>
-
+<h4 id="从-swap-谈起">从 Swap 谈起</h4>
+<a id="more"></a>
 <p>交换函数应该是最常见也是最常用的函数之一，C语言的交换函数一般这样写：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> *p, <span class="hljs-keyword">int</span> *q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> tmp = *p;</span><br><span class="line">    *p = *q;</span><br><span class="line">    *q = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>但是如上代码仅能对 <code>int</code> 类型数据进行交换，如果要交换 <code>double</code> 或者其他类型的数据又需要写一段极其相似的代码（仅将 <code>int</code> 换掉），而这样无疑是不够简练的，代码也不够优美。所以我们考虑写一个能交换所有数据类型的函数，以简练代码，提高效率。</p>
 <p>既然有这样的想法，那么我们试着去实现它。既然要普适所以数据类型，那么我们就需要向本源出发去寻找。无论什么类型的数据，在计算机底层都是以二进制储存的，这我们就找到了所有不同类型数据的共同点，也就有了设计思路：</p>
-<ol>
+<ol type="1">
 <li>在内存中找到两个数据的地址</li>
 <li>从头至尾，将两个数据的每一个字节进行交换</li>
 </ol>
 <p>所以结合C语言的语法特点，便有了如下代码：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap</span> <span class="hljs-params">(<span class="hljs-keyword">void</span> *p, <span class="hljs-keyword">void</span> *q, <span class="hljs-keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> buffer[size];</span><br><span class="line">    <span class="hljs-built_in">memcpy</span>(buffer, p, size);</span><br><span class="line">    <span class="hljs-built_in">memcpy</span>(p, q, size);</span><br><span class="line">    <span class="hljs-built_in">memcpy</span>(q, buffer, size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>就代码而言，此一类函数写就的重中之重就是 <code>void</code> 指针的利用，将 <code>void</code> 指针用于形参，以作限定。由于 <code>void *</code> 变量无法直接引用，因为编译器不知道此指针所指变量到底占了几个字节，且因为要适应所有数据类型，所以多传了个参数—— <code>size</code> ，来对传入数据类型所占字节数进行说明。而整段代码原理如下：</p>
-<ol>
+<ol type="1">
 <li>传入两个数据在内存中的地址以及数据所占字节数</li>
 <li>创建临时变量字符数组 <code>buffer[]</code> 作为中间值（因为一个 <code>char</code> 占1个字节，所以正好采用字符数组来作为中间值）</li>
 <li>与正常交换的方式相同，不过是采用 <code>memcpy()</code> 来进直接对内存进行操作，逐个字节进行复制</li>
 </ol>
-<h4 id="谈谈-IsSearch"><a href="#谈谈-IsSearch" class="headerlink" title="谈谈 IsSearch()"></a>谈谈 IsSearch()</h4><p>既然知道了此种思路与写法，那么我们直接看另一个简单的函数——线性查找，以 <code>int</code> 为例，代码是这样的：</p>
+<h4 id="谈谈-issearch">谈谈 IsSearch()</h4>
+<p>既然知道了此种思路与写法，那么我们直接看另一个简单的函数——线性查找，以 <code>int</code> 为例，代码是这样的：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">IsSearch</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++)</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[i] == key)</span><br><span class="line">            <span class="hljs-keyword">return</span> i;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>那么如果使用泛型，代码应该怎样写呢？答案是这样的：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span>* <span class="hljs-title">IsSearch</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>* key, <span class="hljs-keyword">void</span>* base, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> elemSize)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="hljs-keyword">void</span>* elemAddr = (<span class="hljs-keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">memcpy</span>(key, elemAddr, elemSize) == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>整段代码解释如下：</p>
-<ol>
+<ol type="1">
 <li>传入需要搜索的值，被搜索数组，数组元素数，数组每个元素所占字节数</li>
-<li>进入循环开始查找：<ol>
+<li>进入循环开始查找：
+<ol type="1">
 <li>先确定每一个元素的地址（由于 <code>void*</code> 类型的指针不支持直接操作，所以需要先将其进行强制类型转换为 <code>char*</code> 类型指针）</li>
 <li>调用库函数，将 <code>key</code> 和数组中的元素依次进行必较</li>
-</ol>
-</li>
+</ol></li>
 <li>成功则返回数组对应元素的首地址，否则返回NULL</li>
 </ol>
 <p>但如果我们不利用库函数来进行比较呢？我们想使用自己写的比较函数来比较，那有应该怎么做呢？（<strong>注：</strong>这个想法显然必较牵强，因为此时的这种写法无疑是更加合理的，而为了说明知识点，就加了这个想法）</p>
 <p>（此处 <code>qsort()</code> 课中并未提及）在这里就不得不提一个C语言库函数了，那就是—— <code>qsort()</code> ，一个在调用之时需要写一个针对问题具体情况的比较函数当作参数传入函数之中，而我们这时的情况显然和 <code>qsort()</code> 函数面临的一样，所以我们采用相同的处理方式：传入一个必较函数，来判断两个元素是否一致。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span>* <span class="hljs-title">IsSearch</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>* key, <span class="hljs-keyword">void</span>* base, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> elemSize, <span class="hljs-keyword">int</span> (*cmpfn) (<span class="hljs-keyword">void</span>*, <span class="hljs-keyword">void</span>*))</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="hljs-keyword">void</span>* elemAddr = (<span class="hljs-keyword">char</span>*)base + i*elemSize;</span><br><span class="line">        <span class="hljs-keyword">if</span> (cmpfn(key, elemAddr) == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> elemAddr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注：</strong>因为 <code>cmpfn()</code> 是调用者写的函数，所以其数据类型是确定的，只需直接比较就行，故只传入两个参数。</p>
-<h4 id="调用-IsSearch"><a href="#调用-IsSearch" class="headerlink" title="调用 IsSearch()"></a>调用 IsSearch()</h4><p>有了普适版（第二版）的代码，其中提供了函数接口，那么调用者应该怎么写这个函数呢？</p>
-<h5 id="int-类型数据"><a href="#int-类型数据" class="headerlink" title="int 类型数据"></a><code>int</code> 类型数据</h5><p>比较 <code>int</code> 类型数据的函数，代码如下：</p>
+<h4 id="调用-issearch">调用 IsSearch()</h4>
+<p>有了普适版（第二版）的代码，其中提供了函数接口，那么调用者应该怎么写这个函数呢？</p>
+<h5 id="int-类型数据"><code>int</code> 类型数据</h5>
+<p>比较 <code>int</code> 类型数据的函数，代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">IntCmp</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>* n1, <span class="hljs-keyword">void</span>* n2)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span>* ip1 = n1;</span><br><span class="line">    <span class="hljs-keyword">int</span>* ip2 = n2;</span><br><span class="line">    <span class="hljs-keyword">return</span> (*ip1 - *ip2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注：</strong>此函数所带参数l类型以及返回值类型需与形参中函数一致</p>
-<h5 id="char-字符串-类型数据"><a href="#char-字符串-类型数据" class="headerlink" title="char* (字符串)类型数据"></a><code>char*</code> (字符串)类型数据</h5><p>字符串无疑是优雅的，但在C语言中处理字符串，就完全不存在优雅这一说了，因为C语言更加底层，对于字符串的处理不如其他的一些新语言来的形象（当然也是此些语言为字符串处理做了许多预备工作，以至于处理之时只调用已有的函数即可），所以关于字符串的处理可能要更加不易理解，代码如下：</p>
+<h5 id="char-字符串类型数据"><code>char*</code> (字符串)类型数据</h5>
+<p>字符串无疑是优雅的，但在C语言中处理字符串，就完全不存在优雅这一说了，因为C语言更加底层，对于字符串的处理不如其他的一些新语言来的形象（当然也是此些语言为字符串处理做了许多预备工作，以至于处理之时只调用已有的函数即可），所以关于字符串的处理可能要更加不易理解，代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">StrCmp</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>* vp1, <span class="hljs-keyword">void</span>* vp2)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span>* s1 = * (<span class="hljs-keyword">char</span>**)vp1;</span><br><span class="line">    <span class="hljs-keyword">char</span>* s2 = * (<span class="hljs-keyword">char</span>**)vp2;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-built_in">strcmp</span>(s1, s2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>仅看如此代码，会有种毫无头绪的感觉，那么为了更好地理解，我们需要写一下查找字符串时的全过程，代码：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">char</span>* key = <span class="hljs-string">"Li"</span>;</span><br><span class="line"><span class="hljs-keyword">char</span>* faName[] = &#123;<span class="hljs-string">"zhang"</span>, <span class="hljs-string">"wang"</span>, <span class="hljs-string">"li"</span>, <span class="hljs-string">"zhao"</span>, <span class="hljs-string">"sun"</span>&#125;;</span><br><span class="line"><span class="hljs-keyword">char</span>** found = IsSearch(&amp;key, faName, <span class="hljs-number">5</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">char</span>*), StrCmp);</span><br></pre></td></tr></table></figure>
-
 <p>好，因为单个的 <code>char</code> 是字符，而字符串是 <code>char*</code> ，那么理所当然字符串数组就是 <code>char**</code> 了，所以需要查找之时，传入 <code>IsSearch()</code> 的参数实际上是指针的指针，所以在调用比较函数之时需要进行一次解耦，将之变成两个字符串，而这也就是比较函数前两行的意义所在。</p>
 <p><strong>注：</strong></p>
-<ol>
+<ol type="1">
 <li>为了比较函数代码美观，所以在传参之时将目标字符串也作为指针的指针传入，如只将其作为指针传入，就无需解耦和了。</li>
 <li>在调用之时，用于接收返回值的变量必须是指针的指针，因为返回是个字符串，也就是一个字符指针</li>
 </ol>
@@ -304,7 +300,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">

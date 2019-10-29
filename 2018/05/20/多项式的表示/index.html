@@ -73,7 +73,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-2-column">
+<body class="is-3-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -156,67 +156,73 @@
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p><strong>由多项式的表示引出链表概念，因此，首先学习多项式的表示。</strong></p>
 <a id="more"></a>
-
 <p>##1.顺序存储的直接表示——数组表示</p>
 <p>a[i] 表示，a[i] 的值表示系数，i 表示指数</p>
 <p>如：f(x) = 4x^5 - 3x^2 + 1</p>
 <table>
 <thead>
-<tr>
-<th align="center">下标</th>
-<th align="center">0</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">3</th>
-<th align="center">4</th>
-<th align="center">5</th>
-<th align="center">……</th>
+<tr class="header">
+<th style="text-align: center;">下标</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">……</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>a[i]</strong></td>
-<td align="center"><strong>1</strong></td>
-<td align="center"><strong>0</strong></td>
-<td align="center"><strong>-3</strong></td>
-<td align="center"><strong>0</strong></td>
-<td align="center"><strong>0</strong></td>
-<td align="center"><strong>4</strong></td>
-<td align="center"><strong>……</strong></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>a[i]</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>-3</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>……</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>优点：运算简单，两个多项式相加只需将对应分量相加即可。</p>
 <p>缺点：遇到0项很多时，浪费空间。</p>
-<h2 id="2-顺序储存结构表示非零项——结构数组"><a href="#2-顺序储存结构表示非零项——结构数组" class="headerlink" title="2.顺序储存结构表示非零项——结构数组"></a>2.顺序储存结构表示非零项——结构数组</h2><p><strong>数组分量由系数a[i]、指数 i 组成的结构，对应一个非零项</strong></p>
+<h2 id="顺序储存结构表示非零项结构数组">2.顺序储存结构表示非零项——结构数组</h2>
+<p><strong>数组分量由系数a[i]、指数 i 组成的结构，对应一个非零项</strong></p>
 <p>如：P(x) = 9x^12 + 15x^8 + 3x^2</p>
 <table>
 <thead>
-<tr>
-<th align="center">下标 i</th>
-<th align="center">0</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">……</th>
+<tr class="header">
+<th style="text-align: center;">下标 i</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">……</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>系数 a[i]</strong></td>
-<td align="center"><strong>9</strong></td>
-<td align="center"><strong>15</strong></td>
-<td align="center"><strong>3</strong></td>
-<td align="center"><strong>……</strong></td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>系数 a[i]</strong></td>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;"><strong>15</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>……</strong></td>
 </tr>
-<tr>
-<td align="center"><strong>指数 i</strong></td>
-<td align="center"><strong>12</strong></td>
-<td align="center"><strong>8</strong></td>
-<td align="center"><strong>2</strong></td>
-<td align="center"><strong>……</strong></td>
+<tr class="even">
+<td style="text-align: center;"><strong>指数 i</strong></td>
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"><strong>……</strong></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>优点：节省空间</p>
-<h3 id="相加过程"><a href="#相加过程" class="headerlink" title="相加过程"></a>相加过程</h3><p>1.首先将数据按照 i 由小到大排列</p>
+<h3 id="相加过程">相加过程</h3>
+<p>1.首先将数据按照 i 由小到大排列</p>
 <p>2.将两个需要相加的多项式由两个多项式的第一项进行比较，将小的那一项直接作为和多项式的一项，并将此多项式的项向后移动一位。如果两个指数相等，则将其系数相加。</p>
-<h2 id="3-链表结构存储非零项——链表"><a href="#3-链表结构存储非零项——链表" class="headerlink" title="3.链表结构存储非零项——链表"></a>3.链表结构存储非零项——链表</h2><p>相加过程同结构数组</p>
+<h2 id="链表结构存储非零项链表">3.链表结构存储非零项——链表</h2>
+<p>相加过程同结构数组</p>
 
         </div>
         
@@ -308,7 +314,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
