@@ -10,13 +10,13 @@
 <title>队列 - 文的盲</title>
 
 
-    <meta name="description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
+    <meta name="description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="队列">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;02&#x2F;%E9%98%9F%E5%88%97&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
+<meta property="og:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-08-02T13:15:20.841Z">
@@ -73,7 +73,7 @@
 
 <link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
-<body class="is-3-column">
+<body class="is-2-column">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
@@ -128,7 +128,7 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
@@ -161,6 +161,7 @@
 <li>数据删除：出队列 （<code>deleteQueue</code>）</li>
 </ul>
 <a id="more"></a>
+
 <p>而队列主要的<strong>特性</strong>如下：</p>
 <ul>
 <li>先来先服务</li>
@@ -170,44 +171,51 @@
 <p><strong>数据对象集：</strong>一个有0个或多个元素的有穷线性表</p>
 <p><strong>操作集：</strong>长度为 <code>MaxSize</code> 的队列 <code>Q</code> 属于 <code>Queue</code>， 队列元素 <code>item</code> 属于 <code>ElementType</code></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Queue CreatQueue()						生成空队列</span><br><span class="line">2. int IsFullQ(Queue PtrQ)		判断队列Q是否已满</span><br><span class="line">3. void AddQ(Queue PtrQ, ElementType item)	将数据元素item插入队列Q中</span><br><span class="line">4. int IsEmptyQ(Queue PtrQ)					判断队列是否为空</span><br><span class="line">5. ElementType DeleteQ(Queue PtrQ)			将对头数据元素从队列中删除并返回</span><br></pre></td></tr></table></figure>
-<h3 id="队列的顺序储存实现">队列的顺序储存实现</h3>
-<p>利用数组来实现相关操作</p>
+
+<h3 id="队列的顺序储存实现"><a href="#队列的顺序储存实现" class="headerlink" title="队列的顺序储存实现"></a>队列的顺序储存实现</h3><p>利用数组来实现相关操作</p>
 <ul>
-<li><h4 id="直接利用数组实现">直接利用数组实现</h4>
-<p>数组的一端作为头，另一端作为尾，这样的方式是比较容易<strong>实现</strong>的：</p>
+<li><h4 id="直接利用数组实现"><a href="#直接利用数组实现" class="headerlink" title="直接利用数组实现"></a>直接利用数组实现</h4><p>数组的一端作为头，另一端作为尾，这样的方式是比较容易<strong>实现</strong>的：</p>
 <ul>
 <li>首先在空数组上的将队列头和尾均放在数组头的前一个位置，头和尾的标号为-1</li>
-</ul></li>
-<li><p>添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p></li>
+</ul>
+</li>
+<li><p>添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p>
+</li>
 </ul>
 <p><strong>存在的问题：</strong></p>
 <ul>
-<li><p>如果队放满，也就是队尾下标为 <code>MaxSize-1</code> 但此时队头由于删除元素的原因，还空有位置，因此会造成空间浪费。</p></li>
-<li><h4 id="利用环形数组实现">利用环形数组实现</h4>
-<p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 <code>MaxSize-1</code> ），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
+<li><p>如果队放满，也就是队尾下标为 <code>MaxSize-1</code> 但此时队头由于删除元素的原因，还空有位置，因此会造成空间浪费。</p>
+</li>
+<li><h4 id="利用环形数组实现"><a href="#利用环形数组实现" class="headerlink" title="利用环形数组实现"></a>利用环形数组实现</h4><p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 <code>MaxSize-1</code> ），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
 <p><strong>判断队列空和满</strong></p>
 <ul>
 <li><strong>空：</strong>队头下标等于队尾下标</li>
-</ul></li>
-<li><p><strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p></li>
+</ul>
+</li>
+<li><p><strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p>
+</li>
 </ul>
 <p><strong>改进：</strong>最大队尾下标加一除以 <code>MaxSize</code> 的余数等于队尾下标（除数大于被除数，余数为被除数本身）</p>
 <p>正因为上述所说，平常所说的 <strong>顺序存储</strong> 实现均是以 <strong>指环形数组</strong> 的方式实现。</p>
 <p>首先写出 <code>Queue.h</code> ，C语言代码如下：</p>
 <p><strong>C语言代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BASE_SIZE 8</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> elementType;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QNode</span> *<span class="hljs-title">queue</span>;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QNode</span>&#123;</span></span><br><span class="line">    elementType* data;	<span class="hljs-comment">// 队列数据存储位置</span></span><br><span class="line">    <span class="hljs-keyword">int</span> size;	<span class="hljs-comment">// data 数组大小</span></span><br><span class="line">    <span class="hljs-keyword">int</span> rear;	<span class="hljs-comment">// 队尾</span></span><br><span class="line">    <span class="hljs-keyword">int</span> front;	<span class="hljs-comment">// 队首</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">queue</span> <span class="hljs-title">createQueue</span><span class="hljs-params">()</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q, elementType e)</span></span>;</span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deleteQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
+
 <p>紧接着，我们在 <code>Queue.c</code> 文件中实现头文件中所申明的函数：</p>
 <p><strong>C语言代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"Queue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">queue</span> <span class="hljs-title">createQueue</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">queue</span> q = (<span class="hljs-built_in">queue</span>) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct QNode));</span><br><span class="line">    q-&gt;size = <span class="hljs-number">8</span>;</span><br><span class="line">    q-&gt;data = (elementType*) <span class="hljs-built_in">malloc</span>(q-&gt;size * <span class="hljs-keyword">sizeof</span>(elementType));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (q-&gt;rear+<span class="hljs-number">1</span>) % q-&gt;size == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;rear == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (isFull(q)) &#123;</span><br><span class="line">        q-&gt;size *= <span class="hljs-number">2</span>;</span><br><span class="line">        q-&gt;data = (elementType*) <span class="hljs-built_in">realloc</span>(q-&gt;data, q-&gt;size * <span class="hljs-keyword">sizeof</span>(elementType));</span><br><span class="line">    &#125;</span><br><span class="line">    q-&gt;rear = (q-&gt;rear+<span class="hljs-number">1</span>) % q-&gt;size;</span><br><span class="line">    q-&gt;data[q-&gt;rear] = e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deleteQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    assert(!isEmpty(q));</span><br><span class="line">    q-&gt;front = (q-&gt;front+<span class="hljs-number">1</span>) % q-&gt;size;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;data[q-&gt;front];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="队列的链式储存实现">队列的链式储存实现</h3>
-<p>也就是使用链表存储</p>
+
+<h3 id="队列的链式储存实现"><a href="#队列的链式储存实现" class="headerlink" title="队列的链式储存实现"></a>队列的链式储存实现</h3><p>也就是使用链表存储</p>
 <p>首先可以写出头文件 <code>Queue.h</code> 的内容：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LQNode</span>* <span class="hljs-title">lQueue</span>;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span></span><br><span class="line">    elementType data;</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LQNode</span>&#123;</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">rear</span>;</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">front</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lQueue <span class="hljs-title">createlQueue</span><span class="hljs-params">()</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addlQueue</span><span class="hljs-params">(lQueue q, elementType e)</span></span>;</span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deletelQueue</span><span class="hljs-params">(lQueue q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">islEmpty</span><span class="hljs-params">(lQueue q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
+
+
 <p>用链表储存，设计了两个结构，</p>
-<p><code>Node</code> 为队列中节点，指针指向下一个节点，<code>data</code> 储存节点数据</p>
-<p><code>QNode</code> 为队列头节点，两个指针分别指向队列头和队列尾</p>
+<p><code>Node</code>    为队列中节点，指针指向下一个节点，<code>data</code> 储存节点数据</p>
+<p><code>QNode</code>  为队列头节点，两个指针分别指向队列头和队列尾</p>
 <p>然后，在 <code>Queue.c</code> 文件中实现声明的函数：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">lQueue <span class="hljs-title">createlQueue</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    lQueue q = (lQueue) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct LQNode));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addlQueue</span><span class="hljs-params">(lQueue q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">tmp</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*) <span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span></span><br><span class="line">    tmp-&gt;data = e;</span><br><span class="line">    <span class="hljs-keyword">if</span> (q-&gt;front == <span class="hljs-literal">NULL</span>)</span><br><span class="line">        q-&gt;front = q-&gt;rear = tmp;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        q-&gt;rear = q-&gt;rear-&gt;next = tmp;</span><br><span class="line">    q-&gt;rear-&gt;next = <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deletelQueue</span><span class="hljs-params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    assert(!islEmpty(q));</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">tmp</span> = <span class="hljs-title">q</span>-&gt;<span class="hljs-title">front</span>;</span></span><br><span class="line">    q-&gt;front = q-&gt;front-&gt;next;</span><br><span class="line">    <span class="hljs-keyword">return</span> tmp-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">islEmpty</span><span class="hljs-params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;front == <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>优点：</strong>链表储存无需判断是否队列已满</p>
 
         </div>
@@ -300,7 +308,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -415,966 +423,14 @@
     
         
     
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://google.com" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Google</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">google.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://baidu.com" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">Baidu</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">baidu.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 14px;">C语言</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">小游戏</a> <a href="/tags/%E5%BA%95%E5%B1%82/" style="font-size: 14px;">底层</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 18px;">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3/" style="font-size: 10px;">有趣</a> <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/" style="font-size: 10px;">模式识别</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">算法基础</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" style="font-size: 10px;">算法思想</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">算法技巧</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 12px;">练习</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16px;">随笔</a>
-    </div>
-</div>
-    
     
         <div class="column-right-shadow is-hidden-widescreen ">
         
-            <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/10/09/%E5%88%86%E6%B2%BB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="分治">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T10:35:45.000Z">2019-10-09</time></div>
-                    <a href="/2019/10/09/%E5%88%86%E6%B2%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">分治</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/04/C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C的编译与链接">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-04T13:43:29.000Z">2019-10-04</time></div>
-                    <a href="/2019/10/04/C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C的编译与链接</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/04/C%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C函数执行">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-04T04:44:31.000Z">2019-10-04</time></div>
-                    <a href="/2019/10/04/C%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C函数执行</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/28/Fisher%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Fisher线性判别">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T05:53:59.000Z">2019-09-28</time></div>
-                    <a href="/2019/09/28/Fisher%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Fisher线性判别</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/20/%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="粗谈堆栈">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T06:10:05.000Z">2019-09-20</time></div>
-                    <a href="/2019/09/20/%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">粗谈堆栈</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/AI/">
-                        <span class="tag">AI</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/C/">
-                        <span class="tag">C</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="tag">C语言</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Java/">
-                        <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%88%B7%E9%A2%98/">
-                        <span class="tag">刷题</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="tag">博客</span>
-                        <span class="tag is-grey">30</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/">
-                        <span class="tag">小游戏</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%BA%95%E5%B1%82/">
-                        <span class="tag">底层</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%95%99%E7%A8%8B/">
-                        <span class="tag">教程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">25</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%9C%89%E8%B6%A3/">
-                        <span class="tag">有趣</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/">
-                        <span class="tag">模式识别</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="tag">算法</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
-                        <span class="tag">算法基础</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/">
-                        <span class="tag">算法思想</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">
-                        <span class="tag">算法技巧</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%BB%83%E4%B9%A0/">
-                        <span class="tag">练习</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
-                        <span class="tag">链表</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="tag">随笔</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
         </div>
     
 </div>
 
                 
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2019/10/09/%E5%88%86%E6%B2%BB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="分治">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-09T10:35:45.000Z">2019-10-09</time></div>
-                    <a href="/2019/10/09/%E5%88%86%E6%B2%BB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">分治</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/04/C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C的编译与链接">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-04T13:43:29.000Z">2019-10-04</time></div>
-                    <a href="/2019/10/04/C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C的编译与链接</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/10/04/C%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="C函数执行">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-04T04:44:31.000Z">2019-10-04</time></div>
-                    <a href="/2019/10/04/C%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">C函数执行</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/28/Fisher%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Fisher线性判别">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-28T05:53:59.000Z">2019-09-28</time></div>
-                    <a href="/2019/09/28/Fisher%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Fisher线性判别</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/09/20/%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="粗谈堆栈">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-20T06:10:05.000Z">2019-09-20</time></div>
-                    <a href="/2019/09/20/%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">粗谈堆栈</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/05/">
-                <span class="level-start">
-                    <span class="level-item">五月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/03/">
-                <span class="level-start">
-                    <span class="level-item">三月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/AI/">
-                        <span class="tag">AI</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/C/">
-                        <span class="tag">C</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="tag">C语言</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Java/">
-                        <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/c/">
-                        <span class="tag">c</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/python/">
-                        <span class="tag">python</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%88%B7%E9%A2%98/">
-                        <span class="tag">刷题</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%8D%9A%E5%AE%A2/">
-                        <span class="tag">博客</span>
-                        <span class="tag is-grey">30</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/">
-                        <span class="tag">小游戏</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%BA%95%E5%B1%82/">
-                        <span class="tag">底层</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%95%99%E7%A8%8B/">
-                        <span class="tag">教程</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">25</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%9C%89%E8%B6%A3/">
-                        <span class="tag">有趣</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/">
-                        <span class="tag">模式识别</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="tag">算法</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/">
-                        <span class="tag">算法基础</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/">
-                        <span class="tag">算法思想</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/">
-                        <span class="tag">算法技巧</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E7%BB%83%E4%B9%A0/">
-                        <span class="tag">练习</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E9%93%BE%E8%A1%A8/">
-                        <span class="tag">链表</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="tag">随笔</span>
-                        <span class="tag is-grey">8</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
             </div>
         </div>
     </section>
