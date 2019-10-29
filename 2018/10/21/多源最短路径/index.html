@@ -116,7 +116,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="Search" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes membaca (Sekitar 833 kata)
+                    6 minutes read (About 833 words)
                 </span>
                 
                 
@@ -156,18 +156,19 @@
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>知道了单源最短路的算法之后，我们可以更进一步，学习多源最短路问题，因为我们的需求是多样的，我们在知道某点到某点最短距离之后还想知道其他两点间的最短距离，那么我们需要再求解一次吗？显然，那样过于麻烦，显然，我们需要一种算法来一次性求解所有的两两间距，用的时候只需要取出即可</p>
 <a id="more"></a>
-<h3 id="弗洛伊德floyd算法">弗洛伊德（Floyd）算法</h3>
-<p>弗洛伊德算法是比较经典的求解多元路径的算法，代码极为简洁</p>
+
+<h3 id="弗洛伊德（Floyd）算法"><a href="#弗洛伊德（Floyd）算法" class="headerlink" title="弗洛伊德（Floyd）算法"></a>弗洛伊德（Floyd）算法</h3><p>弗洛伊德算法是比较经典的求解多元路径的算法，代码极为简洁</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Pathmatirx[MAXSIZE][MAXSIZE];</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ShortPathTable[MAXSIZE][MAXSIZE];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShortestPathFloyd</span><span class="hljs-params">(MGraph graph, Pathmatirx *P, ShortPathTable *D)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> v, w, k;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; ++w) &#123;	<span class="hljs-comment">// 初始化数组</span></span><br><span class="line">            (*D)[v][w] = graph-&gt;g[v][w];</span><br><span class="line">            (*P)[v][w] = w;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>; k &lt; graph-&gt;nv; ++k)</span><br><span class="line">        <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">            <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; ++w)</span><br><span class="line">                <span class="hljs-keyword">if</span> ((*D)[v][w] &gt; (*D)[v][k] + (*D)[k][w])&#123;	<span class="hljs-comment">// 求解</span></span><br><span class="line">                    (*D)[v][w] = (*D)[v][k] + (*D)[k][w];</span><br><span class="line">                    (*P)[v][w] = (*P)[v][k];</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>算法解释：</strong></p>
 <ul>
 <li>首先对传入的两个二维数组进行初始化，将图的存储权重的数组复制给D数组，P数组将每列初始化为列标数</li>
-<li>利用三重循环来查找最短路径
-<ul>
-<li>k控制中转点，如：k = 0时，所有顶点都经过v0中转；k = 1时，所有顶点都经过v1中转……</li>
+<li>利用三重循环来查找最短路径<ul>
+<li>k控制中转点，如：k = 0时，所有顶点都经过v0中转；k = 1时，所有顶点都经过v1中转…… </li>
 <li>依次判断两个点经过中转点时路径是否会缩短，如果是，更新D数组的权重，P数组相应位置更新为中转点的下标</li>
-</ul></li>
+</ul>
+</li>
 <li>所以，最后结果为D数组存着某点到某点的最短距离的值，P数组存着相应的某两点之间最短路径所经过的中转点</li>
 </ul>
 <p><strong>细节说明：</strong></p>
@@ -175,22 +176,23 @@
 <li>上述代码直接适用于邻接矩阵存储的图，如是邻接表存储，则初始化部分的代码需重写</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Pathmatirx[MAXSIZE][MAXSIZE];</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ShortPathTable[MAXSIZE][MAXSIZE];</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>以上述方式定义之后便于直接将二维数组以参数传递进函数</li>
 <li>判断的代码直接带入图中更好理解：v -&gt; w 的距离是否大于v-&gt;k 再由 k-&gt;w的距离之和，以此种方式更容易理解和记忆写出该代码的方树，k是中转点也变得更容易理解</li>
 </ul>
-<h3 id="输出结果">输出结果</h3>
-<p>运行算法之后，该如何输出某点到某点的最短路径呢？我们直接给出最普遍的方式——打印出所有两两结点间的最短路径</p>
+<h3 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h3><p>运行算法之后，该如何输出某点到某点的最短路径呢？我们直接给出最普遍的方式——打印出所有两两结点间的最短路径</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) &#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (w = v+<span class="hljs-number">1</span>; w &lt; graph-&gt;nv; ++w) &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"v%d-v%d weight:%d"</span>, v, w, (*D)[v][w]);</span><br><span class="line">        k = (*P)[v][w];</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">" path: %d"</span>, v);</span><br><span class="line">        <span class="hljs-keyword">while</span> (k != w)&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">" -&gt; %d"</span>, k);</span><br><span class="line">            k = (*P)[k][w];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">" -&gt; %d\n"</span>, w);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>算法解释：</strong></p>
 <ul>
 <li>首先输出某点到某点以及之间的距离</li>
-<li>之后输出路径
-<ul>
+<li>之后输出路径<ul>
 <li>在P数组对应位置找到其值k，输出该值之后让其代替初始结点（v）下标</li>
 <li>在新的位置找到新的k并赋值，输出，直至 k==w</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <p><strong>说明：</strong></p>
 <p>该循环直接嵌入上述函数使用</p>
@@ -215,7 +217,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
         <div class="buttons is-centered">
             
                 
@@ -320,7 +322,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         42
@@ -330,7 +332,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -340,7 +342,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         21
@@ -351,7 +353,7 @@
         
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -404,7 +406,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -441,7 +443,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -453,7 +455,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
         <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 14px;">C语言</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">小游戏</a> <a href="/tags/%E5%BA%95%E5%B1%82/" style="font-size: 14px;">底层</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 18px;">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3/" style="font-size: 10px;">有趣</a> <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/" style="font-size: 10px;">模式识别</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">算法基础</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" style="font-size: 10px;">算法思想</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">算法技巧</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 12px;">练习</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16px;">随笔</a>
     </div>
@@ -465,7 +467,7 @@
             <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -570,7 +572,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -748,7 +750,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -918,7 +920,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -1023,7 +1025,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1201,7 +1203,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1487,7 +1489,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1511,7 +1513,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu.." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1523,11 +1525,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };

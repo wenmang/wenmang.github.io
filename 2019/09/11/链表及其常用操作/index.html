@@ -10,13 +10,13 @@
 <title>链表及其常用操作 - 文的盲</title>
 
 
-    <meta name="description" content="链表是什么？学过数据结构的人都很清楚，链表就是一种最最最基本的数据结构，基本到什么程度呢？基本到数据结构课上所学的数据结构都可以用链表来实现。 正因为其基础，我们更要了解链表的基本操作。">
+    <meta name="description" content="链表是什么？学过数据结构的人都很清楚，链表就是一种最最最基本的数据结构，基本到什么程度呢？基本到数据结构课上所学的数据结构都可以用链表来实现。 正因为其基础，我们更要了解链表的基本操作。">
 <meta name="keywords" content="数据结构,算法基础,链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表及其常用操作">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;09&#x2F;11&#x2F;%E9%93%BE%E8%A1%A8%E5%8F%8A%E5%85%B6%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="链表是什么？学过数据结构的人都很清楚，链表就是一种最最最基本的数据结构，基本到什么程度呢？基本到数据结构课上所学的数据结构都可以用链表来实现。 正因为其基础，我们更要了解链表的基本操作。">
+<meta property="og:description" content="链表是什么？学过数据结构的人都很清楚，链表就是一种最最最基本的数据结构，基本到什么程度呢？基本到数据结构课上所学的数据结构都可以用链表来实现。 正因为其基础，我们更要了解链表的基本操作。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-09-14T13:50:47.175Z">
@@ -116,7 +116,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="Search" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes membaca (Sekitar 1132 kata)
+                    8 minutes read (About 1132 words)
                 </span>
                 
                 
@@ -157,8 +157,8 @@
             <script src="/assets/js/APlayer.min.js"> </script><p>链表是什么？学过数据结构的人都很清楚，链表就是一种最最最基本的数据结构，基本到什么程度呢？基本到数据结构课上所学的数据结构都可以用链表来实现。</p>
 <p>正因为其基础，我们更要了解链表的基本操作。</p>
 <a id="more"></a>
-<h4 id="链表的构成及基本操作">链表的构成及基本操作</h4>
-<p>首先了解链表（单向）的构成：链表由一个个统一的节点构成，节点一般由两个变量构成：</p>
+
+<h4 id="链表的构成及基本操作"><a href="#链表的构成及基本操作" class="headerlink" title="链表的构成及基本操作"></a>链表的构成及基本操作</h4><p>首先了解链表（单向）的构成：链表由一个个统一的节点构成，节点一般由两个变量构成：</p>
 <ul>
 <li>一个值，可以为各种类型</li>
 <li>一个指向下一个节点的“指针”</li>
@@ -171,14 +171,13 @@
 </ul>
 <p>下面实现链表的构成及其基本操作（<code>LeetCode</code> 对应题目：<a href="https://leetcode-cn.com/problems/design-linked-list/" target="_blank" rel="noopener">707. 设计链表</a>）</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyLinkedList</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span></span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> val;</span><br><span class="line">		Node next;</span><br><span class="line">		Node(<span class="hljs-keyword">int</span> val)&#123;</span><br><span class="line">			<span class="hljs-keyword">this</span>.val = val;</span><br><span class="line">			<span class="hljs-keyword">this</span>.next = <span class="hljs-keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> Node head,tail;</span><br><span class="line">	<span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyLinkedList</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        Node node = <span class="hljs-keyword">new</span> Node(<span class="hljs-number">0</span>);</span><br><span class="line">        <span class="hljs-keyword">this</span>.head = node;</span><br><span class="line">        <span class="hljs-keyword">this</span>.tail = node;</span><br><span class="line">        <span class="hljs-keyword">this</span>.size = <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (index &lt; <span class="hljs-number">0</span> || index &gt;= <span class="hljs-keyword">this</span>.size) </span><br><span class="line">            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">        Node node = head;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; index; i++)&#123;</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> node.val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addAtHead</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.size == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">this</span>.head.val = val;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            Node tmp = <span class="hljs-keyword">new</span> Node(val);</span><br><span class="line">            tmp.next = head;</span><br><span class="line">            <span class="hljs-keyword">this</span>.head = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">this</span>.size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** Append a node of value val to the last element of the linked list. */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addAtTail</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.size == <span class="hljs-number">0</span>)</span><br><span class="line">            <span class="hljs-keyword">this</span>.tail.val = val;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            Node tmp = <span class="hljs-keyword">new</span> Node(val);</span><br><span class="line">            <span class="hljs-keyword">this</span>.tail.next = tmp;</span><br><span class="line">            <span class="hljs-keyword">this</span>.tail = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">this</span>.size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Add a node of value val before the index-th node in the linked list.</span></span><br><span class="line"><span class="hljs-comment">     * If index equals to the length of linked list, </span></span><br><span class="line"><span class="hljs-comment">     * the node will be appended to the end of linked list.</span></span><br><span class="line"><span class="hljs-comment">     * If index is greater than the length, the node will not be inserted.</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addAtIndex</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, <span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (index &gt; <span class="hljs-keyword">this</span>.size) <span class="hljs-keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (index == <span class="hljs-keyword">this</span>.size) &#123;</span><br><span class="line">            addAtTail(val);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (index &lt;= <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            addAtHead(val);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            Node node = <span class="hljs-keyword">new</span> Node(val);        </span><br><span class="line">            Node tmp = head;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">                tmp = tmp.next;</span><br><span class="line">            &#125;</span><br><span class="line">            node.next = tmp.next;</span><br><span class="line">            tmp.next = node;</span><br><span class="line">            <span class="hljs-keyword">this</span>.size++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** Delete the index-th node in the linked list, if the index is valid. */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteAtIndex</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (index &lt; <span class="hljs-number">0</span> || index &gt;= <span class="hljs-keyword">this</span>.size) <span class="hljs-keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (index == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">this</span>.head = <span class="hljs-keyword">this</span>.head.next;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            Node node = head;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; index; i++) &#123;</span><br><span class="line">                node = node.next;</span><br><span class="line">            &#125;</span><br><span class="line">            node.next = node.next.next;</span><br><span class="line">            <span class="hljs-keyword">if</span> (index == <span class="hljs-keyword">this</span>.size-<span class="hljs-number">1</span>) &#123;</span><br><span class="line">                tail = node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">this</span>.size--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="链表的反转">链表的反转</h4>
-<p>什么是反转，简单来说，就是将 <code>12345</code> 变为 <code>54321</code> ，这便是反转。就链表而言，反转操作一般要求原地操作，尽可能减少空间使用，并且不允许直接改变链表的值。</p>
+
+<h4 id="链表的反转"><a href="#链表的反转" class="headerlink" title="链表的反转"></a>链表的反转</h4><p>什么是反转，简单来说，就是将 <code>12345</code> 变为 <code>54321</code> ，这便是反转。就链表而言，反转操作一般要求原地操作，尽可能减少空间使用，并且不允许直接改变链表的值。</p>
 <p>表面来看反转好像很简单，但是实质上真正写起来也不是那么简单。链表操作的重难点，就是要防止链表断链丢失，所以，为了实现反转操作，我们需要三个节点指针，其过程如下图所示：</p>
-<figure>
-<img src="https://i.loli.net/2019/09/14/NZxj5CKOygPqVMz.png" alt="链表反转1.png"><figcaption>链表反转1.png</figcaption>
-</figure>
+<p><img src="https://i.loli.net/2019/09/14/NZxj5CKOygPqVMz.png" alt="链表反转1.png"></p>
 <p>反转的代码如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> ListNode <span class="hljs-title">flipList</span><span class="hljs-params">(ListNode ptr, ListNode tail)</span> </span>&#123;</span><br><span class="line">	ListNode newHead = <span class="hljs-keyword">null</span>;</span><br><span class="line">	<span class="hljs-keyword">while</span> (ptr != tail) &#123;</span><br><span class="line">		ListNode next = ptr.next;</span><br><span class="line">		ptr.next = newHead;</span><br><span class="line">		newHead = ptr;</span><br><span class="line">		ptr = next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>实质上就是将链表的箭头给翻转过来，而为了使链表不断链丢失，所以引入了三个指针。</p>
 <p><code>LeetCode</code> 相关问题：</p>
 <ul>
@@ -186,9 +185,9 @@
 <li><a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/" target="_blank" rel="noopener">92. 反转链表II</a></li>
 <li><a href="https://leetcode-cn.com/problems/palindrome-linked-list/" target="_blank" rel="noopener">234. 回文链表</a></li>
 </ul>
-<h4 id="链表排序">链表排序</h4>
-<p>链表排序可以直接将数组排序的算法代入其中，选择，归并啥的，只需要注意指针的完整性即可，下面附上链表的归并排序的函数（即：<a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">148. 排序链表</a>）：</p>
+<h4 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h4><p>链表排序可以直接将数组排序的算法代入其中，选择，归并啥的，只需要注意指针的完整性即可，下面附上链表的归并排序的函数（即：<a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">148. 排序链表</a>）：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">sortList</span><span class="hljs-params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>)  <span class="hljs-keyword">return</span> head;</span><br><span class="line">        </span><br><span class="line">        ListNode quick, slow;</span><br><span class="line">        quick = head.next;</span><br><span class="line">        slow = head;</span><br><span class="line">        <span class="hljs-keyword">while</span> (quick != <span class="hljs-keyword">null</span> &amp;&amp; quick.next != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            quick = quick.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ListNode mid = slow.next;</span><br><span class="line">        slow.next = <span class="hljs-keyword">null</span>;</span><br><span class="line">        ListNode head1 = sortList(head);</span><br><span class="line">        ListNode head2 = sortList(mid);</span><br><span class="line">        </span><br><span class="line">        ListNode newHead = <span class="hljs-keyword">new</span> ListNode(-<span class="hljs-number">1</span>);</span><br><span class="line">        ListNode ptr = newHead;</span><br><span class="line">        <span class="hljs-keyword">while</span> (head1 != <span class="hljs-keyword">null</span> &amp;&amp; head2 != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (head1.val &lt; head2.val) &#123;</span><br><span class="line">                ptr.next = head1;</span><br><span class="line">                head1 = head1.next;</span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                ptr.next = head2;</span><br><span class="line">                head2 = head2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            ptr = ptr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        ptr.next = head1 == <span class="hljs-keyword">null</span> ? head2 : head1; </span><br><span class="line">        <span class="hljs-keyword">return</span> newHead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><code>LeetCode</code> 其余相关问题：</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/reorder-list/" target="_blank" rel="noopener">143. 重排链表</a></li>
@@ -215,7 +214,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
         <div class="buttons is-centered">
             
                 
@@ -320,7 +319,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         42
@@ -330,7 +329,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -340,7 +339,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         21
@@ -351,7 +350,7 @@
         
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -404,7 +403,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -441,7 +440,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -453,7 +452,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
         <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 14px;">C语言</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">小游戏</a> <a href="/tags/%E5%BA%95%E5%B1%82/" style="font-size: 14px;">底层</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 18px;">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3/" style="font-size: 10px;">有趣</a> <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/" style="font-size: 10px;">模式识别</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">算法基础</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" style="font-size: 10px;">算法思想</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">算法技巧</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 12px;">练习</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16px;">随笔</a>
     </div>
@@ -465,7 +464,7 @@
             <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -570,7 +569,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -748,7 +747,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -918,7 +917,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -1023,7 +1022,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1201,7 +1200,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1487,7 +1486,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1511,7 +1510,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu.." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1523,11 +1522,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };

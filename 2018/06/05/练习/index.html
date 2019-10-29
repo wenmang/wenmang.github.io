@@ -10,13 +10,13 @@
 <title>练习 - 文的盲</title>
 
 
-    <meta name="description" content="生成五个不重复的随机数 一道蛮有意思的练习">
+    <meta name="description" content="生成五个不重复的随机数一道蛮有意思的练习">
 <meta name="keywords" content="随笔,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="练习">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;06&#x2F;05&#x2F;%E7%BB%83%E4%B9%A0&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="生成五个不重复的随机数 一道蛮有意思的练习">
+<meta property="og:description" content="生成五个不重复的随机数一道蛮有意思的练习">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-06-09T08:29:23.517Z">
@@ -116,7 +116,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="Search" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes membaca (Sekitar 429 kata)
+                    3 minutes read (About 429 words)
                 </span>
                 
                 
@@ -154,21 +154,24 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h2 id="生成五个不重复的随机数">生成五个不重复的随机数</h2>
-<p>一道蛮有意思的练习</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h2 id="生成五个不重复的随机数"><a href="#生成五个不重复的随机数" class="headerlink" title="生成五个不重复的随机数"></a>生成五个不重复的随机数</h2><p>一道蛮有意思的练习</p>
 <a id="more"></a>
-<ol type="1">
+
+<ol>
 <li><p><strong>生成随机数储存在数组中，然后判断数组中元素是否重复，如果重复，则推倒重新生成</strong></p>
-<p>这是我刚开始的想法，后来发现思路用代码实现起来较为困难，而且效率不高，于是摒弃了这种实现方法。</p></li>
+<p>这是我刚开始的想法，后来发现思路用代码实现起来较为困难，而且效率不高，于是摒弃了这种实现方法。</p>
+</li>
 <li><p><strong>每生成一个随机数，进行一次判断，数组中没有此元素，则存入数组，否则重新生成。</strong></p>
-<p>此方法为参照教程思路，效率比较高，而且代码实现也不是很困难，遂采用此种方法实现</p></li>
+<p>此方法为参照教程思路，效率比较高，而且代码实现也不是很困难，遂采用此种方法实现</p>
+</li>
 </ol>
-<h4 id="代码">代码</h4>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> [] k = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];</span><br><span class="line">        <span class="hljs-keyword">while</span> (index &lt; <span class="hljs-number">5</span>)&#123;</span><br><span class="line"></span><br><span class="line">            Random r = <span class="hljs-keyword">new</span> Random();</span><br><span class="line">            <span class="hljs-keyword">int</span> temp;</span><br><span class="line">            temp = r.nextInt(<span class="hljs-number">6</span>);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (temp != <span class="hljs-number">0</span> &amp;&amp; !contains(k,temp))&#123;	<span class="hljs-comment">// 生成元素不为零且不重复</span></span><br><span class="line">                k[index++] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k.length; i++) &#123;</span><br><span class="line">            System.out.println(k[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 判断数组中是否包含temp元素</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k[],<span class="hljs-keyword">int</span> temp)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; k.length;i++)&#123;</span><br><span class="line">           <span class="hljs-keyword">if</span> (k[i] == temp)</span><br><span class="line">               <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="实现文件的复制粘贴">实现文件的复制粘贴</h2>
-<p><strong>利用字节输入输出流实现对硬盘文件的复制粘贴</strong></p>
-<h4 id="代码-1">代码</h4>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="hljs-keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Copy01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 创建输入流</span></span><br><span class="line">        FileInputStream fis = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">"E:\\图片\\壁纸\\0.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 创建输出流</span></span><br><span class="line">        FileOutputStream fos = <span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">"王昭君.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];  <span class="hljs-comment">// 创建数组 每次读取1KB</span></span><br><span class="line">        <span class="hljs-keyword">int</span> temp;</span><br><span class="line">        <span class="hljs-comment">// 一边读一边写</span></span><br><span class="line">        <span class="hljs-keyword">while</span> ((temp=fis.read(bytes)) != -<span class="hljs-number">1</span>)&#123;   <span class="hljs-comment">// 读入</span></span><br><span class="line">            fos.write(bytes,<span class="hljs-number">0</span>,temp);    <span class="hljs-comment">// 写入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> [] k = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">5</span>];</span><br><span class="line">        <span class="hljs-keyword">while</span> (index &lt; <span class="hljs-number">5</span>)&#123;</span><br><span class="line"></span><br><span class="line">            Random r = <span class="hljs-keyword">new</span> Random();</span><br><span class="line">            <span class="hljs-keyword">int</span> temp;</span><br><span class="line">            temp = r.nextInt(<span class="hljs-number">6</span>);</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (temp != <span class="hljs-number">0</span> &amp;&amp; !contains(k,temp))&#123;	<span class="hljs-comment">// 生成元素不为零且不重复</span></span><br><span class="line">                k[index++] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k.length; i++) &#123;</span><br><span class="line">            System.out.println(k[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 判断数组中是否包含temp元素</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k[],<span class="hljs-keyword">int</span> temp)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; k.length;i++)&#123;</span><br><span class="line">           <span class="hljs-keyword">if</span> (k[i] == temp)</span><br><span class="line">               <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="实现文件的复制粘贴"><a href="#实现文件的复制粘贴" class="headerlink" title="实现文件的复制粘贴"></a>实现文件的复制粘贴</h2><p><strong>利用字节输入输出流实现对硬盘文件的复制粘贴</strong></p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="hljs-keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Copy01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        <span class="hljs-comment">// 创建输入流</span></span><br><span class="line">        FileInputStream fis = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">"E:\\图片\\壁纸\\0.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 创建输出流</span></span><br><span class="line">        FileOutputStream fos = <span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">"王昭君.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];  <span class="hljs-comment">// 创建数组 每次读取1KB</span></span><br><span class="line">        <span class="hljs-keyword">int</span> temp;</span><br><span class="line">        <span class="hljs-comment">// 一边读一边写</span></span><br><span class="line">        <span class="hljs-keyword">while</span> ((temp=fis.read(bytes)) != -<span class="hljs-number">1</span>)&#123;   <span class="hljs-comment">// 读入</span></span><br><span class="line">            fos.write(bytes,<span class="hljs-number">0</span>,temp);    <span class="hljs-comment">// 写入</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上述代码是将图片0.jpg从<code>E:\图片\壁纸</code>目录复制到工程目录下并改名为<code>王昭君.jpg</code></p>
 
         </div>
@@ -191,7 +194,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
         <div class="buttons is-centered">
             
                 
@@ -296,7 +299,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         42
@@ -306,7 +309,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -316,7 +319,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         21
@@ -327,7 +330,7 @@
         
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -380,7 +383,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -417,7 +420,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -429,7 +432,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
         <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 14px;">C语言</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">小游戏</a> <a href="/tags/%E5%BA%95%E5%B1%82/" style="font-size: 14px;">底层</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 18px;">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3/" style="font-size: 10px;">有趣</a> <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/" style="font-size: 10px;">模式识别</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">算法基础</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" style="font-size: 10px;">算法思想</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">算法技巧</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 12px;">练习</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16px;">随笔</a>
     </div>
@@ -441,7 +444,7 @@
             <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -546,7 +549,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -724,7 +727,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -894,7 +897,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -999,7 +1002,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1177,7 +1180,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1463,7 +1466,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1487,7 +1490,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu.." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1499,11 +1502,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };

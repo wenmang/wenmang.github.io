@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="此篇博文根据斯坦福公开课 《编程范式》整理，来阐述C语言函数执行时，在内存中的简单过程，也算是一个简单的笔记。">
-<meta name="keywords" content="C语言,随笔,底层">
+<meta name="keywords" content="随笔,C语言,底层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C函数执行">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;04&#x2F;C%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C&#x2F;index.html">
@@ -116,7 +116,7 @@
                 
                 
                 
-                <a class="navbar-item search" title="Pencarian" href="javascript:;" target="_blank" rel="noopener">
+                <a class="navbar-item search" title="Search" href="javascript:;" target="_blank" rel="noopener">
                     <i class="fas fa-search"></i>
                 </a>
                 
@@ -141,7 +141,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    6 minutes membaca (Sekitar 923 kata)
+                    6 minutes read (About 923 words)
                 </span>
                 
                 
@@ -156,28 +156,25 @@
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>此篇博文根据斯坦福公开课 《编程范式》整理，来阐述C语言函数执行时，在内存中的简单过程，也算是一个简单的笔记。</p>
 <a id="more"></a>
-<h3 id="函数的活动记录">函数的活动记录</h3>
-<p>所谓活动记录，便是C语言程序在调用过程中的储存分配方案的记录。即：当一个过程被调用时，就把它的活动记录推入运行时存储栈的栈顶，而在控制返回调用程序时，再从栈顶弹出相应的活动记录。如此反复，以执行整个程序。</p>
+
+<h3 id="函数的活动记录"><a href="#函数的活动记录" class="headerlink" title="函数的活动记录"></a>函数的活动记录</h3><p>所谓活动记录，便是C语言程序在调用过程中的储存分配方案的记录。即：当一个过程被调用时，就把它的活动记录推入运行时存储栈的栈顶，而在控制返回调用程序时，再从栈顶弹出相应的活动记录。如此反复，以执行整个程序。</p>
 <p>我们首先将内存抽象为一个索引从 0 开始的庞大数组，然后为了方便说明函数的具体执行过程，我们以一段简单的代码作为说明：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> c[<span class="hljs-number">4</span>];</span><br><span class="line">    <span class="hljs-keyword">int</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>当我们写下这样一个函数的时候，在编译过程中，在内存中会如下图这样分配空间：</p>
-<figure>
-<img src="https://i.loli.net/2019/10/04/b5tiMoPpc6n9JG7.png" alt="C函数活动记录1.png"><figcaption>C函数活动记录1.png</figcaption>
-</figure>
+<p><img src="https://i.loli.net/2019/10/04/b5tiMoPpc6n9JG7.png" alt="C函数活动记录1.png"></p>
 <p>在该函数编译之时，以 <code>Save PC</code> 为分界线，内存上半部分依次为形参空间，下半部分为函数中所申明的变量的空间。</p>
 <p><strong>注：<code>save PC</code> 我其实并没有搞得很懂，但是按照老师的说法，应当可以理解为函数本身的地址（此处存疑）</strong></p>
-<h3 id="函数的执行">函数的执行</h3>
-<p>为了较为顺畅地理解，我们依旧以示例代码来说明：</p>
+<h3 id="函数的执行"><a href="#函数的执行" class="headerlink" title="函数的执行"></a>函数的执行</h3><p>为了较为顺畅地理解，我们依旧以示例代码来说明：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">foo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>)	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> foo(a<span class="hljs-number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = <span class="hljs-number">3</span>;</span><br><span class="line">    foo(n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>此时，编译之时，会像上边一般，在内存中以相同的方式分配空间，然后，函数开始执行：</p>
 <p>执行过程会在内存的栈区进行，在调用 <code>foo</code> 函数之后，<code>PC</code> 会直接跳转到 <code>foo</code> 函数所在的内存空间之处，也就是 <code>Save PC</code> 所在，如下图所示：</p>
-<figure>
-<img src="https://i.loli.net/2019/10/04/Vh3pWATvqNbDyF4.png" alt="C函数活动记录2.png"><figcaption>C函数活动记录2.png</figcaption>
-</figure>
+<p><img src="https://i.loli.net/2019/10/04/Vh3pWATvqNbDyF4.png" alt="C函数活动记录2.png"></p>
 <p>由于 <code>foo</code> 函数的形参刚好在其上，所以，参数传递就如此完成了。此后，便会执行 <code>foo</code> 函数中的语句。</p>
-<h3 id="有趣的例子">有趣的例子</h3>
-<p>利用上述原理，有这样一个有趣的例子：</p>
+<h3 id="有趣的例子"><a href="#有趣的例子" class="headerlink" title="有趣的例子"></a>有趣的例子</h3><p>利用上述原理，有这样一个有趣的例子：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">createArray</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">100</span>];</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++) </span><br><span class="line">		<span class="hljs-built_in">array</span>[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printArray</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> <span class="hljs-built_in">array</span>[<span class="hljs-number">100</span>];</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">100</span>; i++)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, <span class="hljs-built_in">array</span>[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	createArray();</span><br><span class="line">	<span class="hljs-comment">// printf("Hello");</span></span><br><span class="line">	printArray();</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>看到代码，你会有点懵，这不就是打印 <code>0-99</code> 吗？<strong>这代码有什么特别呢</strong>？然而，你再看看，便会发现两个 <code>array</code> 数组是在两个函数中，这时候你可能会记起当年学的C语言，<strong>不同函数中的声明是相互独立的啊</strong>？这样写不是脱裤子放屁吗？你就会心有疑虑，对这样是否能够实现相关功能而存疑。</p>
 <p>然而，通过上述原理我们知道，函数调用结束之后，只是指针在内存中的跳转，而内容并不会被擦去，所以答案是肯定的，运行代码，会正常输出 <code>0 1 2 3 ...99</code> 。</p>
 <p>那么如果在两次调用中加上一句呢？也就是将上面代码的的注释去掉。然后在运行你便会发现不成了，这是因为<strong>两次调用中间如果加入了其余语句，便会扰乱前一个函数所初始化的内存，从而使得第二个函数不能正常打印</strong>。</p>
@@ -202,7 +199,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="menu-label has-text-centered">Suka dengan artikel ini? Bantu penulis dengan donasi melalui</h3>
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
         <div class="buttons is-centered">
             
                 
@@ -307,7 +304,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Artikel
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         42
@@ -317,7 +314,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Kategori
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
                         0
@@ -327,7 +324,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tag
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
                         21
@@ -338,7 +335,7 @@
         
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                IKUTI</a>
+                SEGUIR</a>
         </div>
         
         
@@ -391,7 +388,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Tautan
+            Links
         </h3>
         <ul class="menu-list">
         
@@ -428,7 +425,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Kategori
+                Categorias
             </h3>
             <ul class="menu-list">
             
@@ -440,7 +437,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Awan tag
+            Nube de etiquetas
         </h3>
         <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 14px;">C语言</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/c/" style="font-size: 10px;">c</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/%E5%88%B7%E9%A2%98/" style="font-size: 10px;">刷题</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 20px;">博客</a> <a href="/tags/%E5%B0%8F%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">小游戏</a> <a href="/tags/%E5%BA%95%E5%B1%82/" style="font-size: 14px;">底层</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 10px;">教程</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 18px;">数据结构</a> <a href="/tags/%E6%9C%89%E8%B6%A3/" style="font-size: 10px;">有趣</a> <a href="/tags/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/" style="font-size: 10px;">模式识别</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12px;">算法</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" style="font-size: 12px;">算法基础</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3/" style="font-size: 10px;">算法思想</a> <a href="/tags/%E7%AE%97%E6%B3%95%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">算法技巧</a> <a href="/tags/%E7%BB%83%E4%B9%A0/" style="font-size: 12px;">练习</a> <a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 12px;">链表</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 16px;">随笔</a>
     </div>
@@ -452,7 +449,7 @@
             <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -557,7 +554,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -735,7 +732,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -905,7 +902,7 @@
         <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Terbaru
+            Recientes
         </h3>
         
         <article class="media">
@@ -1010,7 +1007,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Arsip
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -1188,7 +1185,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tag
+                Etiquetas
             </h3>
             <div class="field is-grouped is-grouped-multiline">
                 
@@ -1474,7 +1471,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
     
-<a id="back-to-top" title="Kembali ke atas" href="javascript:;" target="_blank" rel="noopener">
+<a id="back-to-top" title="Back to Top" href="javascript:;" target="_blank" rel="noopener">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
@@ -1498,7 +1495,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu.." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1510,11 +1507,11 @@ document.addEventListener('DOMContentLoaded', function () {
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Artikel',
-                PAGES: 'Halaman',
-                CATEGORIES: 'Kategori',
-                TAGS: 'Tag',
-                UNTITLED: 'Tanpa Judul',
+                POSTS: 'Entradas',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
+                UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',
         };
