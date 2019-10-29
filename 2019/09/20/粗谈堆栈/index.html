@@ -10,13 +10,13 @@
 <title>粗谈堆栈 - 文的盲</title>
 
 
-    <meta name="description" content="堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
+    <meta name="description" content="堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
 <meta name="keywords" content="随笔,C语言,底层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="粗谈堆栈">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;09&#x2F;20&#x2F;%E7%B2%97%E8%B0%88%E5%A0%86%E6%A0%88&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
+<meta property="og:description" content="堆栈是一两种十分常用的数据结构，而在硬件中根据内存相关分区功能的不同，将和此两种数据结构功能相似的分区（不是物理意义上的分区）分别称之为堆区栈区，简称堆栈。  所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-05T06:15:49.574Z">
@@ -159,10 +159,12 @@
 <li>所以要搞清楚不同之处（我刚学C语言的时候一直搞不清楚）：堆栈在数据结构（软件）中来说是两种数据结构的名称；而在计算机内存中又表示两个不同的分区的名称</li>
 </ul>
 <a id="more"></a>
-
-<h4 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h4><p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p>
-<p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 $40 \times 4 = 160$ ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p>
-<p><img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"></p>
+<h4 id="堆heap">堆（Heap）</h4>
+<p>堆区在内存中占了相当大的一部分，这部分主要是为了储存程序中动态分配的数据，就C语言而言， <code>malloc()</code> <code>realloc()</code> <code>calloc()</code> 申请而来的空间就全部是堆中的空间，而动态申请的空间均需要利用 <code>free()</code> 手动释放掉。</p>
+<p>当我们书写语句，在堆中申请空间：<code>int* tmp = malloc(40 * sizeof(int))</code> ，可以计算出，我们申请的空间大小理论上应该为 <span class="math inline">\(40 \times 4 = 160\)</span> ，但是其在堆中实际申请的空间应该是<strong>大于理论值一到两个字节</strong>的，而申请完毕后传回的指针实际上也不是申请空间的首地址，而是类似一个如下图所示的结构：</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/vVO5rUkajoeM2AG.png" alt="粗谈堆栈1.png"><figcaption>粗谈堆栈1.png</figcaption>
+</figure>
 <p>申请的实际空间如最大的红色边界线所示，而理论空间则如阴影部分所示，申请的空间最前面的一到两个字节（视底层的具体代码决定）用来<strong>标识由此开始的xx字节内存已被占用</strong>，以及一些必要的信息，来方便其他操作（例如需要 <code>free()</code> 之时，只需要将此标记移除或者改动即可）。</p>
 <p><strong>谈谈<code>realloc()</code>：</strong> <code>realloc()</code> 进行内存扩展有两种方式：</p>
 <ul>
@@ -170,8 +172,9 @@
 <li>无法延拓之时，寻找适合的位置，另辟空间，将原有的数据复制过去，返回新空间的指针</li>
 </ul>
 <p><strong>一个减小 <code>malloc()</code> 时间复杂度的方法：</strong> 将所有空闲的内存首地址之间利用链表连接起来，并注明此处闲余空间是多少，然后再次开辟之时，便可以直接跳转寻找合适的空间</p>
-<h4 id="栈（Stack）"><a href="#栈（Stack）" class="headerlink" title="栈（Stack）"></a>栈（Stack）</h4><p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p>
-<p><strong>注意：</strong> </p>
+<h4 id="栈stack">栈（Stack）</h4>
+<p>栈是在程序运行时创立的一块内存，用于存放自动开辟的空间（在C语言中而言也就是声明的变量），其一般来说是可拓展空间的，可随着程序的执行自动进行扩展（就如同之前实现的那个栈一般）。</p>
+<p><strong>注意：</strong></p>
 <ul>
 <li><code>int* tmp = malloc(40 * sizeof(int))</code> 在堆中存储</li>
 <li><code>int tmp[40]</code> 在栈中存储</li>
@@ -268,7 +271,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -392,23 +395,23 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                <a class="level is-mobile" href="https://google.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">Hexo</span>
+                        <span class="level-item">Google</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
+                        <span class="level-item tag">google.com</span>
                     </span>
                 </a>
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                <a class="level is-mobile" href="https://baidu.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">PPOffice</span>
+                        <span class="level-item">Baidu</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">github.com</span>
+                        <span class="level-item tag">baidu.com</span>
                     </span>
                 </a>
             </li>
@@ -443,7 +446,7 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        <div class="column-right-shadow is-hidden-widescreen ">
         
             <div class="card widget">
     <div class="card-content">
@@ -896,7 +899,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
     
         <div class="card widget">
     <div class="card-content">

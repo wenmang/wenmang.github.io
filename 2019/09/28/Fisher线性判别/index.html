@@ -10,13 +10,13 @@
 <title>Fisher线性判别 - 文的盲</title>
 
 
-    <meta name="description" content="分类问题现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能">
+    <meta name="description" content="分类问题 现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条">
 <meta name="keywords" content="AI,模式识别">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fisher线性判别">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;09&#x2F;28&#x2F;Fisher%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="分类问题现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能">
+<meta property="og:description" content="分类问题 现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。 我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-09-28T14:26:58.625Z">
@@ -154,95 +154,156 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h3 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h3><p>现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。</p>
-<p>我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能得到这样个行向量，将所有行向量拼接起来，构成一个$N\times M$ 的矩阵（$N$ 为鱼的数目，$M$ 为依据的特征数目），这样就构成了一个简单的有标签的数据集。</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h3 id="分类问题">分类问题</h3>
+<p>现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。</p>
+<p>我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能得到这样个行向量，将所有行向量拼接起来，构成一个<span class="math inline">\(N\times M\)</span> 的矩阵（<span class="math inline">\(N\)</span> 为鱼的数目，<span class="math inline">\(M\)</span> 为依据的特征数目），这样就构成了一个简单的有标签的数据集。</p>
 <a id="more"></a>
-
 <p>有了数据集，接下来所要做的便是分类。什么是分类呢？现实生活中此概念很简单，比如我们买鱼时便有许多选择：鲤鱼，草鱼，带鱼等等等等，而用以区分这些鱼类的，大都是凭经验根据某些特征来区分。其实电脑也一样，分类要做的，就是将两类数据通过一个分类面区分开来，如下粗糙的图所示，分类所做的就是根据已有的数据，找出中间那条红线，将二者分开。</p>
-<img src="https://i.loli.net/2019/09/28/ko2z9ISYOnjx3ma.png" alt="Fisher1.png" style="zoom:60%;">
-
-
-
+<p><img src="https://i.loli.net/2019/09/28/ko2z9ISYOnjx3ma.png" alt="Fisher1.png" style="zoom:60%;"></p>
 <p>而所谓分类的方法，其归根到底就是利用各种方法，来找到这样一个最佳分类面。而这篇博客所介绍的，仅是所有方法中非常简单的一种——Fisher线性判别。</p>
-<h3 id="Fisher线性判别"><a href="#Fisher线性判别" class="headerlink" title="Fisher线性判别"></a>Fisher线性判别</h3><p><code>Fisher</code> 线性判别 是一种<strong>简单的二分类</strong>方法，其主要思路就是将高维空间的数据进行降维投影至一维空间，从而降低分类的难度。其一般步骤如下：</p>
+<h3 id="fisher线性判别">Fisher线性判别</h3>
+<p><code>Fisher</code> 线性判别 是一种<strong>简单的二分类</strong>方法，其主要思路就是将高维空间的数据进行降维投影至一维空间，从而降低分类的难度。其一般步骤如下：</p>
 <ul>
 <li>将高维数据投影到一维平面上</li>
 <li>通过运算使得每一类之间更加紧凑（使同一类数据之间的距离变小），两类之间的距离尽可能远，从而方便将两类数据分开。</li>
 <li>一般以两类数据中心点的中点最为分类面。</li>
 </ul>
-<h4 id="数学原理"><a href="#数学原理" class="headerlink" title="数学原理"></a>数学原理</h4><p>显然，Fisher线性判别的重难点在于前两步，即如何找到一个投影面，使得类内距离尽可能小而类间距离尽可能大。</p>
-<h5 id="基础概念："><a href="#基础概念：" class="headerlink" title="基础概念："></a>基础概念：</h5><p><strong>在 <code>d</code> 维的 <code>X</code> 空间中（样本空间）：</strong></p>
+<h4 id="数学原理">数学原理</h4>
+<p>显然，Fisher线性判别的重难点在于前两步，即如何找到一个投影面，使得类内距离尽可能小而类间距离尽可能大。</p>
+<h5 id="基础概念">基础概念：</h5>
+<p><strong>在 <code>d</code> 维的 <code>X</code> 空间中（样本空间）：</strong></p>
 <ul>
-<li><p><strong>各类样本的均值向量</strong>$m_i$ ：$m_i = \frac{1}{n_i}\sum_\limits{X\in D_i}{X},\ i=1,2$</p>
-</li>
-<li><p><strong>样本类内离散矩阵</strong>$S_i$和<strong>总样本类内离散度矩阵</strong>$S_w$ （其实可以看出来，所谓类内离散度矩阵便是<strong>每一个样本与样本均值向量之间的欧氏距离</strong>所构成的矩阵）<br>$$<br>\begin{align*}</p>
-<pre><code>&amp; S_i = \sum_{X\in D_i}(x-m_i)(x-m_i)^T,\ i = 1, 2\\
-&amp;S_w = S_1+S_2\\</code></pre><p>\end{align*}<br>$$</p>
-</li>
-<li><p><strong>样本类间离散度矩阵</strong> $ S_b $ （即两类样本均值之间的欧氏距离）<br>$$<br>S_b = (m_1-m_2)(m_1-m_2)^T<br>$$</p>
-</li>
+<li><p><strong>各类样本的均值向量</strong><span class="math inline">\(m_i\)</span> ：<span class="math inline">\(m_i = \frac{1}{n_i}\sum_\limits{X\in D_i}{X},\ i=1,2\)</span></p></li>
+<li><p><strong>样本类内离散矩阵</strong><span class="math inline">\(S_i\)</span>和<strong>总样本类内离散度矩阵</strong><span class="math inline">\(S_w\)</span> （其实可以看出来，所谓类内离散度矩阵便是<strong>每一个样本与样本均值向量之间的欧氏距离</strong>所构成的矩阵） <span class="math display">\[
+\begin{align*}
+  &amp; S_i = \sum_{X\in D_i}(x-m_i)(x-m_i)^T,\ i = 1, 2\\
+  &amp;S_w = S_1+S_2\\
+\end{align*}
+\]</span></p></li>
+<li><p><strong>样本类间离散度矩阵</strong> $ S_b $ （即两类样本均值之间的欧氏距离） <span class="math display">\[
+S_b = (m_1-m_2)(m_1-m_2)^T
+\]</span></p></li>
 </ul>
 <p><strong>在 <code>1</code> 维的 <code>Y</code> 空间中（投影空间）：</strong></p>
 <ul>
-<li><p><strong>各类样本的均值</strong> $\tilde{m_i}$ ：$\tilde{m_i} = \frac{1}{n_i}\sum_\limits{y\in D_i}{y},\ i=1,2$</p>
-</li>
-<li><p><strong>样本类内离散度</strong> $\tilde{S_i}$ 和<strong>总样本类内离散度</strong> $\tilde{S_w}$<br>$$<br>\begin{align*}</p>
-<pre><code>\tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})(y- \tilde{m_i})^T,\ i = 1, 2\\
-&amp;=\sum_{y\in D_i}(y- \tilde{m_i})^2,\ i = 1, 2\\
-\tilde{S_w} &amp;= \tilde{S_1}+ \tilde{S_2}\\</code></pre><p>\end{align*}<br>$$</p>
-</li>
-<li><p><strong>样本类间离散度：</strong><br>$$<br>\begin{align*}</p>
-<pre><code>\tilde{S_b} &amp;= (\tilde{m_1}-\tilde{m_2})(\tilde{m_1}-\tilde{m_2})^T\\
-&amp;=(\tilde{m_1} - \tilde{m_2})^2</code></pre><p>\end{align*}<br>$$</p>
-</li>
+<li><p><strong>各类样本的均值</strong> <span class="math inline">\(\tilde{m_i}\)</span> ：<span class="math inline">\(\tilde{m_i} = \frac{1}{n_i}\sum_\limits{y\in D_i}{y},\ i=1,2\)</span></p></li>
+<li><p><strong>样本类内离散度</strong> <span class="math inline">\(\tilde{S_i}\)</span> 和<strong>总样本类内离散度</strong> <span class="math inline">\(\tilde{S_w}\)</span> <span class="math display">\[
+\begin{align*}
+  \tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})(y- \tilde{m_i})^T,\ i = 1, 2\\
+  &amp;=\sum_{y\in D_i}(y- \tilde{m_i})^2,\ i = 1, 2\\
+  \tilde{S_w} &amp;= \tilde{S_1}+ \tilde{S_2}\\
+\end{align*}
+\]</span></p></li>
+<li><p><strong>样本类间离散度：</strong> <span class="math display">\[
+\begin{align*}
+  \tilde{S_b} &amp;= (\tilde{m_1}-\tilde{m_2})(\tilde{m_1}-\tilde{m_2})^T\\
+  &amp;=(\tilde{m_1} - \tilde{m_2})^2
+\end{align*}
+\]</span></p></li>
 </ul>
-<p>接下来要让投影后的类内距离尽可能小而类间距离尽可能大，也就是要使得 $\tilde{S_w}$ 尽可能小， $\tilde{S_b}$ 尽可能大，换言之也就是令 $\frac{\tilde{S_b}}{\tilde{S_w}}$ 尽可能取得最大值，我们令其比值为 $J(w)$，如下式子：<br>$$<br>\begin{align<em>}<br>    J(w) &amp;= \frac{\tilde{S_b}}{\tilde{S_w}}= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}<br>\end{align</em>}<br>$$<br>又因为，由各类样本均值可推出：<br>$$<br>\begin{align<em>}<br>    \tilde{m_i} &amp;= \frac{1}{n_i}\sum_\limits{y\in D_i}{y}\<br>    &amp;= \frac{1}{n_i}\sum_\limits{X\in D_i}{w^Tx}\<br>    &amp;= {w^T}(\frac{1}{n_i}\sum_\limits{X\in D_i}{x})\<br>    &amp;= w^Tm_i<br>\end{align</em>}<br>$$</p>
-<p>则，投影样本均值之差可以展开为：<br>$$<br>\begin{align<em>}<br>    (\tilde{m_1} - \tilde{m_2})^2 &amp;= (w^Tm_1 - w^Tm_2)^2\<br>    &amp;= w^T(m_1-m_2)(m_1-m_2)^Tw\<br>    &amp;= w^TS_bw<br>\end{align</em>}<br>$$<br>同理，可将 $\tilde{S_i}$ 以相同的方式进行变化：<br>$$<br>\begin{align<em>}<br>    \tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})^2\<br>    &amp;= \sum_{X\in D_i}{(w^Tx-w^Tm_i)^2}\<br>    &amp;= \sum_{X\in D_i}{w^T(x-m_2)(x-m_2)^Tw}\<br>    &amp;= w^TS_iw<br>\end{align</em>}<br>$$<br>则  $J(w)$ 可化为：<br>$$<br>\begin{align<em>}<br>    J(w) &amp;= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}\<br>    &amp;= \frac{w^TS_bw}{w^TS_ww}<br>\end{align</em>}<br>$$<br>之后令分母为非零常数，然后采用<strong>拉格朗日乘子法</strong>确定最佳变换向量，定义拉格朗日函数如下：<br>$$<br>\begin{align<em>}<br>    L(w, \lambda) = w^TS_bw-\lambda (w^TS_ww-c)<br>\end{align</em>}<br>$$<br>求解过程如下：<br>$$<br>\begin{align<em>}<br>    &amp;\frac{\partial L(w,\lambda)}{\partial w} = 2S_bw-2\lambda S_ww =0\<br>    \<br>    即：\qquad &amp;S_bw^</em> = \lambda S_ww^* \qquad S^{-1}_wS_bw^* = \lambda w^<em>\<br>    \<br>\end{align</em>}<br>$$</p>
-<p>$$<br>\begin{align<em>}<br>    w^</em> &amp;= \frac{1}{\lambda}S^{-1}_wS_bw^<em>\<br>    &amp;= \frac{1}{\lambda}S^{-1}(m_1-m_2)(m_1-m_2)^Tw^*\<br>    &amp;= \frac{R}{\lambda}S^{-1}(m_1-m_2)<br>\end{align</em>}<br>$$</p>
-<p>省去常数，则最后可得 $w^* = S^{-1}(m_1-m_2)$</p>
-<p>数据便可通过向量 $w^<em>$ 投影至一维平面上，变成一个个点，而要将两类分开，便直接可以找出阈值点 $w_0$ ，将之分开。常用确定方法如下：<br>$$<br>\begin{align</em>}<br>    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}\<br>    &amp;w_0 = \frac{n_1\tilde{m_1} + n_2\tilde{m_2}}{n_1+n_2} = \tilde{m}\<br>    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}+\frac{ln[P(w_1)/P(w_2)]}{n_1+n_2-2}<br>\end{align*}<br>$$</p>
-<h4 id="实例验证"><a href="#实例验证" class="headerlink" title="实例验证"></a>实例验证</h4><p><strong>要求：</strong>在 <code>UCI</code> 数据集上的 <code>Iris</code>和 <code>sonar</code> 数据上验证算法的有效性。【<code>Iris</code> 数据3类，4维，150个数据；<code>Sonar</code> 数据2类，60维，208个样本】</p>
+<p>接下来要让投影后的类内距离尽可能小而类间距离尽可能大，也就是要使得 <span class="math inline">\(\tilde{S_w}\)</span> 尽可能小， <span class="math inline">\(\tilde{S_b}\)</span> 尽可能大，换言之也就是令 <span class="math inline">\(\frac{\tilde{S_b}}{\tilde{S_w}}\)</span> 尽可能取得最大值，我们令其比值为 <span class="math inline">\(J(w)\)</span>，如下式子： <span class="math display">\[
+\begin{align*}
+    J(w) &amp;= \frac{\tilde{S_b}}{\tilde{S_w}}= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}
+\end{align*}
+\]</span> 又因为，由各类样本均值可推出： <span class="math display">\[
+\begin{align*}
+    \tilde{m_i} &amp;= \frac{1}{n_i}\sum_\limits{y\in D_i}{y}\\
+    &amp;= \frac{1}{n_i}\sum_\limits{X\in D_i}{w^Tx}\\
+    &amp;= {w^T}(\frac{1}{n_i}\sum_\limits{X\in D_i}{x})\\
+    &amp;= w^Tm_i
+\end{align*}
+\]</span></p>
+<p>则，投影样本均值之差可以展开为： <span class="math display">\[
+\begin{align*}
+    (\tilde{m_1} - \tilde{m_2})^2 &amp;= (w^Tm_1 - w^Tm_2)^2\\
+    &amp;= w^T(m_1-m_2)(m_1-m_2)^Tw\\
+    &amp;= w^TS_bw
+\end{align*}
+\]</span> 同理，可将 <span class="math inline">\(\tilde{S_i}\)</span> 以相同的方式进行变化： <span class="math display">\[
+\begin{align*}
+    \tilde{S_i} &amp;= \sum_{y\in D_i}(y- \tilde{m_i})^2\\
+    &amp;= \sum_{X\in D_i}{(w^Tx-w^Tm_i)^2}\\
+    &amp;= \sum_{X\in D_i}{w^T(x-m_2)(x-m_2)^Tw}\\
+    &amp;= w^TS_iw
+\end{align*}
+\]</span> 则 <span class="math inline">\(J(w)\)</span> 可化为： <span class="math display">\[
+\begin{align*}
+    J(w) &amp;= \frac{(\tilde{m_1} - \tilde{m_2})^2}{\tilde{S_1}+ \tilde{S_2}}\\
+    &amp;= \frac{w^TS_bw}{w^TS_ww}
+\end{align*}
+\]</span> 之后令分母为非零常数，然后采用<strong>拉格朗日乘子法</strong>确定最佳变换向量，定义拉格朗日函数如下： <span class="math display">\[
+\begin{align*}
+    L(w, \lambda) = w^TS_bw-\lambda (w^TS_ww-c)
+\end{align*}
+\]</span> 求解过程如下： <span class="math display">\[
+\begin{align*}
+    &amp;\frac{\partial L(w,\lambda)}{\partial w} = 2S_bw-2\lambda S_ww =0\\
+    \\
+    即：\qquad &amp;S_bw^* = \lambda S_ww^* \qquad S^{-1}_wS_bw^* = \lambda w^*\\
+    \\
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+    w^* &amp;= \frac{1}{\lambda}S^{-1}_wS_bw^*\\
+    &amp;= \frac{1}{\lambda}S^{-1}(m_1-m_2)(m_1-m_2)^Tw^*\\
+    &amp;= \frac{R}{\lambda}S^{-1}(m_1-m_2)
+\end{align*}
+\]</span></p>
+<p>省去常数，则最后可得 <span class="math inline">\(w^* = S^{-1}(m_1-m_2)\)</span></p>
+<p>数据便可通过向量 <span class="math inline">\(w^*\)</span> 投影至一维平面上，变成一个个点，而要将两类分开，便直接可以找出阈值点 <span class="math inline">\(w_0\)</span> ，将之分开。常用确定方法如下： <span class="math display">\[
+\begin{align*}
+    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}\\
+    &amp;w_0 = \frac{n_1\tilde{m_1} + n_2\tilde{m_2}}{n_1+n_2} = \tilde{m}\\
+    &amp;w^0 = \frac{\tilde{m_1} - \tilde{m_2}}{2}+\frac{ln[P(w_1)/P(w_2)]}{n_1+n_2-2}
+\end{align*}
+\]</span></p>
+<h4 id="实例验证">实例验证</h4>
+<p><strong>要求：</strong>在 <code>UCI</code> 数据集上的 <code>Iris</code>和 <code>sonar</code> 数据上验证算法的有效性。【<code>Iris</code> 数据3类，4维，150个数据；<code>Sonar</code> 数据2类，60维，208个样本】</p>
 <p><strong>说明：</strong>训练和测试样本有三种方式进行划分：（三选一）</p>
-<ol>
+<ol type="1">
 <li>将数据随机分训练和测试，多次平均求结果</li>
 <li>k折交叉验证</li>
 <li>留1法</li>
 </ol>
-<h5 id="下载数据集"><a href="#下载数据集" class="headerlink" title="下载数据集"></a>下载数据集</h5><p>到 <a href="https://archive.ics.uci.edu/ml/index.php" target="_blank" rel="noopener"><code>UCI</code></a> 官网上即可直接下载两个数据集</p>
-<h5 id="零碎说明"><a href="#零碎说明" class="headerlink" title="零碎说明"></a>零碎说明</h5><ul>
+<h5 id="下载数据集">下载数据集</h5>
+<p>到 <a href="https://archive.ics.uci.edu/ml/index.php" target="_blank" rel="noopener"><code>UCI</code></a> 官网上即可直接下载两个数据集</p>
+<h5 id="零碎说明">零碎说明</h5>
+<ul>
 <li>我选择的是第一种划分方式</li>
 <li>为了简便，我使用了 <code>MATLAB</code> 进行编程</li>
 </ul>
-<h5 id="开始验证"><a href="#开始验证" class="headerlink" title="开始验证"></a>开始验证</h5><ul>
-<li><p>首先将<strong>数据读入，并划分矩阵</strong>，此为基础问题，不再赘述</p>
-</li>
-<li><p>然后，<strong>利用 <code>mean()</code> 函数 求每一类样本的均值向量</strong></p>
-</li>
-<li><p>根据公式，求取训练数据的类内散度矩阵 $S_i$ 和 $S_w$ ，代码实现函数如下：</p>
-<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[s]</span> = <span class="hljs-title">getScatter</span><span class="hljs-params">(sample, size, m, n1, n2)</span></span></span><br><span class="line">	<span class="hljs-comment">% getScatter</span></span><br><span class="line">    <span class="hljs-comment">%   计算数据的类内离散度矩阵</span></span><br><span class="line">    s = &#123;<span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>)&#125;;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:n1</span><br><span class="line">        tmp = sample&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        mi = m&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:n2</span><br><span class="line">            xj = tmp(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">            A = (xj-mi);</span><br><span class="line">            si = A' * A;</span><br><span class="line">            s&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125; = s&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125; + si;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>根据公式，求取最佳变换向量 $w^*$ 和阈值 $w_0$ ，代码实现函数如下：</p>
-<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[w, w0]</span> = <span class="hljs-title">bestVector</span><span class="hljs-params">(s1, s2, m1, m2)</span></span></span><br><span class="line">    <span class="hljs-comment">% bestVector </span></span><br><span class="line">    <span class="hljs-comment">%   求取最佳变换向量</span></span><br><span class="line">    sw = s1 + s2;</span><br><span class="line">    w = sw \ ((m1 - m2)');</span><br><span class="line">    w0 = (w'*m1' + w'*m2') / <span class="hljs-number">2</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
+<h5 id="开始验证">开始验证</h5>
+<ul>
+<li><p>首先将<strong>数据读入，并划分矩阵</strong>，此为基础问题，不再赘述</p></li>
+<li><p>然后，<strong>利用 <code>mean()</code> 函数 求每一类样本的均值向量</strong></p></li>
+<li><p>根据公式，求取训练数据的类内散度矩阵 <span class="math inline">\(S_i\)</span> 和 <span class="math inline">\(S_w\)</span> ，代码实现函数如下：</p>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[s]</span> = <span class="hljs-title">getScatter</span><span class="hljs-params">(sample, size, m, n1, n2)</span></span></span><br><span class="line">	<span class="hljs-comment">% getScatter</span></span><br><span class="line">    <span class="hljs-comment">%   计算数据的类内离散度矩阵</span></span><br><span class="line">    s = &#123;<span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>)&#125;;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:n1</span><br><span class="line">        tmp = sample&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        mi = m&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:n2</span><br><span class="line">            xj = tmp(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">            A = (xj-mi);</span><br><span class="line">            si = A' * A;</span><br><span class="line">            s&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125; = s&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125; + si;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p>根据公式，求取最佳变换向量 <span class="math inline">\(w^*\)</span> 和阈值 <span class="math inline">\(w_0\)</span> ，代码实现函数如下：</p>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[w, w0]</span> = <span class="hljs-title">bestVector</span><span class="hljs-params">(s1, s2, m1, m2)</span></span></span><br><span class="line">    <span class="hljs-comment">% bestVector </span></span><br><span class="line">    <span class="hljs-comment">%   求取最佳变换向量</span></span><br><span class="line">    sw = s1 + s2;</span><br><span class="line">    w = sw \ ((m1 - m2)');</span><br><span class="line">    w0 = (w'*m1' + w'*m2') / <span class="hljs-number">2</span>;</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></li>
 <li><p>将样本矩阵在投影方向上投影，以方便进行检验和画图，代码实现如下：</p>
-<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[D]</span> = <span class="hljs-title">rearProjection</span><span class="hljs-params">(sample, size, i1, i2, w1, n)</span></span></span><br><span class="line">    <span class="hljs-comment">% rearProjection</span></span><br><span class="line">    <span class="hljs-comment">%   计算投影后的点</span></span><br><span class="line">    D = &#123;<span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>, <span class="hljs-number">1</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>, <span class="hljs-number">1</span>)&#125;;</span><br><span class="line">    k = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = [i1 i2]</span><br><span class="line">        tmp = sample&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:n(k)</span><br><span class="line">            xj = tmp(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">            Di = w1' * xj';</span><br><span class="line">            D&#123;k:k&#125;(<span class="hljs-built_in">j</span>,<span class="hljs-number">1</span>) = Di;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">        k = k+<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[D]</span> = <span class="hljs-title">rearProjection</span><span class="hljs-params">(sample, size, i1, i2, w1, n)</span></span></span><br><span class="line">    <span class="hljs-comment">% rearProjection</span></span><br><span class="line">    <span class="hljs-comment">%   计算投影后的点</span></span><br><span class="line">    D = &#123;<span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>, <span class="hljs-number">1</span>), <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>, <span class="hljs-number">1</span>)&#125;;</span><br><span class="line">    k = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = [i1 i2]</span><br><span class="line">        tmp = sample&#123;<span class="hljs-built_in">i</span>:<span class="hljs-built_in">i</span>&#125;;</span><br><span class="line">        <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:n(k)</span><br><span class="line">            xj = tmp(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">            Di = w1' * xj';</span><br><span class="line">            D&#123;k:k&#125;(<span class="hljs-built_in">j</span>,<span class="hljs-number">1</span>) = Di;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">        k = k+<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></li>
 <li><p>进行检验，我写了两个函数，分别检验两类分的是否正确，代码实现如下：</p>
 <figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[rate]</span> = <span class="hljs-title">testLeft</span><span class="hljs-params">(class, i, n, w1, w0)</span></span></span><br><span class="line">    <span class="hljs-comment">% test</span></span><br><span class="line">    <span class="hljs-comment">%   检验剩余测试用例</span></span><br><span class="line">    count = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-built_in">i</span>:n</span><br><span class="line">        xj = class(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">        Di = w1' * xj';</span><br><span class="line">        <span class="hljs-keyword">if</span> Di &lt; w0</span><br><span class="line">            count = count + <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line">    rate = (count*<span class="hljs-number">100</span>)/(n+<span class="hljs-number">1</span>-<span class="hljs-built_in">i</span>);</span><br><span class="line">    fprintf(<span class="hljs-string">"%d/%d = %.2f%%\n"</span>, count, (n-<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>), rate);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[rate]</span> = <span class="hljs-title">testRight</span><span class="hljs-params">(class, i, n, w1, w0)</span></span></span><br><span class="line">    <span class="hljs-comment">% test</span></span><br><span class="line">    <span class="hljs-comment">%   检验剩余测试用例</span></span><br><span class="line">    count = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-built_in">i</span>:n</span><br><span class="line">        xj = class(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">        Di = w1' * xj';</span><br><span class="line">        <span class="hljs-keyword">if</span> Di &gt; w0</span><br><span class="line">            count = count + <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line">    rate = (count*<span class="hljs-number">100</span>)/(n+<span class="hljs-number">1</span>-<span class="hljs-built_in">i</span>);</span><br><span class="line">    fprintf(<span class="hljs-string">"%d/%d = %.2f%%\n"</span>, count, (n-<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>), rate);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[rate]</span> = <span class="hljs-title">testRight</span><span class="hljs-params">(class, i, n, w1, w0)</span></span></span><br><span class="line">    <span class="hljs-comment">% test</span></span><br><span class="line">    <span class="hljs-comment">%   检验剩余测试用例</span></span><br><span class="line">    count = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-built_in">i</span>:n</span><br><span class="line">        xj = class(<span class="hljs-built_in">j</span>:<span class="hljs-built_in">j</span>, :);</span><br><span class="line">        Di = w1' * xj';</span><br><span class="line">        <span class="hljs-keyword">if</span> Di &gt; w0</span><br><span class="line">            count = count + <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">end</span></span><br><span class="line">    <span class="hljs-keyword">end</span></span><br><span class="line">    rate = (count*<span class="hljs-number">100</span>)/(n+<span class="hljs-number">1</span>-<span class="hljs-built_in">i</span>);</span><br><span class="line">    fprintf(<span class="hljs-string">"%d/%d = %.2f%%\n"</span>, count, (n-<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>), rate);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></li>
 <li><p>将投影后的数据画出散点图，画图函数如下：</p>
-<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[]</span> = <span class="hljs-title">drawPicture</span><span class="hljs-params">(x1, x2, n, w0)</span></span></span><br><span class="line">    <span class="hljs-comment">% drawPicture</span></span><br><span class="line">    <span class="hljs-comment">%   画图函数，分类点为五角星</span></span><br><span class="line">    <span class="hljs-built_in">figure</span></span><br><span class="line">    <span class="hljs-built_in">scatter</span>(x1, <span class="hljs-built_in">zeros</span>(n(<span class="hljs-number">1</span>), <span class="hljs-number">1</span>), <span class="hljs-string">'o'</span>);</span><br><span class="line">    <span class="hljs-built_in">hold</span> on</span><br><span class="line">    <span class="hljs-built_in">scatter</span>(x2, <span class="hljs-built_in">zeros</span>(n(<span class="hljs-number">2</span>), <span class="hljs-number">1</span>), <span class="hljs-string">'x'</span>);</span><br><span class="line">    <span class="hljs-built_in">hold</span> on</span><br><span class="line">    <span class="hljs-built_in">scatter</span>(w0, <span class="hljs-number">0</span>, <span class="hljs-number">400</span>, <span class="hljs-string">'p'</span>);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure>
-
-</li>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[]</span> = <span class="hljs-title">drawPicture</span><span class="hljs-params">(x1, x2, n, w0)</span></span></span><br><span class="line">    <span class="hljs-comment">% drawPicture</span></span><br><span class="line">    <span class="hljs-comment">%   画图函数，分类点为五角星</span></span><br><span class="line">    <span class="hljs-built_in">figure</span></span><br><span class="line">    <span class="hljs-built_in">scatter</span>(x1, <span class="hljs-built_in">zeros</span>(n(<span class="hljs-number">1</span>), <span class="hljs-number">1</span>), <span class="hljs-string">'o'</span>);</span><br><span class="line">    <span class="hljs-built_in">hold</span> on</span><br><span class="line">    <span class="hljs-built_in">scatter</span>(x2, <span class="hljs-built_in">zeros</span>(n(<span class="hljs-number">2</span>), <span class="hljs-number">1</span>), <span class="hljs-string">'x'</span>);</span><br><span class="line">    <span class="hljs-built_in">hold</span> on</span><br><span class="line">    <span class="hljs-built_in">scatter</span>(w0, <span class="hljs-number">0</span>, <span class="hljs-number">400</span>, <span class="hljs-string">'p'</span>);</span><br><span class="line"><span class="hljs-keyword">end</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h5><p>由于 <code>Fisher</code> 仅用于处理二分类问题，但是，<code>Iris</code> 数据集有三类，所以我仅在两两之间进行了分类。执行完毕后画出的三张散点图如下：</p>
-<p><img src="https://i.loli.net/2019/09/28/uOcRG5ZjfFboWBx.png" alt="Iris1-2.png"></p>
-<p><img src="https://i.loli.net/2019/09/28/DHgfhqzY49r2VLt.png" alt="Iris1-3.png"></p>
-<p><img src="https://i.loli.net/2019/09/28/YqOwTsc1XZEdfzm.png" alt="Iris2-3.png"></p>
+<h5 id="结果展示">结果展示</h5>
+<p>由于 <code>Fisher</code> 仅用于处理二分类问题，但是，<code>Iris</code> 数据集有三类，所以我仅在两两之间进行了分类。执行完毕后画出的三张散点图如下：</p>
+<figure>
+<img src="https://i.loli.net/2019/09/28/uOcRG5ZjfFboWBx.png" alt="Iris1-2.png"><figcaption>Iris1-2.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2019/09/28/DHgfhqzY49r2VLt.png" alt="Iris1-3.png"><figcaption>Iris1-3.png</figcaption>
+</figure>
+<figure>
+<img src="https://i.loli.net/2019/09/28/YqOwTsc1XZEdfzm.png" alt="Iris2-3.png"><figcaption>Iris2-3.png</figcaption>
+</figure>
 <p><code>Sonar</code> 数据集只有两类，分类后的图像如下：</p>
-<p><img src="https://i.loli.net/2019/09/28/Co9RzsWtPEgKXrS.png" alt="sonar.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/09/28/Co9RzsWtPEgKXrS.png" alt="sonar.png"><figcaption>sonar.png</figcaption>
+</figure>
 
         </div>
         
@@ -334,7 +395,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -458,23 +519,23 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                <a class="level is-mobile" href="https://google.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">Hexo</span>
+                        <span class="level-item">Google</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
+                        <span class="level-item tag">google.com</span>
                     </span>
                 </a>
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                <a class="level is-mobile" href="https://baidu.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">PPOffice</span>
+                        <span class="level-item">Baidu</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">github.com</span>
+                        <span class="level-item tag">baidu.com</span>
                     </span>
                 </a>
             </li>
@@ -509,7 +570,7 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        <div class="column-right-shadow is-hidden-widescreen ">
         
             <div class="card widget">
     <div class="card-content">
@@ -962,7 +1023,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
     
         <div class="card widget">
     <div class="card-content">

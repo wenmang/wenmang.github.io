@@ -10,13 +10,13 @@
 <title>链表之快慢指针 - 文的盲</title>
 
 
-    <meta name="description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
+    <meta name="description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
 <meta name="keywords" content="博客,链表,算法技巧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="链表之快慢指针">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;09&#x2F;06&#x2F;%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
+<meta property="og:description" content="链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。 而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-09-07T08:53:51.899Z">
@@ -157,33 +157,37 @@
             <script src="/assets/js/APlayer.min.js"> </script><p>链表是最为基本的数据结构之一，常与数组作比较。由于链表相较于数组更加优良的的增删性能，常利用于增删比较频繁场合，并且衍生出了许多特殊的链表结构——静态链表，循环链表，双向链表等等。</p>
 <p>而链表操作具有较强的技巧性，双指针最为常见，而双指针中，又以快慢指针最为特殊。这篇文章将根据自己的理解，说明快慢指针的原理与常见应用。</p>
 <a id="more"></a>
-
-<h3 id="链表的中间结点"><a href="#链表的中间结点" class="headerlink" title="链表的中间结点"></a><a href="https://leetcode-cn.com/problems/middle-of-the-linked-list/" target="_blank" rel="noopener">链表的中间结点</a></h3><h4 id="题目说明"><a href="#题目说明" class="headerlink" title="题目说明"></a>题目说明</h4><p>给定一个带有头结点 <code>head</code> 的非空单链表，返回链表的中间结点。</p>
+<h3 id="链表的中间结点"><a href="https://leetcode-cn.com/problems/middle-of-the-linked-list/" target="_blank" rel="noopener">链表的中间结点</a></h3>
+<h4 id="题目说明">题目说明</h4>
+<p>给定一个带有头结点 <code>head</code> 的非空单链表，返回链表的中间结点。</p>
 <p>如果有两个中间结点，则返回第二个中间结点。</p>
 <p><strong>示例 1：</strong></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,3,4,5]</span><br><span class="line">输出：此列表中的结点 3 (序列化形式：[3,4,5])</span><br><span class="line">返回的结点值为 3 。 (测评系统对该结点序列化表述是 [3,4,5])。</span><br><span class="line">注意，我们返回了一个 ListNode 类型的对象 ans，这样：</span><br><span class="line">ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next = NULL.</span><br></pre></td></tr></table></figure>
-
 <p><strong>示例 2：</strong></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：[1,2,3,4,5,6]</span><br><span class="line">输出：此列表中的结点 4 (序列化形式：[4,5,6])</span><br><span class="line">由于该列表有两个中间结点，值分别为 3 和 4，我们返回第二个结点。</span><br></pre></td></tr></table></figure>
-
 <p><strong>提示：</strong></p>
 <ul>
 <li>给定链表的结点数介于 <code>1</code> 和 <code>100</code> 之间。</li>
 </ul>
-<h4 id="题目解答"><a href="#题目解答" class="headerlink" title="题目解答"></a>题目解答</h4><p>链表的中间结点是快慢指针最为基础的一个例子， <code>java</code> 代码如下</p>
+<h4 id="题目解答">题目解答</h4>
+<p>链表的中间结点是快慢指针最为基础的一个例子， <code>java</code> 代码如下</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">middleNode</span><span class="hljs-params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">while</span> (fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.next != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="原理分析："><a href="#原理分析：" class="headerlink" title="原理分析："></a>原理分析：</h4><p> 原理颇为简单，但很精妙：</p>
+<h4 id="原理分析">原理分析：</h4>
+<p>原理颇为简单，但很精妙：</p>
 <ul>
 <li>声明两个指针，一个将之称为快指针，一个将之称为慢指针【快指针步长（一次经过的结点）相较慢指针更大，固有其名】</li>
 <li>此处的快指针步长为2（一次两个结点），慢指针步长为 1 。当快指针到达链表末尾的时候，慢指针刚好到链表中间，由是一次循环便可以解决问题。</li>
 </ul>
-<h4 id="快慢指针的一般形式"><a href="#快慢指针的一般形式" class="headerlink" title="快慢指针的一般形式"></a>快慢指针的一般形式</h4><p>由上题可见，快慢指针实质上就是两个步长不同的指针，步长大的称之为快指针，小的称之为慢指针。而解决问题的原理，在于利用两个指针步长不同所产生的差异，来进行问题的求解。</p>
-<h3 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">环形链表</a></h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个链表，判断链表中是否有环。环，即链表末尾并非指向 <code>null</code> ，而是指向链表中的任意一个结点。详情可点击超链接。</p>
-<h4 id="题目解答-1"><a href="#题目解答-1" class="headerlink" title="题目解答"></a>题目解答</h4><p>此题依旧可以利用快慢指针的思想来解答，<code>java</code>代码如下：</p>
+<h4 id="快慢指针的一般形式">快慢指针的一般形式</h4>
+<p>由上题可见，快慢指针实质上就是两个步长不同的指针，步长大的称之为快指针，小的称之为慢指针。而解决问题的原理，在于利用两个指针步长不同所产生的差异，来进行问题的求解。</p>
+<h3 id="环形链表"><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">环形链表</a></h3>
+<h4 id="题目描述">题目描述</h4>
+<p>给定一个链表，判断链表中是否有环。环，即链表末尾并非指向 <code>null</code> ，而是指向链表中的任意一个结点。详情可点击超链接。</p>
+<h4 id="题目解答-1">题目解答</h4>
+<p>此题依旧可以利用快慢指针的思想来解答，<code>java</code>代码如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="hljs-comment"> *         val = x;</span></span><br><span class="line"><span class="hljs-comment"> *         next = null;</span></span><br><span class="line"><span class="hljs-comment"> *     &#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">hasCycle</span><span class="hljs-params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode quick = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">while</span>(quick != <span class="hljs-keyword">null</span> &amp;&amp; quick.next != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            quick = quick.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            <span class="hljs-keyword">if</span> (quick == slow)</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h4><ul>
+<h4 id="原理分析-1">原理分析</h4>
+<ul>
 <li>同样是快慢指针，快指针步长为 2 ，慢指针步长为 1 。</li>
 <li>如果两指针相遇，便说明链表中有环。</li>
 </ul>
@@ -199,48 +203,43 @@
 <ul>
 <li>一有环链表如下图所示：</li>
 </ul>
-<p><img src="https://i.loli.net/2019/09/07/8uzHLWtjrJEVblX.png" alt="指针之快慢指针2.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/09/07/8uzHLWtjrJEVblX.png" alt="指针之快慢指针2.png"><figcaption>指针之快慢指针2.png</figcaption>
+</figure>
 <p><strong>参数说明：</strong></p>
 <ul>
-<li><p><code>A B</code> 分别为链表的头结点，环的入口结点</p>
-</li>
-<li><p><code>L1</code> 为非环部分的链表长度</p>
-</li>
-<li><p><code>L2</code> 为慢指针在环入口结点时候与快指针间的距离</p>
-</li>
-<li><p>链表环的周长为 <code>C</code></p>
-</li>
-<li><p>$S_s$ 和 $S_f$ 分别为快指针和慢指针所走的 “路径”（即经过的结点数）</p>
-</li>
-<li><p>$N_1$ 为正整数</p>
-</li>
-<li><p>$N_2$ 为一任意实数数</p>
-</li>
+<li><code>A B</code> 分别为链表的头结点，环的入口结点</li>
+<li><p><code>L1</code> 为非环部分的链表长度</p></li>
+<li><code>L2</code> 为慢指针在环入口结点时候与快指针间的距离</li>
+<li>链表环的周长为 <code>C</code></li>
+<li><span class="math inline">\(S_s\)</span> 和 <span class="math inline">\(S_f\)</span> 分别为快指针和慢指针所走的 “路径”（即经过的结点数）</li>
+<li><span class="math inline">\(N_1\)</span> 为正整数</li>
+<li><p><span class="math inline">\(N_2\)</span> 为一任意实数数</p></li>
 </ul>
 <p><strong>证明：</strong></p>
 <ul>
 <li><p>当慢指针到达环的入口结点（即B点）之时，二者所经过的 “路程” 如下：</p>
-<p>$S_S = L1$ </p>
-<p>$S_f = 2\times L1 = L1 + N_1C + L2$</p>
-<p>则：$L1 = N_1C + L2$</p>
-</li>
-<li><p>假设慢指针与快指针在慢指针走了 <code>i</code> 之后相遇（快指针为慢指针的 $N_2$ 倍），可得方程如下：</p>
-<p>$(S_s + i - L1)\ mod\ C =(S_f + N_2i -L1)\ mod\ C$</p>
-<p><strong>代入可得：</strong> $i\ mod\ C =(N_1C + N_2i + L2)\ mod\ C$</p>
-<p><strong>移向化简：</strong> $[(N_2 - 1)i + L1]\ mod\ C = 0$</p>
-<p>又因为 <code>NC</code> 是 <code>C</code> 的整数倍，可约去，所以最终等式为：$[(N_2-1)i+L1]\ mod\ C = 0$</p>
-</li>
+<p><span class="math inline">\(S_S = L1\)</span></p>
+<p><span class="math inline">\(S_f = 2\times L1 = L1 + N_1C + L2\)</span></p>
+<p>则：<span class="math inline">\(L1 = N_1C + L2\)</span></p></li>
+<li><p>假设慢指针与快指针在慢指针走了 <code>i</code> 之后相遇（快指针为慢指针的 <span class="math inline">\(N_2\)</span> 倍），可得方程如下：</p>
+<p><span class="math inline">\((S_s + i - L1)\ mod\ C =(S_f + N_2i -L1)\ mod\ C\)</span></p>
+<p><strong>代入可得：</strong> <span class="math inline">\(i\ mod\ C =(N_1C + N_2i + L2)\ mod\ C\)</span></p>
+<p><strong>移向化简：</strong> <span class="math inline">\([(N_2 - 1)i + L1]\ mod\ C = 0\)</span></p>
+<p>又因为 <code>NC</code> 是 <code>C</code> 的整数倍，可约去，所以最终等式为：<span class="math inline">\([(N_2-1)i+L1]\ mod\ C = 0\)</span></p></li>
 </ul>
-<p>则说明，只要 $(N_2-1)i+L1$ 是  $C$ 的整数倍，那么快慢指针一定能够相遇</p>
-<p>$N_2$ 应该如何取值呢？</p>
+<p>则说明，只要 <span class="math inline">\((N_2-1)i+L1\)</span> 是 <span class="math inline">\(C\)</span> 的整数倍，那么快慢指针一定能够相遇</p>
+<p><span class="math inline">\(N_2\)</span> 应该如何取值呢？</p>
 <ul>
-<li>显然，如果 $N_2 = 1$ （即两指针步长相同），那么等式就只有在 $L1$ 是 $C$ 整数倍的时候才能相遇</li>
-<li>$(N_2-1)i+L1 = KC$ （$K$ 为任意正整数），显然，$N_2$ 取任意大于1的实数，均能够满足此等式</li>
+<li>显然，如果 <span class="math inline">\(N_2 = 1\)</span> （即两指针步长相同），那么等式就只有在 <span class="math inline">\(L1\)</span> 是 <span class="math inline">\(C\)</span> 整数倍的时候才能相遇</li>
+<li><span class="math inline">\((N_2-1)i+L1 = KC\)</span> （<span class="math inline">\(K\)</span> 为任意正整数），显然，<span class="math inline">\(N_2\)</span> 取任意大于1的实数，均能够满足此等式</li>
 </ul>
 <p>所以，有环链表中，<strong>理论上只要快指针的步长大于慢指针的步长，两指针就能相遇</strong>。</p>
 <p>但是，快指针步长为2，慢指针步长为1之时，其<strong>时间复杂度是最低</strong>的，故一般如此使用。【关于时间复杂度最低问题，链表中，快指针虽然说是一次走两步，但是其仍旧是一个结点一个结点逐次访问的，所以步长越大，其所遍历的多余结点数就越多，当然时间复杂度也会相应提升】</p>
-<h3 id="环形链表-II"><a href="#环形链表-II" class="headerlink" title="环形链表 II"></a><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">环形链表 II</a></h3><p>本题与环形链表不同的是，需要求出环形链表的入环结点。此题所采用的算法好像正规名叫 Floyd 判圈算法 ，是图论里的一种算法。</p>
-<h4 id="题目解答-2"><a href="#题目解答-2" class="headerlink" title="题目解答"></a>题目解答</h4><p>这算法的<strong>详细描述</strong>是：</p>
+<h3 id="环形链表-ii"><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">环形链表 II</a></h3>
+<p>本题与环形链表不同的是，需要求出环形链表的入环结点。此题所采用的算法好像正规名叫 Floyd 判圈算法 ，是图论里的一种算法。</p>
+<h4 id="题目解答-2">题目解答</h4>
+<p>这算法的<strong>详细描述</strong>是：</p>
 <ul>
 <li>利用快慢指针判断是否有环</li>
 <li>如果有，则将相遇的结点标记，同时设新指针指向链表头。</li>
@@ -248,14 +247,15 @@
 </ul>
 <p><code>java</code> 代码如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="hljs-comment"> * class ListNode &#123;</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode next;</span></span><br><span class="line"><span class="hljs-comment"> *     ListNode(int x) &#123;</span></span><br><span class="line"><span class="hljs-comment"> *         val = x;</span></span><br><span class="line"><span class="hljs-comment"> *         next = null;</span></span><br><span class="line"><span class="hljs-comment"> *     &#125;</span></span><br><span class="line"><span class="hljs-comment"> * &#125;</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> ListNode <span class="hljs-title">findIntersection</span><span class="hljs-params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">while</span> (fast != <span class="hljs-keyword">null</span> &amp;&amp; fast.next != <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            <span class="hljs-keyword">if</span> (slow == fast) &#123;</span><br><span class="line">                <span class="hljs-keyword">return</span> slow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">detectCycle</span><span class="hljs-params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        ListNode intersection = findIntersection(head);</span><br><span class="line">        <span class="hljs-keyword">if</span> (intersection == <span class="hljs-keyword">null</span>)</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;</span><br><span class="line">        </span><br><span class="line">        ListNode ptr1 = head;</span><br><span class="line">        ListNode ptr2 = intersection;</span><br><span class="line">        <span class="hljs-keyword">while</span> (ptr1 != ptr2) &#123;</span><br><span class="line">            ptr1 = ptr1.next;</span><br><span class="line">            ptr2 = ptr2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">return</span> ptr1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>为了清晰起见，重新定义了一个函数。</p>
-<h4 id="原理分析-1"><a href="#原理分析-1" class="headerlink" title="原理分析"></a>原理分析</h4><p>由上题之证明：二指针相遇之时，恰好满足  $[(N_2 - 1)i + L1]\ mod\ C = 0$ ；</p>
-<p>又因为<code>i</code> 为慢指针走的步数，<code>L1</code> 为前无环部分的长度，二者之和刚好是 $C$ 的整数倍。所以，可得 $C-i = L1$，故此方法定能找到入环结点。</p>
+<h4 id="原理分析-2">原理分析</h4>
+<p>由上题之证明：二指针相遇之时，恰好满足 <span class="math inline">\([(N_2 - 1)i + L1]\ mod\ C = 0\)</span> ；</p>
+<p>又因为<code>i</code> 为慢指针走的步数，<code>L1</code> 为前无环部分的长度，二者之和刚好是 <span class="math inline">\(C\)</span> 的整数倍。所以，可得 <span class="math inline">\(C-i = L1\)</span>，故此方法定能找到入环结点。</p>
 <hr>
-<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><p><a href="http://windsmoon.com/2017/10/09/判断单向链表是否有环及求环入口的算法数学证明/#more" target="_blank" rel="noopener">windsmoon的博客：判断单向链表是否有环及求环入口的算法数学证明</a></p>
+<h4 id="参考文章">参考文章：</h4>
+<p><a href="http://windsmoon.com/2017/10/09/判断单向链表是否有环及求环入口的算法数学证明/#more" target="_blank" rel="noopener">windsmoon的博客：判断单向链表是否有环及求环入口的算法数学证明</a></p>
 <p><a href="https://www.zhihu.com/question/23208893" target="_blank" rel="noopener">知乎问题：为什么用快慢指针找链表的环，快指针和慢指针一定会相遇？</a></p>
-<p><a href="https://stackoverflow.com/questions/3952805/proof-of-detecting-the-start-of-cycle-in-linked-list" target="_blank" rel="noopener">StackOverflow 提问：Proof of detecting the start of cycle in linked list </a></p>
+<p><a href="https://stackoverflow.com/questions/3952805/proof-of-detecting-the-start-of-cycle-in-linked-list" target="_blank" rel="noopener">StackOverflow 提问：Proof of detecting the start of cycle in linked list</a></p>
 <hr>
 <p>本文题目均来源于<code>LeetCode</code></p>
 
@@ -349,7 +349,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -473,23 +473,23 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                <a class="level is-mobile" href="https://google.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">Hexo</span>
+                        <span class="level-item">Google</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
+                        <span class="level-item tag">google.com</span>
                     </span>
                 </a>
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                <a class="level is-mobile" href="https://baidu.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">PPOffice</span>
+                        <span class="level-item">Baidu</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">github.com</span>
+                        <span class="level-item tag">baidu.com</span>
                     </span>
                 </a>
             </li>
@@ -524,7 +524,7 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        <div class="column-right-shadow is-hidden-widescreen ">
         
             <div class="card widget">
     <div class="card-content">
@@ -977,7 +977,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
     
         <div class="card widget">
     <div class="card-content">

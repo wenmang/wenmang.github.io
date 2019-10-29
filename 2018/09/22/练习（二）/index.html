@@ -10,13 +10,13 @@
 <title>练习（二） - 文的盲</title>
 
 
-    <meta name="description" content="算法竞赛入门经典（第二版）——  第二章习题此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！">
+    <meta name="description" content="算法竞赛入门经典（第二版）—— 第二章习题 此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！">
 <meta name="keywords" content="随笔,练习,c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="练习（二）">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;09&#x2F;22&#x2F;%E7%BB%83%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="算法竞赛入门经典（第二版）——  第二章习题此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！">
+<meta property="og:description" content="算法竞赛入门经典（第二版）—— 第二章习题 此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-10-23T07:06:43.895Z">
@@ -154,30 +154,36 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h2 id="算法竞赛入门经典（第二版）——-第二章习题"><a href="#算法竞赛入门经典（第二版）——-第二章习题" class="headerlink" title="算法竞赛入门经典（第二版）——  第二章习题"></a>算法竞赛入门经典（第二版）——  第二章习题</h2><p>此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h2 id="算法竞赛入门经典第二版-第二章习题">算法竞赛入门经典（第二版）—— 第二章习题</h2>
+<p>此为练手简单习题，觉得挺有意思，并且第一次处理之时想的过于简单或者处理有误，故贴出来作为提醒，并分享处理方案，仅供参考！</p>
 <a id="more"></a>
-
-<h3 id="习题-2-5：分数化小数"><a href="#习题-2-5：分数化小数" class="headerlink" title="习题 2-5：分数化小数"></a>习题 2-5：分数化小数</h3><p>输入正整数a,b,c，输出a/b的小数形式，精确到小数点后c位。a,b ≤ $10 ^6$ ，c ≤ 100。输入包含多组数据, 结束标记为a=b=c=0。</p>
-<h4 id="样例输入："><a href="#样例输入：" class="headerlink" title="样例输入："></a>样例输入：</h4><p>1    6    4</p>
-<p>0    0    0</p>
-<h4 id="样例输出："><a href="#样例输出：" class="headerlink" title="样例输出："></a>样例输出：</h4><p>Case 1:   0.1667</p>
+<h3 id="习题-2-5分数化小数">习题 2-5：分数化小数</h3>
+<p>输入正整数a,b,c，输出a/b的小数形式，精确到小数点后c位。a,b ≤ <span class="math inline">\(10 ^6\)</span> ，c ≤ 100。输入包含多组数据, 结束标记为a=b=c=0。</p>
+<h4 id="样例输入">样例输入：</h4>
+<p>1 6 4</p>
+<p>0 0 0</p>
+<h4 id="样例输出">样例输出：</h4>
+<p>Case 1: 0.1667</p>
 <p>该题以普通想法来说，是直接进行输出，但是存在着两个问题：</p>
-<ol>
+<ol type="1">
 <li>输出的小数位数为c，不好直接进行输出</li>
 <li>c ≤ 100 ，由于C语言小数位数的限定，就算 double 类型，其小数位数也不可能达到100位，具体位数可自己进行试验，所以直接进行输出时会有严重的精度损失</li>
 </ol>
 <p>由以上，我们可以针对C语言整数除法的特点，间接计算小数的值</p>
-<h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Decimal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d."</span>, a/b); <span class="hljs-comment">// 输出非小数位</span></span><br><span class="line">    a = a % b;</span><br><span class="line">    <span class="hljs-keyword">while</span> (i++ &lt; c)&#123;	<span class="hljs-comment">// 小数点后前 c-1 位</span></span><br><span class="line">        a *= <span class="hljs-number">10</span>;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, a/b);</span><br><span class="line">        a = a % b;</span><br><span class="line">    &#125;</span><br><span class="line">    a *= <span class="hljs-number">10</span>;</span><br><span class="line">    <span class="hljs-comment">/* 小数点后第 c 位进行四舍五入 */</span></span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ((a%b)*<span class="hljs-number">10</span>)/b &gt;= <span class="hljs-number">5</span> ? (a/b+<span class="hljs-number">1</span>):(a/b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="代码">代码：</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Decimal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d."</span>, a/b); <span class="hljs-comment">// 输出非小数位</span></span><br><span class="line">    a = a % b;</span><br><span class="line">    <span class="hljs-keyword">while</span> (i++ &lt; c)&#123;	<span class="hljs-comment">// 小数点后前 c-1 位</span></span><br><span class="line">        a *= <span class="hljs-number">10</span>;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, a/b);</span><br><span class="line">        a = a % b;</span><br><span class="line">    &#125;</span><br><span class="line">    a *= <span class="hljs-number">10</span>;</span><br><span class="line">    <span class="hljs-comment">/* 小数点后第 c 位进行四舍五入 */</span></span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ((a%b)*<span class="hljs-number">10</span>)/b &gt;= <span class="hljs-number">5</span> ? (a/b+<span class="hljs-number">1</span>):(a/b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以上代码，直接采用函数方式进行分数转小数原理的实现，将多次输入省略</p>
 <p><strong>注：</strong>上述代码实现原理参考<a href="https://blog.csdn.net/Artprog" target="_blank" rel="noopener">Artprog</a>的CSDN博客<a href="https://blog.csdn.net/artprog/article/details/54755191" target="_blank" rel="noopener">C语言 分数化小数</a></p>
-<h3 id="习题2-6：排列"><a href="#习题2-6：排列" class="headerlink" title="习题2-6：排列"></a>习题2-6：排列</h3><p>用1,2,3，……9组成3个三位数 abc , def 和 ghi，每个数字恰好使用一次，要求 abc:def:ghi=1:2:3。按照 “abc   def   ghi” 格式输出所有接。</p>
-<h4 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h4><p>无</p>
-<h4 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h4><p>abc   def   ghi</p>
-<p>此题我基本想法确立之后：循环判断 abc   2abc   3abc  三个数各位 1~9 每个数字是否恰好使用一次，在判断是否使用之时，却遇到了一些困难，参考博客之后，有了如下解法：</p>
+<h3 id="习题2-6排列">习题2-6：排列</h3>
+<p>用1,2,3，……9组成3个三位数 abc , def 和 ghi，每个数字恰好使用一次，要求 abc:def:ghi=1:2:3。按照 “abc def ghi” 格式输出所有接。</p>
+<h4 id="样例输入-1">样例输入</h4>
+<p>无</p>
+<h4 id="样例输出-1">样例输出</h4>
+<p>abc def ghi</p>
+<p>此题我基本想法确立之后：循环判断 abc 2abc 3abc 三个数各位 1~9 每个数字是否恰好使用一次，在判断是否使用之时，却遇到了一些困难，参考博客之后，有了如下解法：</p>
 <p>采用一个布尔类型数组，下标表示数字，储存的值表示数字是否被用到(false or true)，如果数组下标1~9全部为储存的值全部为 true，就进行输出。</p>
-<h4 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Permutation</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i, j, k;</span><br><span class="line">    <span class="hljs-keyword">bool</span> isAppear[<span class="hljs-number">10</span>];  <span class="hljs-comment">// 定义判别数组</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">123</span>; i &lt; <span class="hljs-number">330</span>; i++)&#123;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(isAppear, <span class="hljs-literal">false</span>, <span class="hljs-keyword">sizeof</span>(isAppear));</span><br><span class="line">        j = <span class="hljs-number">2</span>*i;    k = <span class="hljs-number">3</span>*i;</span><br><span class="line">        <span class="hljs-comment">// 处理数组</span></span><br><span class="line">        isAppear[i/<span class="hljs-number">100</span>] = isAppear[(i/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[i%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        isAppear[j/<span class="hljs-number">100</span>] = isAppear[(j/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[j%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        isAppear[k/<span class="hljs-number">100</span>] = isAppear[(k/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[k%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        <span class="hljs-comment">// 判断 1-9 九个数是否都用到</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">1</span>; l &lt; <span class="hljs-number">10</span>; l++) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (isAppear[l] == <span class="hljs-literal">false</span>)</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (l == <span class="hljs-number">9</span>)</span><br><span class="line">                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%5d%5d%5d\n"</span>, i, j, k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="代码-1">代码：</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Permutation</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i, j, k;</span><br><span class="line">    <span class="hljs-keyword">bool</span> isAppear[<span class="hljs-number">10</span>];  <span class="hljs-comment">// 定义判别数组</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">123</span>; i &lt; <span class="hljs-number">330</span>; i++)&#123;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(isAppear, <span class="hljs-literal">false</span>, <span class="hljs-keyword">sizeof</span>(isAppear));</span><br><span class="line">        j = <span class="hljs-number">2</span>*i;    k = <span class="hljs-number">3</span>*i;</span><br><span class="line">        <span class="hljs-comment">// 处理数组</span></span><br><span class="line">        isAppear[i/<span class="hljs-number">100</span>] = isAppear[(i/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[i%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        isAppear[j/<span class="hljs-number">100</span>] = isAppear[(j/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[j%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        isAppear[k/<span class="hljs-number">100</span>] = isAppear[(k/<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>] = isAppear[k%<span class="hljs-number">10</span>] = <span class="hljs-literal">true</span>;</span><br><span class="line">        <span class="hljs-comment">// 判断 1-9 九个数是否都用到</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">1</span>; l &lt; <span class="hljs-number">10</span>; l++) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (isAppear[l] == <span class="hljs-literal">false</span>)</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (l == <span class="hljs-number">9</span>)</span><br><span class="line">                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%5d%5d%5d\n"</span>, i, j, k);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注：</strong>上述代码参考<a href="https://blog.csdn.net/lecholin" target="_blank" rel="noopener">Lecholin</a>的博客<a href="https://blog.csdn.net/lecholin/article/details/69787589" target="_blank" rel="noopener">《算法竞赛入门经典》习题2-6 三位数排列</a></p>
 
         </div>
@@ -270,7 +276,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
 <div class="card widget">
@@ -394,23 +400,23 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                <a class="level is-mobile" href="https://google.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">Hexo</span>
+                        <span class="level-item">Google</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">hexo.io</span>
+                        <span class="level-item tag">google.com</span>
                     </span>
                 </a>
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                <a class="level is-mobile" href="https://baidu.com" target="_blank">
                     <span class="level-left">
-                        <span class="level-item">PPOffice</span>
+                        <span class="level-item">Baidu</span>
                     </span>
                     <span class="level-right">
-                        <span class="level-item tag">github.com</span>
+                        <span class="level-item tag">baidu.com</span>
                     </span>
                 </a>
             </li>
@@ -445,7 +451,7 @@
 </div>
     
     
-        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        <div class="column-right-shadow is-hidden-widescreen ">
         
             <div class="card widget">
     <div class="card-content">
@@ -898,7 +904,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
     
         <div class="card widget">
     <div class="card-content">
