@@ -10,13 +10,13 @@
 <title>二叉搜索树 - 文的盲</title>
 
 
-    <meta name="description" content="二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树 定义：一棵二叉树，可以为空；如果不为空，满足以下性质：   非空左子树的所有键值小于其根结点的键值。 非空右子树的所有键值大于其根结点的键值。 左、右子树都是二叉搜索树。">
+    <meta name="description" content="二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树 定义：一棵二叉树，可以为空；如果不为空，满足以下性质：  非空左子树的所有键值小于其根结点的键值。 非空右子树的所有键值大于其根结点的键值。 左、右子树都是二叉搜索树。">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉搜索树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;02&#x2F;%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树 定义：一棵二叉树，可以为空；如果不为空，满足以下性质：   非空左子树的所有键值小于其根结点的键值。 非空右子树的所有键值大于其根结点的键值。 左、右子树都是二叉搜索树。">
+<meta property="og:description" content="二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树 定义：一棵二叉树，可以为空；如果不为空，满足以下性质：  非空左子树的所有键值小于其根结点的键值。 非空右子树的所有键值大于其根结点的键值。 左、右子树都是二叉搜索树。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-09-07T04:05:45.562Z">
@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
 
 
     
@@ -171,14 +171,13 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树</p>
-<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质： </p>
-<ol>
+<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质：</p>
+<ol type="1">
 <li>非空左子树的所有键值小于其根结点的键值。</li>
 <li>非空右子树的所有键值大于其根结点的键值。</li>
 <li>左、右子树都是二叉搜索树。</li>
 </ol>
 <a id="more"></a>
-
 <p><strong>二叉搜索树操作的一些重要函数</strong></p>
 <ul>
 <li><strong>Position Find( ElementType X, BinTree BST )：</strong>从二叉搜索树BST 中查找元素X，返回其所在结点的地址；</li>
@@ -187,10 +186,11 @@
 <li><strong>BinTree Insert( ElementType X, BinTree BST ) ：</strong></li>
 <li><strong>BinTree Delete( ElementType X, BinTree BST )：</strong></li>
 </ul>
-<h4 id="二叉树的搜索"><a href="#二叉树的搜索" class="headerlink" title="二叉树的搜索"></a>二叉树的搜索</h4><p>查找从根结点开始，如果树为空，返回NULL </p>
+<h4 id="二叉树的搜索">二叉树的搜索</h4>
+<p>查找从根结点开始，如果树为空，返回NULL</p>
 <p>若搜索树非空，则根结点关键字和X进行比较，并进行不同处理：</p>
 <ul>
-<li>若X小于根结点键值，只需在左子树中继续搜索； </li>
+<li>若X小于根结点键值，只需在左子树中继续搜索；</li>
 <li>如果X大于根结点的键值，在右子树中进行继续搜索；</li>
 <li>若两者比较结果是相等，搜索完成，返回指向此结点的指针。</li>
 </ul>
@@ -199,45 +199,40 @@
 <p>由于递归实现的效率不高，所以我们可以将此种递归 ——“尾递归”转化为迭代函数</p>
 <p><strong>迭代实现</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Position  <span class="hljs-title">Find</span> <span class="hljs-params">( ElementType  X , BinTree BST )</span></span>&#123;      <span class="hljs-comment">// 非递归查找</span></span><br><span class="line">    </span><br><span class="line">      <span class="hljs-keyword">while</span> ( BST )&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> ( X &lt; BST-&gt;Data )     <span class="hljs-comment">// 小于父节点 在左子树中继续查找</span></span><br><span class="line">                  BST = BST-&gt;Left;</span><br><span class="line">            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( X &gt; BST-&gt;Data )     <span class="hljs-comment">// 大于父节点 在右子树中继续查找</span></span><br><span class="line">                  BST = BST-&gt;Right;</span><br><span class="line">            <span class="hljs-keyword">else</span>  <span class="hljs-comment">// X == BST-&gt;Data</span></span><br><span class="line">                  <span class="hljs-keyword">return</span> BST  <span class="hljs-comment">// 都不成立 则已经找到 返回找到结点的地址</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="查找最大最小元素"><a href="#查找最大最小元素" class="headerlink" title="查找最大最小元素"></a>查找最大最小元素</h4><p>根据搜索二叉树特点，我们可以知道：</p>
+<h4 id="查找最大最小元素">查找最大最小元素</h4>
+<p>根据搜索二叉树特点，我们可以知道：</p>
 <ul>
-<li>最大元素一定是在树的最右分枝的端结点上 </li>
+<li>最大元素一定是在树的最右分枝的端结点上</li>
 <li>最小元素一定是在树的最左分枝的端结点上</li>
 </ul>
 <p>而且，由普通查找算法可知，查找最大和最小元素也有两种方法</p>
 <p>查找的最大和最小只是向左向右有所不同，所以在此仅仅写上查找最大值的两种实现函数</p>
 <p><strong>递归函数</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">osition  <span class="hljs-title">FindMax</span> <span class="hljs-params">( BinTree BST )</span></span>&#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> ( !BST )</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span> ;     <span class="hljs-comment">// 空树 返回NULL</span></span><br><span class="line">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( !BST-&gt;Right )</span><br><span class="line">            <span class="hljs-keyword">return</span> BST;       <span class="hljs-comment">// 右子树为空 直接返回自身</span></span><br><span class="line">      <span class="hljs-keyword">else</span></span><br><span class="line">            retuen FindMax (BST-&gt;Right)   <span class="hljs-comment">// 右子树不空 对右子树进行递归</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>迭代函数</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Position  <span class="hljs-title">FindMax</span> <span class="hljs-params">( BinTree BST )</span></span>&#123;      </span><br><span class="line">    <span class="hljs-keyword">if</span> ( BST )            </span><br><span class="line">        <span class="hljs-keyword">while</span> ( BST-&gt;Right)     </span><br><span class="line">            BST = BST-&gt;Right ;            </span><br><span class="line">    		<span class="hljs-comment">// 树不空 则直接进行循环查找 直到最右叶节点      </span></span><br><span class="line">    <span class="hljs-keyword">return</span> BST;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="二叉搜索树的插入"><a href="#二叉搜索树的插入" class="headerlink" title="二叉搜索树的插入"></a>二叉搜索树的插入</h4><p>插入的重点在于找到插入的位置，而找位置的方法也就是Find方法，找到之后将元素插入即可。</p>
+<h4 id="二叉搜索树的插入">二叉搜索树的插入</h4>
+<p>插入的重点在于找到插入的位置，而找位置的方法也就是Find方法，找到之后将元素插入即可。</p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">BinTree  <span class="hljs-title">Insert</span>  <span class="hljs-params">( ElementType X , BinTree BST )</span></span>&#123;</span><br><span class="line">      <span class="hljs-keyword">if</span> (!BST)&#123;  <span class="hljs-comment">// 空树 生成并返回一个结点的二叉搜索树</span></span><br><span class="line">            BST = <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct TreeNode));</span><br><span class="line">            BST-&gt;Data = X;</span><br><span class="line">            BST-&gt;Left = BST-&gt;Right = <span class="hljs-literal">NULL</span>;</span><br><span class="line">      &#125; <span class="hljs-keyword">else</span></span><br><span class="line">            <span class="hljs-keyword">if</span> ( X &lt; BST-&gt;Data )    <span class="hljs-comment">// 小于 则在树左边插入</span></span><br><span class="line">                  BST-&gt;Left = Insert( X , BST-&gt;Left ) ;</span><br><span class="line">            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( X &gt; BST-&gt;Data )     <span class="hljs-comment">// 大于 就在树右边插入</span></span><br><span class="line">                  BST-&gt;Right = Insert( X , BST-&gt;Right );</span><br><span class="line">            </span><br><span class="line">      <span class="hljs-keyword">return</span> BST ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>注：</strong></p>
 <p>第一个 if 语句的两个作用：</p>
 <ul>
 <li>刚开始判断是否为空树（第一次传入的树），如果为空树，则创建树</li>
 <li>找到插入点后进行插入</li>
 </ul>
-<h4 id="二叉搜索树的删除"><a href="#二叉搜索树的删除" class="headerlink" title="二叉搜索树的删除"></a>二叉搜索树的删除</h4><p>二叉搜索树的删除主要分为三种情况：</p>
+<h4 id="二叉搜索树的删除">二叉搜索树的删除</h4>
+<p>二叉搜索树的删除主要分为三种情况：</p>
 <ul>
-<li><p>删除叶节点：直接删除，之后将父节点指针置为NULL</p>
-</li>
-<li><p>删除的结点只有一个子节点：将其父结点的指针指向要删除的结点的子结点</p>
-</li>
+<li><p>删除叶节点：直接删除，之后将父节点指针置为NULL</p></li>
+<li><p>删除的结点只有一个子节点：将其父结点的指针指向要删除的结点的子结点</p></li>
 <li><p>删除的结点有两个完整的子节点，也就是有左右两棵子树：</p>
 <ul>
 <li>可以采用另一结点替代被删除结点：左子树最大的元素或者右子树最小的元素，因为只有这样操作，才能在结点删除之后，仍然是一棵完整的二叉搜索树</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">BinTree <span class="hljs-title">Delete</span> <span class="hljs-params">( ElementType X , BinTree BST )</span></span>&#123;</span><br><span class="line">      Position Tmp;</span><br><span class="line">      <span class="hljs-keyword">if</span> ( !BST )       <span class="hljs-built_in">printf</span> ( <span class="hljs-string">"要删除的元素未找到"</span> );</span><br><span class="line">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( X &lt; BST-&gt;Data )     <span class="hljs-comment">// 左子树递归删除</span></span><br><span class="line">            BST-&gt;Left = Delet( X , BST-&gt;Left) ;</span><br><span class="line">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( X &gt; BST-&gt;Data )     <span class="hljs-comment">// 右子树递归删除</span></span><br><span class="line">            BST-&gt;Right = Delet( X , BST-&gt;Right );</span><br><span class="line">      <span class="hljs-keyword">else</span>        <span class="hljs-comment">// 找到需要删除的结点</span></span><br><span class="line">            <span class="hljs-keyword">if</span> ( BST-&gt;Left &amp;&amp; BST-&gt;Right )&#123;     <span class="hljs-comment">// 删除节点的左右结点都存在</span></span><br><span class="line">                  Tmp = FindMin( BST-&gt;Right )   <span class="hljs-comment">// 寻找右子树中最小值 赋给Tmp</span></span><br><span class="line">                  BST-&gt;Data = Tmp-&gt;Data;        </span><br><span class="line">                  <span class="hljs-comment">// 找到后赋值给需要删除的结点 将其覆盖</span></span><br><span class="line">                  BST-&gt;Right = Delet(BST-&gt;Data , BST-&gt;Right) ;</span><br><span class="line">                  <span class="hljs-comment">// 在右子树中递归删除 覆盖了原结点的结点</span></span><br><span class="line">            &#125; <span class="hljs-keyword">else</span> &#123;         <span class="hljs-comment">// 左右子树只存在一个或均不存在</span></span><br><span class="line">                  Tmp = BST;</span><br><span class="line">                  <span class="hljs-keyword">if</span> ( !BST-&gt;Left )       <span class="hljs-comment">// 左子树不存在</span></span><br><span class="line">                        BST = BST-&gt;Right ;      </span><br><span class="line">                        <span class="hljs-comment">// 将其右子树接到要删除结点的上一个结点</span></span><br><span class="line">                  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( !BST-&gt;Right )       <span class="hljs-comment">// 右子树不存在</span></span><br><span class="line">                        BST = BST-&gt;Left;</span><br><span class="line">                        <span class="hljs-comment">// 将其右子树接到要删除结点的上一个结点</span></span><br><span class="line">                  <span class="hljs-built_in">free</span>(Tmp);  <span class="hljs-comment">// 释放Tmp</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="hljs-keyword">return</span> BST ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         

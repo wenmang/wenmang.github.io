@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
 
 
     
@@ -168,7 +168,7 @@
             
         </h1>
         <div class="content">
-            <p><strong>引例：</strong>计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。 </p>
+            <p><strong>引例：</strong>计算机中，经常会遇到这样一个问题——优先级。程序的执行必须要有优先级的确立，而不能仅仅利用程序打开的先后次序，一台电脑，不能因为你新打开了某个巨大的软件，就直接停掉了一个很久之前打开的重要驱动。这显然是不现实的，所以我们可以假设一种序列，取出元素的顺序以优先级大小为准。</p>
         </div>
         
         
@@ -353,8 +353,8 @@
             
         </h1>
         <div class="content">
-            <p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL）<br><strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
-<p><strong>平衡因子（Balance Factor    BF）：</strong><br>BF(T) = $h_L$ - $h_R$ (注：$h_L$ 和 $h_R$分别为左右子树的高度)<br><strong>平衡二叉树（Balance Binary Tree）：AVL树</strong><br>空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
+            <p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL） <strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
+<p><strong>平衡因子（Balance Factor BF）：</strong> BF(T) = <span class="math inline">\(h_L\)</span> - <span class="math inline">\(h_R\)</span> (注：<span class="math inline">\(h_L\)</span> 和 <span class="math inline">\(h_R\)</span>分别为左右子树的高度) <strong>平衡二叉树（Balance Binary Tree）：AVL树</strong> 空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
         </div>
         
         
@@ -416,8 +416,8 @@
         </h1>
         <div class="content">
             <p>二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树</p>
-<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质： </p>
-<ol>
+<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质：</p>
+<ol type="1">
 <li>非空左子树的所有键值小于其根结点的键值。</li>
 <li>非空右子树的所有键值大于其根结点的键值。</li>
 <li>左、右子树都是二叉搜索树。</li>
@@ -482,7 +482,8 @@
             
         </h1>
         <div class="content">
-            <h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><strong>树（Tree）:</strong>  n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
+            <h2 id="树">树</h2>
+<p><strong>树（Tree）:</strong> n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
 <ul>
 <li>树中有一个称为“根（Root）”的特殊结点，用 r 表示；</li>
 <li>其余结点可分为m(m&gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”</li>
@@ -554,7 +555,7 @@
 </ul>
 <p>而在研究之前，首先应知道相关基础知识。</p>
 <blockquote>
-<p> 算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
+<p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
 </blockquote>
         </div>
         
@@ -616,7 +617,8 @@
             
         </h1>
         <div class="content">
-            <h4 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a><a href="https://baike.baidu.com/link?url=zvLqIte02AcZ2PpOeX8ll_JtNsu2LGoqiqZzW0wkhaVYLRN13RIfA-d67aaY72Eqtu0PoRhZtrtdr0BAfOa6aJlih4X_G0k6_4p0Hl_AhlFFk8DZ_7LWxt5Y0R0pJzbT" target="_blank" rel="noopener">线性表</a></h4><p><strong>由同类数据元素构成有序序列的线性结构</strong></p>
+            <h4 id="线性表"><a href="https://baike.baidu.com/link?url=zvLqIte02AcZ2PpOeX8ll_JtNsu2LGoqiqZzW0wkhaVYLRN13RIfA-d67aaY72Eqtu0PoRhZtrtdr0BAfOa6aJlih4X_G0k6_4p0Hl_AhlFFk8DZ_7LWxt5Y0R0pJzbT" target="_blank" rel="noopener">线性表</a></h4>
+<p><strong>由同类数据元素构成有序序列的线性结构</strong></p>
         </div>
         
         

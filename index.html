@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
 
 
     
@@ -288,7 +288,7 @@
             
         </h1>
         <div class="content">
-            <p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="[https://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md](https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p>
+            <p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="%5Bhttps://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md%5D(https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p>
 <ul>
 <li>预处理</li>
 <li>编译</li>
@@ -416,8 +416,9 @@
             
         </h1>
         <div class="content">
-            <h3 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h3><p>现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。</p>
-<p>我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能得到这样个行向量，将所有行向量拼接起来，构成一个$N\times M$ 的矩阵（$N$ 为鱼的数目，$M$ 为依据的特征数目），这样就构成了一个简单的有标签的数据集。</p>
+            <h3 id="分类问题">分类问题</h3>
+<p>现实世界中，我们常常需要对事物进行分类，而分类的所依据的标准往往是多样的，这尤其体现在使用电脑解决分类问题之时。</p>
+<p>我们如果要使用电脑进行分类，首先需要的便是数据。比如：我们需要将两个不同品种的鱼进行分类，我们首先需要根据找不同的方式找出两种鱼在某些特征上的不一致之处（如：长度，宽度，鱼鳍数目、长度等等）。我们将找出来的这些特征构建为一个行向量，同时对每一类都选许多条鱼进行测量，每一条鱼都能得到这样个行向量，将所有行向量拼接起来，构成一个<span class="math inline">\(N\times M\)</span> 的矩阵（<span class="math inline">\(N\)</span> 为鱼的数目，<span class="math inline">\(M\)</span> 为依据的特征数目），这样就构成了一个简单的有标签的数据集。</p>
         </div>
         
         
