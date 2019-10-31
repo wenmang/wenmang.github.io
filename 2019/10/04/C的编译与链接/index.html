@@ -10,13 +10,13 @@
 <title>C的编译与链接 - 文的盲</title>
 
 
-    <meta name="description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
+    <meta name="description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
 <meta name="keywords" content="随笔,底层,C,有趣">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C的编译与链接">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;04&#x2F;C%E7%9A%84%E7%BC%96%E8%AF%91%E4%B8%8E%E9%93%BE%E6%8E%A5&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
+<meta property="og:description" content="曾经在初读 CSAPP 之时，我初步了解了 C 语言的全部编译过程，即大概可分为以下三大步：  预处理 编译 链接  今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-05T05:58:34.042Z">
@@ -170,7 +170,7 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="[https://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md](https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>曾经在初读 <code>CSAPP</code> 之时，我初步了解了 C 语言的全部<a href="%5Bhttps://github.com/wenmang/hello-world/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/SectionI/note/C%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E7%9A%84%E7%BC%96%E8%AF%91%E5%92%8C%E6%89%A7%E8%A1%8C.md%5D(https://github.com/wenmang/hello-world/blob/master/深入理解计算机系统（第二版）/SectionI/note/C语言代码的编译和执行.md)">编译</a>过程，即大概可分为以下三大步：</p>
 <ul>
 <li>预处理</li>
 <li>编译</li>
@@ -178,66 +178,85 @@
 </ul>
 <p>今天，又看了节公开课，对这部分有了相对较为深入的理解，并且知道了一些有意思的事情。</p>
 <a id="more"></a>
-
 <p>开始之前，我们应该有这样一个概念：在使用 <code>gcc</code> 编译器进行编译之时，以上三步在某种意义上来说是相互分离的。</p>
-<h3 id="预处理阶段"><a href="#预处理阶段" class="headerlink" title="预处理阶段"></a>预处理阶段</h3><p>对于此阶段，我之前所理解的全部，便是曾经所做的笔记：</p>
+<h3 id="预处理阶段">预处理阶段</h3>
+<p>对于此阶段，我之前所理解的全部，便是曾经所做的笔记：</p>
 <blockquote>
 <p>通过预处理器( <code>cpp</code> ) 处理之后，将其变成了 <code>.i</code> 文件，<code>.i</code> 文件实际上对你写的 <code>.c</code> 文件里以井号 <code>#</code> 开头的语句进行了处理，其发现你引入了某个头文件，于是预处理器便将头文件的内容插入到了你的代码之中。</p>
 </blockquote>
-<p>而如今，我想可以进一步扩展（或许不准确），预处理阶段所处理的内容，实质上就是对 C语言中的宏进行处理，而其中需要处理的部分，即通过宏语法限定的，在程序中<strong>有效的宏语言</strong><a href="为何说是有效，因为宏拥有一套自己简单的语法，可以控制某段宏是否进行处理，处理几次等操作，所以在此使用了有效的宏语言一词">^【1】</a>。其中主要有两大类：</p>
+<p>而如今，我想可以进一步扩展（或许不准确），预处理阶段所处理的内容，实质上就是对 C语言中的宏进行处理，而其中需要处理的部分，即通过宏语法限定的，在程序中<strong>有效的宏语言</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。其中主要有两大类：</p>
 <ul>
 <li><code>#define</code> ：对以 <code>#define</code> 打头的宏定义部分进行替换。</li>
-<li><code>#include</code>：对以 <code>#include</code>  格式引入的库文件进行添加。</li>
+<li><code>#include</code>：对以 <code>#include</code> 格式引入的库文件进行添加。</li>
 </ul>
-<h4 id="define"><a href="#define" class="headerlink" title="#define"></a><code>#define</code></h4><p>最为常见的宏定义，新手常常使用其表示变量，老手便会使用宏来表示一些简单的函数等等：</p>
+<h4 id="define"><code>#define</code></h4>
+<p>最为常见的宏定义，新手常常使用其表示变量，老手便会使用宏来表示一些简单的函数等等：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PI 3.14159	<span class="hljs-comment">// 新手</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX(a,b) ((a)&gt;(b))?(a):(b)	<span class="hljs-comment">// 老手</span></span></span><br></pre></td></tr></table></figure>
-
 <p>一般来说，既然已经有了函数，但是还是有许多人使用宏来替代函数，那么必有原因，一般来说，宏的优点主要有以下几点：</p>
 <ul>
 <li>同函数一般，简单可复用！同时能够使代码含义更加清晰。</li>
-<li>与函数相比，其直接在预处理阶段进行替换，所以其省去了函数调用的时间，所以，我觉得宏适合在下列情境下使用：<ul>
+<li>与函数相比，其直接在预处理阶段进行替换，所以其省去了函数调用的时间，所以，我觉得宏适合在下列情境下使用：
+<ul>
 <li>函数功能较为简单，只有一行代码，函数调用所花时间对函数功能影响较大</li>
 <li>函数需要多次重复使用（不适合有递归的情况）</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="include"><a href="#include" class="headerlink" title="#include"></a><code>#include</code></h4><p>只要学过C语言，想必就不会对此陌生，人生中第一个 <code>hello world</code> 就使用了这个语句，也就是所谓的头文件，头文件的格式有以下两种：</p>
+<h4 id="include"><code>#include</code></h4>
+<p>只要学过C语言，想必就不会对此陌生，人生中第一个 <code>hello world</code> 就使用了这个语句，也就是所谓的头文件，头文件的格式有以下两种：</p>
 <ul>
 <li><code>#include&lt;&gt;</code> ：以 <code>&lt;&gt;</code> 引用的一般是系统自带的库文件</li>
 <li><code>#include&quot;&quot;</code> ：以 <code>&quot;&quot;</code> 引用的一般是自己写的头文件</li>
 </ul>
 <p>此部分无需多叙。</p>
-<h3 id="编译阶段"><a href="#编译阶段" class="headerlink" title="编译阶段"></a>编译阶段</h3><p>所谓编译，就是将C语言文件编译为汇编文件，以方便计算机执行，而此阶段所做工作的<strong>目的是：</strong> 将C语言进行初步编译，并对程序进行语法上的一次检查，对不符合语法规则的，进行报错，也就是 <code>Error</code> ，并会停止程序的编译 ；对有争议，或是不明确的内容提出警告 <code>Warning</code> ，但是并不会停止编译，最终还是会生成可执行文件 。</p>
+<h3 id="编译阶段">编译阶段</h3>
+<p>所谓编译，就是将C语言文件编译为汇编文件，以方便计算机执行，而此阶段所做工作的<strong>目的是：</strong> 将C语言进行初步编译，并对程序进行语法上的一次检查，对不符合语法规则的，进行报错，也就是 <code>Error</code> ，并会停止程序的编译 ；对有争议，或是不明确的内容提出警告 <code>Warning</code> ，但是并不会停止编译，最终还是会生成可执行文件 。</p>
 <p>既然如此，那么有这样一个有趣的问题：<strong>如果，我们在写代码的时候，不加上头文件，那么该代码是否能通过编译呢？</strong></p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>有这样一段毫无意义的代码，其目的仅是为了说明上述问题：</p>
+<h4 id="示例">示例</h4>
+<p>有这样一段毫无意义的代码，其目的仅是为了说明上述问题：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;	// printf</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;	// malloc, free</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;assert.h&gt;	// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">void</span>* mom = <span class="hljs-built_in">malloc</span>(<span class="hljs-number">400</span>);</span><br><span class="line">    assert(mom != <span class="hljs-literal">NULL</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"yeah!\n"</span>);</span><br><span class="line">    <span class="hljs-built_in">free</span>(mom);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们首先将 <code>#include&lt;stdio.h&gt;</code> 注释掉，那么此时，编译到 <code>printf</code> 语句的时候，编译器由于找不到 <code>printf</code> 的声明，于是会提出警告，并将 <code>printf</code> 以默认的方式进行编译——将之认为是一个函数（参数为字符串，返回值为 <code>int</code> ）。</p>
 <p>所以在编译阶段，此代码即使去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，也依旧能够编译成功</p>
-<h3 id="链接阶段"><a href="#链接阶段" class="headerlink" title="链接阶段"></a>链接阶段</h3><p>链接阶段看似是根据编译的结果进行的，但是却不尽然，因为链接阶段是相对独立的，在链接阶段，编译器会根据编译之后的结果，在库中去依次寻找对应的函数。</p>
+<h3 id="链接阶段">链接阶段</h3>
+<p>链接阶段看似是根据编译的结果进行的，但是却不尽然，因为链接阶段是相对独立的，在链接阶段，编译器会根据编译之后的结果，在库中去依次寻找对应的函数。</p>
 <p>所以，上述代码，在编译成功之后，进行链接之时，依旧能够从库中寻找到 <code>printf</code> 函数，并执行成功。也就是说，上述代码，去掉了 <code>#include&lt;stdio.h&gt;</code> 头文件，使用 <code>gcc</code> 编译，<strong>能够成功地编译并产生可执行文件</strong>，唯一的影响仅是：在编译过程中会产生一条警告信息。我自己实验的结果也同理论相同，结果如下图：</p>
-<p><img src="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png" alt="C的编译与链接1.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/JxjXuLgcdNYWkKr.png" alt="C的编译与链接1.png"><figcaption>C的编译与链接1.png</figcaption>
+</figure>
 <p>可以看到，仅产生了一个 <code>warning</code>，并且能够执行成功。</p>
-<h4 id="普适与特例"><a href="#普适与特例" class="headerlink" title="普适与特例"></a>普适与特例</h4><p>同样地，在去掉 <code>#include&lt;stdlib.h&gt;</code> 之后，也如是。但是，正如上面所说，链接阶段会重新在库函数中寻找函数原型，那么<strong>对于所有的库函数，都能够如此吗？</strong> 答案当然是<strong>否定的！</strong></p>
+<h4 id="普适与特例">普适与特例</h4>
+<p>同样地，在去掉 <code>#include&lt;stdlib.h&gt;</code> 之后，也如是。但是，正如上面所说，链接阶段会重新在库函数中寻找函数原型，那么<strong>对于所有的库函数，都能够如此吗？</strong> 答案当然是<strong>否定的！</strong></p>
 <p><code>#include&lt;assert.h&gt;</code> 头文件之中，<code>assert()</code> 的实现，实质上并不是一个函数，<strong>而是一个宏定义</strong>，所以如果去掉此头文件，在编译阶段便会将 <code>assert()</code> 解释为一个函数。但是显然，<strong>其并非一个函数，那么链接之时便不可能找得到了</strong>，所以如此便会出错！验证结果如下：</p>
-<p><img src="https://i.loli.net/2019/10/05/EuZRKoiCy4w7PlB.png" alt="C的编译与链接2.png"></p>
-<h4 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h4><p>乍一看，这种写法好像没什么意义，但是，如果需要追求极度的精简，减小文件体积，这样的写法还是有意义的。事实上，我觉得这种写法，其实是远古时期，内存极度短缺时候的小技巧【实际测试中，其最后产生的可执行文件大小是一样的】。</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/EuZRKoiCy4w7PlB.png" alt="C的编译与链接2.png"><figcaption>C的编译与链接2.png</figcaption>
+</figure>
+<h4 id="意义">意义</h4>
+<p>乍一看，这种写法好像没什么意义，但是，如果需要追求极度的精简，减小文件体积，这样的写法还是有意义的。事实上，我觉得这种写法，其实是远古时期，内存极度短缺时候的小技巧【实际测试中，其最后产生的可执行文件大小是一样的】。</p>
 <p>至于为何会影响文件大小？<strong>因为加上头文件之后，在预处理阶段就会将头文件中的所有内容加到你的程序当中</strong>，而尽管你只使用了该头文件中的几个函数。而以现在大内存当道的现状，估计很少会有人这么写了。</p>
 <p>所以，此技巧更多地还是体现了<strong>C语言的 ”自由“</strong>，并且还是蛮有趣的。</p>
-<h3 id="深入"><a href="#深入" class="headerlink" title="深入"></a>深入</h3><p>既然不加头文件，编译器会将其理解为一个函数，那么我们就会想到：我直接在自己的代码中以函数的方式进行声明，那么是不是就不会产生警告了？<strong>答案是可行的！</strong>[^【2】]验证如下：</p>
+<h3 id="深入">深入</h3>
+<p>既然不加头文件，编译器会将其理解为一个函数，那么我们就会想到：我直接在自己的代码中以函数的方式进行声明，那么是不是就不会产生警告了？<strong>答案是可行的！</strong><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>验证如下：</p>
 <p>代码改为：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;	// malloc, free</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;assert.h&gt;	// assert</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* s)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">void</span>* mom = <span class="hljs-built_in">malloc</span>(<span class="hljs-number">400</span>);</span><br><span class="line">    assert(mom != <span class="hljs-literal">NULL</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"yeah!\n"</span>);</span><br><span class="line">    <span class="hljs-built_in">free</span>(mom);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>编译结果如下：</p>
-<p><img src="https://i.loli.net/2019/10/05/C5yD3Hw78dvmMUo.png" alt="C的编译与链接3.png"></p>
-<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>有个很有趣的事情，如果不加库，并且利用一个库函数中已有的函数，但是将其参数进行改变（传参数目变多或变少），那么此时程序又会如何被编译，或是产生何种后果？</p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/C5yD3Hw78dvmMUo.png" alt="C的编译与链接3.png"><figcaption>C的编译与链接3.png</figcaption>
+</figure>
+<h3 id="拓展">拓展</h3>
+<p>有个很有趣的事情，如果不加库，并且利用一个库函数中已有的函数，但是将其参数进行改变（传参数目变多或变少），那么此时程序又会如何被编译，或是产生何种后果？</p>
 <p>比如下面一段代码：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mian</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> num = <span class="hljs-number">65</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> length = <span class="hljs-built_in">strlen</span>((<span class="hljs-keyword">char</span>*)&amp;num, num);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"length = %d\n"</span>, length);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>话不多说，首先来看编译结果：</p>
-<p><img src="https://i.loli.net/2019/10/05/MUlkeT5Os2fPWQC.png" alt="C的编译和链接4.png"></p>
+<figure>
+<img src="https://i.loli.net/2019/10/05/MUlkeT5Os2fPWQC.png" alt="C的编译和链接4.png"><figcaption>C的编译和链接4.png</figcaption>
+</figure>
 <p>哈哈哈哈哈，报错了，本来还想着正确之后讲述一番教授的思路呢！看来时代变了啊，编译器是变得安全了不少！那这部分也只能提前结束了。</p>
-<p>[^【2】]: 可以看到，最终编译结果和公开课教授所讲的还是有出入，可能是编译器进化了的缘故吧！毕竟是<code>10</code> 年的公开课</p>
+<section class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>为何说是有效，因为宏拥有一套自己简单的语法，可以控制某段宏是否进行处理，处理几次等操作，所以在此使用了有效的宏语言一词<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>可以看到，最终编译结果和公开课教授所讲的还是有出入，可能是编译器进化了的缘故吧！毕竟是<code>10</code> 年的公开课<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 
         </div>
         
@@ -380,7 +399,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        43
+                        44
                     </p>
                 </div>
             </div>

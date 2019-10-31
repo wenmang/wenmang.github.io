@@ -7,21 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>串 - 文的盲</title>
+<title>堆 - 文的盲</title>
 
 
-    <meta name="description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “\(a_1a_2......a_n\)”(n ≥ 0)  S : 串的名称 \(a_1a_2......a_n\)：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子">
+    <meta name="description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="串">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;09&#x2F;08&#x2F;%E4%B8%B2&#x2F;index.html">
+<meta property="og:title" content="堆">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;30&#x2F;%E5%A0%86&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “\(a_1a_2......a_n\)”(n ≥ 0)  S : 串的名称 \(a_1a_2......a_n\)：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子">
+<meta property="og:description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2018-09-24T09:29:36.857Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;31&#x2F;HB8IKO6kPrcz4dh.png">
+<meta property="og:updated_time" content="2019-10-31T08:48:11.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;31&#x2F;HB8IKO6kPrcz4dh.png">
 
 
 
@@ -83,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.jpg" alt="串" height="28">
+                <img src="/images/logo.jpg" alt="堆" height="28">
             
             </a>
         </div>
@@ -139,20 +139,26 @@
                 <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
 <div class="card">
     
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://i.loli.net/2019/10/31/HB8IKO6kPrcz4dh.png" alt="堆">
+        </span>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-08T01:15:04.000Z">2018-09-08</time>
+                <time class="level-item has-text-grey" datetime="2019-10-30T09:18:21.000Z">2019-10-30</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2018-09-24T09:29:36.857Z"><i class="far fa-calendar-check">&nbsp;</i>2018-09-24</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-10-31T08:48:11.521Z"><i class="far fa-calendar-check">&nbsp;</i>2019-10-31</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 812 个字)
+                    13 分钟 读完 (大约 2006 个字)
                 </span>
                 
                 
@@ -166,61 +172,95 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                串
+                堆
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p><strong>定义：</strong>串是由零个或多个字符组成的有限序列，又叫做 字符串</p>
-<p>一般记为 S = “<span class="math inline">\(a_1a_2......a_n\)</span>”(n ≥ 0)</p>
-<ul>
-<li>S : 串的名称</li>
-<li><span class="math inline">\(a_1a_2......a_n\)</span>：串的值</li>
-</ul>
-<p><strong>概念解释：</strong></p>
-<ul>
-<li><strong>空格串：</strong>只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格</li>
-<li><strong>子串与主串：</strong>串中<strong>任意个数的连续字符</strong>组成的子序列称之为该串的子串，包含子串的串称之为主串</li>
-<li><strong>子串位置：</strong>子串第一个字符在主串中的位置</li>
-</ul>
+            <script src="/assets/js/APlayer.min.js"> </script><p><strong>引例：</strong>在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。</p>
+<p>而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为<strong>优先队列</strong>。</p>
 <a id="more"></a>
-<h4 id="串的比较">串的比较</h4>
-<p><strong>定义：</strong></p>
-<p>给定两个串：s= “<span class="math inline">\(a_1a_2......a_n\)</span>”, t = “<span class="math inline">\(b_1b_2......b_n\)</span>”，当满足以下条件之时，s &lt; t：</p>
+<p><strong>优先队列（Priority Queue）：</strong>特殊的“队列”，依照元素的优先权（关键字）大小取出数据，而不是元素进入队列的先后顺序。</p>
+<h3 id="选择合适的数据结构">选择合适的数据结构</h3>
+<p>既然已经有了这样一个设想，那我们应该采用何种方式来实现呢？</p>
+<h4 id="使用数组或者链表">使用数组或者链表</h4>
+<p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。</p>
 <ul>
-<li>n &lt; m，且 <span class="math inline">\(a_i = b_i\)</span> ( i = 1，2，…，n)</li>
-<li>存在某个k ≤ min(m, n) ，使得<span class="math inline">\(a_i = b_i\)</span>（i = 1，2，…，k-1），<span class="math inline">\(a_k &lt; b_k\)</span></li>
+<li><p><strong>普通数组</strong></p>
+<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 <code>O(n)</code></p></li>
+<li><p><strong>链表</strong></p>
+<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度 <code>O(1)</code></p></li>
+<li><p><strong>有序数组：</strong>即在插入时就按照一定顺序插入</p>
+<p><strong>插入：</strong>找到合适位置 —— 时间复杂度 <code>O(n)</code> 或者 <code>O(log n)</code> 【二分查找】         移动元素并插入    —— 时间复杂度 <code>O(n)</code></p>
+<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 <code>O(n)</code></p></li>
+<li><p><strong>有序链表：</strong>同有序数组插入时按照一定顺序插入</p>
+<p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 <code>O(n)</code>   插入元素    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 <code>O(1)</code></p></li>
 </ul>
-<p>其原理就如同英文字典一样，字典前面的单词总是小于后面的</p>
-<h4 id="串的抽象数据类型">串的抽象数据类型</h4>
-<p><strong>类型名称：</strong>串（string）</p>
-<p><strong>数据对象集：</strong>串中元素仅由一个字符组成，相邻元素具有前驱和后继关系</p>
-<p><strong>操作集：</strong></p>
+<p>我们发现，以上四种实现方式的时间复杂度基本都是 <code>O(n)</code> ，那么可不可以找得到一种数据结构，来降低其时间复杂度呢？</p>
+<p><strong>那么就只有树了！</strong>我们可以用二叉树来实现，因为平衡二叉树的删除与插入时间复杂度都是与树高有关，时间复杂度是 <code>logN</code> 的。</p>
+<h4 id="二叉搜索树">二叉搜索树</h4>
+<p>二叉搜索树可以很好地进行插入与删除操作，删除时只需要将最左或者最右元素删除。<strong>但如果删除元素变多之后，可能会出现树”一边倒“ 的情况，这时会使时间复杂度变大，不再为 <code>O(logN)</code></strong>，所以使用二叉搜索树也不很合适。</p>
+<h4 id="完全二叉树">完全二叉树</h4>
+<p>将最大值或者最小值置于根结点处，用完全二叉树来存储，在删除之时就可以避免树出现“一边倒”的情况 。</p>
+<hr>
+<p>而这种数据结构，便被称作堆。堆在中文维基百科中的定义如下：</p>
+<blockquote>
+<p><strong>堆</strong>（英语：Heap）是<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>中的一种特别的树状<a href="https://zh.wikipedia.org/wiki/数据结构" target="_blank" rel="noopener">数据结构</a>。若是满足以下特性，即可称为堆：“给定堆中任意<a href="https://zh.wikipedia.org/wiki/節點" target="_blank" rel="noopener">节点</a>P和C，若P是C的母节点，那么P的值会小于等于（或大于等于）C的值”。若母节点的值恒<strong>小于等于</strong>子节点的值，此堆称为<strong>最小堆</strong>（min heap）；反之，若母节点的值恒<strong>大于等于</strong>子节点的值，此堆称为<strong>最大堆</strong>（max heap）。</p>
+</blockquote>
+<h3 id="实现堆">实现堆</h3>
+<p>堆的两个特性 ：</p>
+<p><strong>结构性：</strong>用数组表示的完全二叉树； </p>
+<p><strong>有序性：</strong>任一结点的关键字是其子树所有结点的最大值(或最小值) </p>
+<ul>
+<li>“最大堆(<code>MaxHeap</code>)”,也称“大顶堆”：最大值 </li>
+<li>“最小堆(<code>MinHeap</code>)”,也称“小顶堆” ：最小值</li>
+</ul>
+<h4 id="堆的抽象数据类型描述">堆的抽象数据类型描述</h4>
+<p><strong>类型名称：</strong>最大堆（<code>MaxHeap</code>） </p>
+<p><strong>数据对象集：</strong>完全二叉树，每个结点的元素值不小于其子结点的元素值</p>
+<p><strong>操作集：</strong>最大堆H 属于 <code>MaxHeap</code> ，元素item 属于 <code>ElementType</code></p>
+<p><strong>主要操作有： </strong></p>
+<ul>
+<li><p><code>MaxHeap Create( int MaxSize )：</code> 创建一个空的最大堆。 </p></li>
+<li><p><code>Boolean IsFull( MaxHeap H )：</code>判断最大堆<code>H</code>是否已满。</p></li>
+<li><p><code>Insert( MaxHeap H, ElementType item )：</code>将元素 <code>item</code> 插入最大堆 <code>H</code>。 </p></li>
+<li><p><code>Boolean IsEmpty( MaxHeap H )：</code>判断最大堆<code>H</code>是否为空。</p></li>
+<li><p><code>ElementType DeleteMax( MaxHeap H )：</code>返回<code>H</code>中最大元素(高优先级)。</p></li>
+</ul>
+<h4 id="堆的构建">堆的构建</h4>
+<p>首先应该了解怎样创建一个空的最大堆，但在这之前，我们首先应该设计出合适的结构体来表示堆 ：</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeapStruct</span> *<span class="hljs-title">MaxHeap</span> ;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeapStruct</span>&#123;</span></span><br><span class="line">	ElementType  *Elements ;	<span class="hljs-comment">// 存储堆元素的数组</span></span><br><span class="line">	<span class="hljs-keyword">int</span>  Size ;					<span class="hljs-comment">// 堆当前的元素个数</span></span><br><span class="line">	<span class="hljs-keyword">int</span>  Capacity ;				<span class="hljs-comment">// 堆的最大容量</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="堆中元素的插入">堆中元素的插入</h4>
+<p><strong>插入分两步：</strong></p>
 <ol type="1">
-<li>StrAssign(T,*chars) 生成一个其值等于chars的串T</li>
-<li>StrCopy(T,S) 由串S复制得到串T</li>
-<li>StrEmpty(S) 若串为空串返回TRUE否则返回FALSE</li>
-<li>StrLength(S) 返回s的元素个数称为串的长度</li>
-<li>StrCompare(S,T) S&gt;T 返回 &gt;0 ; S=T ,返回 =0 ；</li>
-<li>ClearString(&amp;S) 将串S清空</li>
-<li>SubString(&amp;Sub,S,pos,len) 用sub返回串S的第pos个字符起长度为len的子串</li>
-<li>Index(S,T,pos) 若子串中存在和串T值相同的子串，则返回它在主串中第pos个字符之后第一次出的位置 ；否则函数值为0</li>
-<li>Replace(&amp;S,T,V) 用V替换串S中出现的所有与T相等的不重叠的子串</li>
-<li>StrInsert(&amp;S,pos,T) 在串S的第pos个字符之前插入串T</li>
-<li>StrDelete(&amp;S,pos,len) 从串S中删除从第pos个字符起出长度为len的子串</li>
-<li>DestroyString(&amp;S) 串S被销毁</li>
+<li>将元素插入到数组中元素之后，也就是末位，使之符合完全二叉树的结构</li>
+<li>调整元素位置，使之成为堆</li>
 </ol>
-<h4 id="串的存储结构">串的存储结构</h4>
-<p><strong>顺序存储结构</strong></p>
-<ol type="1">
-<li>预定义最大串长度，一般可将串长度值保存在数组的0下标位置，可以方便许多，当然，在C语言中也可通过遍历直到 ‘\0’ 来计算串的长度</li>
-<li>利用堆进行动态存储</li>
-</ol>
-<p>由于1方法在串比较小的时侯，浪费空间；而在串比较大时，会发生数据丢失的情况，所以一般多考虑第二种次存储方案</p>
-<p><strong>链式存储结构</strong></p>
-<p>一般不如顺序存储好用，因为链式存储不可能一个结点只放一个字符，如果那样就会变得无比繁杂，而一个结点存放多少字符，则又需要根据实际情况做出选择，综合来看，其不如顺序存储灵活，性能也不如顺序存储</p>
-<h3 id="串的模式匹配算法">串的模式匹配算法</h3>
-<p>串的模式匹配算法为串中特别重要的一个算法</p>
-<h4 id="朴素的模式匹配算法">朴素的模式匹配算法</h4>
+<p><strong>代码</strong></p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span> <span class="hljs-params">( MaxHeap H, ElementType item )</span></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span>  i ;</span><br><span class="line">	<span class="hljs-keyword">if</span> ( isFull(H) )&#123;</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已满"</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="hljs-comment">// i 指向插入后 堆中最后一个元素的位置</span></span><br><span class="line">	i = ++H-&gt;Size ;   </span><br><span class="line">	<span class="hljs-keyword">for</span>  ( ; H-&gt;Elements[i] &gt; H-&gt;Elements[i/<span class="hljs-number">2</span>] ; i/=<span class="hljs-number">2</span> )</span><br><span class="line">        <span class="hljs-comment">// 向下过滤节点</span></span><br><span class="line">		H-&gt;Elements[i] = H-&gt;Elements[i/<span class="hljs-number">2</span>] ;     </span><br><span class="line">	H-&gt;Elements[i] = item ; <span class="hljs-comment">// 将item插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>理解：</strong></p>
+<ul>
+<li>代码的主要部分为 <code>for</code> 循环及之后，<code>for</code> 循环在于将新插入至末尾的结点与其父节点进行比较，如新插入节点更大，则将其父节点与其交换位置，即可变为堆。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>交换位置之时，在循环中直接将父节点覆盖子节点，而最后再将新需要插入的结点直接插入到相应位置之中，可以提高效率。</li>
+<li>循环之时，如果在堆中不设哨兵，在循环之时还应进行判断，使其循环替换元素之时不能出堆</li>
+</ul>
+<h4 id="最大堆的删除">最大堆的删除</h4>
+<p>最大堆的删除操作也就是删除掉堆中的最大元素（即树根），并将之返回出去</p>
+<p>删除之后堆中会少一个元素，因此我们的思路是：</p>
+<ul>
+<li>在删除操作进行之时首先将树根元素复制并返回，之后直接将数组最后一个元素将树根元素直接覆盖。</li>
+<li>然后就是将元素顺序再重新调整为一个堆。</li>
+</ul>
+<p><strong>代码</strong></p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ElementType  <span class="hljs-title">DeleteMax</span><span class="hljs-params">( MaxHeap H )</span></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span>  parent, child ;</span><br><span class="line">    ElementType  MaxItem, temp ;</span><br><span class="line">    <span class="hljs-keyword">if</span> ( IsEmpty(H) )&#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已空"</span>) ；</span><br><span class="line">            <span class="hljs-keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    MaxItem = H-&gt;Elements[<span class="hljs-number">1</span>] ;    <span class="hljs-comment">// 取出根节点的最大值</span></span><br><span class="line">    temp = H-&gt;Elements[H-&gt;Size--] ;     <span class="hljs-comment">// 将最后一个元素赋给temp</span></span><br><span class="line">    <span class="hljs-keyword">for</span> ( parent = <span class="hljs-number">1</span> ; parent*<span class="hljs-number">2</span> &lt;= H-&gt;Size ; parent = child )&#123;</span><br><span class="line">        child = parent * <span class="hljs-number">2</span> ;</span><br><span class="line">        <span class="hljs-keyword">if</span> ( (child != H-&gt;Size) &amp;&amp;</span><br><span class="line">            (H-&gt;Elements[child] &lt; H-&gt;Elements[child+<span class="hljs-number">1</span>]) )</span><br><span class="line">            child++ ;   <span class="hljs-comment">// 使 child 指向左右结点中较大者</span></span><br><span class="line">        <span class="hljs-keyword">if</span> ( temp &gt;= H-&gt;Elements[child] )   <span class="hljs-keyword">break</span> ;</span><br><span class="line">        <span class="hljs-keyword">else</span>  <span class="hljs-comment">// 将 temp 元素移动到下一层</span></span><br><span class="line">            H-&gt;Elements[parent] = H-&gt;Elements[child] ;</span><br><span class="line">    &#125;</span><br><span class="line">    H-&gt;Elements[parent] = temp ;</span><br><span class="line">    <span class="hljs-keyword">return</span> MaxItem ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>理解：</strong>代码之中重点就在于重新调整元素，也就是 <code>for</code> 循环中内容——从根节点开始，依次与最大子结点比较，如果小于就与其交换位置，直至调整好为止。</p>
+<p><strong>注：</strong><code>for</code> 循环的前一个if是用来调整 <code>child</code> 的，使 <code>child</code> 指向子结点中最大结点，之后就是调整结点元素的过程</p>
 
         </div>
         
@@ -280,16 +320,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/09/22/%E7%BB%83%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/31/%E5%A0%86%E7%9A%84%E5%BA%94%E7%94%A8/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">练习（二）</span>
+                <span class="level-item">堆的应用</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/07/%E5%9B%BE/">
-                <span class="level-item">图</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/29/%E5%8D%9A%E5%AE%A2%E9%87%8D%E6%96%B0%E9%85%8D%E7%BD%AE/">
+                <span class="level-item">博客重新配置</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -432,26 +472,42 @@
                 <h3 class="menu-label">
                     目录
                 </h3>
-                <ul class="menu-list"><ul class="menu-list"><li>
-        <a class="is-flex" href="#串的比较">
-        <span class="has-mr-6">1.1</span>
-        <span>串的比较</span>
-        </a></li><li>
-        <a class="is-flex" href="#串的抽象数据类型">
-        <span class="has-mr-6">1.2</span>
-        <span>串的抽象数据类型</span>
-        </a></li><li>
-        <a class="is-flex" href="#串的存储结构">
-        <span class="has-mr-6">1.3</span>
-        <span>串的存储结构</span>
-        </a></li></ul><li>
-        <a class="is-flex" href="#串的模式匹配算法">
-        <span class="has-mr-6">2</span>
-        <span>串的模式匹配算法</span>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#选择合适的数据结构">
+        <span class="has-mr-6">1</span>
+        <span>选择合适的数据结构</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#朴素的模式匹配算法">
+        <a class="is-flex" href="#使用数组或者链表">
+        <span class="has-mr-6">1.1</span>
+        <span>使用数组或者链表</span>
+        </a></li><li>
+        <a class="is-flex" href="#二叉搜索树">
+        <span class="has-mr-6">1.2</span>
+        <span>二叉搜索树</span>
+        </a></li><li>
+        <a class="is-flex" href="#完全二叉树">
+        <span class="has-mr-6">1.3</span>
+        <span>完全二叉树</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#实现堆">
+        <span class="has-mr-6">2</span>
+        <span>实现堆</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#堆的抽象数据类型描述">
         <span class="has-mr-6">2.1</span>
-        <span>朴素的模式匹配算法</span>
+        <span>堆的抽象数据类型描述</span>
+        </a></li><li>
+        <a class="is-flex" href="#堆的构建">
+        <span class="has-mr-6">2.2</span>
+        <span>堆的构建</span>
+        </a></li><li>
+        <a class="is-flex" href="#堆中元素的插入">
+        <span class="has-mr-6">2.3</span>
+        <span>堆中元素的插入</span>
+        </a></li><li>
+        <a class="is-flex" href="#最大堆的删除">
+        <span class="has-mr-6">2.4</span>
+        <span>最大堆的删除</span>
         </a></li></ul></li></ul>
             </div>
         </div>
@@ -475,7 +531,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.jpg" alt="串" height="28">
+                    <img src="/images/logo.jpg" alt="堆" height="28">
                 
                 </a>
                 <p class="is-size-7">
