@@ -7,19 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>由一道题重新审视排序 - 文的盲</title>
+<title>并查集 - 文的盲</title>
 
 
-    <meta name="description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
-<meta name="keywords" content="随笔,算法">
+    <meta name="description" content="什么是并查集？可以近似地用数学的观点来看，就像数学中的集合一般。但是并不尽相同，并查集在维基百科中的定义如下：  在计算机科学中，并查集是一种树型的数据结构，用于处理一些不交集（Disjoint Sets）的合并及查询问题。">
+<meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="由一道题重新审视排序">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;14&#x2F;%E7%94%B1%E4%B8%80%E9%81%93%E9%A2%98%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E6%8E%92%E5%BA%8F&#x2F;index.html">
+<meta property="og:title" content="并查集">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;19&#x2F;%E5%B9%B6%E6%9F%A5%E9%9B%86&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：  比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式 比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。">
+<meta property="og:description" content="什么是并查集？可以近似地用数学的观点来看，就像数学中的集合一般。但是并不尽相同，并查集在维基百科中的定义如下：  在计算机科学中，并查集是一种树型的数据结构，用于处理一些不交集（Disjoint Sets）的合并及查询问题。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-04T13:10:50.400Z">
+<meta property="og:updated_time" content="2019-10-31T14:15:48.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -83,7 +83,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.jpg" alt="由一道题重新审视排序" height="28">
+                <img src="/images/logo.jpg" alt="并查集" height="28">
             
             </a>
         </div>
@@ -143,16 +143,16 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-08-14T11:31:44.000Z">2019-08-14</time>
+                <time class="level-item has-text-grey" datetime="2019-08-19T01:54:44.000Z">2019-08-19</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-10-04T13:10:50.400Z"><i class="far fa-calendar-check">&nbsp;</i>2019-10-04</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-10-31T14:15:48.995Z"><i class="far fa-calendar-check">&nbsp;</i>2019-10-31</time>
                 
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1077 个字)
+                    3 分钟 读完 (大约 500 个字)
                 </span>
                 
                 
@@ -166,57 +166,36 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                由一道题重新审视排序
+                并查集
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p>今天闲得无聊，写了道题，写完后，我发现这道题让我对排序有了更加深刻的认识，如今在看来，排序的核心主要有两点：</p>
-<ul>
-<li>比较函数（也就是比较的结果），决定了以何种方式进行排序：从大到小抑或是从小到大，甚至是其他更为特殊的方式</li>
-<li>比较次数（也就是比较的方式），决定了排序的时间复杂度，也就是说，要想降低排序的时间复杂度，其重点就在于减少排序的次数。</li>
-</ul>
+            <script src="/assets/js/APlayer.min.js"> </script><p>什么是并查集？可以近似地用数学的观点来看，就像数学中的集合一般。但是并不尽相同，并查集在维基百科中的定义如下：</p>
+<blockquote>
+<p>在<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>中，<strong>并查集</strong>是一种树型的<a href="https://zh.wikipedia.org/wiki/数据结构" target="_blank" rel="noopener">数据结构</a>，用于处理一些<a href="https://zh.wikipedia.org/wiki/不交集" target="_blank" rel="noopener">不交集</a>（Disjoint Sets）的合并及查询问题。</p>
+</blockquote>
 <a id="more"></a>
-<h3 id="排序总述">排序总述</h3>
-<p>排序，在我看来，就是<strong>以给定的规则，对一组数（或者字符）进行重新排列</strong>，而规则是可变的，比如我们日常使用的：从大到小的顺序，从小到大的顺序，字典序等等等等。</p>
-<p>那么，<strong>从底向上</strong>看排序，其最核心的部分，就在于两两比较，通过比较，就能确定两两之间的相对顺序——即谁先谁后。</p>
-<p>而排序的效率，则取决于比较次数的多少，比如我们可以通过<strong>不重复比较</strong>，或者一些特殊的比较方式来缩短时间复杂度。</p>
-<h3 id="比较函数">比较函数</h3>
-<h4 id="总述">总述</h4>
-<p>什么是比较函数？抽象来说，就是比较两个数，并确定其先后顺序的函数；具体来说，就是C语言 <code>qsort()</code> 函数中的 <code>cmp</code> 参数，是 <code>java</code> 中 <code>Arrays.sort()</code> 方法中的 <code>Comparator</code> 参数。</p>
-<p>比较函数的一般写法是，对传入的两个参数（<code>a, b</code>）进行比较：</p>
+<p>既然名字叫并查集，那么肯定有其原因，因为此数据结构中的两个操作便是并和查。</p>
 <ul>
-<li><code>a</code> 大于 <code>b</code> 返回 <code>1</code></li>
-<li><code>a</code> 大于 <code>b</code> 返回 <code>-1</code></li>
-<li><code>a</code> 大于 <code>b</code> 返回 <code>0</code></li>
+<li><code>Find</code>【查】：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。</li>
+<li><code>Union</code>【并】：将两个子集合并成同一个集合。</li>
 </ul>
-<p>规则进行返回，通过控制两个参数的传入，来控制从大到小排列或者从小到大排列。</p>
-<h4 id="比较">比较</h4>
-<p>比较可以自己写规则，比如最为简单的数字的 从大到小，从小到大 等等，但是一些时候就不仅仅是简单的的从大到小或是从小到大了，比如我今天写的这个题（<a href="https://leetcode-cn.com/problems/largest-number/" target="_blank" rel="noopener"><code>leetcode 179</code></a>）：</p>
-<p><strong>题目如下：</strong></p>
-<p>给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。</p>
-<p>示例 1:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: 210</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: 9534330</span><br></pre></td></tr></table></figure>
-<p><strong>说明:</strong> 输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
-<p><strong>题目解答：</strong></p>
-<p>这题本质是一个排序问题，而排序的方式不再是简单的数字排序：</p>
+<h3 id="初始化并查集">初始化并查集</h3>
+<p>我们可以使用两个数组来简单地实现并查集：</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_N 10000</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> par[MAX_N];		<span class="hljs-comment">// 父亲</span></span><br><span class="line"><span class="hljs-keyword">int</span> rank[MAX_N];	<span class="hljs-comment">// 树高</span></span><br></pre></td></tr></table></figure>
+<p>有了以上定义，便可以实现并查集的初始化：</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		par[i] = i;</span><br><span class="line">		rank[i] = <span class="hljs-number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="并查集-查">并查集 —— 查</h3>
 <ul>
-<li>数字从大到小排序：<code>98</code> 肯定在 <code>9</code>前面，但是此题则应该将顺序置反</li>
-<li>数字从小到大排序：<code>2</code> 肯定在 <code>42</code> 前面，但是此题则应该将顺序置反</li>
+<li>由于 <code>par[]</code> 数组储存的就是父节点下标，所以依次上诉，直至 <code>par[i]=i</code></li>
+<li>在上寻过程中，可进行路径压缩，也就是将查找的结点直接挂接在根结点上</li>
 </ul>
-<p>所以此题的比较不能够按照常规方式写，而我们可以按照字符串的字典序来看，也就是说，将两个数字拼接，比较两种拼接方式的大小，从而选择排列顺序，比如：<code>98</code> 和 <code>9</code></p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 查询树的根</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (par[x] == x) &#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> x;</span><br><span class="line">	&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> par[x] = find(par[x]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="并查集-并">并查集 —— 并</h3>
 <ul>
-<li>两个数只有两种拼接方式：<code>998</code> 明显大于 <code>989</code> ，所以 <code>9</code> 应该在 <code>98</code> 前面</li>
+<li>合并过程需要依次上溯，直至到根节点，然后比较二者所属集合的树高，将低的一方挂接在高的一方即可【这是为了使树相对平衡】。</li>
 </ul>
-<p>便是以此种方式，来进行排序，排序后，将之依次拼贴为一字符串即可, <code>java</code>代码（参考了 <code>leetcode</code> 官方题解）：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">     <span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LargerNumberComparator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(String a, String b)</span> </span>&#123;</span><br><span class="line">            String order1 = a + b;</span><br><span class="line">            String order2 = b + a;</span><br><span class="line">            <span class="hljs-keyword">return</span> order2.compareTo(order1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">largestNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        String[] numsString = <span class="hljs-keyword">new</span> String[nums.length];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++)</span><br><span class="line">            numsString[i] = String.valueOf(nums[i]);</span><br><span class="line">        </span><br><span class="line">        Arrays.sort(numsString, <span class="hljs-keyword">new</span> LargerNumberComparator());</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">if</span> (numsString[<span class="hljs-number">0</span>].equals(<span class="hljs-string">"0"</span>))</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-string">"0"</span>;</span><br><span class="line">        </span><br><span class="line">        String ret = <span class="hljs-keyword">new</span> String();</span><br><span class="line">        <span class="hljs-keyword">for</span> (String numString:numsString)</span><br><span class="line">            ret += numString;   </span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="比较次数">比较次数</h3>
-<p>这部分内容不算是重点，所以，大致说明即可：</p>
-<ul>
-<li>冒泡排序，每次循环都会比较，所以几乎每两个数字间都会进行比较，所以其时间复杂度为 <span class="math inline">\(O(N^2)\)</span></li>
-<li>而比较高级的排序，比如归并，快排甚至桶排，都是降低了比较次数，从而降低了时间复杂度；</li>
-</ul>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 合并x和y所属的集合</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unite</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	x = find(x);</span><br><span class="line">	y = find(y);</span><br><span class="line">	<span class="hljs-keyword">if</span> (x == y)	<span class="hljs-keyword">return</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-keyword">if</span> (rank[x] &lt; rank[y]) &#123;</span><br><span class="line">		par[x] = y;</span><br><span class="line">	&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">		par[y] = x;</span><br><span class="line">		<span class="hljs-keyword">if</span> (rank[x] == rank[y])	rank[x]++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -225,7 +204,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a>
+                    <a class="has-link-grey -link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
                 </div>
             </div>
         </div>
@@ -276,16 +255,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/08/19/%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/09/06/%E9%93%BE%E8%A1%A8%E4%B9%8B%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">并查集</span>
+                <span class="level-item">链表之快慢指针</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/02/%E9%98%9F%E5%88%97/">
-                <span class="level-item">队列</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/08/14/%E7%94%B1%E4%B8%80%E9%81%93%E9%A2%98%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E6%8E%92%E5%BA%8F/">
+                <span class="level-item">由一道题重新审视排序</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -429,25 +408,17 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#排序总述">
+        <a class="is-flex" href="#初始化并查集">
         <span class="has-mr-6">1</span>
-        <span>排序总述</span>
+        <span>初始化并查集</span>
         </a></li><li>
-        <a class="is-flex" href="#比较函数">
+        <a class="is-flex" href="#并查集-查">
         <span class="has-mr-6">2</span>
-        <span>比较函数</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#总述">
-        <span class="has-mr-6">2.1</span>
-        <span>总述</span>
+        <span>并查集 —— 查</span>
         </a></li><li>
-        <a class="is-flex" href="#比较">
-        <span class="has-mr-6">2.2</span>
-        <span>比较</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#比较次数">
+        <a class="is-flex" href="#并查集-并">
         <span class="has-mr-6">3</span>
-        <span>比较次数</span>
+        <span>并查集 —— 并</span>
         </a></li></ul>
             </div>
         </div>
@@ -471,7 +442,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.jpg" alt="由一道题重新审视排序" height="28">
+                    <img src="/images/logo.jpg" alt="并查集" height="28">
                 
                 </a>
                 <p class="is-size-7">

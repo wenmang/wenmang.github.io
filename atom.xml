@@ -279,6 +279,32 @@
   </entry>
   
   <entry>
+    <title>并查集</title>
+    <link href="http://yoursite.com/2019/08/19/%E5%B9%B6%E6%9F%A5%E9%9B%86/"/>
+    <id>http://yoursite.com/2019/08/19/并查集/</id>
+    <published>2019-08-19T01:54:44.000Z</published>
+    <updated>2019-10-31T14:15:48.995Z</updated>
+    
+    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>什么是并查集？可以近似地用数学的观点来看，就像数学中的集合一般。但是并不尽相同，并查集在维基百科中的定义如下：</p><blockquote><p>在<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>中，<strong>并查集</strong>是一种树型的<a href="https://zh.wikipedia.org/wiki/数据结构" target="_blank" rel="noopener">数据结构</a>，用于处理一些<a href="https://zh.wikipedia.org/wiki/不交集" target="_blank" rel="noopener">不交集</a>（Disjoint Sets）的合并及查询问题。</p></blockquote><a id="more"></a><p>既然名字叫并查集，那么肯定有其原因，因为此数据结构中的两个操作便是并和查。</p><ul><li><code>Find</code>【查】：确定元素属于哪一个子集。它可以被用来确定两个元素是否属于同一子集。</li><li><code>Union</code>【并】：将两个子集合并成同一个集合。</li></ul><h3 id="初始化并查集">初始化并查集</h3><p>我们可以使用两个数组来简单地实现并查集：</p><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_N 10000</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> par[MAX_N];<span class="hljs-comment">// 父亲</span></span><br><span class="line"><span class="hljs-keyword">int</span> rank[MAX_N];<span class="hljs-comment">// 树高</span></span><br></pre></td></tr></table></figure><p>有了以上定义，便可以实现并查集的初始化：</p><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">par[i] = i;</span><br><span class="line">rank[i] = <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="并查集-查">并查集 —— 查</h3><ul><li>由于 <code>par[]</code> 数组储存的就是父节点下标，所以依次上诉，直至 <code>par[i]=i</code></li><li>在上寻过程中，可进行路径压缩，也就是将查找的结点直接挂接在根结点上</li></ul><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 查询树的根</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;</span><br><span class="line"><span class="hljs-keyword">if</span> (par[x] == x) &#123;</span><br><span class="line"><span class="hljs-keyword">return</span> x;</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line"><span class="hljs-keyword">return</span> par[x] = find(par[x]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="并查集-并">并查集 —— 并</h3><ul><li>合并过程需要依次上溯，直至到根节点，然后比较二者所属集合的树高，将低的一方挂接在高的一方即可【这是为了使树相对平衡】。</li></ul><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 合并x和y所属的集合</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unite</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">x = find(x);</span><br><span class="line">y = find(y);</span><br><span class="line"><span class="hljs-keyword">if</span> (x == y)<span class="hljs-keyword">return</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (rank[x] &lt; rank[y]) &#123;</span><br><span class="line">par[x] = y;</span><br><span class="line">&#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">par[y] = x;</span><br><span class="line"><span class="hljs-keyword">if</span> (rank[x] == rank[y])rank[x]++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;什么是并查集？可以近似地用数学的观点来看，就像数学中的集合一般。但是并不尽相同，并查集在维基百科中的定义如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在&lt;a href=&quot;https://zh.wikipedia.org/wiki/计算机科学&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;计算机科学&lt;/a&gt;中，&lt;strong&gt;并查集&lt;/strong&gt;是一种树型的&lt;a href=&quot;https://zh.wikipedia.org/wiki/数据结构&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;数据结构&lt;/a&gt;，用于处理一些&lt;a href=&quot;https://zh.wikipedia.org/wiki/不交集&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;不交集&lt;/a&gt;（Disjoint Sets）的合并及查询问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>由一道题重新审视排序</title>
     <link href="http://yoursite.com/2019/08/14/%E7%94%B1%E4%B8%80%E9%81%93%E9%A2%98%E9%87%8D%E6%96%B0%E5%AE%A1%E8%A7%86%E6%8E%92%E5%BA%8F/"/>
     <id>http://yoursite.com/2019/08/14/由一道题重新审视排序/</id>
@@ -503,31 +529,6 @@
       &lt;p&gt;当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了&lt;/p&gt;
 &lt;h3 id=&quot;二分查找&quot;&gt;二分查找&lt;/h3&gt;
 &lt;p&gt;二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 &lt;span class=&quot;math inline&quot;&gt;\(log(N)\)&lt;/span&gt; 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击&lt;a href=&quot;https://wenmang.github.io/2018/04/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;链接&lt;/a&gt;直接跳转&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>普通查找</title>
-    <link href="http://yoursite.com/2018/11/20/%E6%99%AE%E9%80%9A%E6%9F%A5%E6%89%BE/"/>
-    <id>http://yoursite.com/2018/11/20/普通查找/</id>
-    <published>2018-11-20T06:16:26.000Z</published>
-    <updated>2019-03-30T06:43:57.788Z</updated>
-    
-    <content type="html"><![CDATA[<script src="/assets/js/APlayer.min.js"> </script><p>查找是一类重要的算法，尤其是在现今的大数据时代来看更是如此，选择一个好的查找算法往往可以起到事倍功半的效果</p><h3 id="顺序表查找">顺序表查找</h3><p>顺序表查找是最为简单也是最为笨重的一类查找，其遵循的理念就是一个一个找。当需要在顺序表中查找一元素时，需要做的就是从头到尾对表进行一次遍历，直到找到结果为止</p><a id="more"></a><p><strong>代码：</strong></p><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SequentialSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[i] == key)</span><br><span class="line">            <span class="hljs-keyword">return</span> i;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="改进版顺序查找">改进版顺序查找</h3><p>为了使顺序表在每次查找之前不进行不必要的判断是否越界，我们可以利用 “哨兵” 法，在数组的开头或者末尾之前设置一个 “哨兵” ，查找至哨兵位置直接返回没找到即可</p><p><strong>代码：</strong></p><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SequentialSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i = n - <span class="hljs-number">1</span>;</span><br><span class="line">    a[<span class="hljs-number">0</span>] = key</span><br><span class="line">    <span class="hljs-keyword">while</span> (a[i--] != key);</span><br><span class="line">    <span class="hljs-keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>注意：</strong>这样写返回 <code>0</code> 表示没有找到</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;查找是一类重要的算法，尤其是在现今的大数据时代来看更是如此，选择一个好的查找算法往往可以起到事倍功半的效果&lt;/p&gt;
-&lt;h3 id=&quot;顺序表查找&quot;&gt;顺序表查找&lt;/h3&gt;
-&lt;p&gt;顺序表查找是最为简单也是最为笨重的一类查找，其遵循的理念就是一个一个找。当需要在顺序表中查找一元素时，需要做的就是从头到尾对表进行一次遍历，直到找到结果为止&lt;/p&gt;
     
     </summary>
     
