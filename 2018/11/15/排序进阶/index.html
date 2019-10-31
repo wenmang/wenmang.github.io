@@ -10,13 +10,13 @@
 <title>排序进阶 - 文的盲</title>
 
 
-    <meta name="description" content="开始之前 进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序  当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
+    <meta name="description" content="开始之前进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序 当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序进阶">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;15&#x2F;%E6%8E%92%E5%BA%8F%E8%BF%9B%E9%98%B6&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="开始之前 进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序  当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
+<meta property="og:description" content="开始之前进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法 表排序 当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停Swap的操作，就会使时间大大增加">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-12-06T08:59:02.444Z">
@@ -29,7 +29,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/wendemang.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -170,116 +170,107 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h3 id="开始之前">开始之前</h3>
-<p>进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法</p>
-<h3 id="表排序">表排序</h3>
-<ul>
+            <script src="/assets/js/APlayer.min.js"> </script><h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><p>进阶排序是对一些特殊情况下排序的处理方式，也是非常重要的一些排序方法</p>
+<h3 id="表排序"><a href="#表排序" class="headerlink" title="表排序"></a>表排序</h3><ul>
 <li>当数据不再是简单的数字或者字符，而是一些比较大的元素，例如文件等，那么这时在之前介绍的排序中所采取方式就会产生很大的时间复杂度 —— 因为文件的移动是需要时间的，而且需要不短的一段时间，我们普通的排序所采取的不停<code>Swap</code>的操作，就会使时间大大增加</li>
 </ul>
 <a id="more"></a>
-<h4 id="间接排序">间接排序</h4>
-<ul>
+
+<h4 id="间接排序"><a href="#间接排序" class="headerlink" title="间接排序"></a>间接排序</h4><ul>
 <li>那么此时，我们可以采取间接排序的方式，也就是在结构体中添加一个属性，将之进行简单排序，来作为数据的真实顺序</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">A</th>
-<th style="text-align: center;">[0]</th>
-<th style="text-align: center;">[1]</th>
-<th style="text-align: center;">[2]</th>
-<th style="text-align: center;">[3]</th>
-<th style="text-align: center;">[4]</th>
-<th style="text-align: center;">[5]</th>
-<th style="text-align: center;">[6]</th>
-<th style="text-align: center;">[7]</th>
+<tr>
+<th align="center">A</th>
+<th align="center">[0]</th>
+<th align="center">[1]</th>
+<th align="center">[2]</th>
+<th align="center">[3]</th>
+<th align="center">[4]</th>
+<th align="center">[5]</th>
+<th align="center">[6]</th>
+<th align="center">[7]</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">key</td>
-<td style="text-align: center;">f</td>
-<td style="text-align: center;">d</td>
-<td style="text-align: center;">c</td>
-<td style="text-align: center;">a</td>
-<td style="text-align: center;">g</td>
-<td style="text-align: center;">b</td>
-<td style="text-align: center;">h</td>
-<td style="text-align: center;">e</td>
+<tbody><tr>
+<td align="center">key</td>
+<td align="center">f</td>
+<td align="center">d</td>
+<td align="center">c</td>
+<td align="center">a</td>
+<td align="center">g</td>
+<td align="center">b</td>
+<td align="center">h</td>
+<td align="center">e</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">table</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">7</td>
+<tr>
+<td align="center">table</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>对<code>table</code>根据<code>key</code>值进行排序即可</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">A</th>
-<th style="text-align: center;">[0]</th>
-<th style="text-align: center;">[1]</th>
-<th style="text-align: center;">[2]</th>
-<th style="text-align: center;">[3]</th>
-<th style="text-align: center;">[4]</th>
-<th style="text-align: center;">[5]</th>
-<th style="text-align: center;">[6]</th>
-<th style="text-align: center;">[7]</th>
+<tr>
+<th align="center">A</th>
+<th align="center">[0]</th>
+<th align="center">[1]</th>
+<th align="center">[2]</th>
+<th align="center">[3]</th>
+<th align="center">[4]</th>
+<th align="center">[5]</th>
+<th align="center">[6]</th>
+<th align="center">[7]</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">key</td>
-<td style="text-align: center;">f</td>
-<td style="text-align: center;">d</td>
-<td style="text-align: center;">c</td>
-<td style="text-align: center;">a</td>
-<td style="text-align: center;">g</td>
-<td style="text-align: center;">b</td>
-<td style="text-align: center;">h</td>
-<td style="text-align: center;">e</td>
+<tbody><tr>
+<td align="center">key</td>
+<td align="center">f</td>
+<td align="center">d</td>
+<td align="center">c</td>
+<td align="center">a</td>
+<td align="center">g</td>
+<td align="center">b</td>
+<td align="center">h</td>
+<td align="center">e</td>
 </tr>
-<tr class="even">
-<td style="text-align: center;">table</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">6</td>
+<tr>
+<td align="center">table</td>
+<td align="center">3</td>
+<td align="center">5</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">7</td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">6</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>排序完成后结果如上，这时如果要求按顺序输出元素，就可按照<code>A[table[i]]</code> `i取值为0~n-1</li>
 </ul>
-<h4 id="物理排序">物理排序</h4>
-<ul>
+<h4 id="物理排序"><a href="#物理排序" class="headerlink" title="物理排序"></a>物理排序</h4><ul>
 <li>如果明确要求需要对数据进行物理排序的话，那么我们就可以在表排序的基础之上对数据进行交换</li>
 <li>首先我们将<code>A[0]</code>取出，赋给临时值<code>temp</code>，之后寻找<code>A[table[0]]</code>，将之移动到空位上，依次寻找并移动</li>
 <li>因有定理：<strong>N个数字的排列由若干个独立的环组成</strong>，所以我们将每个环都一次移动一遍就好</li>
 <li>那么如何判断一个环已经全部排列整齐呢？我们可以将已排列好的环的<code>table</code>值改为<code>A</code>的下标值，所以<code>if(table[i] == i)</code>为<code>true</code>之时，就说明此环已经被排列整齐</li>
 </ul>
-<h4 id="物理排序复杂度分析">物理排序复杂度分析</h4>
-<ul>
+<h4 id="物理排序复杂度分析"><a href="#物理排序复杂度分析" class="headerlink" title="物理排序复杂度分析"></a>物理排序复杂度分析</h4><ul>
 <li>最好情况：有序，不用交换</li>
 <li>最坏情况：每个环都只有两个元素</li>
 </ul>
-<h3 id="桶排序">桶排序</h3>
-<ul>
-<li>采用传统交换的排序，其时间下限为<span class="math inline">\(O(Nlog(N))\)</span> ，就算是最快的排序也总能找到一个特例，使其最坏时间复杂度为<span class="math inline">\(O(Nlog(N))\)</span></li>
+<h3 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h3><ul>
+<li>采用传统交换的排序，其时间下限为$O(Nlog(N))$ ，就算是最快的排序也总能找到一个特例，使其最坏时间复杂度为$O(Nlog(N))$</li>
 <li>那么就无法让排序变为线性复杂度吗？</li>
 </ul>
 <p>例：有N(N = 50000)个学生，考试成绩为 0 - 100 ，那么此时将学生的考试成绩排序，怎样排序最快呢？</p>
@@ -289,33 +280,30 @@
 <li>遍历每个学生的成绩，将其放在对应的桶下</li>
 <li>依次输出每个桶内的学生，排序完成</li>
 </ul>
-<h4 id="实现思路">实现思路</h4>
-<p>桶排序的一般实现思路：</p>
+<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><p>桶排序的一般实现思路：</p>
 <ul>
 <li>在数据种类小而数据规模大时使用</li>
 <li>为所有可能出现的数据种类建桶，将数据分别放入对应的桶中</li>
 <li>从桶中取出并进行之后的操作</li>
 </ul>
 <p>那么，如果数据规模不大，但是种类比较多，又该如何操作呢？</p>
-<h3 id="基数排序">基数排序</h3>
-<p>假设有10个整数，数字在0到999之间，这时应该怎样使用基数排序呢？</p>
+<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>假设有10个整数，数字在0到999之间，这时应该怎样使用基数排序呢？</p>
 <ul>
 <li>次位优先法进行排序</li>
 <li>在一个数中，个位被称为该数的次位，最高位称为主位</li>
 </ul>
-<h4 id="实例说明">实例说明</h4>
-<p>例：有数字 64， 8， 216， 512， 27， 729 ，0， 1， 343， 125</p>
+<h4 id="实例说明"><a href="#实例说明" class="headerlink" title="实例说明"></a>实例说明</h4><p>例：有数字 64， 8， 216， 512， 27，  729 ，0， 1， 343， 125</p>
 <ul>
 <li>因为是十进制数字，所以我们建立0-9十个桶</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>0</th>
 <th>1</th>
 <th>2</th>
 <th>3</th>
-<th style="text-align: left;">4</th>
+<th align="left">4</th>
 <th>5</th>
 <th>6</th>
 <th>7</th>
@@ -323,27 +311,25 @@
 <th>9</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>0</td>
 <td>1</td>
 <td>512</td>
 <td>343</td>
-<td style="text-align: left;">64</td>
+<td align="left">64</td>
 <td>125</td>
 <td>216</td>
 <td>27</td>
 <td>8</td>
 <td>729</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>第一次排列，根据个位（次位）数字，将之放入相应的桶中</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>0</th>
 <th>1</th>
 <th>2</th>
@@ -356,8 +342,7 @@
 <th>9</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>0</td>
 <td>512</td>
 <td>125</td>
@@ -369,7 +354,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>1</td>
 <td>216</td>
 <td>27</td>
@@ -381,7 +366,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>8</td>
 <td></td>
 <td>729</td>
@@ -393,14 +378,13 @@
 <td></td>
 <td></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>第二次排列，在第一次的基础上按照十位数字将元素放入相应的桶中</li>
 </ul>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>0</th>
 <th>1</th>
 <th>2</th>
@@ -413,8 +397,7 @@
 <th>9</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>0</td>
 <td>125</td>
 <td>216</td>
@@ -426,7 +409,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>1</td>
 <td></td>
 <td></td>
@@ -438,7 +421,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>8</td>
 <td></td>
 <td></td>
@@ -450,7 +433,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>27</td>
 <td></td>
 <td></td>
@@ -462,7 +445,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>64</td>
 <td></td>
 <td></td>
@@ -474,14 +457,12 @@
 <td></td>
 <td></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>第三次排列，按照百位数字放入相应的桶中，排序完毕</li>
 <li>用的时候，直接将元素按次序从桶中依次取出即可</li>
 </ul>
-<h4 id="实现思路-1">实现思路</h4>
-<ul>
+<h4 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
 <li>显然，我们首先要知道最高位的位数，以便知晓我们应该进行几趟排序</li>
 <li>之后就是每一趟将元素依次放入桶中即可</li>
 </ul>
@@ -490,29 +471,31 @@
 <li>实现需要创建桶的结构体</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_DIGIT 4</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> REDIX 10</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* 桶元素结点 */</span></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">PtrToNode</span>;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> key;</span><br><span class="line">    PtrToNode next;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-comment">/* 桶头结点 */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeadNode</span>&#123;</span></span><br><span class="line">    PtrToNode head, tail;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeadNode</span> <span class="hljs-title">Bucket</span>[<span class="hljs-title">REDIX</span>];</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><code>REDIX</code>表示需要排序数字的进制，<code>MAX_DIGIT</code>表示排序数字的最高位数</li>
 <li>之后，因为要根据每一位的数字来放置，所以需要一个取固定位 数字的函数</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">GetDit</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> tmp, i;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= d; ++i) &#123;</span><br><span class="line">        tmp = x % REDIX;</span><br><span class="line">        x /= REDIX;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>准备工作做完之后，就可以进行排序了</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">LSDRadixSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> d, di, i;</span><br><span class="line">    Bucket bucket;</span><br><span class="line">    PtrToNode tmp, p, <span class="hljs-built_in">list</span> = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; REDIX; ++i) <span class="hljs-comment">// 初始化桶</span></span><br><span class="line">        bucket[i].head = bucket[i].tail = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;   <span class="hljs-comment">// 将数组逆序存入list链表</span></span><br><span class="line">        tmp = (PtrToNode)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct Node));</span><br><span class="line">        tmp-&gt;key = a[i];</span><br><span class="line">        tmp-&gt;next = <span class="hljs-built_in">list</span>;</span><br><span class="line">        <span class="hljs-built_in">list</span> = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (d = <span class="hljs-number">1</span>; d &lt;= MAX_DIGIT; ++d) &#123;	<span class="hljs-comment">// 排序</span></span><br><span class="line">        p = <span class="hljs-built_in">list</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (p) &#123;	<span class="hljs-comment">// 将 list 按顺序放入桶中</span></span><br><span class="line">            di = GetDit(p-&gt;key, d);</span><br><span class="line">            tmp = p;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            tmp-&gt;next = <span class="hljs-literal">NULL</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (bucket[di].head == <span class="hljs-literal">NULL</span>)</span><br><span class="line">                bucket[di].head = bucket[di].tail = tmp;</span><br><span class="line">            <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">                bucket[di].tail-&gt;next = tmp;</span><br><span class="line">                bucket[di].tail = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">list</span> = <span class="hljs-literal">NULL</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (di = REDIX<span class="hljs-number">-1</span>; di &gt;= <span class="hljs-number">0</span>; di--) &#123;	<span class="hljs-comment">// 将桶中数字按顺序放回 list 中</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (bucket[di].head) &#123;</span><br><span class="line">                bucket[di].tail-&gt;next = <span class="hljs-built_in">list</span>;</span><br><span class="line">                <span class="hljs-built_in">list</span> = bucket[di].head;</span><br><span class="line">                bucket[di].head = bucket[di].tail = <span class="hljs-literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;	<span class="hljs-comment">// 将排序完成的list重新赋值给a数组</span></span><br><span class="line">        tmp = <span class="hljs-built_in">list</span>;</span><br><span class="line">        <span class="hljs-built_in">list</span> = <span class="hljs-built_in">list</span>-&gt;next;</span><br><span class="line">        a[i] = tmp-&gt;key;</span><br><span class="line">        <span class="hljs-built_in">free</span>(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>主位优先</strong></p>
 <ul>
 <li>该算法采用递归的方式实现，初始化部分和之前一致，只是后面有点差异</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MSD</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> di, i, j;</span><br><span class="line">    Bucket bucket;</span><br><span class="line">    PtrToNode tmp, p, <span class="hljs-built_in">list</span> = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (d == <span class="hljs-number">0</span>)</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; REDIX; ++i)</span><br><span class="line">        bucket[i].head = bucket[i].tail = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = l; l &lt;= r; ++l) &#123;</span><br><span class="line">        tmp = (PtrToNode)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct Node));</span><br><span class="line">        tmp-&gt;key = a[i];</span><br><span class="line">        tmp-&gt;next = <span class="hljs-built_in">list</span>;</span><br><span class="line">        <span class="hljs-built_in">list</span> = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    p = <span class="hljs-built_in">list</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (p) &#123;</span><br><span class="line">        di = GetDit(p-&gt;key, d);</span><br><span class="line">        tmp = p;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        <span class="hljs-keyword">if</span> (bucket[di].head == <span class="hljs-literal">NULL</span>)</span><br><span class="line">            bucket[di].tail = tmp;</span><br><span class="line">        tmp-&gt;next = bucket[di].head;</span><br><span class="line">        bucket[di].head = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    i = j = l;</span><br><span class="line">    <span class="hljs-keyword">for</span> (di = <span class="hljs-number">0</span>; di &lt; REDIX; ++di) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (bucket[di].head) &#123;</span><br><span class="line">            p = bucket[di].head;</span><br><span class="line">            <span class="hljs-keyword">while</span> (p) &#123;</span><br><span class="line">                tmp = p;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">                a[j++] = tmp-&gt;key;</span><br><span class="line">                <span class="hljs-built_in">free</span>(tmp);</span><br><span class="line">            &#125;</span><br><span class="line">            MSD(a, i, j<span class="hljs-number">-1</span>, d<span class="hljs-number">-1</span>);</span><br><span class="line">            i = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MSDRadixSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    MSD(a, <span class="hljs-number">0</span>, n<span class="hljs-number">-1</span>, MAX_DIGIT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如上</p>
-<h4 id="基数排序的应用">基数排序的应用</h4>
-<p>在有多个条件之时，可以先按照一个条件将之进行简单的归类，再逐个类进行排序，最后将其合并</p>
+<h4 id="基数排序的应用"><a href="#基数排序的应用" class="headerlink" title="基数排序的应用"></a>基数排序的应用</h4><p>在有多个条件之时，可以先按照一个条件将之进行简单的归类，再逐个类进行排序，最后将其合并</p>
 <hr>
-<h3 id="总结">总结</h3>
-<p>排序算法的探究到这里就告一段落了，我们对所有排序的时间复杂度和空间复杂度，以及其是否稳定进行一次统计总结：</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>排序算法的探究到这里就告一段落了，我们对所有排序的时间复杂度和空间复杂度，以及其是否稳定进行一次统计总结：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>排序方法</th>
 <th>平均时间复杂度</th>
 <th>最坏时间复杂度</th>
@@ -520,65 +503,63 @@
 <th>稳定性</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>简单选择排序</td>
-<td><span class="math inline">\(O(N^2)\)</span></td>
-<td><span class="math inline">\(O(N^2)\)</span></td>
-<td><span class="math inline">\(O(1)\)</span></td>
+<td>$O(N^2)$</td>
+<td>$O(N^2)$</td>
+<td>$O(1)$</td>
 <td>不稳定</td>
 </tr>
-<tr class="even">
+<tr>
 <td>冒泡排序</td>
 <td>$O(N^ 2 ) $</td>
-<td><span class="math inline">\(O(N^2 )\)</span></td>
-<td><span class="math inline">\(O(1)\)</span></td>
+<td>$O(N^2 )$</td>
+<td>$O(1)$</td>
 <td>稳定</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>直接插入排序</td>
-<td><span class="math inline">\(O(N^ 2)\)</span></td>
-<td><span class="math inline">\(O(N^ 2)\)</span></td>
-<td><span class="math inline">\(O(1)\)</span></td>
+<td>$O(N^ 2)$</td>
+<td>$O(N^ 2)$</td>
+<td>$O(1)$</td>
 <td>稳定</td>
 </tr>
-<tr class="even">
+<tr>
 <td>希尔排序</td>
-<td><span class="math inline">\(O(N^ d)\)</span></td>
-<td><span class="math inline">\(O(N^ 2)\)</span></td>
-<td><span class="math inline">\(O(1)\)</span></td>
+<td>$O(N^ d)$</td>
+<td>$O(N^ 2)$</td>
+<td>$O(1)$</td>
 <td>不稳定</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>堆排序</td>
-<td><span class="math inline">\(O(Nlog N)\)</span></td>
-<td><span class="math inline">\(O(Nlog N)\)</span></td>
-<td><span class="math inline">\(O(1)\)</span></td>
+<td>$O(Nlog N)$</td>
+<td>$O(Nlog N)$</td>
+<td>$O(1)$</td>
 <td>不稳定</td>
 </tr>
-<tr class="even">
+<tr>
 <td>快速排序</td>
-<td><span class="math inline">\(O(Nlog N)\)</span></td>
-<td><span class="math inline">\(O(N^ 2)\)</span></td>
-<td><span class="math inline">\(O(log N)\)</span></td>
+<td>$O(Nlog N)$</td>
+<td>$O(N^ 2)$</td>
+<td>$O(log N)$</td>
 <td>不稳定</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>归并排序</td>
-<td><span class="math inline">\(O(Nlog N)\)</span></td>
-<td><span class="math inline">\(O(Nlog N)\)</span></td>
-<td><span class="math inline">\(O( N)\)</span></td>
+<td>$O(Nlog N)$</td>
+<td>$O(Nlog N)$</td>
+<td>$O( N)$</td>
 <td>稳定</td>
 </tr>
-<tr class="even">
+<tr>
 <td>基数排序</td>
-<td><span class="math inline">\(O(P(N+B))\)</span></td>
-<td><span class="math inline">\(O(P(N+B))\)</span></td>
-<td><span class="math inline">\(O(N+B)\)</span></td>
+<td>$O(P(N+B))$</td>
+<td>$O(P(N+B))$</td>
+<td>$O(N+B)$</td>
 <td>稳定</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
         </div>
         

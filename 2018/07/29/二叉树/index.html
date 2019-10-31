@@ -10,13 +10,13 @@
 <title>二叉树 - 文的盲</title>
 
 
-    <meta name="description" content="树 树（Tree）: n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&amp;gt; 0），它具备以下性质：  树中有一个称为“根（Root）”的特殊结点，用 r 表示； 其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”">
+    <meta name="description" content="树树（Tree）:  n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&amp;gt; 0），它具备以下性质：  树中有一个称为“根（Root）”的特殊结点，用 r 表示； 其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;07&#x2F;29&#x2F;%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="树 树（Tree）: n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&amp;gt; 0），它具备以下性质：  树中有一个称为“根（Root）”的特殊结点，用 r 表示； 其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”">
+<meta property="og:description" content="树树（Tree）:  n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&amp;gt; 0），它具备以下性质：  树中有一个称为“根（Root）”的特殊结点，用 r 表示； 其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-07-29T06:44:43.273Z">
@@ -29,7 +29,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/wendemang.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -170,15 +170,14 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h2 id="树">树</h2>
-<p><strong>树（Tree）:</strong> n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><strong>树（Tree）:</strong>  n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
 <ul>
 <li>树中有一个称为“根（Root）”的特殊结点，用 r 表示；</li>
 <li>其余结点可分为m(m&gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”</li>
 </ul>
 <a id="more"></a>
-<h4 id="树的一些基本术语">树的一些基本术语</h4>
-<ol type="1">
+
+<h4 id="树的一些基本术语"><a href="#树的一些基本术语" class="headerlink" title="树的一些基本术语"></a>树的一些基本术语</h4><ol>
 <li><strong>结点的度（Degree）：</strong>结点的子树个数</li>
 <li><strong>树的度：</strong>树的所有结点中最大的度数</li>
 <li><strong>叶结点（Leaf）：</strong>度为的结点</li>
@@ -191,95 +190,104 @@
 <li><strong>结点的层次（Level）：</strong>规定根结点在1层， 其它任一结点的层数是其父结点的层数加1。</li>
 <li><strong>树的深度（Depth）：</strong>树中所有结点中的最 大层次是这棵树的深度。</li>
 </ol>
-<h4 id="树的表示">树的表示</h4>
-<p>数组？</p>
+<h4 id="树的表示"><a href="#树的表示" class="headerlink" title="树的表示"></a>树的表示</h4><p>数组？                        </p>
 <p>— 树的分枝是不确定的，因此用数组表示不太方便链表？</p>
 <ul>
 <li><p>常规表示</p>
-<p>劣势：此种链表表示方法由于子结点的个数不确定，因此需要多个结构来实现。</p>
-<p>如是直接选取子结点最多的结构来代替所有结构，简化了结构，但会造成资源浪费。</p></li>
+<p>劣势：此种链表表示方法由于子结点的个数不确定，因此需要多个结构来实现。                      </p>
+<p>如是直接选取子结点最多的结构来代替所有结构，简化了结构，但会造成资源浪费。</p>
+</li>
 <li><p>儿子兄弟表示法</p>
-<p>链表结构固定，两个指针，第一个指针指向他的第一个儿子，第二个指针指向他旁边的兄弟，如不存在，则指针为空。如下图所示：</p></li>
+<p>链表结构固定，两个指针，第一个指针指向他的第一个儿子，第二个指针指向他旁边的兄弟，如不存在，则指针为空。如下图所示：       </p>
+</li>
 </ul>
-<h2 id="二叉树">二叉树</h2>
-<ul>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><ul>
 <li>定义：一个有穷的结点集合，由根结点和称为其左子树T_L和右子树T_R的两个不相交的二叉树组成（非空集合）。也可以说是特殊度为2的树，有左右之分。</li>
 </ul>
-<h4 id="相关概念">相关概念：</h4>
-<ol type="1">
+<h4 id="相关概念："><a href="#相关概念：" class="headerlink" title="相关概念："></a>相关概念：</h4><ol>
 <li>叶结点：没有子节点的结点，个数表示为n_0</li>
 <li>只有一个子节点的结点，个数表示为n_1</li>
 <li>有两个子节点的结点，个数表示为n_2</li>
 </ol>
 <ul>
-<li><p>由左至右分别为：空树</p></li>
-<li><p>特殊二叉树：</p></li>
-<li><p>斜二叉树：只有一边的结点</p></li>
-<li><p>完美二叉树：所有根节点都由两个子结点</p></li>
-<li><p>完全二叉树：相对于完美二叉树而言，最后一层的子节点可以缺项，但是从上至下从左往右编号时，前面的编号和完美二叉树完全一致</p></li>
+<li><p>由左至右分别为：空树</p>
+</li>
+<li><p>特殊二叉树：</p>
+</li>
+<li><p>斜二叉树：只有一边的结点</p>
+</li>
+<li><p>完美二叉树：所有根节点都由两个子结点</p>
+</li>
+<li><p>完全二叉树：相对于完美二叉树而言，最后一层的子节点可以缺项，但是从上至下从左往右编号时，前面的编号和完美二叉树完全一致</p>
+</li>
 </ul>
-<h4 id="性质">性质：</h4>
-<p>​ 1. 一个二叉树第i层的最大结点数为：2^(i-1) , i &gt;= 1 2. 深度为k的二叉树有最大的结点总数为：2^k-1 , k &gt;= 1 3. 对于任何非空二叉树，若 n_0 表示叶节点个数，n_2是度为2的非叶节点个数，那么两者之间满足关系 n_0 = n_2 +1</p>
-<p>证明：一个二叉树的两个结点之间的连线可以看作一条边，由下往上看，每一个结点都有一条边，除去根节点，所以，节点数 = 边数 + 1</p>
+<h4 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h4><p>​    1. 一个二叉树第i层的最大结点数为：2^(i-1) , i &gt;= 1<br>    2. 深度为k的二叉树有最大的结点总数为：2^k-1 , k &gt;= 1<br>    3. 对于任何非空二叉树，若 n_0 表示叶节点个数，n_2是度为2的非叶节点个数，那么两者之间满足关系 n_0 = n_2 +1</p>
+<p>证明：一个二叉树的两个结点之间的连线可以看作一条边，由下往上看，每一个结点都有一条边，除去根节点，所以，节点数 = 边数 + 1            </p>
 <p>由上往下看，则可以得到如下等式：n_0 + n_1 + n_2 - 1（节点数）= 0 * n_0 + 1 * n_1 + 2 * n_2（边数，由上往下看，结点拥有子节点的个数等于其边数），化简即可证得。</p>
-<h3 id="二叉树的存储结构">二叉树的存储结构</h3>
-<p>### 顺序存储结构：</p>
-<p><strong>完全二叉树：</strong>从上至下、从左到右的方式进行顺序存储</p>
-<p>Q：储存后相关操作是否方便？<br>
-A ：方便，相关操作是有规律的</p>
+<h3 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h3><h3 id="顺序存储结构："><a href="#顺序存储结构：" class="headerlink" title="顺序存储结构："></a>顺序存储结构：</h3><p><strong>完全二叉树：</strong>从上至下、从左到右的方式进行顺序存储         </p>
+<p>Q：储存后相关操作是否方便？<br>A ：方便，相关操作是有规律的</p>
 <ul>
-<li><p>非根节点 (序号 i &gt; 1) 的父节点序号是 [i/2]</p></li>
-<li><p>结点（序号为 i ）的左孩子结点是 2i （若 2i &lt;= n , 否则没有左孩子）</p></li>
-<li><p>结点（序号为 i ）的右孩子结点是 2i+1 （若 2i+1 &lt;= n , 否则没有右孩子）</p></li>
+<li><p>非根节点 (序号 i &gt; 1) 的父节点序号是 [i/2]</p>
+</li>
+<li><p>结点（序号为 i ）的左孩子结点是 2i （若 2i &lt;= n , 否则没有左孩子）</p>
+</li>
+<li><p>结点（序号为 i ）的右孩子结点是 2i+1 （若 2i+1 &lt;= n , 否则没有右孩子）</p>
+</li>
 </ul>
 <p><strong>一般二叉树：</strong>存储方式同完全二叉树，如结点有缺，则在数组中留出空位</p>
 <p>缺点：会造成空间浪费。</p>
-<h4 id="链表存储">链表存储</h4>
-<p>儿子兄弟表示法</p>
-<h3 id="二叉树的遍历">二叉树的遍历</h3>
-<p><strong>先序遍历：</strong>void PreOrderTraversal( BinTree BT )：先序—-根、左子树、右子树；</p>
-<p><strong>中序遍历：</strong>void InOrderTraversal( BinTree BT )： 中序—左子树、根、右子树；</p>
-<p><strong>后序遍历</strong>：void PostOrderTraversal( BinTree BT )：后序—左子树、右子树、根</p>
+<h4 id="链表存储"><a href="#链表存储" class="headerlink" title="链表存储"></a>链表存储</h4><p>儿子兄弟表示法  </p>
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><p><strong>先序遍历：</strong>void PreOrderTraversal( BinTree BT )：先序—-根、左子树、右子树；</p>
+<p><strong>中序遍历：</strong>void InOrderTraversal( BinTree BT )： 中序—左子树、根、右子树； </p>
+<p><strong>后序遍历</strong>：void PostOrderTraversal( BinTree BT )：后序—左子树、右子树、根 </p>
 <p><strong>层次遍历：</strong>void LevelOrderTraversal( BinTree BT )：层次遍历，从上到下、从左到右</p>
-<h4 id="先序遍历">先序遍历</h4>
-<p><strong>遍历过程为：</strong></p>
-<p>​ 1. 访问根节点 2. 先序遍历左子树 3. 先序遍历右子树</p>
+<h4 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h4><p><strong>遍历过程为：</strong></p>
+<p>​    1. 访问根节点<br>    2. 先序遍历左子树<br>    3. 先序遍历右子树</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PreOrderTraversal</span> <span class="hljs-params">( BinTree BT)</span></span>&#123;     <span class="hljs-comment">// 先序遍历           </span></span><br><span class="line">    <span class="hljs-keyword">if</span>  ( BT )&#123;            </span><br><span class="line">        <span class="hljs-built_in">printf</span> (<span class="hljs-string">"%d"</span>, BT-&gt;Data);      <span class="hljs-comment">// 输出节点            </span></span><br><span class="line">        PreOrderTraversal ( BT-&gt;Left );     <span class="hljs-comment">//对左边进行递归</span></span><br><span class="line">        PreOrderTraversal ( BT-&gt;Right );    <span class="hljs-comment">// 对右边进行递归      </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输出顺序如图所示：</p>
-<h4 id="中序遍历">中序遍历</h4>
-<p><strong>遍历过程为：</strong> 1. 中序遍历其左子树； 2. 访问根结点； 3. 中序遍历其右子树。</p>
+<h4 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h4><p><strong>遍历过程为：</strong><br>    1. 中序遍历其左子树；<br>    2. 访问根结点；<br>    3. 中序遍历其右子树。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span>  <span class="hljs-title">InOrderTraversal</span> <span class="hljs-params">( BinTree BT )</span></span>&#123;    <span class="hljs-comment">// 中序遍历          </span></span><br><span class="line">    <span class="hljs-keyword">if</span>  ( BT )&#123;            </span><br><span class="line">        InOrderTreversal ( BT-&gt;Left );            </span><br><span class="line">        <span class="hljs-built_in">printf</span>  ( <span class="hljs-string">"%d"</span> , BT-&gt;Data );           </span><br><span class="line">        InOrderTreversal ( BT-&gt;Right );      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出顺序如图所示：后序遍历遍历过程为： 1. 后序遍历其左子树； 2. 后序遍历其右子树； 3. 访问根结点。</p>
+
+<p>输出顺序如图所示：后序遍历遍历过程为：<br>    1. 后序遍历其左子树；<br>    2. 后序遍历其右子树；<br>    3. 访问根结点。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PostOrderTraversal</span> <span class="hljs-params">( BinTree BT )</span></span>&#123;     <span class="hljs-comment">// 后序遍历          </span></span><br><span class="line">    <span class="hljs-keyword">if</span>  ( BT )&#123;            </span><br><span class="line">        PreOrderTraversal ( BT-&gt;Left );     <span class="hljs-comment">//对左边进行递归            </span></span><br><span class="line">        PreOrderTraversal ( BT-&gt;Right );    <span class="hljs-comment">// 对右边进行递归            </span></span><br><span class="line">        <span class="hljs-built_in">printf</span> (<span class="hljs-string">"%d"</span>, BT-&gt;Data);      <span class="hljs-comment">// 输出节点      </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输出顺序如图所示：</p>
 <p><strong>以上三种遍历均属于递归遍历</strong></p>
 <p>我们可以发现，上述三种遍历，经过节点的路线都是一样的，之时访问节点的时机不同，也就是输出顺序不同。</p>
-<h4 id="中序遍历非递归遍历算法">中序遍历非递归遍历算法：</h4>
-<p>基本思路：使用堆栈</p>
+<h4 id="中序遍历非递归遍历算法："><a href="#中序遍历非递归遍历算法：" class="headerlink" title="中序遍历非递归遍历算法："></a>中序遍历非递归遍历算法：</h4><p>基本思路：使用堆栈</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span>  <span class="hljs-title">InOrderTraversal</span> <span class="hljs-params">( BinTree  BT )</span></span>&#123;      </span><br><span class="line">    BinTree  T = BT ;       <span class="hljs-comment">//  简化树的变量名      </span></span><br><span class="line">    Stack S = CreatStack ( MaxSize );   <span class="hljs-comment">// 创建并初始化堆栈     </span></span><br><span class="line">    <span class="hljs-keyword">while</span> （ T || ! IsEmpty(S) ）&#123;            </span><br><span class="line">        <span class="hljs-keyword">while</span> ( T )&#123;                 </span><br><span class="line">            Push ( S , T );    <span class="hljs-comment">// 压栈                 </span></span><br><span class="line">            T = T-&gt;Left;    <span class="hljs-comment">// 从树左边开始            </span></span><br><span class="line">        &#125;            </span><br><span class="line">        <span class="hljs-keyword">if</span>  ( ! IsEmpty (S))&#123;                  </span><br><span class="line">            T = Pop(S) ;      <span class="hljs-comment">// 结点弹出堆栈                  </span></span><br><span class="line">            <span class="hljs-built_in">printf</span>( <span class="hljs-string">"%5d"</span> , T-&gt;Data ) ;   <span class="hljs-comment">// 输出结点                  </span></span><br><span class="line">            T = T-&gt;RIght ;    <span class="hljs-comment">// 转向右子树           </span></span><br><span class="line">        &#125;     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="中序遍历非递归遍历算法-1">中序遍历非递归遍历算法：</h4>
-<p><strong>递归实际也是一种用堆栈实现的算法，所以两种方式实现是相同的，只不过不用递归，直接采用建立堆栈，用压栈弹栈进行操作而已。</strong></p>
-<h4 id="层序遍历">层序遍历</h4>
-<p>使用队列实现：</p>
+
+<h4 id="中序遍历非递归遍历算法：-1"><a href="#中序遍历非递归遍历算法：-1" class="headerlink" title="中序遍历非递归遍历算法："></a>中序遍历非递归遍历算法：</h4><p><strong>递归实际也是一种用堆栈实现的算法，所以两种方式实现是相同的，只不过不用递归，直接采用建立堆栈，用压栈弹栈进行操作而已。</strong></p>
+<h4 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h4><p>使用队列实现：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span>  <span class="hljs-title">LevelOrderTraversal</span>  <span class="hljs-params">( BinTree  BT )</span></span>&#123;</span><br><span class="line">      Queue  Q ;  <span class="hljs-comment">// 创建队列</span></span><br><span class="line">      BinTree  T ;      <span class="hljs-comment">// 创建临时二叉树</span></span><br><span class="line">      <span class="hljs-keyword">if</span>  ( !BT )       <span class="hljs-keyword">return</span> ;   <span class="hljs-comment">// 是空树则直接返回</span></span><br><span class="line">      AddQ ( Q , BT ) ;</span><br><span class="line">      <span class="hljs-keyword">while</span> ( !IsEmptyQ (Q) )&#123;      <span class="hljs-comment">// 循环 直至队列为空</span></span><br><span class="line">            T = DelateQ ( Q );</span><br><span class="line">            <span class="hljs-built_in">printf</span> ( <span class="hljs-string">"%d\n"</span> , T-&gt;Data ) ;       <span class="hljs-comment">// 访问取出队列的结点  </span></span><br><span class="line">            <span class="hljs-keyword">if</span> ( T-&gt;Left )    AddQ( Q , T-&gt;Left ) ;</span><br><span class="line">            <span class="hljs-keyword">if</span> ( T-&gt;Right )   AddQ( Q , T-&gt;Right ) ;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="遍历二叉树的应用">遍历二叉树的应用</h3>
-<p><strong>输出二叉树中的叶节点</strong></p>
+
+<h3 id="遍历二叉树的应用"><a href="#遍历二叉树的应用" class="headerlink" title="遍历二叉树的应用"></a>遍历二叉树的应用</h3><p><strong>输出二叉树中的叶节点</strong></p>
 <p>由题意可知，输出叶节点，也就是输出没有没有左右子树的结点，那么我们使用前序便历，在输出之时，检测其是否有左右子树。代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PreOrderPrintLeaves</span><span class="hljs-params">( BinTree BT )</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>( BT )&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> ( !BT-Left &amp;&amp; !BT-&gt;Right )</span><br><span class="line">            <span class="hljs-built_in">printf</span>(“%d”, BT-&gt;Data );</span><br><span class="line">        PreOrderPrintLeaves ( BT-&gt;Left );</span><br><span class="line">        PreOrderPrintLeaves ( BT-&gt;Right );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>求二叉树的高度</strong></p>
 <p>二叉树的高度等于左右子树最高的高度，所以遍历之时添加计数功能。</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">PostOrderGetHeight</span><span class="hljs-params">( BinTree BT )</span> </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">int</span> HL, HR, MaxH;</span><br><span class="line">      <span class="hljs-keyword">if</span>( BT ) &#123;</span><br><span class="line">            HL = PostOrderGetHeight(BT-&gt;Left);  <span class="hljs-comment">//求左子树的深度</span></span><br><span class="line">            HR = PostOrderGetHeight(BT-&gt;Right);       <span class="hljs-comment">// 求右子树的深度</span></span><br><span class="line">            MaxH = （HL &gt; HR）? HL : HR;    <span class="hljs-comment">// 取左右子树较大的深度</span></span><br><span class="line">            <span class="hljs-keyword">return</span> ( MaxH + <span class="hljs-number">1</span> );   <span class="hljs-comment">// 返回树的深度</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;    <span class="hljs-comment">// 空树深度为0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <p><strong>二元运算表达树及其遍历</strong></p>
 <p>三种遍历得到不同的访问结果</p>
 <ul>
-<li><p>先序遍历得到前缀表达式</p></li>
+<li><p>先序遍历得到前缀表达式</p>
+</li>
 <li><p>中序遍历得到中缀表达式：但是中缀表达式可能由于优先级不同，出现问题</p>
-<p>—- 如何解决？ 输出左子树之前加左括号，输出右子树之后加右括号</p></li>
-<li><p>后序遍历得到后续表达式</p></li>
+<p>—-   如何解决？    输出左子树之前加左括号，输出右子树之后加右括号</p>
+</li>
+<li><p>后序遍历得到后续表达式</p>
+</li>
 </ul>
 <p><strong>由两种遍历序列确定二叉树</strong></p>
-<p>Q：可以是任意两种吗？ A：不可以，确定之时必须要有中序遍历，仅仅依靠前序和后序无法确定出一个唯一的树</p>
-<p>先序和中序遍历来确定一棵二叉树 分析： 根据先序遍历序列第一个结点确定根结点； 根据根结点在中序遍历序列中分割出左右两个子序列 对左子树和右子树分别递归使用相同的方法继续分解。</p>
+<p>Q：可以是任意两种吗？<br>A：不可以，确定之时必须要有中序遍历，仅仅依靠前序和后序无法确定出一个唯一的树</p>
+<p>先序和中序遍历来确定一棵二叉树<br>分析：<br>根据先序遍历序列第一个结点确定根结点；<br>根据根结点在中序遍历序列中分割出左右两个子序列<br>对左子树和右子树分别递归使用相同的方法继续分解。</p>
 
         </div>
         
@@ -508,48 +516,52 @@ A ：方便，相关操作是有规律的</p>
         <span class="has-mr-6">2</span>
         <span>二叉树</span>
         </a><ul class="menu-list"><ul class="menu-list"><li>
-        <a class="is-flex" href="#相关概念">
+        <a class="is-flex" href="#相关概念：">
         <span class="has-mr-6">2.1.1</span>
         <span>相关概念：</span>
         </a></li><li>
-        <a class="is-flex" href="#性质">
+        <a class="is-flex" href="#性质：">
         <span class="has-mr-6">2.1.2</span>
         <span>性质：</span>
         </a></li></ul><li>
         <a class="is-flex" href="#二叉树的存储结构">
         <span class="has-mr-6">2.2</span>
         <span>二叉树的存储结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#顺序存储结构：">
+        <span class="has-mr-6">2.3</span>
+        <span>顺序存储结构：</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#链表存储">
-        <span class="has-mr-6">2.2.1</span>
+        <span class="has-mr-6">2.3.1</span>
         <span>链表存储</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#二叉树的遍历">
-        <span class="has-mr-6">2.3</span>
+        <span class="has-mr-6">2.4</span>
         <span>二叉树的遍历</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#先序遍历">
-        <span class="has-mr-6">2.3.1</span>
+        <span class="has-mr-6">2.4.1</span>
         <span>先序遍历</span>
         </a></li><li>
         <a class="is-flex" href="#中序遍历">
-        <span class="has-mr-6">2.3.2</span>
+        <span class="has-mr-6">2.4.2</span>
         <span>中序遍历</span>
         </a></li><li>
-        <a class="is-flex" href="#中序遍历非递归遍历算法">
-        <span class="has-mr-6">2.3.3</span>
+        <a class="is-flex" href="#中序遍历非递归遍历算法：">
+        <span class="has-mr-6">2.4.3</span>
         <span>中序遍历非递归遍历算法：</span>
         </a></li><li>
-        <a class="is-flex" href="#中序遍历非递归遍历算法-1">
-        <span class="has-mr-6">2.3.4</span>
+        <a class="is-flex" href="#中序遍历非递归遍历算法：-1">
+        <span class="has-mr-6">2.4.4</span>
         <span>中序遍历非递归遍历算法：</span>
         </a></li><li>
         <a class="is-flex" href="#层序遍历">
-        <span class="has-mr-6">2.3.5</span>
+        <span class="has-mr-6">2.4.5</span>
         <span>层序遍历</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#遍历二叉树的应用">
-        <span class="has-mr-6">2.4</span>
+        <span class="has-mr-6">2.5</span>
         <span>遍历二叉树的应用</span>
         </a></li></ul></li></ul>
             </div>

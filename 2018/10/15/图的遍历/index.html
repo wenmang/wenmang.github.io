@@ -10,13 +10,13 @@
 <title>图的遍历 - 文的盲</title>
 
 
-    <meta name="description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 此文主要介绍两种遍历方法：DFS和BFS">
+    <meta name="description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 此文主要介绍两种遍历方法：DFS和BFS">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图的遍历">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;15&#x2F;%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 此文主要介绍两种遍历方法：DFS和BFS">
+<meta property="og:description" content="定义：从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历 此文主要介绍两种遍历方法：DFS和BFS">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-10-19T13:36:46.718Z">
@@ -29,7 +29,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/wendemang.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -173,16 +173,17 @@
             <script src="/assets/js/APlayer.min.js"> </script><p><strong>定义：</strong>从图中某一顶点出发，访遍图中其余结点，且使每一个顶点仅被访问一次，此过程称之为图的遍历</p>
 <p>此文主要介绍两种遍历方法：DFS和BFS</p>
 <a id="more"></a>
-<h3 id="深度优先遍历dfs-depth-first-search">深度优先遍历（DFS – Depth First Search）</h3>
-<p>深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法</p>
+
+<h3 id="深度优先遍历（DFS-–-Depth-First-Search）"><a href="#深度优先遍历（DFS-–-Depth-First-Search）" class="headerlink" title="深度优先遍历（DFS – Depth First Search）"></a>深度优先遍历（DFS – Depth First Search）</h3><p>深度优先遍历也称之为深度优先搜索，是一种常用的图遍历算法</p>
 <p>深度优先遍历实现总的来说就是两句话：</p>
-<ol type="1">
+<ol>
 <li>从一顶点开始，在图中进行 ”深入“ —— 即从这个顶点开始，顺着某条边进行遍历</li>
 <li>无法 ”深入“ 时，进行 ”回溯“ —— 即若遍历到这条边的终点，则原路返回上一个结点，在此结点进行查询通过此结点所有可以到达的所有结点是否还有未遍历过的结点，再次进行 ”深入“</li>
 </ol>
 <p>可见，此遍历的实现过程描述是一种递归描述，所以首先考虑通过递归的方法进行实现</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(MGraph graph, <span class="hljs-keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> j;</span><br><span class="line">    visited[i] = TRUE;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%5d"</span>, graph-&gt;data[i]);</span><br><span class="line">    <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; graph-&gt;nv; j++)</span><br><span class="line">        <span class="hljs-keyword">if</span> (graph-&gt;g[i][j] != <span class="hljs-number">0</span>  &amp;&amp; !visited[j])</span><br><span class="line">            DFS(graph, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>注：</strong></p>
 <ul>
 <li>此代码为邻接数组实现的图的DFS遍历</li>
@@ -190,20 +191,21 @@
 </ul>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(LGraph graph, Vertex v)</span></span>&#123;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    visited[v] = TRUE;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%5d"</span>, graph-&gt;g[v].data);</span><br><span class="line">    <span class="hljs-keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!visited[w-&gt;adjv])</span><br><span class="line">            DFS(graph, w-&gt;adjv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>注：</strong></p>
 <ul>
 <li>此代码为邻接表实现的图的DFS遍历</li>
 <li>visited[] 为标记数组，标记某结点是否被遍历到，使用之前应进行初始化为FALSE</li>
 </ul>
-<h3 id="广度优先遍历bfs-breadth-first-search">广度优先遍历（BFS – Breadth First Search）</h3>
-<p>深度优先遍历也称之为深度优先搜索，是最简单的图搜索算法之一</p>
+<h3 id="广度优先遍历（BFS-–-Breadth-First-Search）"><a href="#广度优先遍历（BFS-–-Breadth-First-Search）" class="headerlink" title="广度优先遍历（BFS – Breadth First Search）"></a>广度优先遍历（BFS – Breadth First Search）</h3><p>深度优先遍历也称之为深度优先搜索，是最简单的图搜索算法之一</p>
 <p>广度优先搜索的实现过程实质就是树的层序遍历，从某一结点开始，将这一结点压入队列，结点出队时，将此结点所有边连接的结点统统压入队列</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BFS</span><span class="hljs-params">(MGraph graph)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i, j;</span><br><span class="line">    Queue Q;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; graph-&gt;nv; ++i)</span><br><span class="line">        visited[i] = FALSE;</span><br><span class="line">    Q = CreateQueue(MAXSIZE);   <span class="hljs-comment">// 初始化辅助队列</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; graph-&gt;nv; i++) <span class="hljs-comment">// 循环每一个顶点</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (!visited[i])&#123;   <span class="hljs-comment">// 判断是否访问过</span></span><br><span class="line">            visited[i] = TRUE;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, graph-&gt;data[i]);</span><br><span class="line">            AddQ(Q, i);</span><br><span class="line">            <span class="hljs-keyword">while</span> (!IsEmpty(Q))&#123;    <span class="hljs-comment">// 队列不空</span></span><br><span class="line">                i = Delete(Q);  <span class="hljs-comment">// 取出元素 赋值给i</span></span><br><span class="line">                <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; graph-&gt;nv; j++) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (graph-&gt;g[i][j] == <span class="hljs-number">1</span> &amp;&amp; !visited[j])&#123;    <span class="hljs-comment">// 判断其他顶点与当前顶点之间是否存在边且是否被访问</span></span><br><span class="line">                        visited[j] = TRUE;</span><br><span class="line">                        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, graph-&gt;data[j]);</span><br><span class="line">                        AddQ(Q, j); <span class="hljs-comment">// 将j结点压入队列</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>两步：</p>
-<ol type="1">
+<ol>
 <li>创造辅助队列，并将 i 压入队列</li>
-<li>弹出 i ，并将其联通的结点依次压入队列</li>
+<li>弹出 i ，并将其联通的结点依次压入队列 </li>
 </ol>
 <p>邻接表实现方式，基本代码相同</p>
 <p><strong>代码：</strong></p>
@@ -422,11 +424,11 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#深度优先遍历dfs-depth-first-search">
+        <a class="is-flex" href="#深度优先遍历（DFS-–-Depth-First-Search）">
         <span class="has-mr-6">1</span>
         <span>深度优先遍历（DFS – Depth First Search）</span>
         </a></li><li>
-        <a class="is-flex" href="#广度优先遍历bfs-breadth-first-search">
+        <a class="is-flex" href="#广度优先遍历（BFS-–-Breadth-First-Search）">
         <span class="has-mr-6">2</span>
         <span>广度优先遍历（BFS – Breadth First Search）</span>
         </a></li></ul>

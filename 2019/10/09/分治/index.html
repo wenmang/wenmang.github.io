@@ -10,13 +10,13 @@
 <title>分治 - 文的盲</title>
 
 
-    <meta name="description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
+    <meta name="description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
 <meta name="keywords" content="博客,算法思想">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分治">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;09&#x2F;%E5%88%86%E6%B2%BB&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
+<meta property="og:description" content="何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明： 分治： 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-10-10T13:19:45.766Z">
@@ -29,7 +29,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/wendemang.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -173,60 +173,39 @@
             <script src="/assets/js/APlayer.min.js"> </script><p>何为分治？简单来说，就是将大的问题分解成小问题进行求解，然后对每个小问题的解进行处理【一般是合并】为大问题的解，下面是分治较为官方的说明：</p>
 <p><strong>分治：</strong> 把一个任务，分成形式和原任务相同，但规模更小的 几个部分任务（通常是两个部分），分别完成，或只需要选一部完成。然后再处理完成后的这一个或几个 部分的结果，实现整个任务的完成。</p>
 <a id="more"></a>
-<h3 id="斐波那契数列">斐波那契数列</h3>
-<p>我想了很多，最后发现还是从这个例子开始说起更加便于理解。</p>
-<p>斐波那契数列的定义很简单，其最早的历史来自于那个生兔子的问题。斐波那契数列的解法众多，详细描述可见<a href="https://zh.wikipedia.org/wiki/斐波那契数列" target="_blank" rel="noopener">维基百科</a>，而如果使用数学公式来描述，那么就是这个样子的： <span class="math display">\[
-\begin{equation}  
-\left\{  
-    \begin{array}{**lr**}  
-        F_0 = 0 &amp;  \\  
-        F_1 = 1 &amp;  \\  
-        F_n = F_{n-1} + F_{n-2} &amp; \\    
-    \end{array}  
-\right.  
-\end{equation}  
-\]</span> 他这种递归的定义方式，其实以初等数学使用暴力求解的思路来说，刚好是符合我们的分治思想的。因为你若将求解 <span class="math inline">\(F_4\)</span> 看作一个大问题，就必须将其分解为两个小一点的子问题，即求解 <span class="math inline">\(F_3\)</span> 和 <span class="math inline">\(F_2\)</span> ，然后再计算二者之和。</p>
+
+<h3 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h3><p>我想了很多，最后发现还是从这个例子开始说起更加便于理解。</p>
+<p>斐波那契数列的定义很简单，其最早的历史来自于那个生兔子的问题。斐波那契数列的解法众多，详细描述可见<a href="https://zh.wikipedia.org/wiki/斐波那契数列" target="_blank" rel="noopener">维基百科</a>，而如果使用数学公式来描述，那么就是这个样子的：<br>$$<br>\begin{equation}<br>\left{<br>    \begin{array}{<strong>lr</strong>}<br>        F_0 = 0 &amp;  \<br>        F_1 = 1 &amp;  \<br>        F_n = F_{n-1} + F_{n-2} &amp; \<br>    \end{array}<br>\right.<br>\end{equation}<br>$$<br>他这种递归的定义方式，其实以初等数学使用暴力求解的思路来说，刚好是符合我们的分治思想的。因为你若将求解 $F_4$ 看作一个大问题，就必须将其分解为两个小一点的子问题，即求解 $F_3$ 和 $F_2$ ，然后再计算二者之和。</p>
 <p>那么根据这个递归式，我想只要有点语言基础，都能很快写出一段递归的代码进行求解：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Fibonacci</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">return</span> Fibonacci(n<span class="hljs-number">-1</span>) + Fibonacci(n<span class="hljs-number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>当然，<code>Fibonacci</code> 真正实现的时候不能这么写。</p>
-<h3 id="分治范式">分治范式</h3>
-<p>大致对分治这种思想有了一个整体认识之后，我们便可以总结出一个求解分治问题的范式：</p>
+<h3 id="分治范式"><a href="#分治范式" class="headerlink" title="分治范式"></a>分治范式</h3><p>大致对分治这种思想有了一个整体认识之后，我们便可以总结出一个求解分治问题的范式：</p>
 <p><strong>何时使用分治思想：</strong>问题规模太大或者其他原因导致难以直接求解，那么这时候便可以考虑将问题划分为子问题，通过求解子问题来实现原问题最终的求解。</p>
 <p><strong>范式的一般步骤：</strong></p>
 <ul>
 <li><strong>划分：</strong>简单来说，此步骤就是将大问题分解为小问题【注：每个小问题的求解必须一致，不然分治就失去了其原本的意义】。</li>
-<li><strong>治理：</strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>也就是对每一个子问题进行求解。</li>
+<li><strong>治理：</strong><a href="此处按照教科书上（算法技巧与分析【沙特】）来说，此步骤实质上是一种优化复杂度的步骤，但在此，为了简便起见，直接将其写为了子问题的求解。">^1</a>也就是对每一个子问题进行求解。</li>
 <li><strong>组合：</strong>将所有子问题的结果进行合并，得到原问题的解。</li>
 </ul>
-<h4 id="分治的分析">分治的分析</h4>
-<p>分治的性质决定了其与递归联系紧密，所以如果一个问题可以用分治的思想来解决，那么其必然可以转化为一个递归表达式，就如同最开始直接以递归定义的斐波那契数列的表达式一般。而此类问题时间复杂度的详细分析，也往往依靠求解这样的递归式来得到。</p>
-<h3 id="归并排序">归并排序</h3>
-<p>许多算法都是利用分治思想提出来的，而归并排序无疑是最具代表性的一个，我们可以根据分治范式来一步步分析求解，最终明确这个算法的原理。</p>
-<h4 id="划分">划分</h4>
-<ul>
+<h4 id="分治的分析"><a href="#分治的分析" class="headerlink" title="分治的分析"></a>分治的分析</h4><p>分治的性质决定了其与递归联系紧密，所以如果一个问题可以用分治的思想来解决，那么其必然可以转化为一个递归表达式，就如同最开始直接以递归定义的斐波那契数列的表达式一般。而此类问题时间复杂度的详细分析，也往往依靠求解这样的递归式来得到。</p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>许多算法都是利用分治思想提出来的，而归并排序无疑是最具代表性的一个，我们可以根据分治范式来一步步分析求解，最终明确这个算法的原理。</p>
+<h4 id="划分"><a href="#划分" class="headerlink" title="划分"></a>划分</h4><ul>
 <li>两个数之间如何排序【注：此后所说的排序均代表顺序排序】？很显然两两之间比较，小的放左边，大的放右边。</li>
 <li>那三个数如何排序？选两个排好之后，再将第三个数与已经排好的两数比较，进而确定第三个数的位置。</li>
 <li>四个？此时可以两两排好，然后再合并两个已排序的数组即可。</li>
 <li>六十四个？可以分为俩三十二个的，每个三十二个的又可分为俩十六个的……</li>
 </ul>
 <p>如此，我们可以将大问题以对半划分的方式【注：奇数对半，一半比一半多1即可】层层划分，<strong>直至不可划分为止，也就是仅剩一个数的时候。</strong>而划分，也往往就是递归的过程。</p>
-<h4 id="治理">治理</h4>
-<p>治理，即解决划分后的子问题，划分后的子问题是什么呢？答案就是，一个数的排序。一个数显然无需排序，那么此步骤便无需进行处理。</p>
-<h4 id="组合">组合</h4>
-<p>将子问题的结果组合起来，在此问题中便是，<strong>将已排序的两个数组合并为一个已排序的数组。</strong></p>
-<h4 id="具体实现">具体实现</h4>
-<p>分析清楚之后便可自己尝试写出代码了，首先要写的，便是 <strong>组合</strong> 部分，C语言代码如下：</p>
+<h4 id="治理"><a href="#治理" class="headerlink" title="治理"></a>治理</h4><p>治理，即解决划分后的子问题，划分后的子问题是什么呢？答案就是，一个数的排序。一个数显然无需排序，那么此步骤便无需进行处理。</p>
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><p>将子问题的结果组合起来，在此问题中便是，<strong>将已排序的两个数组合并为一个已排序的数组。</strong></p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>分析清楚之后便可自己尝试写出代码了，首先要写的，便是 <strong>组合</strong> 部分，C语言代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">	- 将数组a的局部a[l,r-1]和a[r,rightEnd]合并到tmp</span></span><br><span class="line"><span class="hljs-comment">    - 然后再拷贝回a[l,rightEnd]</span></span><br><span class="line"><span class="hljs-comment">**/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> leftEnd = r - <span class="hljs-number">1</span>; </span><br><span class="line">	<span class="hljs-keyword">int</span> left = l, count = l;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd) &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (a[l] &lt; a[r])</span><br><span class="line">			tmp[count++] = a[l++];</span><br><span class="line">		<span class="hljs-keyword">else</span> </span><br><span class="line">			tmp[count++] = a[r++];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">		tmp[count++] = a[l++];</span><br><span class="line">	<span class="hljs-keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">		tmp[count++] = a[r++];</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; rightEnd+<span class="hljs-number">1</span>; i++) </span><br><span class="line">		a[i] = tmp[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>然后，就可以完成划分部分，从而进行排序了。C语言代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> tmp[])</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (left &lt; rightEnd) &#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> mid = left + (rightEnd-left)/<span class="hljs-number">2</span>;</span><br><span class="line">		mergeSort(a, left, mid, tmp);	<span class="hljs-comment">// 划分左半部分</span></span><br><span class="line">		mergeSort(a, mid+<span class="hljs-number">1</span>, rightEnd, tmp);	<span class="hljs-comment">// 划分右半部分</span></span><br><span class="line">		merge(a, left, mid+<span class="hljs-number">1</span>, rightEnd, tmp);	<span class="hljs-comment">// 组合子问题的解</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="汉诺塔问题">汉诺塔问题</h4>
-<p>作为练习，可尝试自己实现一下汉诺塔问题！【待补】</p>
-<section class="footnotes">
-<hr>
-<ol>
-<li id="fn1"><p>此处按照教科书上（算法技巧与分析【沙特】）来说，此步骤实质上是一种优化复杂度的步骤，但在此，为了简便起见，直接将其写为了子问题的求解。<a href="#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</section>
+
+<h4 id="汉诺塔问题"><a href="#汉诺塔问题" class="headerlink" title="汉诺塔问题"></a>汉诺塔问题</h4><p>作为练习，可尝试自己实现一下汉诺塔问题！【待补】</p>
 
         </div>
         

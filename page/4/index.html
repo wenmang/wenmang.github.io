@@ -25,7 +25,7 @@
 
 
 
-<link rel="icon" href="/images/favicon.svg">
+<link rel="icon" href="/images/wendemang.png">
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
@@ -159,10 +159,10 @@
         </h1>
         <div class="content">
             <p><strong>定义：</strong>串是由零个或多个字符组成的有限序列，又叫做 字符串</p>
-<p>一般记为 S = “<span class="math inline">\(a_1a_2......a_n\)</span>”(n ≥ 0)</p>
+<p>一般记为 S = “$a_1a_2……a_n$”(n ≥ 0)</p>
 <ul>
-<li>S : 串的名称</li>
-<li><span class="math inline">\(a_1a_2......a_n\)</span>：串的值</li>
+<li>S : 串的名称 </li>
+<li>$a_1a_2……a_n$：串的值</li>
 </ul>
 <p><strong>概念解释：</strong></p>
 <ul>
@@ -233,12 +233,12 @@
             <p>什么是图（Graph）？</p>
 <ul>
 <li>表示“多对多”的关系</li>
-<li>包含：
-<ul>
+<li>包含：<ul>
 <li>一组顶点：通常用V（Vertex） 表示顶点集合</li>
 <li>一组边：通常用E（Edge）表示边的集合</li>
-<li>边是顶点对：（v,w）属于 E ，其中 v,w 属于 V 有向边 &lt;v,w&gt; 表示从v指向w的边（单行线） 不考虑重边和自回路</li>
-</ul></li>
+<li>边是顶点对：（v,w）属于 E ，其中 v,w 属于 V<br>有向边 &lt;v,w&gt; 表示从v指向w的边（单行线）<br>不考虑重边和自回路</li>
+</ul>
+</li>
 </ul>
         </div>
         
@@ -300,13 +300,12 @@
             
         </h1>
         <div class="content">
-            <h3 id="集合的表示">集合的表示</h3>
-<ul>
-<li>用树的结构表示集合
-<ul>
+            <h3 id="集合的表示"><a href="#集合的表示" class="headerlink" title="集合的表示"></a>集合的表示</h3><ul>
+<li>用树的结构表示集合<ul>
 <li>用链表，由于集合的操作只需确定元素属于哪个集合，所以采用双亲表示法，孩子的指针指向双亲</li>
 <li>用结构数组，data表示元素值，parent表示其父结点下标</li>
-</ul></li>
+</ul>
+</li>
 </ul>
         </div>
         
@@ -492,8 +491,8 @@
             
         </h1>
         <div class="content">
-            <p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL） <strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
-<p><strong>平衡因子（Balance Factor BF）：</strong> BF(T) = <span class="math inline">\(h_L\)</span> - <span class="math inline">\(h_R\)</span> (注：<span class="math inline">\(h_L\)</span> 和 <span class="math inline">\(h_R\)</span>分别为左右子树的高度) <strong>平衡二叉树（Balance Binary Tree）：AVL树</strong> 空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
+            <p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL）<br><strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
+<p><strong>平衡因子（Balance Factor    BF）：</strong><br>BF(T) = $h_L$ - $h_R$ (注：$h_L$ 和 $h_R$分别为左右子树的高度)<br><strong>平衡二叉树（Balance Binary Tree）：AVL树</strong><br>空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
         </div>
         
         
@@ -555,8 +554,8 @@
         </h1>
         <div class="content">
             <p>二叉搜索树（BST，Binary Search Tree）， 也称二叉排序树或二叉查找树</p>
-<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质：</p>
-<ol type="1">
+<p><strong>定义：</strong>一棵二叉树，可以为空；如果不为空，满足以下性质： </p>
+<ol>
 <li>非空左子树的所有键值小于其根结点的键值。</li>
 <li>非空右子树的所有键值大于其根结点的键值。</li>
 <li>左、右子树都是二叉搜索树。</li>
@@ -621,8 +620,7 @@
             
         </h1>
         <div class="content">
-            <h2 id="树">树</h2>
-<p><strong>树（Tree）:</strong> n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
+            <h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><p><strong>树（Tree）:</strong>  n（n≥0）个结点构成的有限集合。 当n=0时，称为空树； 对于任一棵非空树（n&gt; 0），它具备以下性质：</p>
 <ul>
 <li>树中有一个称为“根（Root）”的特殊结点，用 r 表示；</li>
 <li>其余结点可分为m(m&gt;0)个互不相交的有限集T1，T2，… ，Tm，其 中每个集合本身又是一棵树，称为原来树的“子树（SubTree）”</li>
@@ -694,7 +692,7 @@
 </ul>
 <p>而在研究之前，首先应知道相关基础知识。</p>
 <blockquote>
-<p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
+<p> 算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
 </blockquote>
         </div>
         
@@ -756,8 +754,7 @@
             
         </h1>
         <div class="content">
-            <h2 id="生成五个不重复的随机数">生成五个不重复的随机数</h2>
-<p>一道蛮有意思的练习</p>
+            <h2 id="生成五个不重复的随机数"><a href="#生成五个不重复的随机数" class="headerlink" title="生成五个不重复的随机数"></a>生成五个不重复的随机数</h2><p>一道蛮有意思的练习</p>
         </div>
         
         
