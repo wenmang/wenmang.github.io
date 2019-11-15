@@ -10,13 +10,13 @@
 <title>堆 - 文的盲</title>
 
 
-    <meta name="description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
+    <meta name="description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="堆">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;30&#x2F;%E5%A0%86&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
+<meta property="og:description" content="引例：在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。 而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为优先队列。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2019&#x2F;10&#x2F;31&#x2F;GLhMWVXxaHTzpOn.png">
 <meta property="og:updated_time" content="2019-10-31T13:46:47.110Z">
@@ -179,79 +179,82 @@
             <script src="/assets/js/APlayer.min.js"> </script><p><strong>引例：</strong>在搜索算法实现中，会遇到这样一个问题——我们并不希望按照入队的先后顺序出队，而是希望每次出队的都是队列中最大或最小的元素。</p>
 <p>而要实现这样的方式，我们可以假设一种队列，取出元素的顺序以大小为准，我们往往将这样的队列称之为<strong>优先队列</strong>。</p>
 <a id="more"></a>
-<p><strong>优先队列（Priority Queue）：</strong>特殊的“队列”，依照元素的优先权（关键字）大小取出数据，而不是元素进入队列的先后顺序。</p>
-<h3 id="选择合适的数据结构">选择合适的数据结构</h3>
-<p>既然已经有了这样一个设想，那我们应该采用何种方式来实现呢？</p>
-<h4 id="使用数组或者链表">使用数组或者链表</h4>
-<p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。</p>
+
+<p><strong>优先队列（Priority Queue）：</strong>特殊的“队列”，依照元素的优先权（关键字）大小取出数据，而不是元素进入队列的先后顺序。 </p>
+<h3 id="选择合适的数据结构"><a href="#选择合适的数据结构" class="headerlink" title="选择合适的数据结构"></a>选择合适的数据结构</h3><p>既然已经有了这样一个设想，那我们应该采用何种方式来实现呢？</p>
+<h4 id="使用数组或者链表"><a href="#使用数组或者链表" class="headerlink" title="使用数组或者链表"></a>使用数组或者链表</h4><p>我们首先会想到以前学过的基本内容，以数组，链表等方式来储存，为了方便判断各种储存方法的优劣，我们将几种方法的时间复杂度进行比较。 </p>
 <ul>
 <li><p><strong>普通数组</strong></p>
-<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 <code>O(1)</code></p>
-<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 <code>O(n)</code></p></li>
+<p><strong>插入：</strong>我们只需要将普通数组的尾部即可    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>需要从数组中查找最大或最小的元素，进行一次遍历即可    —— 时间复杂度为 <code>O(n)</code> </p>
+</li>
 <li><p><strong>链表</strong></p>
-<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 <code>O(1)</code></p>
-<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度 <code>O(1)</code></p></li>
+<p><strong>插入：</strong>元素总是插在链表的头部(头插法)    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>同样需要遍历查找查找最大或最小元素    —— 时间复杂度 <code>O(1)</code> </p>
+</li>
 <li><p><strong>有序数组：</strong>即在插入时就按照一定顺序插入</p>
-<p><strong>插入：</strong>找到合适位置 —— 时间复杂度 <code>O(n)</code> 或者 <code>O(log n)</code> 【二分查找】         移动元素并插入    —— 时间复杂度 <code>O(n)</code></p>
-<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 <code>O(n)</code></p></li>
+<p><strong>插入：</strong>找到合适位置 —— 时间复杂度 <code>O(n)</code>  或者 <code>O(log n)</code> 【二分查找】           移动元素并插入    —— 时间复杂度 <code>O(n)</code></p>
+<p><strong>删除：</strong>删去最后一个元素    —— 时间复杂度 <code>O(n)</code> </p>
+</li>
 <li><p><strong>有序链表：</strong>同有序数组插入时按照一定顺序插入</p>
-<p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 <code>O(n)</code>   插入元素    —— 时间复杂度 <code>O(1)</code></p>
-<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 <code>O(1)</code></p></li>
+<p><strong>插入：</strong>找到合适的位置    —— 时间复杂度为 <code>O(n)</code>    插入元素    —— 时间复杂度 <code>O(1)</code></p>
+<p><strong>删除：</strong>删除首元素或者最后的元素    —— 时间复杂度为 <code>O(1)</code> </p>
+</li>
 </ul>
-<p>我们发现，以上四种实现方式的时间复杂度基本都是 <code>O(n)</code> ，那么可不可以找得到一种数据结构，来降低其时间复杂度呢？</p>
-<p><strong>那么就只有树了！</strong>我们可以用二叉树来实现，因为平衡二叉树的删除与插入时间复杂度都是与树高有关，时间复杂度是 <code>logN</code> 的。</p>
-<h4 id="二叉搜索树">二叉搜索树</h4>
-<p>二叉搜索树可以很好地进行插入与删除操作，删除时只需要将最左或者最右元素删除。<strong>但如果删除元素变多之后，可能会出现树”一边倒“ 的情况，这时会使时间复杂度变大，不再为 <code>O(logN)</code></strong>，所以使用二叉搜索树也不很合适。</p>
-<h4 id="完全二叉树">完全二叉树</h4>
-<p>将最大值或者最小值置于根结点处，用完全二叉树来存储，在删除之时就可以避免树出现“一边倒”的情况 。</p>
+<p>我们发现，以上四种实现方式的时间复杂度基本都是 <code>O(n)</code> ，那么可不可以找得到一种数据结构，来降低其时间复杂度呢？ </p>
+<p><strong>那么就只有树了！</strong>我们可以用二叉树来实现，因为平衡二叉树的删除与插入时间复杂度都是与树高有关，时间复杂度是 <code>logN</code> 的。 </p>
+<h4 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h4><p>二叉搜索树可以很好地进行插入与删除操作，删除时只需要将最左或者最右元素删除。<strong>但如果删除元素变多之后，可能会出现树”一边倒“ 的情况，这时会使时间复杂度变大，不再为 <code>O(logN)</code></strong>，所以使用二叉搜索树也不很合适。</p>
+<h4 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h4><p>将最大值或者最小值置于根结点处，用完全二叉树来存储，在删除之时就可以避免树出现“一边倒”的情况 。</p>
 <hr>
 <p>而这种数据结构，便被称作堆。堆在中文维基百科中的定义如下：</p>
 <blockquote>
-<p><strong>堆</strong>（英语：Heap）是<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>中的一种特别的树状<a href="https://zh.wikipedia.org/wiki/数据结构" target="_blank" rel="noopener">数据结构</a>。若是满足以下特性，即可称为堆：“给定堆中任意<a href="https://zh.wikipedia.org/wiki/節點" target="_blank" rel="noopener">节点</a>P和C，若P是C的母节点，那么P的值会小于等于（或大于等于）C的值”。若母节点的值恒<strong>小于等于</strong>子节点的值，此堆称为<strong>最小堆</strong>（min heap）；反之，若母节点的值恒<strong>大于等于</strong>子节点的值，此堆称为<strong>最大堆</strong>（max heap）。</p>
+<p> <strong>堆</strong>（英语：Heap）是<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>中的一种特别的树状<a href="https://zh.wikipedia.org/wiki/数据结构" target="_blank" rel="noopener">数据结构</a>。若是满足以下特性，即可称为堆：“给定堆中任意<a href="https://zh.wikipedia.org/wiki/節點" target="_blank" rel="noopener">节点</a>P和C，若P是C的母节点，那么P的值会小于等于（或大于等于）C的值”。若母节点的值恒<strong>小于等于</strong>子节点的值，此堆称为<strong>最小堆</strong>（min heap）；反之，若母节点的值恒<strong>大于等于</strong>子节点的值，此堆称为<strong>最大堆</strong>（max heap）。 </p>
 </blockquote>
-<h3 id="实现堆">实现堆</h3>
-<p>堆的两个特性 ：</p>
-<p><strong>结构性：</strong>用数组表示的完全二叉树； </p>
-<p><strong>有序性：</strong>任一结点的关键字是其子树所有结点的最大值(或最小值) </p>
+<h3 id="实现堆"><a href="#实现堆" class="headerlink" title="实现堆"></a>实现堆</h3><p>堆的两个特性 ：</p>
+<p><strong>结构性：</strong>用数组表示的完全二叉树； </p>
+<p><strong>有序性：</strong>任一结点的关键字是其子树所有结点的最大值(或最小值) </p>
 <ul>
-<li>“最大堆(<code>MaxHeap</code>)”,也称“大顶堆”：最大值 </li>
-<li>“最小堆(<code>MinHeap</code>)”,也称“小顶堆” ：最小值</li>
+<li>“最大堆(<code>MaxHeap</code>)”,也称“大顶堆”：最大值 </li>
+<li>“最小堆(<code>MinHeap</code>)”,也称“小顶堆” ：最小值 </li>
 </ul>
-<h4 id="堆的抽象数据类型描述">堆的抽象数据类型描述</h4>
-<p><strong>类型名称：</strong>最大堆（<code>MaxHeap</code>） </p>
+<h4 id="堆的抽象数据类型描述"><a href="#堆的抽象数据类型描述" class="headerlink" title="堆的抽象数据类型描述"></a>堆的抽象数据类型描述</h4><p><strong>类型名称：</strong>最大堆（<code>MaxHeap</code>） </p>
 <p><strong>数据对象集：</strong>完全二叉树，每个结点的元素值不小于其子结点的元素值</p>
 <p><strong>操作集：</strong>最大堆H 属于 <code>MaxHeap</code> ，元素item 属于 <code>ElementType</code></p>
-<p><strong>主要操作有： </strong></p>
+<p>*<em>主要操作有： *</em></p>
 <ul>
-<li><p><code>MaxHeap Create( int MaxSize )：</code> 创建一个空的最大堆。 </p></li>
-<li><p><code>Boolean IsFull( MaxHeap H )：</code>判断最大堆<code>H</code>是否已满。</p></li>
-<li><p><code>Insert( MaxHeap H, ElementType item )：</code>将元素 <code>item</code> 插入最大堆 <code>H</code>。 </p></li>
-<li><p><code>Boolean IsEmpty( MaxHeap H )：</code>判断最大堆<code>H</code>是否为空。</p></li>
-<li><p><code>ElementType DeleteMax( MaxHeap H )：</code>返回<code>H</code>中最大元素(高优先级)。</p></li>
+<li><p><code>MaxHeap Create( int MaxSize )：</code> 创建一个空的最大堆。 </p>
+</li>
+<li><p><code>Boolean IsFull( MaxHeap H )：</code>判断最大堆<code>H</code>是否已满。</p>
+</li>
+<li><p><code>Insert( MaxHeap H, ElementType item )：</code>将元素 <code>item</code> 插入最大堆 <code>H</code>。 </p>
+</li>
+<li><p><code>Boolean IsEmpty( MaxHeap H )：</code>判断最大堆<code>H</code>是否为空。</p>
+</li>
+<li><p><code>ElementType DeleteMax( MaxHeap H )：</code>返回<code>H</code>中最大元素(高优先级)。</p>
+</li>
 </ul>
-<h4 id="堆的构建">堆的构建</h4>
-<p>首先应该了解怎样创建一个空的最大堆，但在这之前，我们首先应该设计出合适的结构体来表示堆 ：</p>
+<h4 id="堆的构建"><a href="#堆的构建" class="headerlink" title="堆的构建"></a>堆的构建</h4><p>首先应该了解怎样创建一个空的最大堆，但在这之前，我们首先应该设计出合适的结构体来表示堆 ：</p>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeapStruct</span> *<span class="hljs-title">MaxHeap</span> ;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HeapStruct</span>&#123;</span></span><br><span class="line">	ElementType  *Elements ;	<span class="hljs-comment">// 存储堆元素的数组</span></span><br><span class="line">	<span class="hljs-keyword">int</span>  Size ;					<span class="hljs-comment">// 堆当前的元素个数</span></span><br><span class="line">	<span class="hljs-keyword">int</span>  Capacity ;				<span class="hljs-comment">// 堆的最大容量</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="堆中元素的插入">堆中元素的插入</h4>
-<p><strong>插入分两步：</strong></p>
-<ol type="1">
+
+<h4 id="堆中元素的插入"><a href="#堆中元素的插入" class="headerlink" title="堆中元素的插入"></a>堆中元素的插入</h4><p><strong>插入分两步：</strong></p>
+<ol>
 <li>将元素插入到数组中元素之后，也就是末位，使之符合完全二叉树的结构</li>
-<li>调整元素位置，使之成为堆</li>
+<li>调整元素位置，使之成为堆 </li>
 </ol>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Insert</span> <span class="hljs-params">( MaxHeap H, ElementType item )</span></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span>  i ;</span><br><span class="line">	<span class="hljs-keyword">if</span> ( isFull(H) )&#123;</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已满"</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="hljs-comment">// i 指向插入后 堆中最后一个元素的位置</span></span><br><span class="line">	i = ++H-&gt;Size ;   </span><br><span class="line">	<span class="hljs-keyword">for</span>  ( ; H-&gt;Elements[i] &gt; H-&gt;Elements[i/<span class="hljs-number">2</span>] ; i/=<span class="hljs-number">2</span> )</span><br><span class="line">        <span class="hljs-comment">// 向下过滤节点</span></span><br><span class="line">		H-&gt;Elements[i] = H-&gt;Elements[i/<span class="hljs-number">2</span>] ;     </span><br><span class="line">	H-&gt;Elements[i] = item ; <span class="hljs-comment">// 将item插入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>理解：</strong></p>
 <ul>
-<li>代码的主要部分为 <code>for</code> 循环及之后，<code>for</code> 循环在于将新插入至末尾的结点与其父节点进行比较，如新插入节点更大，则将其父节点与其交换位置，即可变为堆。</li>
+<li>代码的主要部分为 <code>for</code> 循环及之后，<code>for</code> 循环在于将新插入至末尾的结点与其父节点进行比较，如新插入节点更大，则将其父节点与其交换位置，即可变为堆。 </li>
 </ul>
 <p><strong>注意：</strong></p>
 <ul>
 <li>交换位置之时，在循环中直接将父节点覆盖子节点，而最后再将新需要插入的结点直接插入到相应位置之中，可以提高效率。</li>
-<li>循环之时，如果在堆中不设哨兵，在循环之时还应进行判断，使其循环替换元素之时不能出堆</li>
+<li>循环之时，如果在堆中不设哨兵，在循环之时还应进行判断，使其循环替换元素之时不能出堆 </li>
 </ul>
-<h4 id="最大堆的删除">最大堆的删除</h4>
-<p>最大堆的删除操作也就是删除掉堆中的最大元素（即树根），并将之返回出去</p>
+<h4 id="最大堆的删除"><a href="#最大堆的删除" class="headerlink" title="最大堆的删除"></a>最大堆的删除</h4><p>最大堆的删除操作也就是删除掉堆中的最大元素（即树根），并将之返回出去</p>
 <p>删除之后堆中会少一个元素，因此我们的思路是：</p>
 <ul>
 <li>在删除操作进行之时首先将树根元素复制并返回，之后直接将数组最后一个元素将树根元素直接覆盖。</li>
@@ -259,6 +262,7 @@
 </ul>
 <p><strong>代码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ElementType  <span class="hljs-title">DeleteMax</span><span class="hljs-params">( MaxHeap H )</span></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span>  parent, child ;</span><br><span class="line">    ElementType  MaxItem, temp ;</span><br><span class="line">    <span class="hljs-keyword">if</span> ( IsEmpty(H) )&#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已空"</span>) ；</span><br><span class="line">            <span class="hljs-keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    MaxItem = H-&gt;Elements[<span class="hljs-number">1</span>] ;    <span class="hljs-comment">// 取出根节点的最大值</span></span><br><span class="line">    temp = H-&gt;Elements[H-&gt;Size--] ;     <span class="hljs-comment">// 将最后一个元素赋给temp</span></span><br><span class="line">    <span class="hljs-keyword">for</span> ( parent = <span class="hljs-number">1</span> ; parent*<span class="hljs-number">2</span> &lt;= H-&gt;Size ; parent = child )&#123;</span><br><span class="line">        child = parent * <span class="hljs-number">2</span> ;</span><br><span class="line">        <span class="hljs-keyword">if</span> ( (child != H-&gt;Size) &amp;&amp;</span><br><span class="line">            (H-&gt;Elements[child] &lt; H-&gt;Elements[child+<span class="hljs-number">1</span>]) )</span><br><span class="line">            child++ ;   <span class="hljs-comment">// 使 child 指向左右结点中较大者</span></span><br><span class="line">        <span class="hljs-keyword">if</span> ( temp &gt;= H-&gt;Elements[child] )   <span class="hljs-keyword">break</span> ;</span><br><span class="line">        <span class="hljs-keyword">else</span>  <span class="hljs-comment">// 将 temp 元素移动到下一层</span></span><br><span class="line">            H-&gt;Elements[parent] = H-&gt;Elements[child] ;</span><br><span class="line">    &#125;</span><br><span class="line">    H-&gt;Elements[parent] = temp ;</span><br><span class="line">    <span class="hljs-keyword">return</span> MaxItem ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>理解：</strong>代码之中重点就在于重新调整元素，也就是 <code>for</code> 循环中内容——从根节点开始，依次与最大子结点比较，如果小于就与其交换位置，直至调整好为止。</p>
 <p><strong>注：</strong><code>for</code> 循环的前一个if是用来调整 <code>child</code> 的，使 <code>child</code> 指向子结点中最大结点，之后就是调整结点元素的过程</p>
 
@@ -403,7 +407,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        44
+                        45
                     </p>
                 </div>
             </div>
