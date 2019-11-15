@@ -10,12 +10,12 @@
 <title>Java集合概述 - 文的盲</title>
 
 
-    <meta name="description" content="Java 集合是一种非常常用的容器，就像数组那样，是为了储存各种各样的数据类型或者数据结构而设计的。其包含了各种已经封装好的数据结构，比如栈，队列，封装好的“数组”等等。 Collection 接口 Collection 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。">
+    <meta name="description" content="Java 集合是一种非常常用的容器，就像数组那样，是为了储存各种各样的数据类型或者数据结构而设计的。其包含了各种已经封装好的数据结构，比如栈，队列，封装好的“数组”等等。 Collection 接口Collection 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java集合概述">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;Java%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="Java 集合是一种非常常用的容器，就像数组那样，是为了储存各种各样的数据类型或者数据结构而设计的。其包含了各种已经封装好的数据结构，比如栈，队列，封装好的“数组”等等。 Collection 接口 Collection 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。">
+<meta property="og:description" content="Java 集合是一种非常常用的容器，就像数组那样，是为了储存各种各样的数据类型或者数据结构而设计的。其包含了各种已经封装好的数据结构，比如栈，队列，封装好的“数组”等等。 Collection 接口Collection 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-11-15T11:46:12.540Z">
@@ -170,25 +170,21 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p><code>Java</code> 集合是一种非常常用的容器，就像数组那样，是为了储存各种各样的数据类型或者数据结构而设计的。其包含了各种已经封装好的数据结构，比如栈，队列，封装好的“数组”等等。</p>
-<h3 id="collection-接口"><code>Collection</code> 接口</h3>
-<p><code>Collection</code> 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。</p>
+<h3 id="Collection-接口"><a href="#Collection-接口" class="headerlink" title="Collection 接口"></a><code>Collection</code> 接口</h3><p><code>Collection</code> 接口是最为基本的集合接口，也是相对比较高级的接口，其下又实现了一些子接口。</p>
 <a id="more"></a>
-<h4 id="set-子接口"><code>Set</code> 子接口</h4>
-<p><code>Set</code> 子接口最显著的特征就是置入其中的数据是“无序”且不可重复的。这种无序指的是其中存储的数据可能并不是按照你输入的顺序存储的，而是以其独有的方式进行排列的。而 <code>Set</code> 中的一些数据结构，是直接利用了 <code>Map</code> 中的数据结构实现的。</p>
-<h5 id="hashset-类"><code>HashSet</code> 类</h5>
-<p><code>HashSet</code> 虽然是基于 <code>HashMap</code> 实现的，但其最底层所应用的便是我们数据结构中所学习的<strong>哈希表</strong>，有也就是说其底层实际上是利用哈希函数存储的，而这样的存储方式，也使得其查找，插入，删除等操作的时间复杂度可以降为 <span class="math inline">\(\Theta (1)\)</span> 。</p>
-<p><strong>常见操作的示例代码如下：</strong></p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="treeset-类"><code>TreeSet</code> 类</h5>
-<p>同样，<code>TreeSet</code> 也是基于 <code>TreeMap</code> 实现的，但其最底层所使用的便是我们数据结构没学的<strong>红黑树</strong> ，由于其底层是利用红黑树实现的，所以其可以有序取出，存进去的元素可以以由大到小，或者由小到大的顺序逐个取出，由于是树形结构，所以其查取的时间复杂度是 <span class="math inline">\(O(logN)\)</span> 。</p>
-<p><strong>常见操作的示例代码如下：</strong></p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h5 id="enumset-类"><code>EnumSet</code> 类</h5>
-<p>枚举集合，暂时还没用过，所以先列出来，待补……</p>
-<h4 id="list-子接口"><code>List</code> 子接口</h4>
-<p>与 <code>Set</code> 相反，<code>List</code> 子接口是“有序”可重复的。</p>
-<h5 id="arraylist-类"><code>ArrayList</code> 类</h5>
 
+<h4 id="Set-子接口"><a href="#Set-子接口" class="headerlink" title="Set 子接口"></a><code>Set</code> 子接口</h4><p><code>Set</code> 子接口最显著的特征就是置入其中的数据是“无序”且不可重复的。这种无序指的是其中存储的数据可能并不是按照你输入的顺序存储的，而是以其独有的方式进行排列的。而 <code>Set</code> 中的一些数据结构，是直接利用了 <code>Map</code> 中的数据结构实现的。</p>
+<h5 id="HashSet-类"><a href="#HashSet-类" class="headerlink" title="HashSet 类"></a><code>HashSet</code> 类</h5><p><code>HashSet</code> 虽然是基于 <code>HashMap</code> 实现的，但其最底层所应用的便是我们数据结构中所学习的<strong>哈希表</strong>，有也就是说其底层实际上是利用哈希函数存储的，而这样的存储方式，也使得其查找，插入，删除等操作的时间复杂度可以降为 $\Theta (1)$ 。</p>
+<p><strong>常见操作的示例代码如下：</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="TreeSet-类"><a href="#TreeSet-类" class="headerlink" title="TreeSet 类"></a><code>TreeSet</code> 类</h5><p>同样，<code>TreeSet</code> 也是基于 <code>TreeMap</code> 实现的，但其最底层所使用的便是我们数据结构没学的<strong>红黑树</strong> ，由于其底层是利用红黑树实现的，所以其可以有序取出，存进去的元素可以以由大到小，或者由小到大的顺序逐个取出，由于是树形结构，所以其查取的时间复杂度是 $O(logN)$ 。</p>
+<p><strong>常见操作的示例代码如下：</strong></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="EnumSet-类"><a href="#EnumSet-类" class="headerlink" title="EnumSet 类"></a><code>EnumSet</code> 类</h5><p>枚举集合，暂时还没用过，所以先列出来，待补……</p>
+<h4 id="List-子接口"><a href="#List-子接口" class="headerlink" title="List 子接口"></a><code>List</code> 子接口</h4><p>与 <code>Set</code> 相反，<code>List</code> 子接口是“有序”可重复的。</p>
+<h5 id="ArrayList-类"><a href="#ArrayList-类" class="headerlink" title="ArrayList 类"></a><code>ArrayList</code> 类</h5>
         </div>
         
         
@@ -390,31 +386,31 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#collection-接口">
+        <a class="is-flex" href="#Collection-接口">
         <span class="has-mr-6">1</span>
         <span>Collection 接口</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#set-子接口">
+        <a class="is-flex" href="#Set-子接口">
         <span class="has-mr-6">1.1</span>
         <span>Set 子接口</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#hashset-类">
+        <a class="is-flex" href="#HashSet-类">
         <span class="has-mr-6">1.1.1</span>
         <span>HashSet 类</span>
         </a></li><li>
-        <a class="is-flex" href="#treeset-类">
+        <a class="is-flex" href="#TreeSet-类">
         <span class="has-mr-6">1.1.2</span>
         <span>TreeSet 类</span>
         </a></li><li>
-        <a class="is-flex" href="#enumset-类">
+        <a class="is-flex" href="#EnumSet-类">
         <span class="has-mr-6">1.1.3</span>
         <span>EnumSet 类</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#list-子接口">
+        <a class="is-flex" href="#List-子接口">
         <span class="has-mr-6">1.2</span>
         <span>List 子接口</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#arraylist-类">
+        <a class="is-flex" href="#ArrayList-类">
         <span class="has-mr-6">1.2.1</span>
         <span>ArrayList 类</span>
         </a></li></ul></li></ul></li></ul>
