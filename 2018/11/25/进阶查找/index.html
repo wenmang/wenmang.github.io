@@ -10,13 +10,13 @@
 <title>进阶查找 - 文的盲</title>
 
 
-    <meta name="description" content="当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了 二分查找二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 $log(N)$ 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击链接直接跳转">
+    <meta name="description" content="当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了 二分查找 二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 \(log(N)\) 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击链接直接跳转">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进阶查找">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;25&#x2F;%E8%BF%9B%E9%98%B6%E6%9F%A5%E6%89%BE&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了 二分查找二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 $log(N)$ 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击链接直接跳转">
+<meta property="og:description" content="当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了 二分查找 二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 \(log(N)\) 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击链接直接跳转">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-03-30T07:51:20.539Z">
@@ -171,22 +171,23 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>当数组（或其他查找的对象）是杂乱无章之时，或许查找起来就会比较困难，甚至只能一个一个找。但是，当数据是有序的之后，查找数据就有更为省时的算法了</p>
-<h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><p>二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 $log(N)$ 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击<a href="https://wenmang.github.io/2018/04/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" target="_blank" rel="noopener">链接</a>直接跳转</p>
+<h3 id="二分查找">二分查找</h3>
+<p>二分查找也被称之为折半查找，其绝对是应用最为广泛也的查找算法了，其 <span class="math inline">\(log(N)\)</span> 的时间复杂度也是相当优秀，所以其名声也是相当大，以至于我在很久之前就听说过此算法并写了一篇博文，可以点击<a href="https://wenmang.github.io/2018/04/15/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" target="_blank" rel="noopener">链接</a>直接跳转</p>
 <a id="more"></a>
-
-<h3 id="插值查找"><a href="#插值查找" class="headerlink" title="插值查找"></a>插值查找</h3><p><strong>插值查找</strong>是在二分查找的基础上改进产生的，其大致思路如下：当我们查字典时，如果首字母为 <code>a</code> ，我们必然不会往中间翻，而是翻向靠前的页数，所以，当我们进行查找之时，也可以根据具体情况进行镶银的调整</p>
+<h3 id="插值查找">插值查找</h3>
+<p><strong>插值查找</strong>是在二分查找的基础上改进产生的，其大致思路如下：当我们查字典时，如果首字母为 <code>a</code> ，我们必然不会往中间翻，而是翻向靠前的页数，所以，当我们进行查找之时，也可以根据具体情况进行镶银的调整</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BinarySearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[],<span class="hljs-keyword">int</span> size,<span class="hljs-keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> L = <span class="hljs-number">0</span>; </span><br><span class="line">    <span class="hljs-keyword">int</span> R = size - <span class="hljs-number">1</span>; </span><br><span class="line">    <span class="hljs-keyword">while</span>( L &lt;= R) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> mid = L + (R-L) * (p-a[L]) / a[R] - a[L]; </span><br><span class="line">        <span class="hljs-keyword">if</span>( p == a[mid] )</span><br><span class="line">            <span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>( p &gt; a[mid])</span><br><span class="line">            L = mid + <span class="hljs-number">1</span>; </span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            R = mid - <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong></p>
-<ol>
-<li>插值查找的实质就是 根据key值于表中最大最小值比较后的查找方法，其核心为插值计算公式——$\frac {key-a[low]} {a[hight]- {a[long]}}$ </li>
+<ol type="1">
+<li>插值查找的实质就是 根据key值于表中最大最小值比较后的查找方法，其核心为插值计算公式——<span class="math inline">\(\frac {key-a[low]} {a[hight]- {a[long]}}\)</span></li>
 <li>其对于较为均匀排列的查找表有更好的效率，而对极端不均匀的数据来说可能不是很好的选择</li>
 </ol>
-<h3 id="斐波那契查找"><a href="#斐波那契查找" class="headerlink" title="斐波那契查找"></a>斐波那契查找</h3><p>既然有了二分查找这样的思路，二分查找是以中间作为划分的，插值查找是依据插值计算公式进行划分的，那么我们同样可以试图采用别的划分方法，比如：<strong>斐波那契数列</strong></p>
+<h3 id="斐波那契查找">斐波那契查找</h3>
+<p>既然有了二分查找这样的思路，二分查找是以中间作为划分的，插值查找是依据插值计算公式进行划分的，那么我们同样可以试图采用别的划分方法，比如：<strong>斐波那契数列</strong></p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">FibSearsh</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* a, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> F[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">13</span>, <span class="hljs-number">21</span>, <span class="hljs-number">34</span>, <span class="hljs-number">55</span>, <span class="hljs-number">89</span>&#125;;</span><br><span class="line">    <span class="hljs-keyword">int</span> low = <span class="hljs-number">1</span>, high = n, mid, i, k = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (n &gt; F[k] - <span class="hljs-number">1</span>)</span><br><span class="line">        k++;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = n; i &lt; F[k] - <span class="hljs-number">1</span>; i++)</span><br><span class="line">        a[i] = a[n];</span><br><span class="line">    <span class="hljs-keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        mid = low + F[k<span class="hljs-number">-1</span>] - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (key &lt; a[mid]) &#123;</span><br><span class="line">            high = mid - <span class="hljs-number">1</span>;</span><br><span class="line">            k -= <span class="hljs-number">1</span>;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key &gt; a[mid]) &#123;</span><br><span class="line">            low = mid + <span class="hljs-number">1</span>;</span><br><span class="line">            k -= <span class="hljs-number">2</span>;</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mid &lt;= n)</span><br><span class="line">                <span class="hljs-keyword">return</span> mid;</span><br><span class="line">            <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-keyword">return</span> n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><p>这是利用二叉树来进行查找的算法，相关内容可点击<a href="https://wenmang.github.io/2018/08/02/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" target="_blank" rel="noopener">链接</a>直接跳转</p>
+<h3 id="二叉搜索树">二叉搜索树</h3>
+<p>这是利用二叉树来进行查找的算法，相关内容可点击<a href="https://wenmang.github.io/2018/08/02/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" target="_blank" rel="noopener">链接</a>直接跳转</p>
 
         </div>
         
@@ -329,7 +330,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        45
+                        46
                     </p>
                 </div>
             </div>
@@ -494,15 +495,13 @@
 var IcarusThemeSettings = {
     article: {
         highlight: {
-            clipboard: true,
+            clipboard: false,
             fold: 'unfolded'
         }
     }
 };
 </script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 

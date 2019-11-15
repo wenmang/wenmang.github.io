@@ -10,13 +10,13 @@
 <title>以stack来进一步了解C语言的泛型 - 文的盲</title>
 
 
-    <meta name="description" content="此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。 Stack（栈）栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示">
-<meta name="keywords" content="博客,C语言">
+    <meta name="description" content="此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。 Stack（栈） 栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示">
+<meta name="keywords" content="C语言,博客">
 <meta property="og:type" content="article">
 <meta property="og:title" content="以stack来进一步了解C语言的泛型">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;03&#x2F;29&#x2F;%C2%96%E4%BB%A5stack%E6%9D%A5%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3C%E8%AF%AD%E8%A8%80%E7%9A%84%E6%B3%9B%E5%9E%8B&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。 Stack（栈）栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示">
+<meta property="og:description" content="此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。 Stack（栈） 栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-03-29T14:45:16.449Z">
@@ -171,61 +171,50 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>此篇博文根据斯坦福公开课 《编程范式》整理，也算是一个简单的笔记。</p>
-<h4 id="Stack（栈）"><a href="#Stack（栈）" class="headerlink" title="Stack（栈）"></a>Stack（栈）</h4><p>栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示</p>
+<h4 id="stack栈">Stack（栈）</h4>
+<p>栈是一种十分基础的数据结构，也十分简单，下面我们首先来实现此种数据结构的int表示</p>
 <a id="more"></a>
-
-<h4 id="stack-h"><a href="#stack-h" class="headerlink" title="stack.h"></a>stack.h</h4><p>在此文件之中，我们对栈的结构和栈的基本操作进行了定义，其中代码如下：</p>
+<h4 id="stack.h">stack.h</h4>
+<p>在此文件之中，我们对栈的结构和栈的基本操作进行了定义，其中代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span>* elems;</span><br><span class="line">    <span class="hljs-keyword">int</span> logLength;</span><br><span class="line">    <span class="hljs-keyword">int</span> allocLength;</span><br><span class="line">&#125;<span class="hljs-built_in">stack</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackNew</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackDispose</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPush</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">int</span> value)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">StackPop</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="stack-c"><a href="#stack-c" class="headerlink" title="stack.c"></a>stack.c</h4><p>此文件中，将 <code>.h</code> 文件中的函数进行了实现，代码如下：</p>
+<h4 id="stack.c">stack.c</h4>
+<p>此文件中，将 <code>.h</code> 文件中的函数进行了实现，代码如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackNew</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span> </span>&#123;</span><br><span class="line">    s-&gt;allocLength = <span class="hljs-number">4</span>;</span><br><span class="line">    s-&gt;logLength = <span class="hljs-number">0</span>;</span><br><span class="line">    s-&gt;elems = <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>)*s-&gt;allocLength);</span><br><span class="line">    assert(s-&gt;elems != <span class="hljs-literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackDispose</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">free</span>(s-&gt;elems);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPush</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (s-&gt;logLength == s-&gt;allocLength) &#123;</span><br><span class="line">        s-&gt;allocLength *= <span class="hljs-number">2</span>;</span><br><span class="line">        s-&gt;elems = <span class="hljs-built_in">realloc</span>(s-&gt;elems, s-&gt;allocLength*<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">        assert(s-&gt;elems != <span class="hljs-literal">NULL</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    s-&gt;elems[s-&gt;logLength++] = value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">StackPop</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span> </span>&#123;</span><br><span class="line">    assert(s-&gt;logLength &gt; <span class="hljs-number">0</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> s-&gt;elems[s-&gt;logLength--];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong></p>
-<ol>
+<ol type="1">
 <li><code>assert()</code> ：存于 <code>assert.h</code> 头文件之中，其传参为一个布尔值，传入值为<code>true</code> 之时，什么也不做；如果为<code>flase</code> ，就停止继续执行程序并打印错误。用于此处，是为了检测开辟空间是否成功。</li>
 <li><code>StackPush()</code> 函数可以拓展栈的大小</li>
 </ol>
 <p>如同之前所讲，有了基本的 <code>int</code> 版，那么就可以向着泛型版转化了。</p>
-<h4 id="泛型化的stack"><a href="#泛型化的stack" class="headerlink" title="泛型化的stack"></a>泛型化的stack</h4><p>为了向泛型进化，我们必须在原结构体中加入数据类型的字节数，所以结构体结果如下：</p>
+<h4 id="泛型化的stack">泛型化的stack</h4>
+<p>为了向泛型进化，我们必须在原结构体中加入数据类型的字节数，所以结构体结果如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span>* elems;</span><br><span class="line">    <span class="hljs-keyword">int</span> elemSize;</span><br><span class="line">    <span class="hljs-keyword">int</span> logLength;</span><br><span class="line">    <span class="hljs-keyword">int</span> allocLength;</span><br><span class="line">&#125;<span class="hljs-built_in">stack</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackNew</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">int</span> elemSize)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackDispose</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPush</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">void</span>* elemAddr)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPop</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">void</span>* elemAddr)</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>同理，各个函数的写法如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackNew</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">int</span> elemSize)</span> </span>&#123;</span><br><span class="line">    assert(s-&gt;elems &gt; <span class="hljs-number">0</span>);</span><br><span class="line">    s-&gt;elemSize = elemSize;</span><br><span class="line">    s-&gt;allocLength = <span class="hljs-number">4</span>;</span><br><span class="line">    s-&gt;logLength = <span class="hljs-number">0</span>;</span><br><span class="line">    s-&gt;elems = <span class="hljs-built_in">malloc</span>(elemSize*s-&gt;allocLength);</span><br><span class="line">    assert(s-&gt;elems != <span class="hljs-literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackDispose</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">free</span>(s-&gt;elems);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">StackGrow</span><span class="hljs-params">(<span class="hljs-built_in">stack</span> *s)</span> </span>&#123;</span><br><span class="line">    s-&gt;allocLength *= <span class="hljs-number">2</span>;</span><br><span class="line">    s-&gt;elems = <span class="hljs-built_in">realloc</span>(s-&gt;elems, s-&gt;elemSize * s-&gt;allocLength);</span><br><span class="line">    assert(s-&gt;elems != <span class="hljs-literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPush</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">void</span>* elemAddr)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (s-&gt;logLength == s-&gt;allocLength)</span><br><span class="line">        StackGrow(s);</span><br><span class="line">    <span class="hljs-keyword">void</span>* target = (<span class="hljs-keyword">char</span>*)s-&gt;elems + s-&gt;logLength*s-&gt;elemSize;</span><br><span class="line">    <span class="hljs-built_in">memcpy</span>(target, elemAddr, s-&gt;elemSize);</span><br><span class="line">    s-&gt;logLength++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackPop</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">void</span>* elemAddr)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span>* source = (<span class="hljs-keyword">char</span>*)s-&gt;elems + (s-&gt;logLength - <span class="hljs-number">1</span>) * s-&gt;elemSize;</span><br><span class="line">    <span class="hljs-built_in">memcpy</span>(elemAddr, source, s-&gt;elemSize);</span><br><span class="line">    s-&gt;logLength--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong></p>
-<ol>
+<ol type="1">
 <li>值与值之间的传递都依靠参数传递</li>
 <li><code>static</code> 修饰的函数，只在当前文件可以调用（也就是相当于一个内部函数）</li>
 </ol>
-<h4 id="关于字符串"><a href="#关于字符串" class="headerlink" title="关于字符串"></a>关于字符串</h4><p>众所周知，字符串的传递是与众不同的，所以与其相关的一些问题也需要进行特殊处理，我们先来看一段使用字符串进行栈操作的代码：</p>
+<h4 id="关于字符串">关于字符串</h4>
+<p>众所周知，字符串的传递是与众不同的，所以与其相关的一些问题也需要进行特殊处理，我们先来看一段使用字符串进行栈操作的代码：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* names[] = &#123;<span class="hljs-string">"Bob"</span>, <span class="hljs-string">"Lily"</span>, <span class="hljs-string">"Mike"</span>, <span class="hljs-string">"James"</span>&#125;;</span><br><span class="line">    <span class="hljs-built_in">stack</span>* s;</span><br><span class="line">    <span class="hljs-keyword">char</span>* name;</span><br><span class="line">    StackNew(s, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">char</span>*));</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;</span><br><span class="line">        <span class="hljs-keyword">char</span>* copy = strdup(names[i]);</span><br><span class="line">        StackPush(s, &amp;copy);    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;</span><br><span class="line">        StackPop(s, &amp;name);</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s\n"</span>, name);</span><br><span class="line">        <span class="hljs-built_in">free</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    StackDispose(s);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>由于字符串的长度是不一定的，为了简化代码，因此操作字符串之时在栈中保存的是指向该字符串的指针，但是如此一来便会产生一个<strong>问题：</strong></p>
 <p>当栈中还有元素之时，用户直接进行<code>StackDispose()</code> 操作之后，并没有释放掉指针所指向的空间，因此我们需要继续改进代码。</p>
 <p>而怎样改进呢？<strong>首先我们应该让程序知道这个栈到底是什么类型的栈</strong>，如果是指针类型的，就要在结构体中传入一个额外的指针，指向栈所指向的地址，以便在之后更好地进行<code>free()</code>，所以将结构体改进如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span>* elems;</span><br><span class="line">    <span class="hljs-keyword">int</span> elemSize;</span><br><span class="line">    <span class="hljs-keyword">int</span> logLength;</span><br><span class="line">    <span class="hljs-keyword">int</span> allocLength;</span><br><span class="line">    <span class="hljs-keyword">void</span> (*freefn) (<span class="hljs-keyword">void</span>*);</span><br><span class="line">&#125;<span class="hljs-built_in">stack</span>;</span><br></pre></td></tr></table></figure>
-
 <p>而我们在进行 <code>StackNew()</code> 操作之时，就需要对栈的类型进行声明，所以将其传参改进如下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackNew</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s, <span class="hljs-keyword">int</span> elemSize; <span class="hljs-keyword">void</span>* freefn(<span class="hljs-keyword">void</span>*))</span> </span>&#123;</span><br><span class="line">    assert(s-&gt;elems &gt; <span class="hljs-number">0</span>);</span><br><span class="line">    s-&gt;freefn = freefn;</span><br><span class="line">    s-&gt;elemSize = elemSize;</span><br><span class="line">    s-&gt;allocLength = <span class="hljs-number">4</span>;</span><br><span class="line">    s-&gt;logLength = <span class="hljs-number">0</span>;</span><br><span class="line">    s-&gt;elems = <span class="hljs-built_in">malloc</span>(elemSize*s-&gt;allocLength);</span><br><span class="line">    assert(s-&gt;elems != <span class="hljs-literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>同时，我们将对 <code>StackDispose()</code> 进行重写：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StackDispose</span><span class="hljs-params">(<span class="hljs-built_in">stack</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (s-&gt;freefn != <span class="hljs-literal">NULL</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s-&gt;logLength; i++) &#123;</span><br><span class="line">            s-&gt;freefn ((<span class="hljs-keyword">char</span>*)s-&gt;elems + i * s-&gt;elemSize);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">free</span>(s-&gt;elems);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>一般来说，字符串的释放函数应当如下：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">StrFree</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">free</span>(*(<span class="hljs-keyword">char</span>**)s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -368,7 +357,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        45
+                        46
                     </p>
                 </div>
             </div>
@@ -438,15 +427,15 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#Stack（栈）">
+        <a class="is-flex" href="#stack栈">
         <span class="has-mr-6">1</span>
         <span>Stack（栈）</span>
         </a></li><li>
-        <a class="is-flex" href="#stack-h">
+        <a class="is-flex" href="#stack.h">
         <span class="has-mr-6">2</span>
         <span>stack.h</span>
         </a></li><li>
-        <a class="is-flex" href="#stack-c">
+        <a class="is-flex" href="#stack.c">
         <span class="has-mr-6">3</span>
         <span>stack.c</span>
         </a></li><li>
@@ -537,15 +526,13 @@
 var IcarusThemeSettings = {
     article: {
         highlight: {
-            clipboard: true,
+            clipboard: false,
             fold: 'unfolded'
         }
     }
 };
 </script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
