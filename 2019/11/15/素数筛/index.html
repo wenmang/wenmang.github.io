@@ -10,13 +10,13 @@
 <title>素数筛 - 文的盲</title>
 
 
-    <meta name="description" content="素数是一种作业或竞赛中较易考察的知识点，但好像在实际开发中用的不多【素数好像更多地用在网安领域】。总归，求取 a~b 之间的素数还是一种比较基本的算法技巧。 新手求素数 想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：">
+    <meta name="description" content="素数是一种作业或竞赛中较易考察的知识点，但好像在实际开发中用的不多【素数好像更多地用在网安领域】。总归，求取 a~b 之间的素数还是一种比较基本的算法技巧。 新手求素数想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：">
 <meta name="keywords" content="博客,算法技巧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="素数筛">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;15&#x2F;%E7%B4%A0%E6%95%B0%E7%AD%9B&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="素数是一种作业或竞赛中较易考察的知识点，但好像在实际开发中用的不多【素数好像更多地用在网安领域】。总归，求取 a~b 之间的素数还是一种比较基本的算法技巧。 新手求素数 想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：">
+<meta property="og:description" content="素数是一种作业或竞赛中较易考察的知识点，但好像在实际开发中用的不多【素数好像更多地用在网安领域】。总归，求取 a~b 之间的素数还是一种比较基本的算法技巧。 新手求素数想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-11-15T12:46:56.685Z">
@@ -171,30 +171,30 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>素数是一种作业或竞赛中较易考察的知识点，但好像在实际开发中用的不多【素数好像更多地用在网安领域】。总归，求取 <code>a~b</code> 之间的素数还是一种比较基本的算法技巧。</p>
-<h3 id="新手求素数">新手求素数</h3>
-<p>想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：</p>
+<h3 id="新手求素数"><a href="#新手求素数" class="headerlink" title="新手求素数"></a>新手求素数</h3><p>想当年，我刚学C语言的时候，便是这么写的，也就是直接暴力枚举：</p>
 <a id="more"></a>
+
 <figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> count;</span><br><span class="line"><span class="hljs-keyword">int</span> prime[MAX_N]; </span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    count = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> j;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = a; i &lt;= b; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">2</span>; j &lt; i; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i % j == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (j == i)</span><br><span class="line">            prime[count++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>那时的我也还想到了比如 <code>2*3=6</code> 和 <code>3*2=6</code> 是等价的，所以判断素数的终止条件可以再压缩，也就是：</p>
 <figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (j = <span class="hljs-number">2</span>; j &lt; i/<span class="hljs-number">2</span>; ++j)</span><br></pre></td></tr></table></figure>
-<h3 id="知道点啥之后">知道点啥之后</h3>
-<p>后来我在看过某本书的序言之后，知道了只需要检测到 <span class="math inline">\(\sqrt i\)</span> 即可，可以将这种算法的时间复杂度可以进一步压缩 ，也就是</p>
+
+<h3 id="知道点啥之后"><a href="#知道点啥之后" class="headerlink" title="知道点啥之后"></a>知道点啥之后</h3><p>后来我在看过某本书的序言之后，知道了只需要检测到 $\sqrt i$ 即可，可以将这种算法的时间复杂度可以进一步压缩 ，也就是</p>
 <figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (j = <span class="hljs-number">2</span>; j &lt;= <span class="hljs-built_in">sqrt</span>(b); ++j)</span><br></pre></td></tr></table></figure>
+
 <p>注意引入：<code>math.h</code></p>
-<h3 id="素数筛">素数筛</h3>
-<p>素数筛，顾名思义，就是将素数筛出来，而比较常见的有两种：</p>
-<h4 id="eratosthenes筛法"><code>Eratosthenes</code>筛法</h4>
-<p>埃氏筛是比较基本的一种筛法，其思想是：在处理掉所有不是质数的数（质数的倍数），然后，剩下的便全都是素数了。</p>
+<h3 id="素数筛"><a href="#素数筛" class="headerlink" title="素数筛"></a>素数筛</h3><p>素数筛，顾名思义，就是将素数筛出来，而比较常见的有两种：</p>
+<h4 id="Eratosthenes筛法"><a href="#Eratosthenes筛法" class="headerlink" title="Eratosthenes筛法"></a><code>Eratosthenes</code>筛法</h4><p>埃氏筛是比较基本的一种筛法，其思想是：在处理掉所有不是质数的数（质数的倍数），然后，剩下的便全都是素数了。</p>
 <figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">bool</span>&gt; flag(b, <span class="hljs-literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= b; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!flag[i]) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i*<span class="hljs-number">2</span>; j &lt;= b; j += i) &#123;</span><br><span class="line">            flag[j] = <span class="hljs-literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>常见的埃氏筛都是返回一个布尔类型的数组，来得知是否质数的。</p>
-<p>虽然此举将时间复杂度降为了 <span class="math inline">\(O(N log log N)\)</span>，但是可以发现，埃氏筛依旧具有重复操作，比如 <code>12</code> 在被 <code>2</code> 置 <code>false</code> 之后，还会被 <code>3</code> 置一遍，于是便有了改进之法。</p>
-<h4 id="欧式筛法">欧式筛法</h4>
-<p>欧式筛可以看作埃氏筛的一个改进，即不做重复操作，保证所有合数都是由其最小质因数标记的。</p>
+<p>虽然此举将时间复杂度降为了 $O(N log log N)$，但是可以发现，埃氏筛依旧具有重复操作，比如 <code>12</code> 在被 <code>2</code> 置 <code>false</code> 之后，还会被 <code>3</code> 置一遍，于是便有了改进之法。</p>
+<h4 id="欧式筛法"><a href="#欧式筛法" class="headerlink" title="欧式筛法"></a>欧式筛法</h4><p>欧式筛可以看作埃氏筛的一个改进，即不做重复操作，保证所有合数都是由其最小质因数标记的。</p>
 <figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">bool</span> flag[MAX_N] = &#123;<span class="hljs-literal">false</span>&#125;;</span><br><span class="line"><span class="hljs-keyword">int</span> prime[MAX_N] = &#123;<span class="hljs-number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= b; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!flag[i]) &#123;</span><br><span class="line">            prime[count++] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; count &amp;&amp; i*prime[j] &lt;= b; ++j) &#123;</span><br><span class="line">            flag[i*prime[j]] = <span class="hljs-literal">true</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i % prime[j] == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>因为 <code>C++</code> 的 <code>bool</code> 数组默认均为 <code>false</code>，所以索性用 <code>false</code> 标记质数（0和1在上述代码中并未置数为 <code>false</code>）。而最终的结果，储存在 <code>prime</code> 之中。</p>
-<p>时间复杂度为：<span class="math inline">\(\omega (N)\)</span></p>
-<h3 id="总结">总结</h3>
-<p>可以发现，随着时间复杂度的降低，空间复杂度好像在升高了，尤其体现在两个筛法的实现之中。</p>
+<p>时间复杂度为：$\omega (N)$</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以发现，随着时间复杂度的降低，空间复杂度好像在升高了，尤其体现在两个筛法的实现之中。</p>
 
         </div>
         
@@ -252,6 +252,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/22/%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">花里胡哨的位运算</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -330,7 +337,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        46
+                        47
                     </p>
                 </div>
             </div>
@@ -412,7 +419,7 @@
         <span class="has-mr-6">3</span>
         <span>素数筛</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#eratosthenes筛法">
+        <a class="is-flex" href="#Eratosthenes筛法">
         <span class="has-mr-6">3.1</span>
         <span>Eratosthenes筛法</span>
         </a></li><li>

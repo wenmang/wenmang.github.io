@@ -10,13 +10,13 @@
 <title>串 - 文的盲</title>
 
 
-    <meta name="description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “\(a_1a_2......a_n\)”(n ≥ 0)  S : 串的名称 \(a_1a_2......a_n\)：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子">
+    <meta name="description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “$a_1a_2……a_n$”(n ≥ 0)  S : 串的名称  $a_1a_2……a_n$：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子串位置：子串第一个字符在主串中的位置">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="串">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;09&#x2F;08&#x2F;%E4%B8%B2&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “\(a_1a_2......a_n\)”(n ≥ 0)  S : 串的名称 \(a_1a_2......a_n\)：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子">
+<meta property="og:description" content="定义：串是由零个或多个字符组成的有限序列，又叫做 字符串 一般记为 S = “$a_1a_2……a_n$”(n ≥ 0)  S : 串的名称  $a_1a_2……a_n$：串的值  概念解释：  空格串：只包含空格的串，空格串不是空串，其有内容有长度，可不止一个空格 子串与主串：串中任意个数的连续字符组成的子序列称之为该串的子串，包含子串的串称之为主串 子串位置：子串第一个字符在主串中的位置">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-09-24T09:29:36.857Z">
@@ -171,10 +171,10 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p><strong>定义：</strong>串是由零个或多个字符组成的有限序列，又叫做 字符串</p>
-<p>一般记为 S = “<span class="math inline">\(a_1a_2......a_n\)</span>”(n ≥ 0)</p>
+<p>一般记为 S = “$a_1a_2……a_n$”(n ≥ 0)</p>
 <ul>
-<li>S : 串的名称</li>
-<li><span class="math inline">\(a_1a_2......a_n\)</span>：串的值</li>
+<li>S : 串的名称 </li>
+<li>$a_1a_2……a_n$：串的值</li>
 </ul>
 <p><strong>概念解释：</strong></p>
 <ul>
@@ -183,45 +183,41 @@
 <li><strong>子串位置：</strong>子串第一个字符在主串中的位置</li>
 </ul>
 <a id="more"></a>
-<h4 id="串的比较">串的比较</h4>
-<p><strong>定义：</strong></p>
-<p>给定两个串：s= “<span class="math inline">\(a_1a_2......a_n\)</span>”, t = “<span class="math inline">\(b_1b_2......b_n\)</span>”，当满足以下条件之时，s &lt; t：</p>
+
+<h4 id="串的比较"><a href="#串的比较" class="headerlink" title="串的比较"></a>串的比较</h4><p><strong>定义：</strong></p>
+<p>给定两个串：s= “$a_1a_2……a_n$”,   t = “$b_1b_2……b_n$”，当满足以下条件之时，s &lt; t：</p>
 <ul>
-<li>n &lt; m，且 <span class="math inline">\(a_i = b_i\)</span> ( i = 1，2，…，n)</li>
-<li>存在某个k ≤ min(m, n) ，使得<span class="math inline">\(a_i = b_i\)</span>（i = 1，2，…，k-1），<span class="math inline">\(a_k &lt; b_k\)</span></li>
+<li>n &lt; m，且 $a_i = b_i$ ( i = 1，2，…，n)</li>
+<li>存在某个k ≤ min(m, n) ，使得$a_i = b_i$（i = 1，2，…，k-1），$a_k &lt; b_k$</li>
 </ul>
 <p>其原理就如同英文字典一样，字典前面的单词总是小于后面的</p>
-<h4 id="串的抽象数据类型">串的抽象数据类型</h4>
-<p><strong>类型名称：</strong>串（string）</p>
+<h4 id="串的抽象数据类型"><a href="#串的抽象数据类型" class="headerlink" title="串的抽象数据类型"></a>串的抽象数据类型</h4><p><strong>类型名称：</strong>串（string）</p>
 <p><strong>数据对象集：</strong>串中元素仅由一个字符组成，相邻元素具有前驱和后继关系</p>
 <p><strong>操作集：</strong></p>
-<ol type="1">
-<li>StrAssign(T,*chars) 生成一个其值等于chars的串T</li>
-<li>StrCopy(T,S) 由串S复制得到串T</li>
-<li>StrEmpty(S) 若串为空串返回TRUE否则返回FALSE</li>
-<li>StrLength(S) 返回s的元素个数称为串的长度</li>
-<li>StrCompare(S,T) S&gt;T 返回 &gt;0 ; S=T ,返回 =0 ；</li>
-<li>ClearString(&amp;S) 将串S清空</li>
-<li>SubString(&amp;Sub,S,pos,len) 用sub返回串S的第pos个字符起长度为len的子串</li>
-<li>Index(S,T,pos) 若子串中存在和串T值相同的子串，则返回它在主串中第pos个字符之后第一次出的位置 ；否则函数值为0</li>
-<li>Replace(&amp;S,T,V) 用V替换串S中出现的所有与T相等的不重叠的子串</li>
-<li>StrInsert(&amp;S,pos,T) 在串S的第pos个字符之前插入串T</li>
-<li>StrDelete(&amp;S,pos,len) 从串S中删除从第pos个字符起出长度为len的子串</li>
-<li>DestroyString(&amp;S) 串S被销毁</li>
+<ol>
+<li>StrAssign(T,*chars)             生成一个其值等于chars的串T</li>
+<li>StrCopy(T,S)                         由串S复制得到串T </li>
+<li>StrEmpty(S)                     若串为空串返回TRUE否则返回FALSE </li>
+<li>StrLength(S)                    返回s的元素个数称为串的长度 </li>
+<li>StrCompare(S,T)                 S&gt;T 返回 &gt;0 ; S=T ,返回 =0 ； </li>
+<li>ClearString(&amp;S)                 将串S清空 </li>
+<li>SubString(&amp;Sub,S,pos,len)         用sub返回串S的第pos个字符起长度为len的子串 </li>
+<li>Index(S,T,pos)                         若子串中存在和串T值相同的子串，则返回它在主串中第pos个字符之后第一次出的位置 ；否则函数值为0</li>
+<li>Replace(&amp;S,T,V)                        用V替换串S中出现的所有与T相等的不重叠的子串 </li>
+<li>StrInsert(&amp;S,pos,T)                在串S的第pos个字符之前插入串T </li>
+<li>StrDelete(&amp;S,pos,len)                    从串S中删除从第pos个字符起出长度为len的子串</li>
+<li>DestroyString(&amp;S)                    串S被销毁 </li>
 </ol>
-<h4 id="串的存储结构">串的存储结构</h4>
-<p><strong>顺序存储结构</strong></p>
-<ol type="1">
+<h4 id="串的存储结构"><a href="#串的存储结构" class="headerlink" title="串的存储结构"></a>串的存储结构</h4><p><strong>顺序存储结构</strong></p>
+<ol>
 <li>预定义最大串长度，一般可将串长度值保存在数组的0下标位置，可以方便许多，当然，在C语言中也可通过遍历直到 ‘\0’ 来计算串的长度</li>
 <li>利用堆进行动态存储</li>
 </ol>
 <p>由于1方法在串比较小的时侯，浪费空间；而在串比较大时，会发生数据丢失的情况，所以一般多考虑第二种次存储方案</p>
 <p><strong>链式存储结构</strong></p>
 <p>一般不如顺序存储好用，因为链式存储不可能一个结点只放一个字符，如果那样就会变得无比繁杂，而一个结点存放多少字符，则又需要根据实际情况做出选择，综合来看，其不如顺序存储灵活，性能也不如顺序存储</p>
-<h3 id="串的模式匹配算法">串的模式匹配算法</h3>
-<p>串的模式匹配算法为串中特别重要的一个算法</p>
-<h4 id="朴素的模式匹配算法">朴素的模式匹配算法</h4>
-
+<h3 id="串的模式匹配算法"><a href="#串的模式匹配算法" class="headerlink" title="串的模式匹配算法"></a>串的模式匹配算法</h3><p>串的模式匹配算法为串中特别重要的一个算法</p>
+<h4 id="朴素的模式匹配算法"><a href="#朴素的模式匹配算法" class="headerlink" title="朴素的模式匹配算法"></a>朴素的模式匹配算法</h4>
         </div>
         
         <hr style="height:1px;margin:1rem 0"/>
@@ -363,7 +359,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        46
+                        47
                     </p>
                 </div>
             </div>
