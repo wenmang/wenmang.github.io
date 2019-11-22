@@ -19,7 +19,7 @@
 <meta property="og:description" content="位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！ 初识位运算初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-22T12:45:07.733Z">
+<meta property="og:updated_time" content="2019-11-22T13:58:36.906Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -145,7 +145,7 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-11-22T10:45:25.000Z">2019-11-22</time>
                 
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-11-22T12:45:07.733Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-22</time>
+                <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-11-22T13:58:36.906Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-22</time>
                 
                 
                 
@@ -193,8 +193,7 @@
 <li>与或非的基本定义</li>
 <li>……</li>
 </ul>
-<p>####<a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">只出现一次的数字</a> （<code>LeetCode 136</code>）</p>
-<p><strong>题目说明：</strong>给定一个<strong>非空</strong>整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<h4 id="只出现一次的数字-（LeetCode-136）"><a href="#只出现一次的数字-（LeetCode-136）" class="headerlink" title="只出现一次的数字 （LeetCode 136）"></a><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">只出现一次的数字</a> （<code>LeetCode 136</code>）</h4><p><strong>题目说明：</strong>给定一个<strong>非空</strong>整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
 <p><strong>题目解答：</strong>这道题便可以利用异或的性质，将数组元素挨个异或，便可以将所有成对的数据消去，最终剩下的，便是只出现了一次时数字。</p>
 <p><strong>代码如下：</strong></p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) </span><br><span class="line">            ret ^= nums[i];</span><br><span class="line">        <span class="hljs-keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -434,16 +433,20 @@
         <span class="has-mr-6">2</span>
         <span>常见的位运算技巧</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#位1的个数（LeetCode-191）">
+        <a class="is-flex" href="#只出现一次的数字-（LeetCode-136）">
         <span class="has-mr-6">2.1</span>
+        <span>只出现一次的数字 （LeetCode 136）</span>
+        </a></li><li>
+        <a class="is-flex" href="#位1的个数（LeetCode-191）">
+        <span class="has-mr-6">2.2</span>
         <span>位1的个数（LeetCode 191）</span>
         </a></li><li>
         <a class="is-flex" href="#2的幂（LeetCode-231）">
-        <span class="has-mr-6">2.2</span>
+        <span class="has-mr-6">2.3</span>
         <span>2的幂（LeetCode 231）</span>
         </a></li><li>
         <a class="is-flex" href="#4的幂（LeetCode-342）">
-        <span class="has-mr-6">2.3</span>
+        <span class="has-mr-6">2.4</span>
         <span>4的幂（LeetCode 342）</span>
         </a></li></ul></li></ul>
             </div>
