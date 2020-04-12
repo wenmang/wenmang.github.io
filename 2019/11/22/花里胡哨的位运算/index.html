@@ -10,13 +10,13 @@
 <title>花里胡哨的位运算 - 文的盲</title>
 
 
-    <meta name="description" content="位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！ 初识位运算初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：">
+    <meta name="description" content="位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！ 初识位运算 初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：">
 <meta name="keywords" content="博客,算法技巧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="花里胡哨的位运算">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;22&#x2F;%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！ 初识位运算初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：">
+<meta property="og:description" content="位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！ 初识位运算 初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-11-22T13:58:36.906Z">
@@ -171,54 +171,50 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>位运算，虽然说是一种十分精妙的算法技巧，但是除了花里胡哨好像并不能大幅提升时间复杂度。虽说如此，但不得不说，位运算的诸多技巧还是非常有趣的！</p>
-<h3 id="初识位运算"><a href="#初识位运算" class="headerlink" title="初识位运算"></a>初识位运算</h3><p>初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：</p>
+<h3 id="初识位运算">初识位运算</h3>
+<p>初次见到位运算的应用，那是在一个夏天的下午，有同学在班群问：“如何写交换函数？”不久，有人贴了这么段代码：</p>
 <a id="more"></a>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* a, <span class="hljs-keyword">int</span>* b)</span> </span>&#123;</span><br><span class="line">    *a ^= *b;</span><br><span class="line">    *b ^= *a;</span><br><span class="line">    *a ^= *b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我一脸懵，这都行？这是怎么交换的？异或还能这么使？记得那天我在草稿纸上花了半天，才搞懂了个大概：</p>
 <p>我们以 <code>3</code> 和 <code>6</code> 为例：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">初始状态时：		a = 3 = 011		b = 6 = 110</span><br><span class="line">第一句执行： 	    a = 101			b = 110</span><br><span class="line">第二句执行：		a = 101			b = 011 = 3</span><br><span class="line">第三局执行：		a = 110 = 6		b = 011 = 3</span><br></pre></td></tr></table></figure>
-
 <p>确实交换过来了，但为啥呢？但其实，我们可以将代码简单地变一下：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = (a ^ b) ^ b;</span><br></pre></td></tr></table></figure>
-
 <p>使用交换律，也就是 <code>b = a ^ (b ^ b)</code> ，而这时，便可以清晰地看出来：因为一个数异或本身等于 <code>0</code> ，所以代码的前两句也便是 <code>b = a</code>。那 <code>a</code> 又是怎么变过来的呢？</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = (a ^ b) ^ ((a ^ b) ^ b)</span><br></pre></td></tr></table></figure>
-
 <p>同样，进行变换 <code>a = ((a ^ b) ^ (a ^ b)) ^ b</code> ，也就是 <code>a = b</code>，至此便完成了交换的操作。</p>
-<h3 id="常见的位运算技巧"><a href="#常见的位运算技巧" class="headerlink" title="常见的位运算技巧"></a>常见的位运算技巧</h3><p>位运算说是技巧，但实质上也是利用了逻辑运算的基本技巧：</p>
+<h3 id="常见的位运算技巧">常见的位运算技巧</h3>
+<p>位运算说是技巧，但实质上也是利用了逻辑运算的基本技巧：</p>
 <ul>
 <li>一个数异或自己本身为 <code>0</code></li>
 <li>与或非的基本定义</li>
 <li>……</li>
 </ul>
-<h4 id="只出现一次的数字-（LeetCode-136）"><a href="#只出现一次的数字-（LeetCode-136）" class="headerlink" title="只出现一次的数字 （LeetCode 136）"></a><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">只出现一次的数字</a> （<code>LeetCode 136</code>）</h4><p><strong>题目说明：</strong>给定一个<strong>非空</strong>整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<h4 id="只出现一次的数字-leetcode-136"><a href="https://leetcode-cn.com/problems/single-number/" target="_blank" rel="noopener">只出现一次的数字</a> （<code>LeetCode 136</code>）</h4>
+<p><strong>题目说明：</strong>给定一个<strong>非空</strong>整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
 <p><strong>题目解答：</strong>这道题便可以利用异或的性质，将数组元素挨个异或，便可以将所有成对的数据消去，最终剩下的，便是只出现了一次时数字。</p>
 <p><strong>代码如下：</strong></p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">singleNumber</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.length; i++) </span><br><span class="line">            ret ^= nums[i];</span><br><span class="line">        <span class="hljs-keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="位1的个数（LeetCode-191）"><a href="#位1的个数（LeetCode-191）" class="headerlink" title="位1的个数（LeetCode 191）"></a><a href="https://leetcode-cn.com/problems/number-of-1-bits/" target="_blank" rel="noopener">位1的个数</a>（<code>LeetCode 191</code>）</h4><p><strong>题目说明：</strong>  编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为<a href="https://baike.baidu.com/item/汉明重量" target="_blank" rel="noopener">汉明重量</a>）。 </p>
+<h4 id="位1的个数leetcode-191"><a href="https://leetcode-cn.com/problems/number-of-1-bits/" target="_blank" rel="noopener">位1的个数</a>（<code>LeetCode 191</code>）</h4>
+<p><strong>题目说明：</strong> 编写一个函数，输入是一个无符号整数，返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为<a href="https://baike.baidu.com/item/汉明重量" target="_blank" rel="noopener">汉明重量</a>）。</p>
 <p><strong>题目解答：</strong> 这题便是相当明显的需要利用位操作的题目，因为需要一位一位地判断。所以一边右移一边判断最右边那位是0还是1即可！</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// you need to treat n as an unsigned value</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">32</span>; i++) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> ((n &amp; <span class="hljs-number">1</span>) == <span class="hljs-number">1</span>) ret++;</span><br><span class="line">            n &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong> 数字和1与，可以判断该数的奇偶！因为 1 的二进制是 <code>00...1</code> ，所以与完的结果便只有最后一位，<code>1</code> 为奇数，<code>0</code> 为偶数。</p>
 <p>虽是如此，<a href="https://leetcode-cn.com/problems/number-of-1-bits/solution/wei-1de-ge-shu-by-leetcode/" target="_blank" rel="noopener">官方</a>还给出来一个更为特殊的解法：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// you need to treat n as an unsigned value</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hammingWeight</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ret = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (n != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            ret++;</span><br><span class="line">            n &amp;= (n-<span class="hljs-number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong>在二进制表示中，数字 <code>n</code> 中最低位的 <code>1</code> 总是对应 <code>n - 1</code> 中的 <code>0</code> 。因此，将 <code>n</code> 和 <code>n - 1</code> 与运算总是能把 <code>n</code> 中最低位的 <code>1</code> 变成 <code>0</code> ，并保持其他位不变。</p>
 <p>所以，优化之后，只运算 <code>1</code> 的个数次即可！</p>
-<h4 id="2的幂（LeetCode-231）"><a href="#2的幂（LeetCode-231）" class="headerlink" title="2的幂（LeetCode 231）"></a><a href="https://leetcode-cn.com/problems/power-of-two/" target="_blank" rel="noopener">2的幂</a>（<code>LeetCode 231</code>）</h4><p><strong>题目说明：</strong> 给定一个整数，编写一个函数来判断它是否是 2 的幂次方。 </p>
+<h4 id="的幂leetcode-231"><a href="https://leetcode-cn.com/problems/power-of-two/" target="_blank" rel="noopener">2的幂</a>（<code>LeetCode 231</code>）</h4>
+<p><strong>题目说明：</strong> 给定一个整数，编写一个函数来判断它是否是 2 的幂次方。</p>
 <p><strong>题目解答：</strong> 这题如果能想到 <code>位运算</code> 这仨字，那么便可以比较容易地想出算法，因为毕竟 2 的幂次在二进制中来看是“整”的，相当于十进制中的 <code>10...100...1000</code>等等！</p>
 <p><strong>比如：</strong> 8的二进制表示为<code>1000</code>，<code>8-1</code> 也就是 <code>7</code> 的二进制为 <code>0111</code> 。如果把这俩数相与，不刚好是 <code>0</code> 吗？但是由于负数的补码问题，所以首先<strong>还需要判断是否正数</strong>。</p>
 <p>所以可以<strong>写出代码：</strong></p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">bool <span class="hljs-title">isPowerOfTwo</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> ((n &gt; <span class="hljs-number">0</span>) &amp;&amp; ((n &amp; (n-<span class="hljs-number">1</span>))== <span class="hljs-number">0</span>))</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="4的幂（LeetCode-342）"><a href="#4的幂（LeetCode-342）" class="headerlink" title="4的幂（LeetCode 342）"></a><a href="https://leetcode-cn.com/problems/power-of-four/" target="_blank" rel="noopener">4的幂</a>（<code>LeetCode 342</code>）</h4><p><strong>题目说明：</strong>  给定一个整数 (<code>32</code> 位有符号整数)，请编写一个函数来判断它是否是 <code>4</code> 的幂次方。 </p>
+<h4 id="的幂leetcode-342"><a href="https://leetcode-cn.com/problems/power-of-four/" target="_blank" rel="noopener">4的幂</a>（<code>LeetCode 342</code>）</h4>
+<p><strong>题目说明：</strong> 给定一个整数 (<code>32</code> 位有符号整数)，请编写一个函数来判断它是否是 <code>4</code> 的幂次方。</p>
 <p><strong>题目解答：</strong> 这算是上题的进阶，如果熟悉二进制，便知道4的幂实质上用二进制来表示实质上为 <code>10</code> 间隔，<code>4 -&gt; 10</code> <code>16 -&gt; 10000</code> <code>64 -&gt; 1000000</code>。利用此特点，便可以发现这样一个数：<code>01010101010101010101...</code> ，也就是十六进制的 <code>0x55555555</code>，其和4的幂相与，不会改变 <code>0x55555555</code> 的值。</p>
 <p>综上<strong>写出代码：</strong></p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isPowerOfFour</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">0</span> || (num &amp; (num-<span class="hljs-number">1</span>)) != <span class="hljs-number">0</span>)   <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span> ((num &amp; <span class="hljs-number">0x55555555</span>) == num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>说明：</strong> “<code>0x55555555</code>，其和4的幂相与，不会改变 <code>0x55555555</code> 的值”是一个充分条件，并非必要条件。故可能还有别的数和 <code>0x55555555</code>，其与4的幂相与，不会改变 <code>0x55555555</code> 的值，因此需要进行限制！即将非 <code>2</code> 的幂次和小于 <code>0</code> 的数除外。</p>
 
         </div>
@@ -440,19 +436,19 @@
         <span class="has-mr-6">2</span>
         <span>常见的位运算技巧</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#只出现一次的数字-（LeetCode-136）">
+        <a class="is-flex" href="#只出现一次的数字-leetcode-136">
         <span class="has-mr-6">2.1</span>
         <span>只出现一次的数字 （LeetCode 136）</span>
         </a></li><li>
-        <a class="is-flex" href="#位1的个数（LeetCode-191）">
+        <a class="is-flex" href="#位1的个数leetcode-191">
         <span class="has-mr-6">2.2</span>
         <span>位1的个数（LeetCode 191）</span>
         </a></li><li>
-        <a class="is-flex" href="#2的幂（LeetCode-231）">
+        <a class="is-flex" href="#的幂leetcode-231">
         <span class="has-mr-6">2.3</span>
         <span>2的幂（LeetCode 231）</span>
         </a></li><li>
-        <a class="is-flex" href="#4的幂（LeetCode-342）">
+        <a class="is-flex" href="#的幂leetcode-342">
         <span class="has-mr-6">2.4</span>
         <span>4的幂（LeetCode 342）</span>
         </a></li></ul></li></ul>

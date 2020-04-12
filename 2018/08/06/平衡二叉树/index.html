@@ -10,13 +10,13 @@
 <title>平衡二叉树 - 文的盲</title>
 
 
-    <meta name="description" content="搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL）二叉搜索树一般ASL计算方法：（每层结点个数 * 层数）之和 &#x2F; 结点个数 平衡因子（Balance Factor    BF）：BF(T) = $h_L$ - $h_R$ (注：$h_L$ 和 $h_R$分别为左右子树的高度)平衡二叉树（Balance Binary Tree）：AVL树空树，或者任意结点左右子树高度差">
+    <meta name="description" content="搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL） 二叉搜索树一般ASL计算方法：（每层结点个数 * 层数）之和 &#x2F; 结点个数 平衡因子（Balance Factor BF）： BF(T) = \(h_L\) - \(h_R\) (注：\(h_L\) 和 \(h_R\)分别为左右子树的高度) 平衡二叉树（Balance Binary Tree）：AVL树 空树，或者任">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡二叉树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;06&#x2F;%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL）二叉搜索树一般ASL计算方法：（每层结点个数 * 层数）之和 &#x2F; 结点个数 平衡因子（Balance Factor    BF）：BF(T) = $h_L$ - $h_R$ (注：$h_L$ 和 $h_R$分别为左右子树的高度)平衡二叉树（Balance Binary Tree）：AVL树空树，或者任意结点左右子树高度差">
+<meta property="og:description" content="搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL） 二叉搜索树一般ASL计算方法：（每层结点个数 * 层数）之和 &#x2F; 结点个数 平衡因子（Balance Factor BF）： BF(T) = \(h_L\) - \(h_R\) (注：\(h_L\) 和 \(h_R\)分别为左右子树的高度) 平衡二叉树（Balance Binary Tree）：AVL树 空树，或者任">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-09-08T14:37:05.417Z">
@@ -170,50 +170,46 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL）<br><strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
-<p><strong>平衡因子（Balance Factor    BF）：</strong><br>BF(T) = $h_L$ - $h_R$ (注：$h_L$ 和 $h_R$分别为左右子树的高度)<br><strong>平衡二叉树（Balance Binary Tree）：AVL树</strong><br>空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
+            <script src="/assets/js/APlayer.min.js"> </script><p>搜索树中，由于结点插入顺序不同，将导致不同的深度和不同的平均查找长度（ASL） <strong>二叉搜索树一般ASL计算方法：</strong>（每层结点个数 * 层数）之和 / 结点个数</p>
+<p><strong>平衡因子（Balance Factor BF）：</strong> BF(T) = <span class="math inline">\(h_L\)</span> - <span class="math inline">\(h_R\)</span> (注：<span class="math inline">\(h_L\)</span> 和 <span class="math inline">\(h_R\)</span>分别为左右子树的高度) <strong>平衡二叉树（Balance Binary Tree）：AVL树</strong> 空树，或者任意结点左右子树高度差绝对值不超过1，即|BF(T)| &lt;= 1</p>
 <a id="more"></a>
-<p>平衡二叉树是为了提升查找效率而提出的一种树的结构，其是基于二叉搜索树的，也就是满足二叉搜索树右大左小的道理。<br>所以给定节点数为n的AVL树，其最大高度为O($log_2n$)</p>
+<p>平衡二叉树是为了提升查找效率而提出的一种树的结构，其是基于二叉搜索树的，也就是满足二叉搜索树右大左小的道理。 所以给定节点数为n的AVL树，其最大高度为O(<span class="math inline">\(log_2n\)</span>)</p>
 <p><strong>AVL树的结构代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* AVL树的类型 */</span></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AVLNode</span> *<span class="hljs-title">Position</span>;</span></span><br><span class="line"><span class="hljs-keyword">typedef</span> Position AVLTree;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AVLNode</span>&#123;</span></span><br><span class="line">    ElementType Data;   <span class="hljs-comment">// 结点数据</span></span><br><span class="line">    AVLTree Left;   <span class="hljs-comment">// 左子树</span></span><br><span class="line">    AVLTree Right;  <span class="hljs-comment">// 右子树</span></span><br><span class="line">    <span class="hljs-keyword">int</span> Height; <span class="hljs-comment">// 树高</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>平衡二叉树要保持平衡态是不容易的，插入一个元素之后，很可能就会破坏平衡，所以为了保证其一直处于平衡态，我们就需讨论在插入元素并破坏平衡态之后如何再次调整为平衡态，同时，还要保证其是二叉搜索树。</p>
-<h3 id="平衡二叉树的调整"><a href="#平衡二叉树的调整" class="headerlink" title="平衡二叉树的调整"></a>平衡二叉树的调整</h3><p><strong>相关说明：</strong><br>破坏平衡的结点又可称之为 “麻烦节点”<br>被破坏平衡的结点又可称之为 “发现者”</p>
-<h4 id="RR旋转"><a href="#RR旋转" class="headerlink" title="RR旋转"></a>RR旋转</h4><p>也就是 “麻烦节点” 在 “发现者” 右子树的右边 </p>
-<p><strong>调整方式：</strong><br>将 “发现者” 右子树的根节点提上来代替 “发现者”  的位置，“发现者”连同其左子树作为新的左子树，而 “发现者” 右子树根节点原来的左子树作为 “发现者” 的右子树，右边不变，如图：<br><img src="http://t1.aixinxi.net/o_1cmspmh2n1ee7lu91vo61hn24rsa.png-j.jpg" alt="RR旋转"></p>
+<h3 id="平衡二叉树的调整">平衡二叉树的调整</h3>
+<p><strong>相关说明：</strong> 破坏平衡的结点又可称之为 “麻烦节点” 被破坏平衡的结点又可称之为 “发现者”</p>
+<h4 id="rr旋转">RR旋转</h4>
+<p>也就是 “麻烦节点” 在 “发现者” 右子树的右边</p>
+<p><strong>调整方式：</strong> 将 “发现者” 右子树的根节点提上来代替 “发现者” 的位置，“发现者”连同其左子树作为新的左子树，而 “发现者” 右子树根节点原来的左子树作为 “发现者” 的右子树，右边不变，如图： <img src="http://t1.aixinxi.net/o_1cmspmh2n1ee7lu91vo61hn24rsa.png-j.jpg" alt="RR旋转"></p>
 <p><strong>代码实现：</strong></p>
 <p>调整平衡如上解释，只采用三步即可完成：</p>
-<ol>
-<li>将 “发现者” 右子树的根节点提上来代替 “发现者”  的位置，即将 “发现者” 右子树赋值给一个新结点</li>
+<ol type="1">
+<li>将 “发现者” 右子树的根节点提上来代替 “发现者” 的位置，即将 “发现者” 右子树赋值给一个新结点</li>
 <li>“发现者” 右子树根节点原来的左子树作为 “发现者” 的右子树，即将“发现者” 右子树根节点原来的左子树赋值给 “发现者” 的右子树</li>
 <li>“发现者” 连同其左子树作为新的左子树，即将 “发现者” 赋值给新树树的左节点</li>
 </ol>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 右单旋 更新高度并返回新结点 B */</span></span><br><span class="line"><span class="hljs-function">AVLTree <span class="hljs-title">SingRightRotation</span><span class="hljs-params">(AVLTree A)</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/* 调整平衡树 */</span></span><br><span class="line">    AVLTree B = A-&gt;Right;</span><br><span class="line">    A-&gt;Right = B-&gt;Left;</span><br><span class="line">    B-&gt;Left = A;</span><br><span class="line">    <span class="hljs-comment">/* 更新高度 */</span></span><br><span class="line">    A-&gt;Height = Max(A-&gt;Right-&gt;Height, A-&gt;Left-&gt;Height) + <span class="hljs-number">1</span>;</span><br><span class="line">    B-&gt;Height = Max(B-&gt;Right-&gt;Height, A-&gt;Height) + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> B;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="LL旋转"><a href="#LL旋转" class="headerlink" title="LL旋转"></a>LL旋转</h4><p>也就是 “麻烦节点” 在 “发现者” 左子树的左边</p>
+<h4 id="ll旋转">LL旋转</h4>
+<p>也就是 “麻烦节点” 在 “发现者” 左子树的左边</p>
 <p>理论以及实现和RR旋转相同，只不过操作位置相反，省去解释</p>
-<p><strong>代码：</strong><br>代码实现的前提：A必须要有一个左子节点B</p>
+<p><strong>代码：</strong> 代码实现的前提：A必须要有一个左子节点B</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 左单旋 更新高度并返回新结点 B */</span></span><br><span class="line"><span class="hljs-function">AVLTree <span class="hljs-title">SingleLeftRotation</span><span class="hljs-params">(AVLTree A)</span></span>&#123;</span><br><span class="line">    AVLTree B = A-&gt;Left;    <span class="hljs-comment">// 将A左子树给B</span></span><br><span class="line">    A-&gt;Left = B-&gt;Right; <span class="hljs-comment">// 将B的右子树给A 成为新A的左子树</span></span><br><span class="line">    B-&gt;Right = A;   <span class="hljs-comment">// A给B的右子树</span></span><br><span class="line">    A-&gt;Height = Max(A-&gt;Left-&gt;Height, A-&gt;Right-&gt;Height) + <span class="hljs-number">1</span>;</span><br><span class="line">    B-&gt;Height = Max(B-&gt;Left-&gt;Height, A-&gt;Height) + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> B;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="LR旋转"><a href="#LR旋转" class="headerlink" title="LR旋转"></a>LR旋转</h4><p>也就是 “麻烦结点” 在左子树的右边</p>
-<p>对于LR旋转，我们可以将其分为两步：</p>
-<ol>
-<li><p>首先将 “发现者” 的左子树进行RR旋转</p>
-</li>
-<li><p>再将 “发现者” 本身进行LL旋转，返回即可</p>
-</li>
+<h4 id="lr旋转">LR旋转</h4>
+<p>也就是 “麻烦结点” 在左子树的右边</p>
+<p>对于LR旋转，我们可以将其分为两步： 1. 首先将 “发现者” 的左子树进行RR旋转</p>
+<ol start="2" type="1">
+<li>再将 “发现者” 本身进行LL旋转，返回即可</li>
 </ol>
-<p>示意图如下：<br><img src="http://t1.aixinxi.net/o_1cmspo7svv3612o1kn717d013d7a.png-j.jpg" alt="LR旋转"></p>
+<p>示意图如下： <img src="http://t1.aixinxi.net/o_1cmspo7svv3612o1kn717d013d7a.png-j.jpg" alt="LR旋转"></p>
 <p>** 代码：**</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 将B与C做右单旋，C被返回 */</span></span><br><span class="line"><span class="hljs-function">AVLTree <span class="hljs-title">DoubleLeftRightRotation</span><span class="hljs-params">(AVLTree A)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/* 注意：A必须有一个左子结点B，且B必须有一个右子结点C */</span></span><br><span class="line">    A-&gt;Left = SingRightRotation(A-&gt;Left);</span><br><span class="line">    <span class="hljs-keyword">return</span> SingleLeftRotation(A);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="RL旋转"><a href="#RL旋转" class="headerlink" title="RL旋转"></a>RL旋转</h4><p>也就是 “麻烦结点” 在右子树的左边</p>
-<p>与LR旋转对称，RL仍然何以分为两步：</p>
-<ol>
-<li>首先将 “发现者” 的右子树进行LL旋转</li>
-<li>再将 “发现者” 本身进行RR旋转，返回即可</li>
-</ol>
+<h4 id="rl旋转">RL旋转</h4>
+<p>也就是 “麻烦结点” 在右子树的左边</p>
+<p>与LR旋转对称，RL仍然何以分为两步： 1. 首先将 “发现者” 的右子树进行LL旋转 2. 再将 “发现者” 本身进行RR旋转，返回即可</p>
 <p>代码简略，直接省去</p>
-<h3 id="平衡二叉树的插入"><a href="#平衡二叉树的插入" class="headerlink" title="平衡二叉树的插入"></a>平衡二叉树的插入</h3><p>解决了平衡二叉树的调整问题，我们便可以方便地讨论其插入问题</p>
+<h3 id="平衡二叉树的插入">平衡二叉树的插入</h3>
+<p>解决了平衡二叉树的调整问题，我们便可以方便地讨论其插入问题</p>
 <p>问题简单，直接上代码</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">AVLTree <span class="hljs-title">Insert</span><span class="hljs-params">(AVLTree T, ElementType X)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (!T)&#123;    <span class="hljs-comment">// 空树中插入，建立新树</span></span><br><span class="line">        T = (AVLTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct AVLNode));</span><br><span class="line">        T-&gt;Data = X;</span><br><span class="line">        T-&gt;Height = <span class="hljs-number">0</span>;</span><br><span class="line">        T-&gt;Left = T-&gt;Right = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (X &lt; T-&gt;Data)&#123;    <span class="hljs-comment">// 小值 插入左树</span></span><br><span class="line">        T-&gt;Left = Insert(T-&gt;Left, X);</span><br><span class="line">        <span class="hljs-keyword">if</span> (T-&gt;Left-&gt;Height - T-&gt;Right-&gt;Height == <span class="hljs-number">2</span>)</span><br><span class="line">            <span class="hljs-keyword">if</span> (X &lt; T-&gt;Left-&gt;Data)  <span class="hljs-comment">// 判断X插入到左边还是右边</span></span><br><span class="line">                <span class="hljs-comment">// 左子树左边</span></span><br><span class="line">                T = SingleLeftRotation(T);</span><br><span class="line">            <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-comment">// 左子树右边</span></span><br><span class="line">                T = DoubleLeftRightRotation(T);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (X &gt; T-&gt;Data)&#123;    <span class="hljs-comment">// 大值 插入右树</span></span><br><span class="line">        T-&gt;Right = Insert(T-&gt;Right, X);</span><br><span class="line">        <span class="hljs-keyword">if</span> (T-&gt;Left-&gt;Height - T-&gt;Right-&gt;Height == <span class="hljs-number">-2</span>)&#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (X &gt; T-&gt;Right-&gt;Data) <span class="hljs-comment">// 判断X插入到左边还是右边</span></span><br><span class="line">                <span class="hljs-comment">// 右子树右边</span></span><br><span class="line">                T = SingleRightRotation(T);</span><br><span class="line">            <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-comment">// 右子树左边</span></span><br><span class="line">                T = DoubleRightLeftRotation(T);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="hljs-comment">/* else X == T-&gt;Data，无须插入 */</span> </span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 更新树高</span></span><br><span class="line">    T-&gt;Height = Max(T-&gt;Left-&gt;Height, T-&gt;Right-&gt;Height) + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -433,19 +429,19 @@
         <span class="has-mr-6">1</span>
         <span>平衡二叉树的调整</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#RR旋转">
+        <a class="is-flex" href="#rr旋转">
         <span class="has-mr-6">1.1</span>
         <span>RR旋转</span>
         </a></li><li>
-        <a class="is-flex" href="#LL旋转">
+        <a class="is-flex" href="#ll旋转">
         <span class="has-mr-6">1.2</span>
         <span>LL旋转</span>
         </a></li><li>
-        <a class="is-flex" href="#LR旋转">
+        <a class="is-flex" href="#lr旋转">
         <span class="has-mr-6">1.3</span>
         <span>LR旋转</span>
         </a></li><li>
-        <a class="is-flex" href="#RL旋转">
+        <a class="is-flex" href="#rl旋转">
         <span class="has-mr-6">1.4</span>
         <span>RL旋转</span>
         </a></li></ul></li><li>
