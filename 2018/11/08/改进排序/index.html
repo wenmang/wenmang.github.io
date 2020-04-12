@@ -10,13 +10,13 @@
 <title>改进排序 - 文的盲</title>
 
 
-    <meta name="description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
+    <meta name="description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序 在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="改进排序">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;11&#x2F;08&#x2F;%E6%94%B9%E8%BF%9B%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
+<meta property="og:description" content="在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来 希尔排序 在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-12-06T09:00:09.745Z">
@@ -171,185 +171,186 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><p>在了解了简单排序之后，我们仍不满足简单排序的效率，在此驱动之下，又有效率更高的排序算法被设计出来</p>
-<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路</p>
+<h3 id="希尔排序">希尔排序</h3>
+<p>在学习了冒泡和插入排序之后，我们发现，对于同一数列而言，采用冒泡排序和采用插入排序所进行的交换次数是一致的，进而可以得知，排序实际是消除逆序对的过程，由此我们可以有以下思路</p>
 <a id="more"></a>
-
-<h4 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
-<li><p>冒泡和插入排序每次只消除一个逆序对</p>
-</li>
-<li><p>既然排序是为了消除逆序对，那么能不能通过一次交换消除多个逆序对呢</p>
-</li>
-<li><p>显然，我们可以采用隔几个数字的方式来进行排序，这样一来，进行一次交换就可消除不止一个逆序对</p>
-</li>
-<li><p>结和以上思路，便实现了希尔排序的一般实现方式</p>
-</li>
+<h4 id="实现思路">实现思路</h4>
+<ul>
+<li>冒泡和插入排序每次只消除一个逆序对</li>
+<li><p>既然排序是为了消除逆序对，那么能不能通过一次交换消除多个逆序对呢</p></li>
+<li>显然，我们可以采用隔几个数字的方式来进行排序，这样一来，进行一次交换就可消除不止一个逆序对</li>
+<li><p>结和以上思路，便实现了希尔排序的一般实现方式</p></li>
 </ul>
-<h4 id="代码1"><a href="#代码1" class="headerlink" title="代码1"></a>代码1</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShellSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 希尔1</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i, j, k;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = n/<span class="hljs-number">2</span>; i &gt; <span class="hljs-number">0</span>; i /= <span class="hljs-number">2</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">            ELEMENT_TYPE temp = a[j];</span><br><span class="line">            <span class="hljs-keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                a[k] = a[k - i];</span><br><span class="line">            a[k] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="代码1">代码1</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShellSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 希尔1</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i, j, k;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = n/<span class="hljs-number">2</span>; i &gt; <span class="hljs-number">0</span>; i /= <span class="hljs-number">2</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">            ELEMENT_TYPE temp = a[j];</span><br><span class="line">            <span class="hljs-keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                a[k] = a[k - i];</span><br><span class="line">            a[k] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>简单的希尔排序如上，也就是分别隔<code>n/2``n/4</code>…… 直至<code>n = 1</code></p>
 <p>但是采用这种方法可能出现尴尬的情况</p>
 <table>
 <thead>
-<tr>
-<th align="center">1</th>
-<th align="center">9</th>
-<th align="center">2</th>
-<th align="center">10</th>
-<th align="center">3</th>
-<th align="center">11</th>
-<th align="center">4</th>
-<th align="center">12</th>
-<th align="center">5</th>
-<th align="center">13</th>
-<th align="center">6</th>
-<th align="center">14</th>
-<th align="center">7</th>
-<th align="center">15</th>
-<th align="center">8</th>
-<th align="center">16</th>
+<tr class="header">
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">11</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">12</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">13</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">14</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">15</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">16</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">9</td>
-<td align="center">2</td>
-<td align="center">10</td>
-<td align="center">3</td>
-<td align="center">11</td>
-<td align="center">4</td>
-<td align="center">12</td>
-<td align="center">5</td>
-<td align="center">13</td>
-<td align="center">6</td>
-<td align="center">14</td>
-<td align="center">7</td>
-<td align="center">15</td>
-<td align="center">8</td>
-<td align="center">16</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
 </tr>
-<tr>
-<td align="center">1</td>
-<td align="center">9</td>
-<td align="center">2</td>
-<td align="center">10</td>
-<td align="center">3</td>
-<td align="center">11</td>
-<td align="center">4</td>
-<td align="center">12</td>
-<td align="center">5</td>
-<td align="center">13</td>
-<td align="center">6</td>
-<td align="center">14</td>
-<td align="center">7</td>
-<td align="center">15</td>
-<td align="center">8</td>
-<td align="center">16</td>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
 </tr>
-<tr>
-<td align="center">1</td>
-<td align="center">9</td>
-<td align="center">2</td>
-<td align="center">10</td>
-<td align="center">3</td>
-<td align="center">11</td>
-<td align="center">4</td>
-<td align="center">12</td>
-<td align="center">5</td>
-<td align="center">13</td>
-<td align="center">6</td>
-<td align="center">14</td>
-<td align="center">7</td>
-<td align="center">15</td>
-<td align="center">8</td>
-<td align="center">16</td>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
 </tr>
-<tr>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="center">6</td>
-<td align="center">7</td>
-<td align="center">8</td>
-<td align="center">9</td>
-<td align="center">10</td>
-<td align="center">11</td>
-<td align="center">12</td>
-<td align="center">13</td>
-<td align="center">14</td>
-<td align="center">15</td>
-<td align="center">16</td>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>也就是数列刚好每隔<code>n/2``n/4</code>…… 都是排序完成的，那么扫描就成了无用功</p>
 <p>发现上述问题之后，有专家就提出来一个交换间隔的数列</p>
 <ul>
-<li><p>Hibbard 增量序列 </p>
+<li><p>Hibbard 增量序列</p>
 <ul>
-<li>$D_K$ = $2^k$ - 1（$D_k$为间隔数）</li>
-<li>最坏情况：$T = Θ{(N^{\frac{2}{3}})}$ </li>
-<li>猜测：$T_{avg} = O(N{\frac{5}{4}})$</li>
-</ul>
-</li>
+<li><span class="math inline">\(D_K\)</span> = <span class="math inline">\(2^k\)</span> - 1（<span class="math inline">\(D_k\)</span>为间隔数）</li>
+<li>最坏情况：<span class="math inline">\(T = Θ{(N^{\frac{2}{3}})}\)</span></li>
+<li>猜测：<span class="math inline">\(T_{avg} = O(N{\frac{5}{4}})\)</span></li>
+</ul></li>
 <li><p>Sedgewick增量序列</p>
 <ul>
 <li><p>{1, 5, 19, 41, 109, …}</p>
-<p>—— $9\times4^i - 9\times2^i  + 1$ 或者 $4^i - 3\times2^i  + 1$</p>
-</li>
-<li><p>猜想：$T_{avg} = O(N^\frac{7}{6})$ , $T_{worst} = O(N\frac{4}{3})$</p>
-</li>
-</ul>
-</li>
+<p>—— <span class="math inline">\(9\times4^i - 9\times2^i + 1\)</span> 或者 <span class="math inline">\(4^i - 3\times2^i + 1\)</span></p></li>
+<li><p>猜想：<span class="math inline">\(T_{avg} = O(N^\frac{7}{6})\)</span> , <span class="math inline">\(T_{worst} = O(N\frac{4}{3})\)</span></p></li>
+</ul></li>
 </ul>
 <p>则改进后的代码为：（只写Sedgewick）</p>
-<h4 id="代码2"><a href="#代码2" class="headerlink" title="代码2"></a>代码2</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShellSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 希尔2</span></span><br><span class="line">    <span class="hljs-keyword">int</span> si, i, j, k;</span><br><span class="line">    <span class="hljs-keyword">int</span> Sedgewick[] = &#123;<span class="hljs-number">929</span>, <span class="hljs-number">505</span>, <span class="hljs-number">20</span>, <span class="hljs-number">109</span>, <span class="hljs-number">41</span>, <span class="hljs-number">19</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;;</span><br><span class="line">    <span class="hljs-keyword">for</span> (si = <span class="hljs-number">0</span>; Sedgrwick[si] &gt;= N; si++) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (i = Sedgrwick[si]; i &gt; <span class="hljs-number">0</span>; i = Sedgrwick[++si]) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">                ELEMENT_TYPE temp = a[j];</span><br><span class="line">                <span class="hljs-keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                    a[k] = a[k - i];</span><br><span class="line">                a[k] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>那么简单排序中的选择排序是否可以优化呢？答案是肯定的</p>
-<h4 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
+<h4 id="代码2">代码2</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ShellSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;   <span class="hljs-comment">// 希尔2</span></span><br><span class="line">    <span class="hljs-keyword">int</span> si, i, j, k;</span><br><span class="line">    <span class="hljs-keyword">int</span> Sedgewick[] = &#123;<span class="hljs-number">929</span>, <span class="hljs-number">505</span>, <span class="hljs-number">20</span>, <span class="hljs-number">109</span>, <span class="hljs-number">41</span>, <span class="hljs-number">19</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;;</span><br><span class="line">    <span class="hljs-keyword">for</span> (si = <span class="hljs-number">0</span>; Sedgrwick[si] &gt;= N; si++) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (i = Sedgrwick[si]; i &gt; <span class="hljs-number">0</span>; i = Sedgrwick[++si]) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++) &#123;</span><br><span class="line">                ELEMENT_TYPE temp = a[j];</span><br><span class="line">                <span class="hljs-keyword">for</span> (k = j; k &gt;= i &amp;&amp; a[k - i] &gt; temp; k -= i)</span><br><span class="line">                    a[k] = a[k - i];</span><br><span class="line">                a[k] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序">堆排序</h3>
+<p>那么简单排序中的选择排序是否可以优化呢？答案是肯定的</p>
+<h4 id="实现思路-1">实现思路</h4>
+<ul>
 <li>首先选择排序的外层循环是不可变的，优化的只能是内层循环，即寻找数列之中最小的元素的过程</li>
-<li>选择排序中，此过程运用了遍历数组的方式，复杂度为 $O(N)$</li>
+<li>选择排序中，此过程运用了遍历数组的方式，复杂度为 <span class="math inline">\(O(N)\)</span></li>
 <li>而在之前，我们学习了堆的知识，所以我们可以利用最小堆来进行寻找</li>
 </ul>
-<h4 id="代码1-1"><a href="#代码1-1" class="headerlink" title="代码1"></a>代码1</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HeapSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-comment">// 堆</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i;</span><br><span class="line">    ELEMENT_TYPE tmpA;</span><br><span class="line">    BuildHeap(a);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        tmpA = DeleteMin(a);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        a[i] = tmpA[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="代码1-1">代码1</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HeapSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-comment">// 堆</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i;</span><br><span class="line">    ELEMENT_TYPE tmpA;</span><br><span class="line">    BuildHeap(a);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        tmpA = DeleteMin(a);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        a[i] = tmpA[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>如上代码，首先将<code>a</code>调整为一个最小堆</li>
 <li>之后取出依次最小的元素置于一个新临时数组中</li>
 <li>最后，将排好序的<code>tmpA</code>数组中的元素复制回原数组</li>
 </ul>
-<p>这样，虽然将时间复杂度降到了$O(log(n))$ ，但是空间复杂度提升了一倍，在数据量较大之时应用不是很方便</p>
-<h4 id="代码2-1"><a href="#代码2-1" class="headerlink" title="代码2"></a>代码2</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HeapSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-comment">// 堆</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = N / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; --i) &#123;</span><br><span class="line">        Swap(&amp;a[<span class="hljs-number">0</span>], &amp;a[i]);</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>这样，虽然将时间复杂度降到了<span class="math inline">\(O(log(n))\)</span> ，但是空间复杂度提升了一倍，在数据量较大之时应用不是很方便</p>
+<h4 id="代码2-1">代码2</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">HeapSort</span><span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-comment">// 堆</span></span><br><span class="line">    <span class="hljs-keyword">int</span> i;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = N / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; --i) &#123;</span><br><span class="line">        Swap(&amp;a[<span class="hljs-number">0</span>], &amp;a[i]);</span><br><span class="line">        PercDown(a, i, n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>首先通过第一个循环将其建为最大堆</li>
 <li>将最大堆的根与<code>a[0]</code>交换，之后再将<code>a</code>调整为最大堆</li>
 <li>重复2步骤，n次</li>
 </ul>
-<p>由定理可知，其平均比较次数为 $2NlogN - O(Nlog(logN))$</p>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>归并排序的核心就是有序子列的归并，也就是将两个已经排好序的数列，归并到一个更大的数列中去</p>
-<h4 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h4><ul>
+<p>由定理可知，其平均比较次数为 <span class="math inline">\(2NlogN - O(Nlog(logN))\)</span></p>
+<h3 id="归并排序">归并排序</h3>
+<p>归并排序的核心就是有序子列的归并，也就是将两个已经排好序的数列，归并到一个更大的数列中去</p>
+<h4 id="实现思路-2">实现思路</h4>
+<ul>
 <li>分别设立两个指针，从两个数组的开头扫到结尾，比较指针所在处数组的值，将小值复制到大数组中，之后将小值所在数组的指针后移一位</li>
 <li>重复步骤一，直至所有数字都挪入大数组</li>
 </ul>
 <p>核心理解之后就可以进行排序了，也就是将需排序的数组拆分成若干已排序的小数组直接进行归并</p>
-<h4 id="递归代码"><a href="#递归代码" class="headerlink" title="递归代码"></a>递归代码</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> leftEnd = r<span class="hljs-number">-1</span> ;</span><br><span class="line">    <span class="hljs-keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123; <span class="hljs-comment">// 当左右子序列均不空</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="hljs-keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; rightEnd + <span class="hljs-number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> temp[])</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> center;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l &lt; rightEnd) &#123;</span><br><span class="line">        center = (l + rightEnd) / <span class="hljs-number">2</span>;</span><br><span class="line">        MergeSort(a, l, center, temp);</span><br><span class="line">        MergeSort(a, center + <span class="hljs-number">1</span>, rightEnd, temp);</span><br><span class="line">        Merge(a, l, center+<span class="hljs-number">1</span>, rightEnd, temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span>* tmpA;</span><br><span class="line">    tmpA = <span class="hljs-built_in">malloc</span>(n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">    <span class="hljs-keyword">if</span> (tmpA != <span class="hljs-literal">NULL</span>)&#123;</span><br><span class="line">        MergeSort(a, <span class="hljs-number">0</span>, n<span class="hljs-number">-1</span>, tmpA);</span><br><span class="line">        <span class="hljs-built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"ERROR"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="递归代码">递归代码</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> temp[])</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> leftEnd = r<span class="hljs-number">-1</span> ;</span><br><span class="line">    <span class="hljs-keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123; <span class="hljs-comment">// 当左右子序列均不空</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="hljs-keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; rightEnd + <span class="hljs-number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> rightEnd, <span class="hljs-keyword">int</span> temp[])</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> center;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l &lt; rightEnd) &#123;</span><br><span class="line">        center = (l + rightEnd) / <span class="hljs-number">2</span>;</span><br><span class="line">        MergeSort(a, l, center, temp);</span><br><span class="line">        MergeSort(a, center + <span class="hljs-number">1</span>, rightEnd, temp);</span><br><span class="line">        Merge(a, l, center+<span class="hljs-number">1</span>, rightEnd, temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge_sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[], <span class="hljs-keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span>* tmpA;</span><br><span class="line">    tmpA = <span class="hljs-built_in">malloc</span>(n * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">    <span class="hljs-keyword">if</span> (tmpA != <span class="hljs-literal">NULL</span>)&#123;</span><br><span class="line">        MergeSort(a, <span class="hljs-number">0</span>, n<span class="hljs-number">-1</span>, tmpA);</span><br><span class="line">        <span class="hljs-built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"ERROR"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>三个函数，分别为归并函数，主函数，和接口函数</li>
 <li>归并函数就是将两个有序数组归并为一个大数组</li>
 <li>主函数起到将数组左边右边分别进行归并的作用，也就是当数组分割到只有一个元素之后，直接进行归并</li>
 <li>接口函数为了使其符合排序函数的规律，仅传入数组及其长度</li>
 </ul>
-<h4 id="循环代码"><a href="#循环代码" class="headerlink" title="循环代码"></a>循环代码</h4><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[],  <span class="hljs-keyword">int</span> temp[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> rightEnd)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> leftEnd = r<span class="hljs-number">-1</span> ;</span><br><span class="line">    <span class="hljs-keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="hljs-keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; rightEnd + <span class="hljs-number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergePass</span><span class="hljs-params">(ELEMENT_TYPE a[], ELEMENT_TYPE tmpA[], <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i, j;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= n - <span class="hljs-number">2</span>*length; i += <span class="hljs-number">2</span>*length)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="hljs-number">-1</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span> (i + length &lt; n)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="hljs-number">-1</span>);</span><br><span class="line">    <span class="hljs-keyword">else</span> </span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++)</span><br><span class="line">            tmpA[j] = a[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> length;</span><br><span class="line">    ELEMENT_TYPE* tmpA;</span><br><span class="line">    length = <span class="hljs-number">1</span>;</span><br><span class="line">    tmpA = <span class="hljs-built_in">malloc</span>(n*<span class="hljs-keyword">sizeof</span>(ELEMENT_TYPE));</span><br><span class="line">    <span class="hljs-keyword">if</span> (tmpA != <span class="hljs-literal">NULL</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (length &lt; n) &#123;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="hljs-number">2</span>;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="hljs-number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"空间不足"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="循环代码">循环代码</h4>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a[],  <span class="hljs-keyword">int</span> temp[], <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> rightEnd)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> leftEnd = r<span class="hljs-number">-1</span> ;</span><br><span class="line">    <span class="hljs-keyword">int</span> left = l, tmp = l;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd &amp;&amp; r &lt;= rightEnd)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[l] &gt; a[r])</span><br><span class="line">            temp[tmp++] = a[r++];</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            temp[tmp++] = a[l++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (l &lt;= leftEnd)</span><br><span class="line">        temp[tmp++] = a[l++];</span><br><span class="line">    <span class="hljs-keyword">while</span> (r &lt;= rightEnd)</span><br><span class="line">        temp[tmp++] = a[r++];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = left; i &lt; rightEnd + <span class="hljs-number">1</span>; i++)</span><br><span class="line">        a[i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergePass</span><span class="hljs-params">(ELEMENT_TYPE a[], ELEMENT_TYPE tmpA[], <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> i, j;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= n - <span class="hljs-number">2</span>*length; i += <span class="hljs-number">2</span>*length)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="hljs-number">-1</span>);</span><br><span class="line">    <span class="hljs-keyword">if</span> (i + length &lt; n)</span><br><span class="line">        Merge(a, tmpA, i, i+length, n<span class="hljs-number">-1</span>);</span><br><span class="line">    <span class="hljs-keyword">else</span> </span><br><span class="line">        <span class="hljs-keyword">for</span> (j = i; j &lt; n; j++)</span><br><span class="line">            tmpA[j] = a[j];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">MergeSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> length;</span><br><span class="line">    ELEMENT_TYPE* tmpA;</span><br><span class="line">    length = <span class="hljs-number">1</span>;</span><br><span class="line">    tmpA = <span class="hljs-built_in">malloc</span>(n*<span class="hljs-keyword">sizeof</span>(ELEMENT_TYPE));</span><br><span class="line">    <span class="hljs-keyword">if</span> (tmpA != <span class="hljs-literal">NULL</span>) &#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (length &lt; n) &#123;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="hljs-number">2</span>;</span><br><span class="line">            MergePass(a, tmpA, n, length);</span><br><span class="line">            length *= <span class="hljs-number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">free</span>(tmpA);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"空间不足"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>简单的递归可以用循环代替，所以也就有了上面的代码</p>
 <ul>
 <li>即先将数组元素，相邻的两个一对进行归并</li>
 <li>之后相邻的元素便排序完成，再四个一对进行归并，同理，之后就是八个……</li>
 </ul>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>快排是很有名的一个排序算法，在许多语言的库函数中直接调用的排序函数就是快速排序，据说快排是在实际应用中最快的算法，其由归并排序衍生而来，也主要采用递归的方法来实现，其主要原理寻找主元和针对主元对数组进行调整的过程</p>
-<h4 id="选主元"><a href="#选主元" class="headerlink" title="选主元"></a>选主元</h4><p>主元的选择是快排中至关重要的一个环节，如果主元失误的话就整个排序就容易废掉，那么如何选取主元呢?</p>
+<h3 id="快速排序">快速排序</h3>
+<p>快排是很有名的一个排序算法，在许多语言的库函数中直接调用的排序函数就是快速排序，据说快排是在实际应用中最快的算法，其由归并排序衍生而来，也主要采用递归的方法来实现，其主要原理寻找主元和针对主元对数组进行调整的过程</p>
+<h4 id="选主元">选主元</h4>
+<p>主元的选择是快排中至关重要的一个环节，如果主元失误的话就整个排序就容易废掉，那么如何选取主元呢?</p>
 <ul>
 <li>随机选择主元，<code>rand()</code> 函数也是需要时间的</li>
 <li>取数组头，中，尾三个数字中的中位数</li>
@@ -358,11 +359,11 @@
 <p>这里采取选取三者中位数的方式来选取主元</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ELEMENT_TYPE <span class="hljs-title">Media3</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> center = (left + right) / <span class="hljs-number">2</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (a[left] &gt; a[center])</span><br><span class="line">        Swap(&amp;a[left], &amp;a[center]);</span><br><span class="line">    <span class="hljs-keyword">if</span> (a[left] &gt; a[right])</span><br><span class="line">        Swap(&amp;a[left], &amp;a[right]);</span><br><span class="line">    <span class="hljs-keyword">if</span> (a[center] &gt; a[right])</span><br><span class="line">        Swap(&amp;a[center], &amp;a[right]);</span><br><span class="line"></span><br><span class="line">    Swap(&amp;a[center], &amp;a[right<span class="hljs-number">-1</span>]);</span><br><span class="line">    <span class="hljs-keyword">return</span> a[right<span class="hljs-number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>功能就是将三个数排列，并将中位数置于<code>right-1</code>的位置，并返回主元</li>
 </ul>
-<h4 id="子集划分"><a href="#子集划分" class="headerlink" title="子集划分"></a>子集划分</h4><ul>
+<h4 id="子集划分">子集划分</h4>
+<ul>
 <li>子集划分主要由两个 “指针” 从两端进行查找，将比主元小的元素调整到数组左边，比主元大的元素调整到数组的右边</li>
 <li>之后将主元移动到数组固定的位置</li>
 </ul>
@@ -370,15 +371,13 @@
 <p>了解了子集划分之后，就又有了新的问题，因为快排的实现方式是采用递归的方法，所以对于小规模数据的排序可能还不如插入排序，所以我们应该设置一个阈值，在数据量低于此阈值的情况下直接采用插入排序</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">QSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> pivot, cutoff = <span class="hljs-number">10000</span>, low, high;</span><br><span class="line">    <span class="hljs-keyword">if</span> (cutoff &lt;= right - left) &#123;</span><br><span class="line">        pivot = Media3(a, left, right);</span><br><span class="line">        low = left;</span><br><span class="line">        high = right <span class="hljs-number">-1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (; ;) &#123;</span><br><span class="line">            <span class="hljs-keyword">while</span> (a[++low] &lt; a[right<span class="hljs-number">-1</span>]);</span><br><span class="line">            <span class="hljs-keyword">while</span> (a[--high] &gt; a[right<span class="hljs-number">-1</span>]);</span><br><span class="line">            <span class="hljs-keyword">if</span> (low &lt; high)</span><br><span class="line">                Swap(&amp;a[low], a[high]);</span><br><span class="line">            <span class="hljs-keyword">else</span></span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Swap(&amp;a[low], &amp;a[right<span class="hljs-number">-1</span>]);</span><br><span class="line">        QSort(a, left, low<span class="hljs-number">-1</span>);</span><br><span class="line">        QSort(a, low+<span class="hljs-number">1</span>, right);</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span></span><br><span class="line">        InsertionSort(a+left, right-left+<span class="hljs-number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>此段代码最精髓之处我觉得是采用两个<code>while</code>循环进行子集划分的操作，很帅</li>
-<li><code>pivot</code>为主元   <code>cutoff</code>为阈值 我将其设为1000</li>
+<li><code>pivot</code>为主元 <code>cutoff</code>为阈值 我将其设为1000</li>
 </ul>
 <p>之后对接口进行统一化处理</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">QuickSort</span> <span class="hljs-params">(ELEMENT_TYPE a[], <span class="hljs-keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    QSort(a, <span class="hljs-number">0</span>, n<span class="hljs-number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -521,7 +520,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        47
+                        48
                     </p>
                 </div>
             </div>
@@ -541,7 +540,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        21
+                        22
                     </p>
                 </div>
             </div>
@@ -677,7 +676,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 文盲&nbsp;
+                &copy; 2020 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 

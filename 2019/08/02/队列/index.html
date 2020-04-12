@@ -10,13 +10,13 @@
 <title>队列 - 文的盲</title>
 
 
-    <meta name="description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
+    <meta name="description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="队列">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;08&#x2F;02&#x2F;%E9%98%9F%E5%88%97&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
+<meta property="og:description" content="队列是具有一定操作约束的线性表，只能在一端（队尾）进行插入，另一端（队头）进行删除。 简单地理解，按照字面意思，队列这种数据结构，就如同生活中排队的队列一般，后来的人（数据）只能跟在队尾，而队首的人（数据）首先接受服务（进行删除）。  数据插入：入队列 （addQueue） 数据删除：出队列 （deleteQueue）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-08-02T13:15:20.841Z">
@@ -177,7 +177,6 @@
 <li>数据删除：出队列 （<code>deleteQueue</code>）</li>
 </ul>
 <a id="more"></a>
-
 <p>而队列主要的<strong>特性</strong>如下：</p>
 <ul>
 <li>先来先服务</li>
@@ -187,51 +186,44 @@
 <p><strong>数据对象集：</strong>一个有0个或多个元素的有穷线性表</p>
 <p><strong>操作集：</strong>长度为 <code>MaxSize</code> 的队列 <code>Q</code> 属于 <code>Queue</code>， 队列元素 <code>item</code> 属于 <code>ElementType</code></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. Queue CreatQueue()						生成空队列</span><br><span class="line">2. int IsFullQ(Queue PtrQ)		判断队列Q是否已满</span><br><span class="line">3. void AddQ(Queue PtrQ, ElementType item)	将数据元素item插入队列Q中</span><br><span class="line">4. int IsEmptyQ(Queue PtrQ)					判断队列是否为空</span><br><span class="line">5. ElementType DeleteQ(Queue PtrQ)			将对头数据元素从队列中删除并返回</span><br></pre></td></tr></table></figure>
-
-<h3 id="队列的顺序储存实现"><a href="#队列的顺序储存实现" class="headerlink" title="队列的顺序储存实现"></a>队列的顺序储存实现</h3><p>利用数组来实现相关操作</p>
+<h3 id="队列的顺序储存实现">队列的顺序储存实现</h3>
+<p>利用数组来实现相关操作</p>
 <ul>
-<li><h4 id="直接利用数组实现"><a href="#直接利用数组实现" class="headerlink" title="直接利用数组实现"></a>直接利用数组实现</h4><p>数组的一端作为头，另一端作为尾，这样的方式是比较容易<strong>实现</strong>的：</p>
+<li><h4 id="直接利用数组实现">直接利用数组实现</h4>
+<p>数组的一端作为头，另一端作为尾，这样的方式是比较容易<strong>实现</strong>的：</p>
 <ul>
 <li>首先在空数组上的将队列头和尾均放在数组头的前一个位置，头和尾的标号为-1</li>
-</ul>
-</li>
-<li><p>添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p>
-</li>
+</ul></li>
+<li><p>添加元素之后，则将队尾保存的标号加一；同理删除元素之后，将队头的元素加一</p></li>
 </ul>
 <p><strong>存在的问题：</strong></p>
 <ul>
-<li><p>如果队放满，也就是队尾下标为 <code>MaxSize-1</code> 但此时队头由于删除元素的原因，还空有位置，因此会造成空间浪费。</p>
-</li>
-<li><h4 id="利用环形数组实现"><a href="#利用环形数组实现" class="headerlink" title="利用环形数组实现"></a>利用环形数组实现</h4><p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 <code>MaxSize-1</code> ），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
+<li><p>如果队放满，也就是队尾下标为 <code>MaxSize-1</code> 但此时队头由于删除元素的原因，还空有位置，因此会造成空间浪费。</p></li>
+<li><h4 id="利用环形数组实现">利用环形数组实现</h4>
+<p>环形数组并不是物理意义上的环形，而是指队列如果放满之后（队尾下标为 <code>MaxSize-1</code> ），数组头部如果还有空位，就将新加进来的元素，从数组头继续存放。这时，如何判断队列是否已满呢？</p>
 <p><strong>判断队列空和满</strong></p>
 <ul>
 <li><strong>空：</strong>队头下标等于队尾下标</li>
-</ul>
-</li>
-<li><p><strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p>
-</li>
+</ul></li>
+<li><p><strong>满：</strong>队尾下标加一等于对头下标，但如果此时队尾下标而队头为0则无法用此法判断</p></li>
 </ul>
 <p><strong>改进：</strong>最大队尾下标加一除以 <code>MaxSize</code> 的余数等于队尾下标（除数大于被除数，余数为被除数本身）</p>
 <p>正因为上述所说，平常所说的 <strong>顺序存储</strong> 实现均是以 <strong>指环形数组</strong> 的方式实现。</p>
 <p>首先写出 <code>Queue.h</code> ，C语言代码如下：</p>
 <p><strong>C语言代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BASE_SIZE 8</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> elementType;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QNode</span> *<span class="hljs-title">queue</span>;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">QNode</span>&#123;</span></span><br><span class="line">    elementType* data;	<span class="hljs-comment">// 队列数据存储位置</span></span><br><span class="line">    <span class="hljs-keyword">int</span> size;	<span class="hljs-comment">// data 数组大小</span></span><br><span class="line">    <span class="hljs-keyword">int</span> rear;	<span class="hljs-comment">// 队尾</span></span><br><span class="line">    <span class="hljs-keyword">int</span> front;	<span class="hljs-comment">// 队首</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">queue</span> <span class="hljs-title">createQueue</span><span class="hljs-params">()</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q, elementType e)</span></span>;</span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deleteQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
-
 <p>紧接着，我们在 <code>Queue.c</code> 文件中实现头文件中所申明的函数：</p>
 <p><strong>C语言代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"Queue.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">queue</span> <span class="hljs-title">createQueue</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">queue</span> q = (<span class="hljs-built_in">queue</span>) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct QNode));</span><br><span class="line">    q-&gt;size = <span class="hljs-number">8</span>;</span><br><span class="line">    q-&gt;data = (elementType*) <span class="hljs-built_in">malloc</span>(q-&gt;size * <span class="hljs-keyword">sizeof</span>(elementType));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (q-&gt;rear+<span class="hljs-number">1</span>) % q-&gt;size == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;rear == q-&gt;front;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (isFull(q)) &#123;</span><br><span class="line">        q-&gt;size *= <span class="hljs-number">2</span>;</span><br><span class="line">        q-&gt;data = (elementType*) <span class="hljs-built_in">realloc</span>(q-&gt;data, q-&gt;size * <span class="hljs-keyword">sizeof</span>(elementType));</span><br><span class="line">    &#125;</span><br><span class="line">    q-&gt;rear = (q-&gt;rear+<span class="hljs-number">1</span>) % q-&gt;size;</span><br><span class="line">    q-&gt;data[q-&gt;rear] = e;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deleteQueue</span><span class="hljs-params">(<span class="hljs-built_in">queue</span> q)</span> </span>&#123;</span><br><span class="line">    assert(!isEmpty(q));</span><br><span class="line">    q-&gt;front = (q-&gt;front+<span class="hljs-number">1</span>) % q-&gt;size;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;data[q-&gt;front];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="队列的链式储存实现"><a href="#队列的链式储存实现" class="headerlink" title="队列的链式储存实现"></a>队列的链式储存实现</h3><p>也就是使用链表存储</p>
+<h3 id="队列的链式储存实现">队列的链式储存实现</h3>
+<p>也就是使用链表存储</p>
 <p>首先可以写出头文件 <code>Queue.h</code> 的内容：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"><span class="hljs-comment">// Created by wenmang on 2019/8/2.</span></span><br><span class="line"><span class="hljs-comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DATA_STRUCTURE_QUEUE_H</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LQNode</span>* <span class="hljs-title">lQueue</span>;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>&#123;</span></span><br><span class="line">    elementType data;</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">LQNode</span>&#123;</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">rear</span>;</span></span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">front</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lQueue <span class="hljs-title">createlQueue</span><span class="hljs-params">()</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addlQueue</span><span class="hljs-params">(lQueue q, elementType e)</span></span>;</span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deletelQueue</span><span class="hljs-params">(lQueue q)</span></span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">islEmpty</span><span class="hljs-params">(lQueue q)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//DATA_STRUCTURE_QUEUE_H</span></span></span><br></pre></td></tr></table></figure>
-
-
 <p>用链表储存，设计了两个结构，</p>
-<p><code>Node</code>    为队列中节点，指针指向下一个节点，<code>data</code> 储存节点数据</p>
-<p><code>QNode</code>  为队列头节点，两个指针分别指向队列头和队列尾</p>
+<p><code>Node</code> 为队列中节点，指针指向下一个节点，<code>data</code> 储存节点数据</p>
+<p><code>QNode</code> 为队列头节点，两个指针分别指向队列头和队列尾</p>
 <p>然后，在 <code>Queue.c</code> 文件中实现声明的函数：</p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">lQueue <span class="hljs-title">createlQueue</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    lQueue q = (lQueue) <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct LQNode));</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addlQueue</span><span class="hljs-params">(lQueue q, elementType e)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">tmp</span> = (<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>*) <span class="hljs-title">malloc</span>(<span class="hljs-title">sizeof</span>(<span class="hljs-title">struct</span> <span class="hljs-title">Node</span>));</span></span><br><span class="line">    tmp-&gt;data = e;</span><br><span class="line">    <span class="hljs-keyword">if</span> (q-&gt;front == <span class="hljs-literal">NULL</span>)</span><br><span class="line">        q-&gt;front = q-&gt;rear = tmp;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        q-&gt;rear = q-&gt;rear-&gt;next = tmp;</span><br><span class="line">    q-&gt;rear-&gt;next = <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">elementType <span class="hljs-title">deletelQueue</span><span class="hljs-params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    assert(!islEmpty(q));</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>* <span class="hljs-title">tmp</span> = <span class="hljs-title">q</span>-&gt;<span class="hljs-title">front</span>;</span></span><br><span class="line">    q-&gt;front = q-&gt;front-&gt;next;</span><br><span class="line">    <span class="hljs-keyword">return</span> tmp-&gt;data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">islEmpty</span><span class="hljs-params">(lQueue q)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> q-&gt;front == <span class="hljs-literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>优点：</strong>链表储存无需判断是否队列已满</p>
 
         </div>
@@ -375,7 +367,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        47
+                        48
                     </p>
                 </div>
             </div>
@@ -395,7 +387,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        21
+                        22
                     </p>
                 </div>
             </div>
@@ -487,7 +479,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 文盲&nbsp;
+                &copy; 2020 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 

@@ -10,13 +10,13 @@
 <title>算法复杂度初探 - 文的盲</title>
 
 
-    <meta name="description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。   算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+    <meta name="description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。  算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
 <meta name="keywords" content="博客,算法基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法复杂度初探">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;07&#x2F;20&#x2F;%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%9D%E6%8E%A2&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。   算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
+<meta property="og:description" content="研究算法，研究什么？  算法的原理：即此算法为何被提出来，其解决问题的原理是什么 算法的复杂度：即此算法快不快，有多快；需要的额外空间是多少，大不大。  而在研究之前，首先应知道相关基础知识。  算法分析是理论研究，是关于计算机程序性能和资源利用的研究。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2019-09-12T07:00:32.653Z">
@@ -177,77 +177,78 @@
 </ul>
 <p>而在研究之前，首先应知道相关基础知识。</p>
 <blockquote>
-<p> 算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
+<p>算法分析是理论研究，是关于<strong>计算机程序性能</strong>和资源利用的研究。</p>
 </blockquote>
 <a id="more"></a>
-
 <p>Q： 既然算法与计算机程序性能有关，那么性能就必须放在第一位吗？</p>
 <p>A： 对于有些问题的处理方案（即算法），以现在的技术，在计算机上进行运算或者处理，但时间是无限久远的，或者无法在短时间内解决，这时候就应该将算法置于首位，提升算法解决问题的速度。</p>
 <p>对于有些问题，已有的算法已经能够在短时间解决问题，那么算法就不应该被摆在第一位，那么这时就会考虑其他因素：<strong>成本，简洁度，安全性，稳定度</strong>等等。</p>
 <p>我们向往速度，所以我们总是在追求速度——更快的交通，更快的网络。或许这也是为什么算法会吸引这么多人学习的原因吧！</p>
-<h2 id="符号说明"><a href="#符号说明" class="headerlink" title="符号说明"></a>符号说明</h2><ul>
-<li>$O(g(n))$    大 $O$  符号，表示复杂度的上限为 $g(n)$ 的 $c$ 倍（ $c$ 为常数）</li>
-<li>$\Omega (g(n))$     大 $\Omega$ 符号，表示复杂度的下限为 $g(n)$ 的 $c$ 倍（ $c$ 为常数）</li>
-<li>$\Theta (g(n))$     大 $ \Theta $ 符号，表示复杂度的介于 $c_1 g(n)$ 于 $c_2g(n)$ 之间（ $c_1 c_2$ 为常数）</li>
+<h2 id="符号说明">符号说明</h2>
+<ul>
+<li><span class="math inline">\(O(g(n))\)</span> 大 <span class="math inline">\(O\)</span> 符号，表示复杂度的上限为 <span class="math inline">\(g(n)\)</span> 的 <span class="math inline">\(c\)</span> 倍（ <span class="math inline">\(c\)</span> 为常数）</li>
+<li><span class="math inline">\(\Omega (g(n))\)</span> 大 <span class="math inline">\(\Omega\)</span> 符号，表示复杂度的下限为 <span class="math inline">\(g(n)\)</span> 的 <span class="math inline">\(c\)</span> 倍（ <span class="math inline">\(c\)</span> 为常数）</li>
+<li><span class="math inline">\(\Theta (g(n))\)</span> 大 $ $ 符号，表示复杂度的介于 <span class="math inline">\(c_1 g(n)\)</span> 于 <span class="math inline">\(c_2g(n)\)</span> 之间（ <span class="math inline">\(c_1 c_2\)</span> 为常数）</li>
 </ul>
-<h2 id="从排序入手"><a href="#从排序入手" class="headerlink" title="从排序入手"></a>从排序入手</h2><blockquote>
-<p>输入一组数 $(a_{1} a_{2}  ,  ……  , a_{n})$ </p>
-<p>按需求重新排列后进行输出 $(  a_{1}^{‘}   a_{2}^{‘}     ,    ……     ,    a_{n}^{‘} )$</p>
-<p>使得  $a_{1}^{‘} \le a_{2}^{‘} \le …… \le a_{n}^{‘}$    （使得大小单调递增）</p>
+<h2 id="从排序入手">从排序入手</h2>
+<blockquote>
+<p>输入一组数 <span class="math inline">\((a_{1} a_{2} , ...... , a_{n})\)</span></p>
+<p>按需求重新排列后进行输出 <span class="math inline">\(( a_{1}^{&#39;} a_{2}^{&#39;} , ...... , a_{n}^{&#39;} )\)</span></p>
+<p>使得 <span class="math inline">\(a_{1}^{&#39;} \le a_{2}^{&#39;} \le ...... \le a_{n}^{&#39;}\)</span> （使得大小单调递增）</p>
 </blockquote>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p><strong>伪代码为：</strong></p>
+<h3 id="插入排序">插入排序</h3>
+<p><strong>伪代码为：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Insertion <span class="hljs-title">Sort</span><span class="hljs-params">(A,n)</span>	<span class="hljs-comment">// Sorts A[1 , 2 , ...... , n]</span></span></span><br><span class="line"> for j &lt;-- 2 to n</span><br><span class="line"> 	<span class="hljs-keyword">do</span> key &lt;-- A[j]</span><br><span class="line">    	i &lt;-- j<span class="hljs-number">-1</span></span><br><span class="line">    	<span class="hljs-keyword">while</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> A[i] &gt; key</span><br><span class="line">    		<span class="hljs-keyword">do</span> A[i+<span class="hljs-number">1</span>] &lt;-- A[i]</span><br><span class="line">    			i &lt;-- i<span class="hljs-number">-1</span></span><br><span class="line">    		A[i+<span class="hljs-number">1</span>]&lt;-- key</span><br></pre></td></tr></table></figure>
-
 <p>顾名思义，该算法核心在于插入，从第二个数起开始插入，也就是上述伪码中的 j ，根据程序的运行可知，a[j] 之前的数均已经排序完成，所以只需不断插入即可！</p>
 <p><strong>运行时间</strong></p>
-<ol>
+<ol type="1">
 <li>输入的数据本身（如输入已经有序，那么进行的步骤将会非常少）</li>
-<li>输入数据的规模（六百万数据和六亿数据运行的时间肯定不一样）<br>—- 我们将输入数据的规模进行参数化，之后将运行时间看作是待排列数据规模的函数</li>
+<li>输入数据的规模（六百万数据和六亿数据运行的时间肯定不一样） —- 我们将输入数据的规模进行参数化，之后将运行时间看作是待排列数据规模的函数</li>
 <li>硬件设备的种类（同样的算法在PC 和 超级计算机运行情况不同）</li>
 </ol>
 <p><strong>一般研究种类</strong></p>
-<ol>
+<ol type="1">
 <li><p>最坏情况（最常研究的）</p>
-<p>—- T(n) = 输入规模为n时的最长运行时间</p>
-</li>
+<p>—- T(n) = 输入规模为n时的最长运行时间</p></li>
 <li><p>平均情况（有时研究）</p>
-<p>—- T(n) = 输入规模之下的所有可能<strong>期望时间</strong> （也就是一种加权平均，即每种输入的运行时间乘以那种输入出现的概率）<br>但是输入出现的概率是不知道的，所以需要进行假设，如 每种输入出现的概率相等。</p>
-</li>
-<li><p>最好情况（假象  bogus：因为最好的情况往往不会出现，但可以骗人，有些算法对于特定的数据可能会有超级优秀的速率，但是这不具有普遍性，是无效的）</p>
-</li>
+<p>—- T(n) = 输入规模之下的所有可能<strong>期望时间</strong> （也就是一种加权平均，即每种输入的运行时间乘以那种输入出现的概率） 但是输入出现的概率是不知道的，所以需要进行假设，如 每种输入出现的概率相等。</p></li>
+<li><p>最好情况（假象 bogus：因为最好的情况往往不会出现，但可以骗人，有些算法对于特定的数据可能会有超级优秀的速率，但是这不具有普遍性，是无效的）</p></li>
 </ol>
 <p><strong>插入排序的最坏运行时间</strong></p>
-<p>由于不同设备因其性能不同，运行时间也会不同，那我们如何比较算法的运行时间呢？<br>—- 通常，我们比较算法时，比较的是其相对速度，即两个算法在同一机器上的时间。</p>
-<p>但是一个算法一定会在所有计算机上都是优秀的吗？<br>—- <strong>算法的BIG IDEA ! —— Asymptotic analysis</strong></p>
+<p>由于不同设备因其性能不同，运行时间也会不同，那我们如何比较算法的运行时间呢？ —- 通常，我们比较算法时，比较的是其相对速度，即两个算法在同一机器上的时间。</p>
+<p>但是一个算法一定会在所有计算机上都是优秀的吗？ —- <strong>算法的BIG IDEA ! —— Asymptotic analysis</strong></p>
 <p><strong>Asymptotic analysis</strong></p>
-<ol>
-<li><p>忽略掉依赖于机器的常量，也就是不同机器对于算法的影响一般仅仅相当于时间的n倍</p>
-</li>
-<li><p>不是去检查实际的运行时间，而是去关注运行时间的增长<br>—- <strong>look at growth of T(n) as n –&gt; $\infty $</strong> </p>
-</li>
+<ol type="1">
+<li><p>忽略掉依赖于机器的常量，也就是不同机器对于算法的影响一般仅仅相当于时间的n倍</p></li>
+<li><p>不是去检查实际的运行时间，而是去关注运行时间的增长 —- <strong>look at growth of T(n) as n –&gt; $$</strong></p></li>
 </ol>
 <p><strong>Asymptotic notation</strong></p>
 <ul>
-<li><p>$\theta$  ：弃去公式的低阶项，并忽略前面的常数因子<br>Ex：公式为 ： $3{n}^{3}+90{n}^{2}-5n+6046$ = $\theta$ (${n}^{3}$)</p>
-</li>
-<li><p>当 $n$ –&gt; $\infty $ 时 , $\theta$ (${n}^{2}$) 的算法迟早会战胜一个$\theta$ (${n}^{3}$)的算法</p>
-</li>
+<li><p><span class="math inline">\(\theta\)</span> ：弃去公式的低阶项，并忽略前面的常数因子 Ex：公式为 ： <span class="math inline">\(3{n}^{3}+90{n}^{2}-5n+6046\)</span> = <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)</p></li>
+<li><p>当 <span class="math inline">\(n\)</span> –&gt; $$ 时 , <span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{2}\)</span>) 的算法迟早会战胜一个<span class="math inline">\(\theta\)</span> (<span class="math inline">\({n}^{3}\)</span>)的算法</p></li>
 </ul>
 <p><strong>Insertion Sort analysis</strong></p>
-<p>最坏情况：即输入的数已经按照从大到小排列好<br>—- T(n) = $\sum\limits_{j=2}^{n}{\theta (j)=\theta ({n}^{2})}$        也就是一个常数级数</p>
+<p>最坏情况：即输入的数已经按照从大到小排列好 —- T(n) = <span class="math inline">\(\sum\limits_{j=2}^{n}{\theta (j)=\theta ({n}^{2})}\)</span> 也就是一个常数级数</p>
 <p>由上可见：当数据量小的时候，插入排序的速度是毋庸置疑的，但数据量大的时候，就不是那么快了</p>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p><strong>伪码</strong></p>
+<h3 id="归并排序">归并排序</h3>
+<p><strong>伪码</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Merge Sort A[<span class="hljs-number">1</span> , <span class="hljs-number">2</span> , ... , n]</span><br><span class="line"><span class="hljs-number">1.</span> <span class="hljs-keyword">if</span> n = <span class="hljs-number">1</span> , done</span><br><span class="line"><span class="hljs-number">2.</span> Recursively sort </span><br><span class="line">   A[<span class="hljs-number">1</span> , <span class="hljs-number">2</span> , ..., [n/<span class="hljs-number">2</span>]]</span><br><span class="line">   A[[n/<span class="hljs-number">2</span>]+<span class="hljs-number">1</span> , ... , n]</span><br><span class="line"><span class="hljs-number">3.</span> Merge <span class="hljs-number">2</span> sort lists</span><br></pre></td></tr></table></figure>
-
-<p>$T_{1}$  =  $\theta$ (1)    // 滥用 $\theta$</p>
-<p>$T_{2}$ = 2T(n/2)    // 拆成两个数列（故乘2），每个是(n/2)个数</p>
-<p>$T_{3}$  =  $\theta$ (n)    // 将两个排好的数列进行归并，复杂度与输入规模成线性关系</p>
-<p>$$<br>T(n) = \left{ \begin{array}{ll}<br>\theta (1) &amp; \textrm{if $ n=1 $}\<br>2T(\frac{n}{2})+\theta(n) &amp; \textrm{if $n &gt; 1$}\<br>\end{array} \right.<br>$$<br>采用递归树方法进行分析 T(n) = $2T(\frac{n}{2})  + cn$  (用 $cn$ 替换了$\theta$(n) )，如图：</p>
-<p><img src="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg" alt="递归树分析"></p>
-<p>可知树（这个树是倒放的）高 n 为$\lg (n)$，实际为以二为底，n的对数。而将所有叶节点加起来为$\theta$(n)</p>
-<p>那么可知，${T_2}(n) = (cn)\lg (n) + \theta \left( n \right) = \theta (n\lg n)$</p>
+<p><span class="math inline">\(T_{1}\)</span> = <span class="math inline">\(\theta\)</span> (1) // 滥用 <span class="math inline">\(\theta\)</span></p>
+<p><span class="math inline">\(T_{2}\)</span> = 2T(n/2) // 拆成两个数列（故乘2），每个是(n/2)个数</p>
+<p><span class="math inline">\(T_{3}\)</span> = <span class="math inline">\(\theta\)</span> (n) // 将两个排好的数列进行归并，复杂度与输入规模成线性关系</p>
+<p><span class="math display">\[
+T(n) = \left\{ \begin{array}{ll}
+\theta (1) &amp; \textrm{if $ n=1 $}\\
+2T(\frac{n}{2})+\theta(n) &amp; \textrm{if $n &gt; 1$}\\
+\end{array} \right.
+\]</span> 采用递归树方法进行分析 T(n) = <span class="math inline">\(2T(\frac{n}{2}) + cn\)</span> (用 <span class="math inline">\(cn\)</span> 替换了<span class="math inline">\(\theta\)</span>(n) )，如图：</p>
+<figure>
+<img src="http://t1.aixinxi.net/o_1cj02aafc5nntnr1jl3ohr109sa.jpg-j.jpg" alt="递归树分析"><figcaption>递归树分析</figcaption>
+</figure>
+<p>可知树（这个树是倒放的）高 n 为<span class="math inline">\(\lg (n)\)</span>，实际为以二为底，n的对数。而将所有叶节点加起来为<span class="math inline">\(\theta\)</span>(n)</p>
+<p>那么可知，<span class="math inline">\({T_2}(n) = (cn)\lg (n) + \theta \left( n \right) = \theta (n\lg n)\)</span></p>
 <p>综上可知，归并排序优于插入排序！</p>
-<p><strong>注：重点在于掌握分析算法复杂度的数学方法，$\theta$  符号的意义，以及学会使用递归树进行分析递归算法</strong></p>
+<p><strong>注：重点在于掌握分析算法复杂度的数学方法，<span class="math inline">\(\theta\)</span> 符号的意义，以及学会使用递归树进行分析递归算法</strong></p>
 
         </div>
         
@@ -390,7 +391,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        47
+                        48
                     </p>
                 </div>
             </div>
@@ -410,7 +411,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        21
+                        22
                     </p>
                 </div>
             </div>
@@ -502,7 +503,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 文盲&nbsp;
+                &copy; 2020 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 

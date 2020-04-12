@@ -10,13 +10,13 @@
 <title>最小生成树 - 文的盲</title>
 
 
-    <meta name="description" content="是一棵树 无回路 v 个顶点一定有 v-1 条边   是生成树 包含全部顶点 v-1 条边都在图里 向生成树中加入一条边都一定构成回路   边权重和最小">
+    <meta name="description" content="是一棵树  无回路 v 个顶点一定有 v-1 条边  是生成树  包含全部顶点 v-1 条边都在图里 向生成树中加入一条边都一定构成回路  边权重和最小">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最小生成树">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;27&#x2F;%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="是一棵树 无回路 v 个顶点一定有 v-1 条边   是生成树 包含全部顶点 v-1 条边都在图里 向生成树中加入一条边都一定构成回路   边权重和最小">
+<meta property="og:description" content="是一棵树  无回路 v 个顶点一定有 v-1 条边  是生成树  包含全部顶点 v-1 条边都在图里 向生成树中加入一条边都一定构成回路  边权重和最小">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-11-01T13:55:47.639Z">
@@ -171,83 +171,75 @@
         </h1>
         <div class="content">
             <script src="/assets/js/APlayer.min.js"> </script><ul>
-<li>是一棵树<ul>
+<li>是一棵树
+<ul>
 <li>无回路</li>
 <li>v 个顶点一定有 v-1 条边</li>
-</ul>
-</li>
-<li>是生成树<ul>
+</ul></li>
+<li>是生成树
+<ul>
 <li>包含全部顶点</li>
 <li>v-1 条边都在图里</li>
 <li>向生成树中加入一条边都一定构成回路</li>
-</ul>
-</li>
+</ul></li>
 <li>边权重和最小</li>
 </ul>
 <a id="more"></a>
-
 <p>最小生成树问题的相关算法都基本按照<strong>贪心算法</strong>来实现</p>
-<h3 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h3><p>形象地来说，此算法就是<strong>让一棵小树长大</strong>——在图中任意选取一结点作为树根，然后继续在图中选取结点让这棵树长大</p>
+<h3 id="prim算法">Prim算法</h3>
+<p>形象地来说，此算法就是<strong>让一棵小树长大</strong>——在图中任意选取一结点作为树根，然后继续在图中选取结点让这棵树长大</p>
 <p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Vertex <span class="hljs-title">FindMinDist</span> <span class="hljs-params">(MGraph graph, WeightType dist[])</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/* 返回未收录顶点之中dist的最小者 */</span></span><br><span class="line">    Vertex minV, v;</span><br><span class="line">    WeightType minDist = INFINITY;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (dist[v] != <span class="hljs-number">0</span> &amp;&amp; dist[v] &lt; minDist)&#123; <span class="hljs-comment">// 若v被收录，且dist[v]更小</span></span><br><span class="line">            minDist = dist[v];  <span class="hljs-comment">// 更新最小距离</span></span><br><span class="line">            minV = v;   <span class="hljs-comment">// 更新对应顶点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (minDist &lt; INFINITY) <span class="hljs-comment">// 若找到最小的dist</span></span><br><span class="line">        <span class="hljs-keyword">return</span> minV;</span><br><span class="line">    <span class="hljs-keyword">else</span>    <span class="hljs-comment">// 不存在 返回-1</span></span><br><span class="line">        <span class="hljs-keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Prim</span><span class="hljs-params">(MGraph graph, MGraph MST)</span></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/* 将最小生成树保存为邻接表储存的图MST 返回最小权重和 */</span></span><br><span class="line">    WeightType dist[MAXSIZE], totalWeight;</span><br><span class="line">    Vertex parent[MAXSIZE], v, w;</span><br><span class="line">    <span class="hljs-keyword">int</span> vCount;</span><br><span class="line">    Edge e;</span><br><span class="line">    <span class="hljs-comment">/* 初始化，默认初始点下标为0 */</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) &#123;   <span class="hljs-comment">// 若v到w有直接的边 则graph-&gt;g[w][v]定义为INFINITY</span></span><br><span class="line">        dist[v] = graph-&gt;g[<span class="hljs-number">0</span>][v];</span><br><span class="line">        parent[v] = <span class="hljs-number">0</span>;  <span class="hljs-comment">// 定义所有顶点的父顶点都是初始点0</span></span><br><span class="line">    &#125;</span><br><span class="line">    totalWeight = <span class="hljs-number">0</span>;    <span class="hljs-comment">// 初始化权重</span></span><br><span class="line">    vCount = <span class="hljs-number">0</span>; <span class="hljs-comment">// 初始化收录的顶点数</span></span><br><span class="line">    MST = CreateGraph(graph-&gt;nv);</span><br><span class="line">    e = (Edge)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct ENode)); <span class="hljs-comment">// 建立空的边结点</span></span><br><span class="line">    </span><br><span class="line">    dist[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;    <span class="hljs-comment">// 收录初始点0进入MST</span></span><br><span class="line">    vCount++;</span><br><span class="line">    parent[<span class="hljs-number">0</span>] = <span class="hljs-number">-1</span>; <span class="hljs-comment">// 初始化树根结点的父节点为-1</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)&#123;</span><br><span class="line">        v = FindMinDist(graph, dist);</span><br><span class="line">        <span class="hljs-keyword">if</span> (v == ERROR)</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        e-&gt;v1 = parent[v];</span><br><span class="line">        e-&gt;v2 = v;</span><br><span class="line">        e-&gt;weight = dist[v];</span><br><span class="line">        InsertEdge(MST, e);</span><br><span class="line">        totalWeight += dist[v];</span><br><span class="line">        dist[v] = <span class="hljs-number">0</span>;</span><br><span class="line">        vCount++;</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = <span class="hljs-number">0</span>; w &lt; graph-&gt;nv; ++w) <span class="hljs-comment">// 对图中每一个顶点</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (dist[w] != <span class="hljs-number">0</span> &amp;&amp; graph-&gt;g[v][w] &lt; INFINITY)&#123; <span class="hljs-comment">// w未被收录并且w和v是邻接点</span></span><br><span class="line">                <span class="hljs-keyword">if</span> (graph-&gt;g[v][w] &lt; dist[w])&#123;  <span class="hljs-comment">// 收录v使得dist[w]变得更小 更新dist[w]</span></span><br><span class="line">                    dist[w] = graph-&gt;g[v][w];</span><br><span class="line">                    parent[w] = v;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vCount &lt; graph-&gt;nv)</span><br><span class="line">        totalWeight = ERROR;</span><br><span class="line">    <span class="hljs-keyword">return</span> totalWeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>代码分析：</strong></p>
 <ul>
 <li>首先对 dist[] 数组进行初始化，使数组值下标所在结点与初始结点的权重，parent[] 数组全部初始化为0，建立只有结点的邻接表存储的图MST来保存最小生成树，建立空结点e</li>
 <li>将初始点0收录进MST，即将 dist[0] 的值设为0，收录的顶点数+1，根节点的父节点设为-1</li>
-<li>进入循环，直至所有可以收录的结点都被收录<ul>
+<li>进入循环，直至所有可以收录的结点都被收录
+<ul>
 <li>调用 FindMinDist() 函数，找到未收录结点中 dist 的最小者 v</li>
 <li>将 v 结点加入到树中，即边的一端接 v 的父结点，一端接 v 结点，将边插入到MST树中</li>
 <li>调整总权重，收录的顶点数加一</li>
 <li>如有其他结点到 v 结点比已知路径断，对 dist 和 parent 数组进行更新</li>
-</ul>
-</li>
+</ul></li>
 <li>判断是否有未访问结点，如有，则说明图有独立结点，返回-1；否则，返回总权重</li>
 </ul>
-<h3 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h3><p>Kruskal算法的主要思想是让<strong>森林合并成一棵树</strong>——也就是从整个图中从权值最小的边开始，依次挑选，判断是否构成回路，一条边及其两端的两个结点可看作一棵树，挑选完n-1条边之后，形成了n-1棵树，将之合并为一棵生成树</p>
+<h3 id="kruskal算法">Kruskal算法</h3>
+<p>Kruskal算法的主要思想是让<strong>森林合并成一棵树</strong>——也就是从整个图中从权值最小的边开始，依次挑选，判断是否构成回路，一条边及其两端的两个结点可看作一棵树，挑选完n-1条边之后，形成了n-1棵树，将之合并为一棵生成树</p>
 <ul>
 <li><p>那么应该如何选取最小权重的边呢？</p>
-<p>——利用最小堆</p>
-</li>
+<p>——利用最小堆</p></li>
 <li><p>如何判断找出来的边在已有的树中不构成回路呢？</p>
-<p>——利用并查集</p>
-</li>
+<p>——利用并查集</p></li>
 </ul>
-<h4 id="最小堆的定义"><a href="#最小堆的定义" class="headerlink" title="最小堆的定义"></a>最小堆的定义</h4><p><strong>最小堆的调整：</strong></p>
+<h4 id="最小堆的定义">最小堆的定义</h4>
+<p><strong>最小堆的调整：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 将n个元素的边数组以ESet[p]为根的子堆调整为关于Weight的最小堆 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">PercDown</span><span class="hljs-params">(Edge Eset, <span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> n)</span></span>&#123; </span><br><span class="line">    <span class="hljs-keyword">int</span> parent, child;</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ENode</span> <span class="hljs-title">x</span>;</span></span><br><span class="line">    x = Eset[p];	<span class="hljs-comment">// 取出根节点存放的值</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (parent = p; (parent*<span class="hljs-number">2</span>) + <span class="hljs-number">1</span> &lt; n; parent = child) &#123;</span><br><span class="line">        child = parent*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> ((child != n<span class="hljs-number">-1</span>) &amp;&amp; (Eset[child].weight &gt; Eset[child+<span class="hljs-number">1</span>].weight))</span><br><span class="line">            child++;	<span class="hljs-comment">// child指向左右结点中最小者</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (x.weight &lt;= Eset[child].weight)	<span class="hljs-comment">// 找到了合适位置</span></span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">else</span>	<span class="hljs-comment">// 向下过滤结点</span></span><br><span class="line">            Eset[parent] = Eset[child];</span><br><span class="line">    &#125;</span><br><span class="line">    Eset[parent] = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>最小堆的初始化：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 将图的边存入数组ESet中，并且初始化为最小堆 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitializeESet</span><span class="hljs-params">(LGraph graph, Edge eSet)</span></span>&#123;</span><br><span class="line">    Vertex v;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line">    <span class="hljs-keyword">int</span> eCount;</span><br><span class="line">    eCount = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-comment">/* 将图的边存入数组eSet */</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next)</span><br><span class="line">            <span class="hljs-keyword">if</span> (v &lt; w-&gt;adjv)&#123;	<span class="hljs-comment">// 避免重复录入的无向图的边， 只收v1&lt;v2的边</span></span><br><span class="line">                eSet[eCount].v1 = v;</span><br><span class="line">                eSet[eCount].v2 = w-&gt;adjv;</span><br><span class="line">                eSet[eCount++].weight = w-&gt;weight;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="hljs-comment">/* 初始化为最小堆 */</span></span><br><span class="line">    <span class="hljs-keyword">for</span> (eCount = graph-&gt;ne/<span class="hljs-number">2</span>; eCount &gt;= <span class="hljs-number">0</span>; --eCount)</span><br><span class="line">        PercDown(eSet, eCount, graph-&gt;ne);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 给定当前堆的的大小currentSize 将当前最小边位置弹出并调整堆 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">GetEdge</span><span class="hljs-params">(Edge eSet, <span class="hljs-keyword">int</span> currentSize)</span></span>&#123;    </span><br><span class="line">    Swap(&amp;eSet[<span class="hljs-number">0</span>], &amp;eSet[currentSize<span class="hljs-number">-1</span>]);	<span class="hljs-comment">// 将最小边与当前堆的最后一个位置的边交换</span></span><br><span class="line">    PercDown(eSet, <span class="hljs-number">0</span>, currentSize<span class="hljs-number">-1</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> currentSize<span class="hljs-number">-1</span>;	<span class="hljs-comment">// 返回最小边所在位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="顶点并查集的定义"><a href="#顶点并查集的定义" class="headerlink" title="顶点并查集的定义"></a>顶点并查集的定义</h4><p><strong>开始之前：</strong></p>
+<h4 id="顶点并查集的定义">顶点并查集的定义</h4>
+<p><strong>开始之前：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> Vertex ElementType;</span><br><span class="line"><span class="hljs-keyword">typedef</span> Vertex  SetName;</span><br><span class="line"><span class="hljs-keyword">typedef</span> ElementType SetType[MAXSIZE];</span><br></pre></td></tr></table></figure>
-
 <p><strong>初始化并查集：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">InitializeVSet</span><span class="hljs-params">(SetType s, <span class="hljs-keyword">int</span> n)</span></span>&#123;  <span class="hljs-comment">// 初始化并查集</span></span><br><span class="line">    ElementType x;</span><br><span class="line">    <span class="hljs-keyword">for</span> (x = <span class="hljs-number">0</span>; x &lt; n; ++x)	<span class="hljs-comment">// 集合元素全部初始化为-1</span></span><br><span class="line">        s[x] = <span class="hljs-number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>并集运算：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Union</span><span class="hljs-params">(SetType s, SetName root1, SetName root2)</span></span>&#123;</span><br><span class="line">	<span class="hljs-comment">/* 保证小集合并入大集合 */</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (s[root1] &lt; s[root2])&#123;	</span><br><span class="line">        s[root2] += s[root1];</span><br><span class="line">        s[root1] = root2;</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        s[root1] += s[root2];</span><br><span class="line">        s[root2] = root1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>查找：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">SetName <span class="hljs-title">Find</span><span class="hljs-params">(SetType s, ElementType x)</span></span>&#123; </span><br><span class="line">    <span class="hljs-keyword">if</span> (s[x]  &lt; <span class="hljs-number">0</span>)	<span class="hljs-comment">// 找到集合的根</span></span><br><span class="line">        <span class="hljs-keyword">return</span> x;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">        <span class="hljs-keyword">return</span> s[x] = Find(s, s[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>检查找出的边是否在已有的子集中构成回路：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 检查连接v1和v2的边是否存在现有的最小生成树子集中构成回路 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">CheckCycle</span><span class="hljs-params">(SetType vSet, Vertex v1, Vertex v2)</span></span>&#123;</span><br><span class="line">    Vertex root1, root2;</span><br><span class="line">    root1 = Find(vSet, v1);	<span class="hljs-comment">// 得到v1所属联通集名称</span></span><br><span class="line">    root2 = Find(vSet, v2);	<span class="hljs-comment">// 得到v2所属联通集名称</span></span><br><span class="line">    <span class="hljs-keyword">if</span> (root1 == root2)	<span class="hljs-comment">// 判断v1和v2是否已经相连</span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;	<span class="hljs-comment">// 相连 不收录</span></span><br><span class="line">    <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">        Union(vSet, root1, root2);	<span class="hljs-comment">// 不相连 将v1和v2并入同一联通集 </span></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Kruskal算法实现"><a href="#Kruskal算法实现" class="headerlink" title="Kruskal算法实现"></a>Kruskal算法实现</h4><p><strong>代码：</strong></p>
+<h4 id="kruskal算法实现">Kruskal算法实现</h4>
+<p><strong>代码：</strong></p>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/* 将最小生成树保存为邻接表存储的图MST 并返回最小权重和 */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Kruskal</span><span class="hljs-params">(LGraph graph, LGraph MST)</span></span>&#123; </span><br><span class="line">    WeightType totalWeight;</span><br><span class="line">    <span class="hljs-keyword">int</span> eCount, nextEdge;</span><br><span class="line">    SetType vSet;	<span class="hljs-comment">// 顶点数组</span></span><br><span class="line">    Edge eSet;	<span class="hljs-comment">// 边数组</span></span><br><span class="line">    </span><br><span class="line">    InitializeVSet(vSet, graph-&gt;nv);	<span class="hljs-comment">// 初始化顶点并查集</span></span><br><span class="line">    eSet = (Edge)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(struct ENode) * graph-&gt;ne);</span><br><span class="line">    InsertEdge(graph, eSet);	<span class="hljs-comment">// 初始化边的最小堆</span></span><br><span class="line">    </span><br><span class="line">    MST = CreateGrape(graph-&gt;nv);	<span class="hljs-comment">// 创建只有顶点没有边的图</span></span><br><span class="line">    totalWeight = <span class="hljs-number">0</span>;	<span class="hljs-comment">// 总权重</span></span><br><span class="line">    eCount = <span class="hljs-number">0</span>;	<span class="hljs-comment">// 总收录的边数</span></span><br><span class="line">    nextEdge = graph-&gt;ne;	<span class="hljs-comment">// 原始边集的规模 </span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (eCount &lt; graph-&gt;nv<span class="hljs-number">-1</span>)&#123;</span><br><span class="line">        nextEdge = GetEdge(eSet, nextEdge);	<span class="hljs-comment">// 从边集中得到最小边的位置</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (nextEdge &lt; <span class="hljs-number">0</span>)	<span class="hljs-comment">// 边集空</span></span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (CheckCycle(vSet, eSet[nextEdge].v1, eSet[nextEdge].v2) == <span class="hljs-literal">true</span>)&#123;</span><br><span class="line">            <span class="hljs-comment">/* 如此边可以收录 */</span></span><br><span class="line">            InsertEdge(MST, eSet+nextEdge);	<span class="hljs-comment">// 将边插入图</span></span><br><span class="line">            totalWeight += eSet[nextEdge].weight;</span><br><span class="line">            eCount++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (eCount &lt; graph-&gt;nv<span class="hljs-number">-1</span>)	<span class="hljs-comment">// 边数不够 </span></span><br><span class="line">        totalWeight = <span class="hljs-number">-1</span>;	<span class="hljs-comment">// 设置错误标记</span></span><br><span class="line">    <span class="hljs-keyword">return</span> totalWeight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>代码说明：</strong> </p>
+<p><strong>代码说明：</strong></p>
 <ul>
 <li>初始化顶点并查集以及边的最小堆</li>
 <li>初始化目标图MST</li>
-<li>循环寻找最小边（直至收录了graph-&gt;nv-1条边或者所有边都被收录），判断此边是否可以收录- <ul>
+<li>循环寻找最小边（直至收录了graph-&gt;nv-1条边或者所有边都被收录），判断此边是否可以收录-
+<ul>
 <li>如可以，插入图MST，并将相应的变量进行更新</li>
 <li>不可以，继续寻找最小边</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
         </div>
@@ -391,7 +383,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        47
+                        48
                     </p>
                 </div>
             </div>
@@ -411,7 +403,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        21
+                        22
                     </p>
                 </div>
             </div>
@@ -461,11 +453,11 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#Prim算法">
+        <a class="is-flex" href="#prim算法">
         <span class="has-mr-6">1</span>
         <span>Prim算法</span>
         </a></li><li>
-        <a class="is-flex" href="#Kruskal算法">
+        <a class="is-flex" href="#kruskal算法">
         <span class="has-mr-6">2</span>
         <span>Kruskal算法</span>
         </a><ul class="menu-list"><li>
@@ -477,7 +469,7 @@
         <span class="has-mr-6">2.2</span>
         <span>顶点并查集的定义</span>
         </a></li><li>
-        <a class="is-flex" href="#Kruskal算法实现">
+        <a class="is-flex" href="#kruskal算法实现">
         <span class="has-mr-6">2.3</span>
         <span>Kruskal算法实现</span>
         </a></li></ul></li></ul>
@@ -507,7 +499,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 文盲&nbsp;
+                &copy; 2020 文盲&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
                 
