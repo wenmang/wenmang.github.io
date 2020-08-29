@@ -10,13 +10,13 @@
 <title>二分查找细则 - 文的盲</title>
 
 
-    <meta name="description" content="关于二分查找 二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
+    <meta name="description" content="关于二分查找二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
 <meta name="keywords" content="算法,细节">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分查找细则">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="关于二分查找 二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
+<meta property="og:description" content="关于二分查找二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2020-04-12T06:05:13.225Z">
@@ -170,24 +170,20 @@
             
         </h1>
         <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h3 id="关于二分查找">关于二分查找</h3>
-<p>二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。</p>
+            <script src="/assets/js/APlayer.min.js"> </script><h3 id="关于二分查找"><a href="#关于二分查找" class="headerlink" title="关于二分查找"></a>关于二分查找</h3><p>二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。</p>
 <p>这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？</p>
 <a id="more"></a>
-<h3 id="常规写法一">常规写法一</h3>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt;= end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] == key)	<span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常规写法一"><a href="#常规写法一" class="headerlink" title="常规写法一"></a>常规写法一</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt;= end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] == key)	<span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这种写法便是我所学习的，或许也是大多数人所学习的，如果存在，其查找过程如下：</p>
-<figure>
-<img src="https://i.loli.net/2020/02/11/dtCQwWfY148glZG.png" alt="二分_1.png"><figcaption>二分_1.png</figcaption>
-</figure>
+<p><img src="https://i.loli.net/2020/02/11/dtCQwWfY148glZG.png" alt="二分_1.png"></p>
 <p>如果目标不存在，则查找过程如下所示：</p>
-<figure>
-<img src="https://i.loli.net/2020/02/11/1cM6yLYjxogOJ9A.png" alt="二分_2.png"><figcaption>二分_2.png</figcaption>
-</figure>
+<p><img src="https://i.loli.net/2020/02/11/1cM6yLYjxogOJ9A.png" alt="二分_2.png"></p>
 <p>如上种写法，注意，<strong>在参数传入的时候，数组的两边都是封闭的</strong>，也就是说，在传入数组的时候，需要传入 <code>length-1</code> ，使得 <code>end =length-1</code>。</p>
-<h3 id="常规写法二">常规写法二</h3>
-<p>但是，好多人可能还见到过另一种写法：</p>
+<h3 id="常规写法二"><a href="#常规写法二" class="headerlink" title="常规写法二"></a>常规写法二</h3><p>但是，好多人可能还见到过另一种写法：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] == key)	<span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (start &gt;= arr.length)	<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> arr[start] == key ? start : -<span class="hljs-number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>注意此种写法与上种写法的差异：</p>
 <ul>
 <li><code>start &lt;= end</code> 变为 <code>start &lt; end</code></li>
@@ -195,68 +191,63 @@
 </ul>
 <p>经过以上改动，其传参之时，便是一个<strong>左闭右开</strong>的区间了，如需传入整个数组，则直接传入 <code>length</code> 即可，</p>
 <p>那么<strong>为何如此</strong>？</p>
-<h3 id="一与二的差异">一与二的差异</h3>
-<p>第一种与第二种写法，实质上是相同的，而所产生了写法上差异的原因，本质在于<strong>区间范围的不同。</strong></p>
+<h3 id="一与二的差异"><a href="#一与二的差异" class="headerlink" title="一与二的差异"></a>一与二的差异</h3><p>第一种与第二种写法，实质上是相同的，而所产生了写法上差异的原因，本质在于<strong>区间范围的不同。</strong> </p>
 <p>和所有算法一般，代码希望<strong>不重复，不遗漏地解决问题</strong>，故产生了两种不同的细节。</p>
-<h4 id="写法一的细节">写法一的细节</h4>
-<p>正如我在写法一最后所说，<strong>写法一的左右区间都是封闭的</strong>。</p>
+<h4 id="写法一的细节"><a href="#写法一的细节" class="headerlink" title="写法一的细节"></a>写法一的细节</h4><p>正如我在写法一最后所说，<strong>写法一的左右区间都是封闭的</strong>。</p>
 <ul>
-<li><code>end = mid - 1</code>
-<ul>
+<li><code>end = mid - 1</code><ul>
 <li>在搜索判断的时候，只要<code>arr[mid] &gt; key</code>的时候，我们接下来要做的便只是<strong>缩短区间</strong>，<strong>将区间缩为 <code>[start, mid-1]</code></strong></li>
 <li>由于此区间便是左右封闭的，那么直接写为<code>end = mid - 1</code> 即可。</li>
-</ul></li>
-<li><code>start &lt;= end</code>
-<ul>
+</ul>
+</li>
+<li><code>start &lt;= end</code><ul>
 <li>为何这么写？答为：<strong>为了方便</strong>。</li>
 <li>如果写为 <code>start &lt; end</code>，那么，代码有可能在 <code>start == end</code> 的时候终止，而 <code>key</code> 有可能恰好就在 <code>start</code> 处，这时候，返回 <code>-1</code> 显然是不合适的。</li>
-<li>写为 <code>start &lt; end</code> 可不可以？
-<ul>
+<li>写为 <code>start &lt; end</code> 可不可以？<ul>
 <li><strong>可以</strong>，当然，你需要在跳出循环之后进一步判断，当然，此时不能单纯地使用 <code>arr[start]</code> ，可能会超出数组索引，比较麻烦。</li>
-</ul></li>
-</ul></li>
 </ul>
-<h4 id="写法二的细节">写法二的细节</h4>
-<p><strong>第二种写法一开始便认为区间是左闭右开的。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="写法二的细节"><a href="#写法二的细节" class="headerlink" title="写法二的细节"></a>写法二的细节</h4><p><strong>第二种写法一开始便认为区间是左闭右开的。</strong></p>
 <ul>
-<li><code>end = mid - 1</code>
-<ul>
+<li><code>end = mid - 1</code><ul>
 <li>同样地，<code>arr[mid] &gt; key</code>之时，也需要缩短区间至 <code>[start, mid-1]</code></li>
 <li>由于第二种写法是<strong>左闭右开</strong>的，也就是说要将区间缩为 <code>[start, mid)</code>，故需要写为 <code>end = mid</code></li>
-</ul></li>
-<li><code>start &lt; end</code>
-<ul>
+</ul>
+</li>
+<li><code>start &lt; end</code><ul>
 <li>为何这么写？答为：<strong>为了不陷入死循环。</strong></li>
-<li>和上面为了方便不同，此处如果写为 <code>&lt;=</code> 便会直接出错
-<ul>
+<li>和上面为了方便不同，此处如果写为 <code>&lt;=</code> 便会直接出错<ul>
 <li>如果写为 <code>&lt;=</code> 如果此时刚好 <code>mid == start == end</code> 并且 <code>arr[mid] &gt; key</code> ，便一直会执行 <code>end == mid</code>，从而导致 <code>start === end</code>，从而造成死循环！</li>
 <li>第一种写法则不同，其是 <code>end = mid - 1</code> ，可以直接跳过。</li>
-</ul></li>
-</ul></li>
 </ul>
-<h3 id="查找左侧边界">查找左侧边界</h3>
-<p>当数组有重复元素时，比如：<code>[1, 2, 2, 2, 2, 3, 4, 5]</code>，此时若需要寻找一个元素，我们更希望寻找到一个边界的元素，比如寻找 <code>2</code> ，我们更希望寻找到最左边的 <code>2</code> 或者是最右边的 <code>2</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="查找左侧边界"><a href="#查找左侧边界" class="headerlink" title="查找左侧边界"></a>查找左侧边界</h3><p>当数组有重复元素时，比如：<code>[1, 2, 2, 2, 2, 3, 4, 5]</code>，此时若需要寻找一个元素，我们更希望寻找到一个边界的元素，比如寻找 <code>2</code> ，我们更希望寻找到最左边的 <code>2</code> 或者是最右边的 <code>2</code>。</p>
 <p>寻找左侧边界，便是这种寻找最左边元素的二分算法。</p>
 <p>首先贴出代码让大家感受一番：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lowerBound</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt;= key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>有了上面对于细节的描述，我想，现在便可以很容易地看出：</p>
 <ul>
 <li>上边的代码会停在最左边的元素上（如果有这个元素的话）。</li>
 <li>上边的代码会停在小于查找的元素中最大的那个上（如果没有这个元素的话）</li>
 </ul>
-<h3 id="查找右侧边界">查找右侧边界</h3>
-<p>代码如下：</p>
+<h3 id="查找右侧边界"><a href="#查找右侧边界" class="headerlink" title="查找右侧边界"></a>查找右侧边界</h3><p>代码如下：</p>
 <figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">upperBound</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>同样，可以看出：</p>
 <ul>
 <li>上述代码如果直接返回，那么查找的便是大于查找元素中最小的元素，即便数组中有所要查找的元素。</li>
 <li>如果需要严格地查找右边界，那么可以返回 <code>start-1</code></li>
 </ul>
-<h3 id="附录">附录</h3>
-<p>其实上面所说的，所写的都可以作为一个模板来使用，通过更改终止条件等方式达到自己想要的目的！</p>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>其实上面所说的，所写的都可以作为一个模板来使用，通过更改终止条件等方式达到自己想要的目的！</p>
 <p>比如，<code>leetcode</code> 上一些打着二分搜索的题目！</p>
-<h3 id="参考">参考</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/79553968" target="_blank" rel="noopener">知乎专栏：二分查找细节详解</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zhuanlan.zhihu.com/p/79553968" target="_blank" rel="noopener">知乎专栏：二分查找细节详解</a></p>
 <p><a href="https://www.bilibili.com/video/BV1yW411Z7um" target="_blank" rel="noopener">花花酱：二分查找的视频</a></p>
 
         </div>

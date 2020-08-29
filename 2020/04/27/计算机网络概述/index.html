@@ -10,13 +10,13 @@
 <title>计算机网络概述 - 文的盲</title>
 
 
-    <meta name="description" content="所谓二十一世纪是生物的世纪，在生物的曙光还未照亮之际，我们的生活却实实在在地被计算机所改变，被计算机网络所改变。 计算机网络，现今，通过光纤将许许多多计算机组在一起，以联通你和世界；通过互联网协议，使数据可以“安全稳定”地传输、解析，将一条条信息送到你眼前。">
+    <meta name="description" content="所谓二十一世纪是生物的世纪，在生物的曙光还未照亮之际，我们的生活却实实在在地被计算机所改变，被计算机网络所改变。 计算机网络，现今，通过光纤将许许多多计算机组在一起，以联通你和世界；通过互联网协议，使数据可以“安全稳定”地传输、解析，将一条条信息送到你眼前。">
 <meta name="keywords" content="计算机网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机网络概述">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;27&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="所谓二十一世纪是生物的世纪，在生物的曙光还未照亮之际，我们的生活却实实在在地被计算机所改变，被计算机网络所改变。 计算机网络，现今，通过光纤将许许多多计算机组在一起，以联通你和世界；通过互联网协议，使数据可以“安全稳定”地传输、解析，将一条条信息送到你眼前。">
+<meta property="og:description" content="所谓二十一世纪是生物的世纪，在生物的曙光还未照亮之际，我们的生活却实实在在地被计算机所改变，被计算机网络所改变。 计算机网络，现今，通过光纤将许许多多计算机组在一起，以联通你和世界；通过互联网协议，使数据可以“安全稳定”地传输、解析，将一条条信息送到你眼前。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2020-08-27T06:55:15.198Z">
@@ -173,72 +173,70 @@
             <script src="/assets/js/APlayer.min.js"> </script><p>所谓二十一世纪是生物的世纪，在生物的曙光还未照亮之际，我们的生活却实实在在地被计算机所改变，被计算机网络所改变。</p>
 <p>计算机网络，现今，通过光纤将许许多多计算机组在一起，以联通你和世界；通过互联网协议，使数据可以“安全稳定”地传输、解析，将一条条信息送到你眼前。</p>
 <a id="more"></a>
-<h2 id="osi服务参考模型">OSI服务参考模型</h2>
-<p>OSI参考模型是一种计算机网络的理论模型，其按照功能将计算机网络自上而下分为了 7 层：</p>
-<ol type="1">
-<li>应用层：主要是一些服务/协议，用于完成某项特殊功能
-<ul>
+
+<h2 id="OSI服务参考模型"><a href="#OSI服务参考模型" class="headerlink" title="OSI服务参考模型"></a>OSI服务参考模型</h2><p>OSI参考模型是一种计算机网络的理论模型，其按照功能将计算机网络自上而下分为了 7 层：</p>
+<ol>
+<li>应用层：主要是一些服务/协议，用于完成某项特殊功能<ul>
 <li>文件传输协议：<code>FTP</code></li>
-<li>电子邮件协议：<code>SMTP</code></li>
-</ul></li>
-<li>表示层：用于处理两个系统之间交换信息的<strong>语法与语义</strong>问题
-<ul>
+<li>电子邮件协议：<code>SMTP</code> </li>
+</ul>
+</li>
+<li>表示层：用于处理两个系统之间交换信息的<strong>语法与语义</strong>问题<ul>
 <li>信息的加密与解密</li>
 <li>信息的压缩与解压</li>
-</ul></li>
-<li>会话层：用于会话控制
-<ul>
+</ul>
+</li>
+<li>会话层：用于会话控制<ul>
 <li>建立、维护会话</li>
-</ul></li>
-<li>传输层：负责<strong>源-目的（端到端）（进程间）</strong>完整的报文传输
-<ul>
+</ul>
+</li>
+<li>传输层：负责<strong>源-目的（端到端）（进程间）</strong>完整的报文传输<ul>
 <li>分段与重组</li>
 <li>连接、流量、差错控制等</li>
-</ul></li>
-<li>网络层：控制子网运行，将网络地址翻译为物理地址
-<ul>
+</ul>
+</li>
+<li>网络层：控制子网运行，将网络地址翻译为物理地址<ul>
 <li>逻辑编址</li>
 <li>分组传输，路由选择等</li>
-</ul></li>
-<li>数据链路层：负责节点到节点的数据传输
-<ul>
+</ul>
+</li>
+<li>数据链路层：负责节点到节点的数据传输<ul>
 <li>物理寻址</li>
 <li>连接、流量、差错控制等</li>
-</ul></li>
-<li>物理层：指定物理底层的标准
-<ul>
+</ul>
+</li>
+<li>物理层：指定物理底层的标准<ul>
 <li>接口标准：形状、电压等</li>
 <li>编码方式、数据率等</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-<h2 id="tcpip参考模型">TCP/IP参考模型</h2>
-<p>虽然理论上给出了OSI参考模型，但是在实际设计的时候，并未采用OSI参考模型。而TCP/IP模型却是在拥有协议之后，总结出来的。</p>
+<h2 id="TCP-IP参考模型"><a href="#TCP-IP参考模型" class="headerlink" title="TCP/IP参考模型"></a>TCP/IP参考模型</h2><p>虽然理论上给出了OSI参考模型，但是在实际设计的时候，并未采用OSI参考模型。而TCP/IP模型却是在拥有协议之后，总结出来的。</p>
 <p>TCP/IP参考模型将OSI中的应用层、表示层、会话层和三为一，统称其为应用层，然后将数据链路层与物理层合并，称之为网络接口层（<strong>这两个也常不做合并</strong>）。</p>
-<ol type="1">
-<li>应用层：支持各种网络应用（应用层，表示层，会话层的组合）
-<ul>
+<ol>
+<li>应用层：支持各种网络应用（应用层，表示层，会话层的组合）<ul>
 <li><code>FTP</code>、<code>SMTP</code>、<code>HTTP</code></li>
-</ul></li>
-<li>传输层：进程-进程之间的数据传输
-<ul>
+</ul>
+</li>
+<li>传输层：进程-进程之间的数据传输<ul>
 <li><code>TCP</code>、<code>UDP</code></li>
-</ul></li>
-<li>网络层：源主机到目的主机的数据分组路由与转发
-<ul>
+</ul>
+</li>
+<li>网络层：源主机到目的主机的数据分组路由与转发<ul>
 <li><code>IP</code> 协议、路由协议等</li>
-</ul></li>
-<li>网络层接口层（这层也常被展开，并看作5层参考模型）：
-<ul>
+</ul>
+</li>
+<li>网络层接口层（这层也常被展开，并看作5层参考模型）：<ul>
 <li>物理层：比特传输</li>
-<li>数据链路层：相邻网络元素的数据传输
-<ul>
+<li>数据链路层：相邻网络元素的数据传输<ul>
 <li>以太网</li>
 <li>WIFI（802.11）</li>
-</ul></li>
-</ul></li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<h2 id="附言">附言</h2>
-<p>建立了计算机网络体系结构，那么便可以清晰地逐层学习计算机网络了。</p>
+<h2 id="附言"><a href="#附言" class="headerlink" title="附言"></a>附言</h2><p>建立了计算机网络体系结构，那么便可以清晰地逐层学习计算机网络了。</p>
 <p>而学习计算机的两派——“自顶向下”和“自底向上”也便是这么产生的。由应用层学到物理层便是“自顶向下”；那么显然，由物理层学到应用层便是“自底向上”了。</p>
 <p>我是结合哈工大的慕课学习的，其是采用“自顶向下”的学习步骤，我也就跟随这个脚步一起来学习了。</p>
 
@@ -453,11 +451,11 @@
                     目录
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#osi服务参考模型">
+        <a class="is-flex" href="#OSI服务参考模型">
         <span class="has-mr-6">1</span>
         <span>OSI服务参考模型</span>
         </a></li><li>
-        <a class="is-flex" href="#tcpip参考模型">
+        <a class="is-flex" href="#TCP-IP参考模型">
         <span class="has-mr-6">2</span>
         <span>TCP/IP参考模型</span>
         </a></li><li>

@@ -10,13 +10,13 @@
 <title>拓扑排序 - 文的盲</title>
 
 
-    <meta name="description" content="拓扑序：如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序 拓扑排序：获得一个拓扑序的过程就是拓扑排序 AOV如果有合理的拓扑序，则必定是有向无环图">
+    <meta name="description" content="拓扑序：如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序 拓扑排序：获得一个拓扑序的过程就是拓扑排序 AOV如果有合理的拓扑序，则必定是有向无环图">
 <meta name="keywords" content="博客,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拓扑排序">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;10&#x2F;28&#x2F;%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F&#x2F;index.html">
 <meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="拓扑序：如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序 拓扑排序：获得一个拓扑序的过程就是拓扑排序 AOV如果有合理的拓扑序，则必定是有向无环图">
+<meta property="og:description" content="拓扑序：如果图中从v到w有一条有向路径，则v一定排在w之前。满足此条件的顶点序列称为一个拓扑序 拓扑排序：获得一个拓扑序的过程就是拓扑排序 AOV如果有合理的拓扑序，则必定是有向无环图">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 <meta property="og:updated_time" content="2018-11-01T13:35:41.573Z">
@@ -174,6 +174,7 @@
 <p><strong>拓扑排序：</strong>获得一个拓扑序的过程就是拓扑排序</p>
 <p><strong>AOV</strong>如果有合理的拓扑序，则必定是有向无环图</p>
 <a id="more"></a>
+
 <p><strong>算法原理：</strong></p>
 <ul>
 <li>将图中入度为0的顶点输出，或者储存在一数组中</li>
@@ -186,24 +187,25 @@
 <li><strong>优化：</strong>用一个容器将所有入度为0的结点装入，每次输出之时只需取出即可</li>
 </ul>
 <figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">TopSort</span><span class="hljs-params">(LGraph graph, Vertex topOrder[])</span></span>&#123;  <span class="hljs-comment">// 拓扑排序</span></span><br><span class="line">    <span class="hljs-keyword">int</span> indegree[MAXSIZE], cnt;</span><br><span class="line">    Vertex v;</span><br><span class="line">    PtrToAdjVNode w;</span><br><span class="line"></span><br><span class="line">    Queue Q = CreateQueue(graph-&gt;nv);</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) <span class="hljs-comment">// 初始化indegree[]</span></span><br><span class="line">        indegree[v] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v) <span class="hljs-comment">// 遍历图 得到indegree[]</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next)</span><br><span class="line">            indegree[w-&gt;adjv]++;</span><br><span class="line">    <span class="hljs-keyword">for</span> (v = <span class="hljs-number">0</span>; v &lt; graph-&gt;nv; ++v)</span><br><span class="line">        <span class="hljs-keyword">if</span> (indegree[v] == <span class="hljs-number">0</span>)   <span class="hljs-comment">// 将入度为0的顶点入队</span></span><br><span class="line">            AddQ(Q, v);</span><br><span class="line"></span><br><span class="line">    cnt = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (!IsEmpty(Q))&#123;</span><br><span class="line">        v = Delete(Q);  <span class="hljs-comment">// 弹出一个入度为0的顶点</span></span><br><span class="line">        topOrder[cnt++] = v;</span><br><span class="line">        <span class="hljs-keyword">for</span> (w = graph-&gt;g[v].firstEdge; w; w = w-&gt;next)</span><br><span class="line">            <span class="hljs-keyword">if</span> (--indegree[w-&gt;adjv] == <span class="hljs-number">0</span>)   <span class="hljs-comment">// 将删除v使得w-&gt;adjv入度为0</span></span><br><span class="line">                AddQ(Q, w-&gt;adjv);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (cnt != graph-&gt;nv)</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>代码分析：</strong></p>
 <ul>
 <li>定义变量：indegree[MAXSIZE] 值为下标对应结点的入度</li>
-<li>初始化
-<ul>
+<li>初始化<ul>
 <li>初始化入度数组，使数组所有值均为0</li>
 <li>遍历图，将有前驱结点的结点的入度值+1，变为1</li>
 <li>将入度为0的结点压入队列</li>
-</ul></li>
-<li>排序
-<ul>
+</ul>
+</li>
+<li>排序<ul>
 <li>弹出队列中一个结点，装入排序数组中</li>
 <li>将该结点的边所指向的结点的入度更改为0，并再次将入度为0的结点入队</li>
-</ul></li>
-<li>判断
-<ul>
+</ul>
+</li>
+<li>判断<ul>
 <li>如果所有节点都被访问到，则返回true； 否则返回false</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
         </div>
