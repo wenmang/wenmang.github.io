@@ -1,189 +1,124 @@
-<!DOCTYPE html>
-<html  lang="zh">
-<head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>二分查找细则 | 文的盲</title><!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="description" content="关于二分查找 二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？  常规写法一 1234567891011121314public static int bSearch(int[] arr, int start,"><meta name="keywords" content="算法,细节"><meta name="author" content="文盲"><meta name="copyright" content="文盲"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/01/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="二分查找细则"><meta property="og:url" content="http://yoursite.com/2020/01/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99/"><meta property="og:site_name" content="文的盲"><meta property="og:description" content="关于二分查找 二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？  常规写法一 1234567891011121314public static int bSearch(int[] arr, int start,"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-01-10T13:47:55.000Z"><meta property="article:modified_time" content="2020-04-12T06:05:13.225Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
 
-<meta name="generator" content="Hexo 4.0.0" />
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-<title>二分查找细则 - 文的盲</title>
-
-
-    <meta name="description" content="关于二分查找二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
-<meta name="keywords" content="算法,细节">
-<meta property="og:type" content="article">
-<meta property="og:title" content="二分查找细则">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;10&#x2F;%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99&#x2F;index.html">
-<meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="关于二分查找二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。 这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-04-12T06:05:13.225Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-
-
-
-
-
-
-
-<link rel="icon" href="/images/wendemang.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
-
-
-    
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    
-    
-        <script type="text/javascript" src="//js.users.51.la/20443653.js"></script>
-    
-
-    
-
-
-<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-<body class="is-3-column">
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="二分查找细则" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item"
-                href="/">主页</a>
-                
-                <a class="navbar-item"
-                href="/archives">归档</a>
-                
-                <a class="navbar-item"
-                href="/categories">分类</a>
-                
-                <a class="navbar-item"
-                href="/tags">标签</a>
-                
-                <a class="navbar-item"
-                href="/about">关于</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/wenmang">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-01-10T13:47:55.000Z">2020-01-10</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-12T06:05:13.225Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-12</time>
-                
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1407 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                二分查找细则
-            
-        </h1>
-        <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><h3 id="关于二分查找"><a href="#关于二分查找" class="headerlink" title="关于二分查找"></a>关于二分查找</h3><p>二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。</p>
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-04-12 14:05:13'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/custom_css_source.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="文的盲" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">51</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="toc-number">1.</span> <span class="toc-text">关于二分查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E5%86%99%E6%B3%95%E4%B8%80"><span class="toc-number">2.</span> <span class="toc-text">常规写法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E5%86%99%E6%B3%95%E4%BA%8C"><span class="toc-number">3.</span> <span class="toc-text">常规写法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%8E%E4%BA%8C%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="toc-number">4.</span> <span class="toc-text">一与二的差异</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E6%B3%95%E4%B8%80%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-number">4.1.</span> <span class="toc-text">写法一的细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E6%B3%95%E4%BA%8C%E7%9A%84%E7%BB%86%E8%8A%82"><span class="toc-number">4.2.</span> <span class="toc-text">写法二的细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%B7%A6%E4%BE%A7%E8%BE%B9%E7%95%8C"><span class="toc-number">5.</span> <span class="toc-text">查找左侧边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%8F%B3%E4%BE%A7%E8%BE%B9%E7%95%8C"><span class="toc-number">6.</span> <span class="toc-text">查找右侧边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">附录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">文的盲</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">二分查找细则</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-01-10T13:47:55.000Z" title="发表于 2020-01-10 21:47:55">2020-01-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-04-12T06:05:13.225Z" title="更新于 2020-04-12 14:05:13">2020-04-12</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h3 id="关于二分查找">关于二分查找</h3>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>二分查找或许是很多人学习的第一个算法，其简洁明快，但是在实际应用中，你却会看到许多种写法的二分查找，而这些写法，仅是细节处的区别。</p>
 <p>这些不同写法的二分查找，究竟哪一个才是正确的？还是，无论怎么写，达到目的便可以称之为二分查找？</p>
 <a id="more"></a>
-
-<h3 id="常规写法一"><a href="#常规写法一" class="headerlink" title="常规写法一"></a>常规写法一</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt;= end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] == key)	<span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h3 id="常规写法一">常规写法一</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bSearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (start &lt;= end)&#123;</span><br><span class="line">        <span class="comment">// 防止溢位</span></span><br><span class="line">        <span class="keyword">int</span> mid = start + (end - start)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] == key)	<span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这种写法便是我所学习的，或许也是大多数人所学习的，如果存在，其查找过程如下：</p>
-<p><img src="https://i.loli.net/2020/02/11/dtCQwWfY148glZG.png" alt="二分_1.png"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/02/11/dtCQwWfY148glZG.png" alt="二分_1.png" /><figcaption>二分_1.png</figcaption>
+</figure>
 <p>如果目标不存在，则查找过程如下所示：</p>
-<p><img src="https://i.loli.net/2020/02/11/1cM6yLYjxogOJ9A.png" alt="二分_2.png"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/02/11/1cM6yLYjxogOJ9A.png" alt="二分_2.png" /><figcaption>二分_2.png</figcaption>
+</figure>
 <p>如上种写法，注意，<strong>在参数传入的时候，数组的两边都是封闭的</strong>，也就是说，在传入数组的时候，需要传入 <code>length-1</code> ，使得 <code>end =length-1</code>。</p>
-<h3 id="常规写法二"><a href="#常规写法二" class="headerlink" title="常规写法二"></a>常规写法二</h3><p>但是，好多人可能还见到过另一种写法：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">bSearch</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] == key)	<span class="hljs-keyword">return</span> mid;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">if</span> (start &gt;= arr.length)	<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> arr[start] == key ? start : -<span class="hljs-number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h3 id="常规写法二">常规写法二</h3>
+<p>但是，好多人可能还见到过另一种写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">bSearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="comment">// 防止溢位</span></span><br><span class="line">        <span class="keyword">int</span> mid = start + (end - start)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] == key)	<span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (start &gt;= arr.length)	<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> arr[start] == key ? start : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意此种写法与上种写法的差异：</p>
 <ul>
 <li><code>start &lt;= end</code> 变为 <code>start &lt; end</code></li>
@@ -191,530 +126,67 @@
 </ul>
 <p>经过以上改动，其传参之时，便是一个<strong>左闭右开</strong>的区间了，如需传入整个数组，则直接传入 <code>length</code> 即可，</p>
 <p>那么<strong>为何如此</strong>？</p>
-<h3 id="一与二的差异"><a href="#一与二的差异" class="headerlink" title="一与二的差异"></a>一与二的差异</h3><p>第一种与第二种写法，实质上是相同的，而所产生了写法上差异的原因，本质在于<strong>区间范围的不同。</strong> </p>
+<h3 id="一与二的差异">一与二的差异</h3>
+<p>第一种与第二种写法，实质上是相同的，而所产生了写法上差异的原因，本质在于<strong>区间范围的不同。</strong></p>
 <p>和所有算法一般，代码希望<strong>不重复，不遗漏地解决问题</strong>，故产生了两种不同的细节。</p>
-<h4 id="写法一的细节"><a href="#写法一的细节" class="headerlink" title="写法一的细节"></a>写法一的细节</h4><p>正如我在写法一最后所说，<strong>写法一的左右区间都是封闭的</strong>。</p>
+<h4 id="写法一的细节">写法一的细节</h4>
+<p>正如我在写法一最后所说，<strong>写法一的左右区间都是封闭的</strong>。</p>
 <ul>
-<li><code>end = mid - 1</code><ul>
+<li><code>end = mid - 1</code>
+<ul>
 <li>在搜索判断的时候，只要<code>arr[mid] &gt; key</code>的时候，我们接下来要做的便只是<strong>缩短区间</strong>，<strong>将区间缩为 <code>[start, mid-1]</code></strong></li>
 <li>由于此区间便是左右封闭的，那么直接写为<code>end = mid - 1</code> 即可。</li>
-</ul>
-</li>
-<li><code>start &lt;= end</code><ul>
+</ul></li>
+<li><code>start &lt;= end</code>
+<ul>
 <li>为何这么写？答为：<strong>为了方便</strong>。</li>
 <li>如果写为 <code>start &lt; end</code>，那么，代码有可能在 <code>start == end</code> 的时候终止，而 <code>key</code> 有可能恰好就在 <code>start</code> 处，这时候，返回 <code>-1</code> 显然是不合适的。</li>
-<li>写为 <code>start &lt; end</code> 可不可以？<ul>
-<li><strong>可以</strong>，当然，你需要在跳出循环之后进一步判断，当然，此时不能单纯地使用 <code>arr[start]</code> ，可能会超出数组索引，比较麻烦。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="写法二的细节"><a href="#写法二的细节" class="headerlink" title="写法二的细节"></a>写法二的细节</h4><p><strong>第二种写法一开始便认为区间是左闭右开的。</strong></p>
+<li>写为 <code>start &lt; end</code> 可不可以？
 <ul>
-<li><code>end = mid - 1</code><ul>
+<li><strong>可以</strong>，当然，你需要在跳出循环之后进一步判断，当然，此时不能单纯地使用 <code>arr[start]</code> ，可能会超出数组索引，比较麻烦。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="写法二的细节">写法二的细节</h4>
+<p><strong>第二种写法一开始便认为区间是左闭右开的。</strong></p>
+<ul>
+<li><code>end = mid - 1</code>
+<ul>
 <li>同样地，<code>arr[mid] &gt; key</code>之时，也需要缩短区间至 <code>[start, mid-1]</code></li>
 <li>由于第二种写法是<strong>左闭右开</strong>的，也就是说要将区间缩为 <code>[start, mid)</code>，故需要写为 <code>end = mid</code></li>
-</ul>
-</li>
-<li><code>start &lt; end</code><ul>
+</ul></li>
+<li><code>start &lt; end</code>
+<ul>
 <li>为何这么写？答为：<strong>为了不陷入死循环。</strong></li>
-<li>和上面为了方便不同，此处如果写为 <code>&lt;=</code> 便会直接出错<ul>
+<li>和上面为了方便不同，此处如果写为 <code>&lt;=</code> 便会直接出错
+<ul>
 <li>如果写为 <code>&lt;=</code> 如果此时刚好 <code>mid == start == end</code> 并且 <code>arr[mid] &gt; key</code> ，便一直会执行 <code>end == mid</code>，从而导致 <code>start === end</code>，从而造成死循环！</li>
 <li>第一种写法则不同，其是 <code>end = mid - 1</code> ，可以直接跳过。</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="查找左侧边界"><a href="#查找左侧边界" class="headerlink" title="查找左侧边界"></a>查找左侧边界</h3><p>当数组有重复元素时，比如：<code>[1, 2, 2, 2, 2, 3, 4, 5]</code>，此时若需要寻找一个元素，我们更希望寻找到一个边界的元素，比如寻找 <code>2</code> ，我们更希望寻找到最左边的 <code>2</code> 或者是最右边的 <code>2</code>。</p>
+<h3 id="查找左侧边界">查找左侧边界</h3>
+<p>当数组有重复元素时，比如：<code>[1, 2, 2, 2, 2, 3, 4, 5]</code>，此时若需要寻找一个元素，我们更希望寻找到一个边界的元素，比如寻找 <code>2</code> ，我们更希望寻找到最左边的 <code>2</code> 或者是最右边的 <code>2</code>。</p>
 <p>寻找左侧边界，便是这种寻找最左边元素的二分算法。</p>
 <p>首先贴出代码让大家感受一番：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lowerBound</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt;= key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lowerBound</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="comment">// 防止溢位</span></span><br><span class="line">        <span class="keyword">int</span> mid = start + (end - start)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &gt;= key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>有了上面对于细节的描述，我想，现在便可以很容易地看出：</p>
 <ul>
 <li>上边的代码会停在最左边的元素上（如果有这个元素的话）。</li>
 <li>上边的代码会停在小于查找的元素中最大的那个上（如果没有这个元素的话）</li>
 </ul>
-<h3 id="查找右侧边界"><a href="#查找右侧边界" class="headerlink" title="查找右侧边界"></a>查找右侧边界</h3><p>代码如下：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">upperBound</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="hljs-comment">// 防止溢位</span></span><br><span class="line">        <span class="hljs-keyword">int</span> mid = start + (end - start)/<span class="hljs-number">2</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            start = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h3 id="查找右侧边界">查找右侧边界</h3>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">upperBound</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (start &lt; end)&#123;</span><br><span class="line">        <span class="comment">// 防止溢位</span></span><br><span class="line">        <span class="keyword">int</span> mid = start + (end - start)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (arr[mid] &gt; key)</span><br><span class="line">            end = mid;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>同样，可以看出：</p>
 <ul>
 <li>上述代码如果直接返回，那么查找的便是大于查找元素中最小的元素，即便数组中有所要查找的元素。</li>
 <li>如果需要严格地查找右边界，那么可以返回 <code>start-1</code></li>
 </ul>
-<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><p>其实上面所说的，所写的都可以作为一个模板来使用，通过更改终止条件等方式达到自己想要的目的！</p>
+<h3 id="附录">附录</h3>
+<p>其实上面所说的，所写的都可以作为一个模板来使用，通过更改终止条件等方式达到自己想要的目的！</p>
 <p>比如，<code>leetcode</code> 上一些打着二分搜索的题目！</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://zhuanlan.zhihu.com/p/79553968" target="_blank" rel="noopener">知乎专栏：二分查找细节详解</a></p>
-<p><a href="https://www.bilibili.com/video/BV1yW411Z7um" target="_blank" rel="noopener">花花酱：二分查找的视频</a></p>
-
-        </div>
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>,&nbsp;<a class="has-link-grey -link" href="/tags/%E7%BB%86%E8%8A%82/" rel="tag">细节</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <div class="social-share"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
-<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="/images/weixin.png" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/04/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">计算机网络概述</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/22/%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/">
-                <span class="level-item">花里胡哨的位运算</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="valine-thread" class="content"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#valine-thread' ,
-        notify: true,
-        verify: false,
-        app_id: 'aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz',
-        app_key: 'z44iJIftlyIVIWPh6A9LDHH3',
-        placeholder: '说点什么吧'
-    });
-</script>
-
-    </div>
-</div>
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/touxiang.jpg" alt="文盲">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        文盲
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        饱暖思淫欲
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>西安</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        50
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        23
-                    </p>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                关注我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/wenmang">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="envelope" href="mailto:xdwenmang@gmail.com">
-                
-                <i class="fab fa-envelope-o"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="RSS" href="/atom.xml">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        
-
-    <div class="card widget column-left is-sticky" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#关于二分查找">
-        <span class="has-mr-6">1</span>
-        <span>关于二分查找</span>
-        </a></li><li>
-        <a class="is-flex" href="#常规写法一">
-        <span class="has-mr-6">2</span>
-        <span>常规写法一</span>
-        </a></li><li>
-        <a class="is-flex" href="#常规写法二">
-        <span class="has-mr-6">3</span>
-        <span>常规写法二</span>
-        </a></li><li>
-        <a class="is-flex" href="#一与二的差异">
-        <span class="has-mr-6">4</span>
-        <span>一与二的差异</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#写法一的细节">
-        <span class="has-mr-6">4.1</span>
-        <span>写法一的细节</span>
-        </a></li><li>
-        <a class="is-flex" href="#写法二的细节">
-        <span class="has-mr-6">4.2</span>
-        <span>写法二的细节</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#查找左侧边界">
-        <span class="has-mr-6">5</span>
-        <span>查找左侧边界</span>
-        </a></li><li>
-        <a class="is-flex" href="#查找右侧边界">
-        <span class="has-mr-6">6</span>
-        <span>查找右侧边界</span>
-        </a></li><li>
-        <a class="is-flex" href="#附录">
-        <span class="has-mr-6">7</span>
-        <span>附录</span>
-        </a></li><li>
-        <a class="is-flex" href="#参考">
-        <span class="has-mr-6">8</span>
-        <span>参考</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
-</div>
-
-                
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="二分查找细则" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2020 文盲&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
-                <br>
-                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
-                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
-                
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wenmang">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-CN");</script>
-
-<script>
-var IcarusThemeSettings = {
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-    
-    
-<script src="/js/animation.js"></script>
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-    
-    
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-    
-    
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-    
-</body>
-</html>
+<h3 id="参考">参考</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79553968">知乎专栏：二分查找细节详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yW411Z7um">花花酱：二分查找的视频</a></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">文盲</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/01/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99/">http://yoursite.com/2020/01/10/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%BB%86%E5%88%99/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">文的盲</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E7%BB%86%E8%8A%82/">细节</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"><img class="prev-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络概述</div></div></a></div><div class="next-post pull-right"><a href="/2019/11/22/%E8%8A%B1%E9%87%8C%E8%83%A1%E5%93%A8%E7%9A%84%E4%BD%8D%E8%BF%90%E7%AE%97/"><img class="next-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">花里胡哨的位运算</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2018/04/15/二分查找/" title="二分查找"><img class="relatedPosts_cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-15</div><div class="relatedPosts_title">二分查找</div></div></a></div><div class="relatedPosts_item"><a href="/2019/08/14/由一道题重新审视排序/" title="由一道题重新审视排序"><img class="relatedPosts_cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-14</div><div class="relatedPosts_title">由一道题重新审视排序</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 文盲</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

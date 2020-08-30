@@ -1,220 +1,151 @@
-<!DOCTYPE html>
-<html  lang="zh">
-<head>
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>计算机网络应用层 | 文的盲</title><!-- hexo-inject:begin --><!-- hexo-inject:end --><meta name="description" content="所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。 本篇内容，主要说说最为重要、最为基础的 HTTP 协议。  HTTP协议 我们所浏览的 Web 网页，其主要是基于 HTTP 协议所搭建的。 HTTP 协议，英文全称为 Hyper Text Transfer Protocol （超文本传输协议），其是"><meta name="keywords" content="计算机网络"><meta name="author" content="文盲"><meta name="copyright" content="文盲"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/2020/05/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="计算机网络应用层"><meta property="og:url" content="http://yoursite.com/2020/05/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82/"><meta property="og:site_name" content="文的盲"><meta property="og:description" content="所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。 本篇内容，主要说说最为重要、最为基础的 HTTP 协议。  HTTP协议 我们所浏览的 Web 网页，其主要是基于 HTTP 协议所搭建的。 HTTP 协议，英文全称为 Hyper Text Transfer Protocol （超文本传输协议），其是"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2020-05-01T06:56:33.000Z"><meta property="article:modified_time" content="2020-08-29T07:34:06.604Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
 
-<meta name="generator" content="Hexo 4.0.0" />
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-<title>计算机网络应用层 - 文的盲</title>
-
-
-    <meta name="description" content="所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。 本篇内容，主要说说最为重要、最为基础的 HTTP 协议。">
-<meta name="keywords" content="计算机网络">
-<meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络应用层">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;01&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82&#x2F;index.html">
-<meta property="og:site_name" content="文的盲">
-<meta property="og:description" content="所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。 本篇内容，主要说说最为重要、最为基础的 HTTP 协议。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-08-29T07:34:06.604Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-
-
-
-
-
-
-
-<link rel="icon" href="/images/wendemang.png">
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/monokai.css">
-
-
-    
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    
-    
-        <script type="text/javascript" src="//js.users.51.la/20443653.js"></script>
-    
-
-    
-
-
-<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-<body class="is-3-column">
-    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/logo.png" alt="计算机网络应用层" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item"
-                href="/">主页</a>
-                
-                <a class="navbar-item"
-                href="/archives">归档</a>
-                
-                <a class="navbar-item"
-                href="/categories">分类</a>
-                
-                <a class="navbar-item"
-                href="/tags">标签</a>
-                
-                <a class="navbar-item"
-                href="/about">关于</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" title="My GitHub" href="https://github.com/wenmang">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;" target="_blank" rel="noopener">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-05-01T06:56:33.000Z">2020-05-01</time>
-                
-                <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-08-29T07:34:06.604Z"><i class="far fa-calendar-check">&nbsp;</i>2020-08-29</time>
-                
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    20 分钟 读完 (大约 3016 个字)
-                </span>
-                
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                计算机网络应用层
-            
-        </h1>
-        <div class="content">
-            <script src="/assets/js/APlayer.min.js"> </script><p>所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。</p>
-<p>本篇内容，主要说说最为重要、最为基础的 HTTP 协议。</p>
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.1.1',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false    
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-08-29 15:34:06'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/custom_css_source.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="文的盲" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">51</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text">HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP报文格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-number">1.1.1.</span> <span class="toc-text">HTTP 请求报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-number">1.1.2.</span> <span class="toc-text">HTTP响应报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookies"><span class="toc-number">1.2.</span> <span class="toc-text">Cookies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E6%AC%A1%E8%AE%BF%E9%97%AE"><span class="toc-number">1.2.1.</span> <span class="toc-text">首次访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%8D%E6%AC%A1%E8%AE%BF%E9%97%AE"><span class="toc-number">1.2.2.</span> <span class="toc-text">再次访问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web-%E7%BC%93%E5%AD%98"><span class="toc-number">1.3.</span> <span class="toc-text">Web 缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E6%BC%94%E7%A4%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">缓存演示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%BC%93%E5%AD%98"><span class="toc-number">1.3.2.</span> <span class="toc-text">更新缓存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%89%88%E6%9C%AC"><span class="toc-number">1.4.</span> <span class="toc-text">HTTP版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#persistent-connections"><span class="toc-number">1.4.1.</span> <span class="toc-text">Persistent Connections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-2.0"><span class="toc-number">1.4.2.</span> <span class="toc-text">HTTP 2.0</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#https"><span class="toc-number">1.5.</span> <span class="toc-text">HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E4%B8%8E-https3"><span class="toc-number">1.5.1.</span> <span class="toc-text">HTTP 与 HTTPS4</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">文的盲</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">计算机网络应用层</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-01T06:56:33.000Z" title="发表于 2020-05-01 14:56:33">2020-05-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-08-29T07:34:06.604Z" title="更新于 2020-08-29 15:34:06">2020-08-29</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>所谓应用层，便是指生活中一些基础的应用所处的层次，也就是我们日常所能够看到的，诸如 Web 网页，电子邮件等这些基础的应用所使用的协议。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>本篇内容，主要说说最为重要、最为基础的 HTTP 协议。</p>
 <a id="more"></a>
-
-<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>我们所浏览的 Web 网页，其主要是基于 HTTP 协议所搭建的。</p>
+<h1 id="http协议">HTTP协议</h1>
+<p>我们所浏览的 Web 网页，其主要是基于 HTTP 协议所搭建的。</p>
 <p>HTTP 协议，英文全称为 Hyper Text Transfer Protocol （超文本传输协议），其是一种双端协议，也就是说，这个协议是有两个版本的，一个是服务端的协议一个是客户端的协议。</p>
 <p>正如 <em>Computer Networking, A Top-Down Approach</em> 中所说的那样：HTTP defines how Web clients request Web pages from Web servers and how servers transfer Web pages to clients. HTTP 定义了 Web 客户端如何从 Web 服务器请求网页以及 Web 服务器<strong>如何</strong>向 Web 客户端传输结果。</p>
-<h2 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h2><p>HTTP 规范包含了对HTTP报文格式的定义，正如上述所说，由于服务端与客户端的不同，共有两种报文。</p>
-<h3 id="HTTP-请求报文"><a href="#HTTP-请求报文" class="headerlink" title="HTTP 请求报文"></a>HTTP 请求报文</h3><p>下面是一个典型的HTTP请求报文，来自我请求百度主页时候的报文复制（并未按顺序全部复制）：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: www.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br></pre></td></tr></table></figure>
-
+<h2 id="http报文格式">HTTP报文格式</h2>
+<p>HTTP 规范包含了对HTTP报文格式的定义，正如上述所说，由于服务端与客户端的不同，共有两种报文。</p>
+<h3 id="http-请求报文">HTTP 请求报文</h3>
+<p>下面是一个典型的HTTP请求报文，来自我请求百度主页时候的报文复制（并未按顺序全部复制）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: www.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;84.0.4147.135 Safari&#x2F;537.36</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.9</span><br></pre></td></tr></table></figure>
 <p>首先可知，报文时使用 ASCII 编码书写的；然后，可以按照规定，将请求报文分为三个部分：请求行（Request Line），请求头（Header Lines），请求体（Entity body）。</p>
 <p>以上面的例子来说明上述几个部分：</p>
 <ul>
 <li><p>第一行也就是请求行，其对应关系为：</p>
-  <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">请求方法 请求路径 请求协议/协议版本</span><br></pre></td></tr></table></figure>
-</li>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F; HTTP&#x2F;1.1</span><br><span class="line">请求方法 请求路径 请求协议&#x2F;协议版本</span><br></pre></td></tr></table></figure></p></li>
 <li><p>然后便是请求头，其由冒号后加一空格将头和值隔开</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host: www.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>随着一个空行，之后的内容便是请求体，使用 <code>GET</code> 方法时，并没有请求体，所以上面的请求报文中并没有请求体。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Host: www.baidu.com</span><br><span class="line">Connection: keep-alive</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+<li><p>随着一个空行，之后的内容便是请求体，使用 <code>GET</code> 方法时，并没有请求体，所以上面的请求报文中并没有请求体。</p></li>
 </ul>
 <p>综上所述，其格式如下图所示：</p>
-<p><img src="https://i.loli.net/2020/08/29/XVgCimrhkTYFjd6.jpg" alt="请求报文格式"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/08/29/XVgCimrhkTYFjd6.jpg" alt="请求报文格式" /><figcaption>请求报文格式</figcaption>
+</figure>
 <ul>
 <li>其中，<code>sp</code> 为空格，<code>cr</code> 为回车，<code>lf</code> 为换行。</li>
 </ul>
-<h3 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h3><p>既然有请求，那就会有响应，下面是一个典型的HTTP响应报文，也是来自我请求百度主页时候的报文复制（并未按顺序全部复制）：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Type: text/html;charset=utf-8</span><br><span class="line">Date: Fri, 01 May 2020 09:32:25 GMT</span><br><span class="line">Expires: Fri, 01 May 2020 09:32:25 GMT</span><br><span class="line">Server: BWS/1.1</span><br></pre></td></tr></table></figure>
-
+<h3 id="http响应报文">HTTP响应报文</h3>
+<p>既然有请求，那就会有响应，下面是一个典型的HTTP响应报文，也是来自我请求百度主页时候的报文复制（并未按顺序全部复制）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Type: text&#x2F;html;charset&#x3D;utf-8</span><br><span class="line">Date: Fri, 01 May 2020 09:32:25 GMT</span><br><span class="line">Expires: Fri, 01 May 2020 09:32:25 GMT</span><br><span class="line">Server: BWS&#x2F;1.1</span><br></pre></td></tr></table></figure>
 <p>同样，也可以按照规定，将响应报文分为三个部分：响应行（Status Line），响应头（Header Lines），响应体（Entity body）。</p>
 <ul>
 <li><p>第一行为响应行，其对应关系为：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">协议名/协议版本 状态码 描述状态码的短语</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">协议名&#x2F;协议版本 状态码 描述状态码的短语</span><br></pre></td></tr></table></figure></li>
 <li><p>之后的各行为响应头：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Connection: keep-alive</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>同样随着一个空行，之后的内容便是响应体，响应来的一般是一个 HTML 文件。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Connection: keep-alive</span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+<li><p>同样随着一个空行，之后的内容便是响应体，响应来的一般是一个 HTML 文件。</p></li>
 </ul>
 <p>综上所述，其格式如下图所示：</p>
-<p><img src="https://i.loli.net/2020/08/29/jryFzWVZAkbqRL8.jpg" alt="响应报文格式.jpg"></p>
-<h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p>由于 HTTP 服务是无状态的，但是日常中，Web 站点更希望能识别用户，提供个性化服务或者限制用户的访问，为了达到这个目的，HTTP 使用了cookie 。</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/08/29/jryFzWVZAkbqRL8.jpg" alt="响应报文格式.jpg" /><figcaption>响应报文格式.jpg</figcaption>
+</figure>
+<h2 id="cookies">Cookies</h2>
+<p>由于 HTTP 服务是无状态的，但是日常中，Web 站点更希望能识别用户，提供个性化服务或者限制用户的访问，为了达到这个目的，HTTP 使用了cookie 。</p>
 <p>Cookie 有四个重要的组件：</p>
 <ul>
 <li>HTTP 响应报文有一个 cookie 首部行</li>
@@ -222,546 +153,80 @@
 <li>用户端系统保存有一个 cookie 文件</li>
 <li>Web 站点有一个后端数据库</li>
 </ul>
-<h3 id="首次访问"><a href="#首次访问" class="headerlink" title="首次访问"></a>首次访问</h3><ul>
+<h3 id="首次访问">首次访问</h3>
+<ul>
 <li><p>首次使用浏览器访问某个 Web 网站，Web 站点产生一个唯一的识别码，以该索引码作为索引在后端数据库中产生一个新的表项。然后在响应报文中加入 <code>Set-cookie</code> 的头部，比如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-cookie: 1678</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>浏览器收到了 HTTP 响应报文，识别 <code>Set-cookie</code> 之后，会在其管理的 cookie 文件中添加一行（包括服务器的主机名和 <code>Set-cookie</code> 中的识别码）。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-cookie: 1678</span><br></pre></td></tr></table></figure></li>
+<li><p>浏览器收到了 HTTP 响应报文，识别 <code>Set-cookie</code> 之后，会在其管理的 cookie 文件中添加一行（包括服务器的主机名和 <code>Set-cookie</code> 中的识别码）。</p></li>
 </ul>
 <p>此时，初次添加 cookie 便完成了，那么之后，你在该网站的一举一动都会被记录，无论是你浏览了什么还是点击了什么。</p>
-<h3 id="再次访问"><a href="#再次访问" class="headerlink" title="再次访问"></a>再次访问</h3><p>几天之后，你又一次访问该网站。</p>
+<h3 id="再次访问">再次访问</h3>
+<p>几天之后，你又一次访问该网站。</p>
 <ul>
 <li><p>浏览器会在 cookie 文件中检测是否有该网站的 cookie ；如果有，便会将保存的 cookie 作为请求报文的头发给服务端，比如：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: 1678</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>服务端根据你的 cookie 读取你的信息，并根据此值查询数据库的信息，给你推荐相关产品或者广告。</p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: 1678</span><br></pre></td></tr></table></figure></li>
+<li><p>服务端根据你的 cookie 读取你的信息，并根据此值查询数据库的信息，给你推荐相关产品或者广告。</p></li>
 </ul>
 <p>cookie 的本意是简化一些操作，但是经常被滥用，借此收集用户的信息，甚至收集后将信息卖给第三方，实实在在地侵害了用户的隐私。</p>
-<h2 id="Web-缓存"><a href="#Web-缓存" class="headerlink" title="Web 缓存"></a>Web 缓存</h2><p>缓存服务器或者代理服务器，其实很容易理解，就是一个服务器与客户端之间的中转。而这部分的重心，我觉得是实实在在理解缓存带来的优势。</p>
-<h3 id="缓存演示"><a href="#缓存演示" class="headerlink" title="缓存演示"></a>缓存演示</h3><p>有这样一个简单的网络模型[^1]：</p>
-<p><img src="https://i.loli.net/2020/08/29/vTFY7nsXmMgbW5f.jpg" alt="简单网络结构.jpg"></p>
+<h2 id="web-缓存">Web 缓存</h2>
+<p>缓存服务器或者代理服务器，其实很容易理解，就是一个服务器与客户端之间的中转。而这部分的重心，我觉得是实实在在理解缓存带来的优势。</p>
+<h3 id="缓存演示">缓存演示</h3>
+<p>有这样一个简单的网络模型<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>：</p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/08/29/vTFY7nsXmMgbW5f.jpg" alt="简单网络结构.jpg" /><figcaption>简单网络结构.jpg</figcaption>
+</figure>
 <p>假设，机构网络（Institutional network）中一个请求从发出到接收到共需要 2 秒，可将其非正式地称之为 “Internet delay”（因特网时延）；假设现在每秒发送 15 个请求，每个请求平均长度为 1Mbits 。</p>
 <ul>
-<li>首先估算机构局域网中的流量强度：$(15 请求/秒)⋅\frac{1 Mb/请求}{100 Mbps} =0.15$</li>
-<li>然后估算接入链路上的流量强度：$(15 请求/秒)⋅\frac{1 Mb/请求}{15 Mbps} = 1$</li>
+<li>首先估算机构局域网中的流量强度：<span class="math inline">\((15 请求/秒)⋅\frac{1 Mb/请求}{100 Mbps} =0.15\)</span></li>
+<li>然后估算接入链路上的流量强度：<span class="math inline">\((15 请求/秒)⋅\frac{1 Mb/请求}{15 Mbps} = 1\)</span></li>
 </ul>
 <p>链路上流量强度达到了 1 ，网络时延会变得无限大，这显然是不行的。</p>
 <p>于是使用一个 Web 缓存，将网络结构变为下图这种方式：</p>
-<p><img src="https://i.loli.net/2020/08/29/qtw8e5kXIMrJEnN.jpg" alt="加入缓存的网络结构.jpg"></p>
+<figure>
+<img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2020/08/29/qtw8e5kXIMrJEnN.jpg" alt="加入缓存的网络结构.jpg" /><figcaption>加入缓存的网络结构.jpg</figcaption>
+</figure>
 <p>和上面的假设一样，除此之外，假设命中率（一个缓存器所满足的请求的比率）为 0.4 。那么便会有 40% 的请求由缓存服务器处理，60% 的缓存由初始服务器满足。</p>
 <p>由于原来的 100% 变为了现在的 60% ，流量强度也由 1.0 变为 0.6 ，一般来说，流量强度小于 0.8 的时候，时延约为几十毫秒。此时需要花费的时间为：</p>
-<p>$$<br>0.4 \times (0.010)秒 \ + \ 0.6 \times (2.01秒) = 1.21秒<br>$$</p>
-<p> 效果可见一斑了。</p>
-<h3 id="更新缓存"><a href="#更新缓存" class="headerlink" title="更新缓存"></a>更新缓存</h3><p>缓存是会过期的，因为目标服务器不可能总时一成不变的，一旦服务器发生了更新，那么缓存还维持原来的内容便有点说不过去了。</p>
+<p><span class="math display">\[
+0.4 \times (0.010)秒 \ + \ 0.6 \times (2.01秒) = 1.21秒
+\]</span></p>
+<p>效果可见一斑了。</p>
+<h3 id="更新缓存">更新缓存</h3>
+<p>缓存是会过期的，因为目标服务器不可能总时一成不变的，一旦服务器发生了更新，那么缓存还维持原来的内容便有点说不过去了。</p>
 <p>更新缓存所使用的是 条件GET方法 ，条件 GET 为了减少传输的数据量，只发送一个包含简单几个头的GET请求，来询问服务器数据是否发生了改变，一般如下所示：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /fruit/kiwi.gif HTTP/1.1</span><br><span class="line">Host: www.exotiquecuisine.com</span><br><span class="line">If-modified-since: Wed, 9 Sep 2015 09:23:24</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;fruit&#x2F;kiwi.gif HTTP&#x2F;1.1</span><br><span class="line">Host: www.exotiquecuisine.com</span><br><span class="line">If-modified-since: Wed, 9 Sep 2015 09:23:24</span><br></pre></td></tr></table></figure>
 <p>其中 <code>If-modified-since</code> 头的日期数据，就是缓存服务器中数据的更新日期，如果并未发生改变，服务器会发送一个空的响应，并设置状态码为 304 ，并不会像普通的GET的响应一样，会发送网页或者请求的数据。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 304 Not Modified</span><br><span class="line">Date: Sat, 10 Oct 2015 15:39:29</span><br><span class="line">Server: Apache/1.3.0 (Unix)</span><br><span class="line"></span><br><span class="line">(empty entity body)</span><br></pre></td></tr></table></figure>
-
-<h2 id="HTTP版本"><a href="#HTTP版本" class="headerlink" title="HTTP版本"></a>HTTP版本</h2><p>现行的 HTTP 协议经历了几个重要的版本更迭，分别是 <code>1.0</code> ，<code>1.1</code> 以及最新的 <code>2.0</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 304 Not Modified</span><br><span class="line">Date: Sat, 10 Oct 2015 15:39:29</span><br><span class="line">Server: Apache&#x2F;1.3.0 (Unix)</span><br><span class="line"></span><br><span class="line">(empty entity body)</span><br></pre></td></tr></table></figure>
+<h2 id="http版本">HTTP版本</h2>
+<p>现行的 HTTP 协议经历了几个重要的版本更迭，分别是 <code>1.0</code> ，<code>1.1</code> 以及最新的 <code>2.0</code>。</p>
 <p><code>HTTP 1.0</code> 是最为基础的版本，所以拥有最基本的 HTTP 功能，其至今仍被广泛采用，关于 <code>HTTP 1.0</code> 的相关内容，并不需要过于长篇大论的介绍。</p>
 <p><code>HTTP 1.1</code> 是在 <code>1.0</code> 之后推出的一个版本，也是如今最为应用广泛的版本，所以重心应该集中在 <code>1.1</code> 对 <code>1.0</code> 的改进。在 <code>1.1</code> 中，引进了Persistent Connections等新特性，做出了重要改进。</p>
-<h3 id="Persistent-Connections"><a href="#Persistent-Connections" class="headerlink" title="Persistent Connections"></a>Persistent Connections</h3><p>Persistent Connections（持久性连接）是在 <code>1.1</code> 之后加入的新特性。</p>
+<h3 id="persistent-connections">Persistent Connections</h3>
+<p>Persistent Connections（持久性连接）是在 <code>1.1</code> 之后加入的新特性。</p>
 <p>在 <code>1.0</code> 的时候，一次连接只能发送和接收一次请求，也就是说，假如有一个网页，网页上有 10 张图片，那么这时候，便需要进行 11 次 TCP 连接，每个文件传输完毕之后都会关闭 TCP 连接，这就造成了极大的时间浪费。并且每个请求代对象都需要建立和维护一个全新的连接，在客户端和服务器中分配 TCP 缓冲区和保持 TCP 变量，这也会给 Web 服务器带来严重的负担。</p>
 <p>而 <code>1.1</code> 之后，默认都是长连接，也就是在处理事务结束之后也不会将 TCP 连接关闭，而是继续保持以便复用，这就节省了很大一部分不必要的时间。</p>
 <p>其实 <code>1.0</code> 中，添加请求头 <code>Connection: Keep-Alive</code> 也能够达到长连接的效果，但是随着互联网的发展，网页内容逐渐丰富，并不像 <code>1.0</code> 时代那样只有一个网页和几张图片了，所以干脆在 <code>1.1</code> 之后直接默认为持久性连接了。</p>
 <p><strong>其实 <code>1.1</code> 还加入了不少新特性，只是我没有深入了解，就不再赘述了</strong>。</p>
-<h3 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a>HTTP 2.0</h3><p><code>HTTP 2.0</code> ，既然大版本号发生了更迭，那么就意味着 <code>2.0</code> 是下一代 HTTP 协议。当然，这个版本目前应用还非常少。</p>
-<p><code>2.0</code> 版本最大的特点是加入了多路复用技术，在不改动原语义、方法等核心概念的基础上，增加了<strong>二进制分帧层</strong>。<code>HTTP 2.0</code> 会将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码 ，其中 <code>HTTP1.x</code> 的首部信息会被封装到 Headers 帧，而我们的 request body 则封装到 Data 帧里[^2]。</p>
-<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTP 协议在传送消息时，是明文发送的，如果有人截取传送的消息，那么你的一切将会暴露在他面前，包括你的信用卡号甚至密码。</p>
-<p>网景公司于 1994 年首次提出，将HTTP的数据包利用 SSL/TLS 进行加密，从而提供对网站服务器的身份认证，以及保证资料交换的隐私性与完整性，后来才扩展到整个互联网上[^3]。</p>
-<h3 id="HTTP-与-HTTPS-3"><a href="#HTTP-与-HTTPS-3" class="headerlink" title="HTTP 与 HTTPS[^3]"></a>HTTP 与 HTTPS[^3]</h3><ul>
+<h3 id="http-2.0">HTTP 2.0</h3>
+<p><code>HTTP 2.0</code> ，既然大版本号发生了更迭，那么就意味着 <code>2.0</code> 是下一代 HTTP 协议。当然，这个版本目前应用还非常少。</p>
+<p><code>2.0</code> 版本最大的特点是加入了多路复用技术，在不改动原语义、方法等核心概念的基础上，增加了<strong>二进制分帧层</strong>。<code>HTTP 2.0</code> 会将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码 ，其中 <code>HTTP1.x</code> 的首部信息会被封装到 Headers 帧，而我们的 request body 则封装到 Data 帧里<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>。</p>
+<h2 id="https">HTTPS</h2>
+<p>HTTP 协议在传送消息时，是明文发送的，如果有人截取传送的消息，那么你的一切将会暴露在他面前，包括你的信用卡号甚至密码。</p>
+<p>网景公司于 1994 年首次提出，将HTTP的数据包利用 SSL/TLS 进行加密，从而提供对网站服务器的身份认证，以及保证资料交换的隐私性与完整性，后来才扩展到整个互联网上<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>。</p>
+<h3 id="http-与-https3">HTTP 与 HTTPS<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></h3>
+<ul>
 <li>HTTP 默认使用 80 端口；HTTPS 默认使用 443 端口。</li>
 <li>严格来说 HTTPS 并不是一个单独的协议，而是对工作在加密连接（TLS或SSL）上的常规 HTTP 协议的称呼。</li>
 <li>要使一网络服务器准备好接受HTTPS连接，管理员必须创建一数字证书，并交由证书颁发机构签名以使浏览器接受。证书颁发机构会验证数字证书持有人和其声明的为同一人</li>
 </ul>
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>[^1]: 文中所有的图片都来源于教材 <em>Computer Networking, A Top-Down Approach</em> 英文版。<br>[^2]:  <a href="https://zhuanlan.zhihu.com/p/37387316" target="_blank" rel="noopener">似水流年的知乎文章：HTTP协议几个版本的比较</a><br>[^3]: <a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">维基百科：超文本传输协议</a></p>
-
-        </div>
-        
-        <hr style="height:1px;margin:1rem 0"/>
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
-                    <a class="has-link-grey -link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <div class="social-share"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
-<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="/images/weixin.png" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2020/04/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/">
-                <span class="level-item">计算机网络概述</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
-
-
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="valine-thread" class="content"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#valine-thread' ,
-        notify: true,
-        verify: false,
-        app_id: 'aYV3dPhBi9XfuerM2SQAQohF-gzGzoHsz',
-        app_key: 'z44iJIftlyIVIWPh6A9LDHH3',
-        placeholder: '说点什么吧'
-    });
-</script>
-
-    </div>
-</div>
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="" src="/images/touxiang.jpg" alt="文盲">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        文盲
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        饱暖思淫欲
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>西安</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        50
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <p class="title has-text-weight-normal">
-                        23
-                    </p>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/wenmang" target="_blank">
-                关注我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/wenmang">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="envelope" href="mailto:xdwenmang@gmail.com">
-                
-                <i class="fab fa-envelope-o"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="RSS" href="/atom.xml">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        
-
-    <div class="card widget column-left is-sticky" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    目录
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP协议">
-        <span class="has-mr-6">1</span>
-        <span>HTTP协议</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP报文格式">
-        <span class="has-mr-6">1.1</span>
-        <span>HTTP报文格式</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP-请求报文">
-        <span class="has-mr-6">1.1.1</span>
-        <span>HTTP 请求报文</span>
-        </a></li><li>
-        <a class="is-flex" href="#HTTP响应报文">
-        <span class="has-mr-6">1.1.2</span>
-        <span>HTTP响应报文</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Cookies">
-        <span class="has-mr-6">1.2</span>
-        <span>Cookies</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#首次访问">
-        <span class="has-mr-6">1.2.1</span>
-        <span>首次访问</span>
-        </a></li><li>
-        <a class="is-flex" href="#再次访问">
-        <span class="has-mr-6">1.2.2</span>
-        <span>再次访问</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Web-缓存">
-        <span class="has-mr-6">1.3</span>
-        <span>Web 缓存</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#缓存演示">
-        <span class="has-mr-6">1.3.1</span>
-        <span>缓存演示</span>
-        </a></li><li>
-        <a class="is-flex" href="#更新缓存">
-        <span class="has-mr-6">1.3.2</span>
-        <span>更新缓存</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#HTTP版本">
-        <span class="has-mr-6">1.4</span>
-        <span>HTTP版本</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Persistent-Connections">
-        <span class="has-mr-6">1.4.1</span>
-        <span>Persistent Connections</span>
-        </a></li><li>
-        <a class="is-flex" href="#HTTP-2-0">
-        <span class="has-mr-6">1.4.2</span>
-        <span>HTTP 2.0</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#HTTPS">
-        <span class="has-mr-6">1.5</span>
-        <span>HTTPS</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#HTTP-与-HTTPS-3">
-        <span class="has-mr-6">1.5.1</span>
-        <span>HTTP 与 HTTPS[^3]</span>
-        </a></li></ul></li></ul></li><li>
-        <a class="is-flex" href="#参考链接">
-        <span class="has-mr-6">2</span>
-        <span>参考链接</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-        </div>
-    
-</div>
-
-                
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/logo.png" alt="计算机网络应用层" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2020 文盲&nbsp;
-                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
-                
-                <br>
-                <span id="busuanzi_container_site_uv"> 来访 <span id="busuanzi_value_site_uv"></span>人</span>
-                <span id="busuanzi_container_site_pv">, 总访问 <span id="busuanzi_value_site_pv"></span>次</span>
-                
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
-                        
-                        <i class="fab fa-creative-commons"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
-                        
-                        <i class="fab fa-creative-commons-by"></i>
-                        
-                    </a>
-                </p>
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/wenmang">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
-            </div>
-        </div>
-    </div>
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-CN");</script>
-
-<script>
-var IcarusThemeSettings = {
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
-
-
-
-    
-    
-<script src="/js/animation.js"></script>
-
-    
-    
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
-
-    
-    
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-    
-    
-<a id="back-to-top" title="回到顶端" href="javascript:;" target="_blank" rel="noopener">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-
-
-<script src="/js/main.js" defer></script>
-
-    
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
-</div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-    
-</body>
-</html>
+<h1 id="参考链接">参考链接</h1>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>文中所有的图片都来源于教材 <em>Computer Networking, A Top-Down Approach</em> 英文版。<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37387316">似水流年的知乎文章：HTTP协议几个版本的比较</a><a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">维基百科：超文本传输协议</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">维基百科：超文本传输协议</a><a href="#fnref4" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">文盲</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/05/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82/">http://yoursite.com/2020/05/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%B1%82/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com" target="_blank">文的盲</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/08/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%B1%82/"><img class="prev-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络传输层</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/"><img class="next-cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络概述</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/08/30/计算机网络传输层/" title="计算机网络传输层"><img class="relatedPosts_cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-30</div><div class="relatedPosts_title">计算机网络传输层</div></div></a></div><div class="relatedPosts_item"><a href="/2020/04/27/计算机网络概述/" title="计算机网络概述"><img class="relatedPosts_cover" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-27</div><div class="relatedPosts_title">计算机网络概述</div></div></a></div></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By 文盲</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font_plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font_minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
